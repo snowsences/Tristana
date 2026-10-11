@@ -40,7 +40,8 @@
           "smallBytes": 42010,
           "sha256": "5f8a21219643062b871086854ab2d337b8d4af190f5a0ba48fe1e021e58a939e",
           "smallSha256": "1a1f0d9e0b105b086ce169f3948b561659599035b36854efe97ccf10117fef2a",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef9ef"
         },
         {
           "id": "cottage-night",
@@ -58,7 +59,8 @@
           "smallBytes": 38994,
           "sha256": "bc816477550e3ee30447e1c899e69f8e92086caaf6aec92214c20048b6155b0b",
           "smallSha256": "972f9f72748a7b099fd874f28363365f473391209409c7f557d5488b41def1a1",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fcf9f1"
         },
         {
           "id": "snowfall-window",
@@ -76,7 +78,8 @@
           "smallBytes": 26706,
           "sha256": "6224228b209695fdf1c8690dc4a1ba6ae6892686def041721ddccee15bdda762",
           "smallSha256": "c52be386f95239d9711ff83061b86d36c33f3730aa4547a06837f29ee138544d",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef9ef"
         },
         {
           "id": "forest-low-sun",
@@ -94,7 +97,8 @@
           "smallBytes": 37642,
           "sha256": "e40f78ac0c5fbfd813a1ed18f44816e92db77ee82753f1fd578fc72180cfef77",
           "smallSha256": "b51000e0f3882f55b2d42429419b5f8d626a6e31958b4dff8dfc7c80e0e45723",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fefaf2"
         },
         {
           "id": "stream-day",
@@ -112,7 +116,8 @@
           "smallBytes": 44892,
           "sha256": "bbf89fe90c4ff0994dc6c9c8a381e3d8435a449002adf89edc1db8a7cbb91870",
           "smallSha256": "e3c841b64ff47904618d04ce08550e290600d7ffde4bf1235014cc64498d2574",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fcf9f1"
         },
         {
           "id": "stream-sunset",
@@ -130,7 +135,8 @@
           "smallBytes": 45868,
           "sha256": "923b6ea01650e3abe135699a3a6ecd11be62ff98425820637116ec947f357f11",
           "smallSha256": "ffc6aaa08ed71cd225d0237bff6aa41334537646b45e889fa78da90c568a87a7",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef9ef"
         },
         {
           "id": "firelight-moonlight",
@@ -148,7 +154,8 @@
           "smallBytes": 25522,
           "sha256": "d42bd5793fe6a3ca71306e3b3ca8adbc86b1c3457f0123d64e889f93759f6ad5",
           "smallSha256": "e659753e89a3ee40efb3e8364171b491136e94b2df25603e562a5ab9465fa950",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         }
       ]
     },
@@ -178,7 +185,8 @@
           "smallBytes": 45736,
           "sha256": "9e68522dc7973d5a77204c474c38c36c5d112ccf6d59c908c7e54c453a2bd558",
           "smallSha256": "c7e740fb043ca7dfeabd5847e7ccac35c6ccc72d9428fc1d8ec113414ebf751e",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "monstera-morning",
@@ -196,7 +204,8 @@
           "smallBytes": 44276,
           "sha256": "50ad6562b21537f00fa52eaa23a29c7c303e51053b7f2dfbe16d9ad931103f01",
           "smallSha256": "418ad17228832a913995ac4cf1d902d7a22d44125b8dacc955b0ca9bb087d74e",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fefaf2"
         },
         {
           "id": "reef-midday",
@@ -214,7 +223,8 @@
           "smallBytes": 48668,
           "sha256": "63e1fad0fee5a312e583ff32ada99e12189f84ef99009be069be2e67166f41ce",
           "smallSha256": "7f296990b85c91fbc2ef310cd379cb2db3454f3cc104f851fcdef5c1c9bd468b",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fefaf2"
         },
         {
           "id": "napali-mist",
@@ -232,7 +242,8 @@
           "smallBytes": 52818,
           "sha256": "3aed92a8139f75869cb9b85bb8c0a15f3733f3a0ab04b62d248660138bd9f225",
           "smallSha256": "60755f5eed81ba24b51a26e78f74ed462554c301c9e01c9163064a88a788bcf8",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef7ec"
         },
         {
           "id": "monstera-rain",
@@ -250,7 +261,8 @@
           "smallBytes": 42534,
           "sha256": "c93087d7feeb21146e3b042b25be7dadc161061c4dc4de75bc30c753b27f7729",
           "smallSha256": "cf2f99e400ae28fdf5cb5dfcd17abd87c32249fe17149e5044cfad04e813d33c",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef9ef"
         },
         {
           "id": "reef-clear-water",
@@ -268,7 +280,8 @@
           "smallBytes": 59604,
           "sha256": "fb33ad5b341a06b2a317e27f60a98bd5ba3c6d36e1d3c1dc76af54de4f12f20e",
           "smallSha256": "74936c2492061f2233d035b08130b4982ece5ab26bec8d72a13ba240cf806bcc",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fefbf0"
         },
         {
           "id": "napali-sunset",
@@ -286,7 +299,8 @@
           "smallBytes": 51104,
           "sha256": "d792156d9784b5940d0e1867c2bfa3b98195b05453cfe9b78afae154cc56a7de",
           "smallSha256": "30027581b27e8acad69aeb26e01740ce402117b5a8a69cb291ff8c7b16354af4",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef9ef"
         }
       ]
     },
@@ -316,7 +330,8 @@
           "smallBytes": 46670,
           "sha256": "5d16e847202b9b9d6aa30c44a069f5346a6e4de3abd46bad6dceb4fc97a87acf",
           "smallSha256": "ee4be87caa233acb533c8d0fb419932f1b60e8cea8ecdca9adb462b186cb84b5",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f0f9fd"
         },
         {
           "id": "sunlit-cyan",
@@ -334,7 +349,8 @@
           "smallBytes": 42854,
           "sha256": "068220be815348a535cb580599d7500416cf0ecac01d625c71ac21feb13110d0",
           "smallSha256": "07d939ed5294e5ea2b20bd39cca3b707c5860f092d0f432cd406b9d59cb69507",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         },
         {
           "id": "deep-teal",
@@ -352,7 +368,8 @@
           "smallBytes": 43504,
           "sha256": "5617adaf61ab814c097317c91665b6ff593674a43eeac966f6ceae18b93ddcba",
           "smallSha256": "a5eb1baf174ae98f53ffd2ab1760e6415a5f095e6bfa6c3710c17d534c406538",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         },
         {
           "id": "soft-blue",
@@ -370,7 +387,8 @@
           "smallBytes": 41666,
           "sha256": "4df28e86040625891bee4fb54fb2f502893101cccbee190e0690cde17c8e35ce",
           "smallSha256": "39e5b9da5f202754292461896f9a260b2fbdcb4422749fc8b50370969509aad7",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f4fbfd"
         },
         {
           "id": "aurora-green-cyan",
@@ -388,7 +406,8 @@
           "smallBytes": 37856,
           "sha256": "133429f8df5229a78d4461db17c39df520e9cb53b0318b2c9def209f1610fa50",
           "smallSha256": "e5906b76c82f1e591b6f285ecbb0c54f39a364f70e7b21815372b65b99e2750f",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         },
         {
           "id": "aurora-violet-pink",
@@ -406,7 +425,8 @@
           "smallBytes": 39228,
           "sha256": "ffdf32f82f924365d694f2c29a1e1fbcbb451e543c43022a9dc5375f7aa0d4dd",
           "smallSha256": "f23fd24b206a81d437e5f826a37d6c4a9eee6617d56c17099487adca9a25f289",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f0f9fd"
         },
         {
           "id": "aurora-red-magenta",
@@ -424,7 +444,8 @@
           "smallBytes": 33228,
           "sha256": "c0c842175dd33bc7a1f04025dc36ec36d21a3aad6afe5ee52f878691842ac896",
           "smallSha256": "807699afed5cf09daae946533c7fb94d264ed06043bb72b99e615d212c288ad8",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f2fafe"
         }
       ]
     },
@@ -454,7 +475,8 @@
           "smallBytes": 56514,
           "sha256": "3019da31d3623166e95d1c95f20f032321a799ce256554e2a2849476a083a3c4",
           "smallSha256": "b1c737a57122f4ede9f514d9e05ce725a2e50080c769de5fe65b0e03e36c43f1",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f7f8f3"
         },
         {
           "id": "mossy-steps",
@@ -472,7 +494,8 @@
           "smallBytes": 56362,
           "sha256": "ca7a52580cf03284b8edf6892e7fe75593470bfc5773c798289c9412b3bc80d3",
           "smallSha256": "3c78fcc01dee7abb7b7dd816358f53082f8fa64f47bfb6acdb1f7d1b663b0186",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f7f8f3"
         },
         {
           "id": "sunlit-spray",
@@ -490,7 +513,8 @@
           "smallBytes": 55302,
           "sha256": "460ec189cb91e87a98534661328b763591fe9cd214f0c35b0919c4b2db1445c2",
           "smallSha256": "1f6126d4413d5703d2af1299261126a85ece9583baf52c4d15b3e42bda96c851",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f7f8f3"
         },
         {
           "id": "fern-grotto",
@@ -508,7 +532,8 @@
           "smallBytes": 60188,
           "sha256": "267f9079647cfc207ee9a721fc581efa1136d0de9f55b452c77af9a0ded4c2f5",
           "smallSha256": "f22560f55e77b45572168815c82eb49e554249df584fab26cd13435c840383b4",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f8f9f4"
         },
         {
           "id": "rain-fed-falls",
@@ -526,7 +551,8 @@
           "smallBytes": 57318,
           "sha256": "00f51920f0e7638c75fdaabb68b96d84f7e59cbcc62772136e15ca6aa3ada54c",
           "smallSha256": "9d4091943ad7d79902798892957ca6fd824a2b76d60614d51937d53b60ad1de4",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f7f8f3"
         },
         {
           "id": "quiet-pool",
@@ -544,7 +570,8 @@
           "smallBytes": 58506,
           "sha256": "3288f081fd628d9b6e9b549d4f3899217c6cba3e497a01844ffcc70431e68bd6",
           "smallSha256": "9fa49ea623d724bba078a175393ede86476ccefbda5c5e0c977763c5b6bd0746",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f5f5f0"
         },
         {
           "id": "original-cascade",
@@ -562,7 +589,8 @@
           "smallBytes": 55780,
           "sha256": "24b0f62f29142e278789c83576808c5b983efeeb1fef6839bbbb82225846680e",
           "smallSha256": "304a3568fa03fc70c55b138ba94139c3a21409de01a1591655c2fabf96a08f4b",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f7f8f3"
         }
       ]
     },
@@ -592,7 +620,8 @@
           "smallBytes": 21888,
           "sha256": "3a79b51b9282d6182852750d2803c3546062a5641bd96153afdd945598ae8ed3",
           "smallSha256": "99f1377c4b0f80f5ae954d676b9faefc843f37d03cb6e062381b0ecab8edeac3",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6eb"
         },
         {
           "id": "fern-shadows",
@@ -610,7 +639,8 @@
           "smallBytes": 25230,
           "sha256": "35f0111eca14edbc99ed94f42099979fe80dd5383d514491cb21d740bf7cd191",
           "smallSha256": "f73587133615cd7373084460cfc7ffe6ef15bb6fba521a39dc76cf8a5f4fc793",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fefaf2"
         },
         {
           "id": "dappled-light",
@@ -628,7 +658,8 @@
           "smallBytes": 21380,
           "sha256": "db8d1dbf3bf99669e3cde81a700d4608396a5260c0a646aec52e31455f89639e",
           "smallSha256": "2bacd0c65109b0132fd50fddfc538383bbbe6f43306e9b5afa155703f038f3ff",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf7f0"
         },
         {
           "id": "sheer-curtain",
@@ -646,7 +677,8 @@
           "smallBytes": 19076,
           "sha256": "d373e1b1b2303f7893a23384e46561d08d5a3b7b87f0a95544749653db3c9581",
           "smallSha256": "20e0ecde0bb7c4418b1c7acf1e49bda59463bdb55254fe08fe7d1dbc9f6fbbf2",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fefaf2"
         },
         {
           "id": "golden-afternoon",
@@ -664,7 +696,8 @@
           "smallBytes": 24204,
           "sha256": "401a7f6abb00557db9800e131220baf3194a5068191f056653d1de36fdcc3c6c",
           "smallSha256": "82078e13e461fda986837e99c05efde137d955726288727e8c4b205ff6b9b1bc",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef7ee"
         },
         {
           "id": "last-light",
@@ -682,7 +715,8 @@
           "smallBytes": 30130,
           "sha256": "fbcb69587199f2e509601c60b243d0205a2d40d8ca53c192b616f1220272d531",
           "smallSha256": "509e43cc3be5e0fadf4b8e30964a1b6b91966ffe38ed7528f473208d817fe81b",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6eb"
         },
         {
           "id": "original-daylight",
@@ -700,7 +734,8 @@
           "smallBytes": 22412,
           "sha256": "9b93cfa9e41d24365d38bc66d4c5237edaf7c89ae9981b10c339730c029fc521",
           "smallSha256": "463fad9a3e65553497cbec1f6fad92d08e5778a23aa61d797feb1c7ac8b0cbc7",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6ed"
         }
       ]
     },
@@ -731,7 +766,8 @@
           "sha256": "a4fcb06241b26535d3d642e3bb6d71b5217ce7306adf062b46bbace1867125d2",
           "smallSha256": "6ae9004e4dfa54be726114bb7589a96df07f690ceff82ff9b54674f93fa7e158",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-01-monday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-01-monday-contours.svg",
+          "background": "#effafd"
         },
         {
           "id": "foggy-headland",
@@ -750,7 +786,8 @@
           "sha256": "768c3a9c2d4c2bd2d97341194628475a06b26a0d8e6aaa906a6a897d5f1af157",
           "smallSha256": "534ebdeece0e36eed6654a1e8d4dd7cabe5f8ccb94ec8120784f37e8c551046e",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-02-tuesday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-02-tuesday-contours.svg",
+          "background": "#f1fcfd"
         },
         {
           "id": "clear-midday",
@@ -769,7 +806,8 @@
           "sha256": "cee93ab4966c9227dd368447c2768deeecced59b6132f823e67a7e99cac772e2",
           "smallSha256": "05ad0104009a3c2e1e126155a84992cdf1e21c37aec254bcd885ed3bfb368234",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-03-wednesday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-03-wednesday-contours.svg",
+          "background": "#f3fcfd"
         },
         {
           "id": "driftwood-morning",
@@ -788,7 +826,8 @@
           "sha256": "dc5c2352b16932f7cd547f95004ffba7c5a5b6adec766779b840244084cb2ac1",
           "smallSha256": "5120b38e4354f5fb27fa5562b5a3e54bf89840db75246f42de720d78beac6186",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-04-thursday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-04-thursday-contours.svg",
+          "background": "#f0fbfe"
         },
         {
           "id": "golden-surf",
@@ -807,7 +846,8 @@
           "sha256": "42c073431b564413d87f0c34c15256b1d7c2ef201f025e2d2cb0a422aa0212a4",
           "smallSha256": "b822e5c331c701fa5ea4c903ea42fecd27b266dea0c3ee8ac6b95c3449d10b6d",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-05-friday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-05-friday-contours.svg",
+          "background": "#edfbfd"
         },
         {
           "id": "coastal-sunset",
@@ -826,7 +866,8 @@
           "sha256": "4e20c81f670c0690c875b66d7eef738ff10c6714a193c7d5c914e10abe2b3c5c",
           "smallSha256": "e55450e6b03dff7da90dd50ce6b14a940d90155582120c896acc80487cffeef6",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-06-saturday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-06-saturday-contours.svg",
+          "background": "#effafb"
         },
         {
           "id": "blue-hour",
@@ -845,7 +886,8 @@
           "sha256": "7adfc6b8d4a90d3bcead0e093609979928b7383f4d31f302237c768cadb82070",
           "smallSha256": "18e4486b310cd23153b7ff91b6d5af699f959788c4a805f140575555bf915932",
           "reviewStatus": "awaiting final user review",
-          "motifSrc": "assets/tide-motifs/jun-07-sunday-contours.svg"
+          "motifSrc": "assets/tide-motifs/jun-07-sunday-contours.svg",
+          "background": "#f1fcfd"
         }
       ]
     },
@@ -875,7 +917,8 @@
           "smallBytes": 61140,
           "sha256": "2edd1341c7c71851231127ba822c1052669dbf706cdbc03a006e18ac22d25e62",
           "smallSha256": "6a80f8a55a8f20416b113934e57e45223d5b9f038e890251ef846ef16ec5e198",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fcf9f1"
         },
         {
           "id": "paintbrush-meadow",
@@ -893,7 +936,8 @@
           "smallBytes": 60932,
           "sha256": "97bca1c830944f0bd2bcd344ad2b5784c332e5e1028045147417484d1a4d5053",
           "smallSha256": "5ef3cbb7b6cd10f177c6a8a09b2a12773ec163e60ea0516b057b19333feb8387",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fbf8f0"
         },
         {
           "id": "white-wildflowers",
@@ -911,7 +955,8 @@
           "smallBytes": 54608,
           "sha256": "acb3e54b845a7707da20b019faec473872c6265e508a21ebf67c2dcbad1b1ad0",
           "smallSha256": "e7403e50f739fa957bc14926c905a85752db4866a9f555815d282c2099b51547",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#faf9f0"
         },
         {
           "id": "summer-mist",
@@ -929,7 +974,8 @@
           "smallBytes": 50142,
           "sha256": "8e7878091c329a987b4f8a6acb0a91e2acdb06fa31c5f2300bd2d345ce1f6585",
           "smallSha256": "c950cabfc86074ecc458787246f9c3aa08ddc74430aa58069af226bd18f084e9",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#faf7ef"
         },
         {
           "id": "golden-meadow",
@@ -947,7 +993,8 @@
           "smallBytes": 55400,
           "sha256": "555071be4d47e10951700a534dc57e36607fd1432a7c65e3b0f745b31dfe8d55",
           "smallSha256": "a042ba7d027cf6c02b5b1e3141836a24542e801336f965c63023234951c20ac2",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#faf7ef"
         },
         {
           "id": "after-rain",
@@ -965,7 +1012,8 @@
           "smallBytes": 56032,
           "sha256": "04d012d0c5b703f85ac3c1fa705443765ab9c9a72ec18633012c34eac9ee2c68",
           "smallSha256": "53f544fbadc09b62c6cf135845c68e47c313f34fbe7f87fa27087234152b6526",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fbf8f0"
         },
         {
           "id": "original-alpine-summer",
@@ -983,7 +1031,8 @@
           "smallBytes": 65302,
           "sha256": "bdf1668f0a9745477e53417dabfecef707a73a9f21756227674fa6d57df2f5e4",
           "smallSha256": "2ff2b268c5e94dcc9f80ea6d35cda54096706fa848d14b9314ef6487b7d8e9c8",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fcf7eb"
         }
       ]
     },
@@ -1013,7 +1062,8 @@
           "smallBytes": 59980,
           "sha256": "ef5724f54983429b14e0154497d243b9b63775874fc1df68c137cc726da1d20d",
           "smallSha256": "2aca8b14c3847e54dbb73ad2e2e08700a60297b00d74343890e691c1d6cd7099",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f9fcf8"
         },
         {
           "id": "emerald-lake-morning",
@@ -1031,7 +1081,8 @@
           "smallBytes": 41980,
           "sha256": "005d796143621299d53fa287e8f2332ff30a22b4af394a76be2084bdf3744402",
           "smallSha256": "10a5f0f4f6bf795e0c5a70649d0e2cc7ca4c495cac3e893e9d5aa94277c71e2f",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f6f9f6"
         },
         {
           "id": "lake-louise-light",
@@ -1049,7 +1100,8 @@
           "smallBytes": 49488,
           "sha256": "8e117be03865e01ef664793db2ff66b5e99e2d0d5cac2b401b410127343fe5c2",
           "smallSha256": "3bd0f00cdf1ef4a6d3c25b78c5acf8b6150d1dd8564d55bb0e116cbf3d08d4c3",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f9fcf8"
         },
         {
           "id": "island-lake-cloud",
@@ -1067,7 +1119,8 @@
           "smallBytes": 55234,
           "sha256": "99ddbf4f37583ec7d0576c76a1f34e0b45a92165646ad818f09c391c3e48dd33",
           "smallSha256": "7cb76f1a8569bfb8858d907d51d2763f0a4b23a5c2c87a27516085d7dc476928",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f8faf7"
         },
         {
           "id": "emerald-lake-gold",
@@ -1085,7 +1138,8 @@
           "smallBytes": 54798,
           "sha256": "fa691cd31c86699e1cd7cd6872ce5c4df6a6fb55ae491fe92ba0bcdea7a9f52b",
           "smallSha256": "76c0dfb22bfd6a9822d05cee67cddd22007c192f041c676ee268ebdada79d57b",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f6f9f6"
         },
         {
           "id": "lake-louise-mist",
@@ -1103,7 +1157,8 @@
           "smallBytes": 55052,
           "sha256": "14045cb2e1233fe2692aafecf4d5a89c7926de47fefab1680bcc3134d6fb73fd",
           "smallSha256": "5685d2aad07c63614e1679633cdd7c2455a0f8f9ba6d3686f89f4543662dca98",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f6f9f6"
         },
         {
           "id": "quiet-lake-reflections",
@@ -1121,7 +1176,8 @@
           "smallBytes": 66348,
           "sha256": "7b7c4edf569198a7a535fdc52dada1d43e7d500a4f42e283ac28b330e71b9186",
           "smallSha256": "2de4144168b5eb852d87b213e3e03268c004c626b4eb1679c792a019952fcd7e",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f6f9f6"
         }
       ]
     },
@@ -1151,7 +1207,8 @@
           "smallBytes": 56226,
           "sha256": "b5625a6cca90aacc6e241d84759f819a25eb99330da57691e054bd1dd2122620",
           "smallSha256": "69442f56c40f1fd3799f1e84ecfb316ca55435614e359fcceb67de10fd569ee1",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "red-berry-slope",
@@ -1169,7 +1226,8 @@
           "smallBytes": 64258,
           "sha256": "c027acd14eba4395ba5c008eb7820854862977d97fbe807980f7b21a20daf420",
           "smallSha256": "574f9345d6582171eef7812fa48ece63b1b386a74e8ca6e8ca2a73be8dc9ac3e",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "morning-frost",
@@ -1187,7 +1245,8 @@
           "smallBytes": 51400,
           "sha256": "a536f8a4ee4ade82c70813f1133e675d1ac88a3f9b9b150ce3421614f03efc79",
           "smallSha256": "1b58c505e7d431b071f88a9dacd64465daf017ba8e5a3cfa8ee7d2cf0486f0ed",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "aspen-sunlight",
@@ -1205,7 +1264,8 @@
           "smallBytes": 51238,
           "sha256": "e88e0239bbad3f00a8a15cf3a066e9c45c97629cef39411848e5014f5f5d3f19",
           "smallSha256": "9259d8b72b1dbb44edd74e650845fc20a3c894831b75362cc2abe4917a45e279",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fcf9f1"
         },
         {
           "id": "clouded-ridge",
@@ -1223,7 +1283,8 @@
           "smallBytes": 54768,
           "sha256": "d570b4419c758e6b3789d09de437f47c6d80bb6da8b37563f63b65bb07c39b9b",
           "smallSha256": "259d669707722bea67289dccc42d8e1f707fcfadf7076ddf3552e3bb369c2a11",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "late-autumn-light",
@@ -1241,7 +1302,8 @@
           "smallBytes": 53002,
           "sha256": "8ce72b4cef08f58680108594881cb8e00dfde52a15d3f83eb853d1dadb17083a",
           "smallSha256": "969e371ca7796c48b17ad9f1d47b9677e0d80fd15d438de6a11d86dde0b2d62a",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef8f1"
         },
         {
           "id": "original-alpine-autumn",
@@ -1259,7 +1321,8 @@
           "smallBytes": 57442,
           "sha256": "d0e22f0b9059b847aaf777242783c7f78e2bd88537d5aa0c59d720c1efa5f9d6",
           "smallSha256": "605c05aa9afb51625b52af555c9a25808f517893f6ddc72788a5b047b560a7fb",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fcf6ed"
         }
       ]
     },
@@ -1289,7 +1352,8 @@
           "smallBytes": 52054,
           "sha256": "7d591f39182a67b6f46ac94d10d85f12b0a886926aa52739a8af9bad8dcfb419",
           "smallSha256": "41bfabaf842fd87696bb45df1e770c7fa2d3742e68ab892c39e5cc436e46ff5b",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6eb"
         },
         {
           "id": "pumpkin-patch",
@@ -1307,7 +1371,8 @@
           "smallBytes": 58260,
           "sha256": "35562603aa0fffc48059bedd1e47c6776dbd36a735cc5e05d3b56e775fbb831e",
           "smallSha256": "b933af4cd4aa343fa0ddd3d2877c43b01c0f933cf1eb1d5524d97d43cd252acb",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "red-maple-lane",
@@ -1325,7 +1390,8 @@
           "smallBytes": 62168,
           "sha256": "083ecf92fae7245a8c12ea157d4f28547c3c2f5850ef014009237a6416e33a7f",
           "smallSha256": "11158e2d8b47324c36c634a8c5dadfbd909ee9dd14810729c586b8d36d9758aa",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ee"
         },
         {
           "id": "ridgefield-waterfowl",
@@ -1343,7 +1409,8 @@
           "smallBytes": 56926,
           "sha256": "c8798650fc1011d4e8b2f5532dc12b2e91e19372ecc3336a7f5405e6875070e6",
           "smallSha256": "31c1882d8e36d724d7ae7147719673e7c2b438af54ae4861e0d248b09254b4a4",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf7f0"
         },
         {
           "id": "apple-afternoon",
@@ -1361,7 +1428,8 @@
           "smallBytes": 58794,
           "sha256": "70d733ea501dc389c99bc3fa45c696d874f5eaa936a57346affc751d8cdfe053",
           "smallSha256": "cc877ac24b99871c6e8804b2c4a357b4a2f8d0d7e3edc342342cff20e485c427",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6eb"
         },
         {
           "id": "maple-lane-mist",
@@ -1379,7 +1447,8 @@
           "smallBytes": 59628,
           "sha256": "b53f0f072a8be88230cd1bc874135da3a9e58e65d6b8e6c38d4202e5f82f9b87",
           "smallSha256": "90a56f5bd1177657d195e924f1a10de1c29e33a5b7b81faef971f208ccf6bb73",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef7ec"
         },
         {
           "id": "ridgefield-flight",
@@ -1397,7 +1466,8 @@
           "smallBytes": 52114,
           "sha256": "6b6428d7c326fe9c026cbc2765e661a7800f9d37bd0a4567a78582252d3a1091",
           "smallSha256": "e16589e2d2c70193e55c620ed2b72bec3a7306cfe488bcf9389e2c3b08fff3f5",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6eb"
         }
       ]
     },
@@ -1427,7 +1497,8 @@
           "smallBytes": 60306,
           "sha256": "df1d9d7e747c9cece6a049b6c01835ec38cb0900fcc9156f2bf20ed7b34a4c18",
           "smallSha256": "0d5b08e7269cb80d598496e42a7e7c7acf7ab84fee3aea21adac955c549986fc",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#faf8f2"
         },
         {
           "id": "gorge-tall-falls",
@@ -1445,7 +1516,8 @@
           "smallBytes": 51770,
           "sha256": "3c7c9ae5d8c07dfa3015b574cf97cbf880dca6c427bf019c79793e2a4fd51eb6",
           "smallSha256": "8bd0d6f71e37fbcf0bb27c1298aa59af354621214bc0778bb19bd0cc044d4b74",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f8f7f1"
         },
         {
           "id": "fern-study",
@@ -1463,7 +1535,8 @@
           "smallBytes": 50366,
           "sha256": "252d1ac7706b6ed6d4855c67da3931657a319a30c4a73805359cf956dcb48f14",
           "smallSha256": "94ce3d0d6d808437ed50ec7c1c12772672502646cf46f36e408e35d2ce8120d9",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#fbfaf3"
         },
         {
           "id": "mount-hood-window",
@@ -1481,7 +1554,8 @@
           "smallBytes": 56926,
           "sha256": "0ed6bd5b97c2e57514c4e9752590cc630fd2242a2a57ff2e2c3efd2319e3c2ac",
           "smallSha256": "d2c1a59c89f0b61eb045075b3e37779bd65da70de08550f8f8cf6ec0cf7e284f",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f8f7f1"
         },
         {
           "id": "gorge-forest-cascade",
@@ -1499,7 +1573,8 @@
           "smallBytes": 54436,
           "sha256": "93818e3713db8946d8fd53b73a5ed3cd9cec725e72f17c3afe5b4475ee487c3a",
           "smallSha256": "53ff305c46a38cf2e7d32a920f87f485726cae8f7471a8ed8b3729a106c33030",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f8f7f1"
         },
         {
           "id": "canopy-light",
@@ -1517,7 +1592,8 @@
           "smallBytes": 68106,
           "sha256": "6e8b03504e2ff0938fe70a2e2402172265f768aafc4589de64d7444a956161c3",
           "smallSha256": "56443839014187f12feb29b072188c97d781b6f0ad05afc7a2b97982a16cd6c7",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f8f7f3"
         },
         {
           "id": "mount-hood-morning",
@@ -1535,7 +1611,8 @@
           "smallBytes": 55064,
           "sha256": "633f737b662611a71c9886d1d321f30272f11cf86ee29a01be9116d78412a2d2",
           "smallSha256": "5a823d61b29a072e0d6e5ffc65a7143430ddc96da0ff5247c701d9b11c6a3d11",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f7f6f0"
         }
       ]
     },
@@ -1565,7 +1642,8 @@
           "smallBytes": 34846,
           "sha256": "5a08b8c5afe161a11cc9a5ec7f811aa8f59c927b4f1ed0ea14dc37c01513f79a",
           "smallSha256": "0712bc682dc25d573a7b32fcd3a7229433ff11c6b06cd90524c9eeba263ad21a",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         },
         {
           "id": "frosted-cedar",
@@ -1583,7 +1661,8 @@
           "smallBytes": 45336,
           "sha256": "ec07d528ae9fc9b0bdb7a2ad155f65a760eb47c30d72a8be37b7b5cc5ae782d6",
           "smallSha256": "a07b93d6412e32b6010a41aeb80a26b382736803b6431f9c8fc54e01be0811c3",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f2f8fd"
         },
         {
           "id": "snowfall-ridges",
@@ -1601,7 +1680,8 @@
           "smallBytes": 50126,
           "sha256": "d96393d7b9cef1880c29db48a4a5c5b827e6b25c03dfc5ec4d97d46d7d860302",
           "smallSha256": "a7af8adb9cb0f8d04c30fbc1ba88075273a5822b3b48b9871467c47cec64a608",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f2f8fd"
         },
         {
           "id": "clear-winter-day",
@@ -1619,7 +1699,8 @@
           "smallBytes": 33888,
           "sha256": "68c996738241b7d4ce60eb9e3c395415d17214f26c9535416fe926d180721c75",
           "smallSha256": "0977ee5ce431124c6dd6c26943b47117b7b516b8e9a9f38148d6ba3352a02879",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f5f8fe"
         },
         {
           "id": "lavender-dusk",
@@ -1637,7 +1718,8 @@
           "smallBytes": 33774,
           "sha256": "56279a87ac63b8f767fccb375f68f0dadc9703201cabfa1ad4c37fb018ee48b8",
           "smallSha256": "a99f50db6bc381a5977edc72b22d19366ace629f13eb055495dea968f67bc700",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         },
         {
           "id": "misty-snow-valley",
@@ -1655,7 +1737,8 @@
           "smallBytes": 54716,
           "sha256": "dd7a916af690ab1ece6b665dd643981c1fb180460d3b729e0bc688d9d5f8989c",
           "smallSha256": "27d94ed19a62604b0c70a2849141bace1ad0ce2aeb08d515c67dfd84552659ff",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         },
         {
           "id": "original-alpine-winter",
@@ -1673,7 +1756,8 @@
           "smallBytes": 44370,
           "sha256": "7a53df2d3b0438a18d12500fc0d2600c0ee6eb0f396a4a02b2142227a3da074c",
           "smallSha256": "e064451ec37bd54e741b0f11ddfa60c61e85c29c143fa648bbe12a419218add7",
-          "reviewStatus": "awaiting final user review"
+          "reviewStatus": "awaiting final user review",
+          "background": "#f3f9fe"
         }
       ]
     }

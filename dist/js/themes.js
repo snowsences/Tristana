@@ -26,7 +26,7 @@ export function resolveHeader(manifest, {date=localISODate(), themeMonth, weekda
 export function applyHeader(element, selection, {baseURL='./'}={}) {
   const {theme,scene}=selection;
   const base = new URL(baseURL, document.baseURI);
-  element.style.setProperty('--journal-bg',theme.colors.background);
+  element.style.setProperty('--journal-bg',scene.background||theme.colors.background);
   element.style.setProperty('--journal-ink',theme.colors.ink);
   element.style.setProperty('--journal-accent',theme.colors.accent);
   let image=element.querySelector('.journal-header__art');

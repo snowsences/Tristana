@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {JSDOM} from 'jsdom';
+import {applyAuthGate} from '../dist/js/auth-ui.js';
+const html=readFileSync(new URL('../dist/index.html',import.meta.url),'utf8');
+const css=readFileSync(new URL('../dist/style.css',import.meta.url),'utf8');
+function page(){const dom=new JSDOM(html,{url:'https://snowsences.github.io/Tristana/dist/'});const style=dom.window.document.createElement('style');style.textContent=css;dom.window.document.head.append(style);return dom;}
+function visible(window,element){for(let e=element;e;e=e.parentElement)if(window.getComputedStyle(e).display==='none')return false;return true;}
+test('first paint shows only the login button before authentication resolves',()=>{const dom=page();try{const {document}=dom.window;assert.ok(document.getElementById('app-shell').hidden);assert.ok(document.getElementById('app-shell').hasAttribute('inert'));assert.deepEqual([...document.querySelectorAll('button')].filter(b=>visible(dom.window,b)).map(b=>b.id),['signin']);assert.equal(visible(dom.window,document.querySelector('.bottom-nav')),false);}finally{dom.window.close();}});
+test('confirmed sign-in reveals the journal and tabs while hiding the splash',()=>{const dom=page();try{const {document}=dom.window;applyAuthGate(document,true);assert.ok(visible(dom.window,document.getElementById('journal-view')));assert.ok(visible(dom.window,document.querySelector('.bottom-nav')));assert.equal(document.getElementById('app-shell').hasAttribute('inert'),false);assert.equal(visible(dom.window,document.getElementById('signin-panel')),false);}finally{dom.window.close();}});
+test('sign-out hides populated journal, photo and settings content and disables app interaction',()=>{const dom=page();try{const {document}=dom.window;applyAuthGate(document,true);document.getElementById('good').value='Private journal text';document.getElementById('settings-view').hidden=false;document.getElementById('photo-preview').hidden=false;applyAuthGate(document,false);for(const id of ['good','settings-view','photo-preview'])assert.equal(visible(dom.window,document.getElementById(id)),false);assert.ok(document.getElementById('app-shell').hasAttribute('inert'));assert.deepEqual([...document.querySelectorAll('button')].filter(b=>visible(dom.window,b)).map(b=>b.id),['signin']);}finally{dom.window.close();}});

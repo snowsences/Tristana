@@ -4,6 +4,7 @@ import {resolveHeader} from './themes.js';
 import * as store from './storage.js';
 import * as cloud from './cloud.js';
 import {createCropper} from './crop.js';
+import {applyAuthGate} from './auth-ui.js';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -34,8 +35,8 @@ function applyTheme(){
   $('meta[name=theme-color]').content=theme.colors.background;
 }
 function header(){
-  applyTheme();$('#eyebrow').textContent=tab==='settings'?'A place for your days':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
-  $('#page-title').innerHTML=tab==='past'?'Past<br>days.':tab==='settings'?'Make it<br>yours.':'A little<br>of today.';
+  applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
+  $('#page-title').innerHTML=tab==='past'?'Past<br>days.':tab==='settings'?'Make it yours.':'A little<br>of today.';
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
   $('#entry-date').textContent=selectedDate===today()?'Today':displayDate(selectedDate,{weekday:'short',month:'short',day:'numeric',year:'numeric'});
   $('#next-day').disabled=selectedDate>=today();
@@ -66,12 +67,12 @@ function refreshProgress(){
   if(yearView)renderYear();
 }
 function renderEntry(){
-  const e=entry();for(const field of ['good','learned']){if(document.activeElement!==$('#'+field))$('#'+field).value=e[field]||'';$('#'+field+'-count').textContent=count(e[field])+' / '+LIMIT;}
-  $('#photo-empty').hidden=Boolean(e.photo);$('#photo-preview').hidden=!e.photo;$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'Square, with room to make it yours.';
+  const e=entry();for(const field of ['good','learned']){if(document.activeElement!==$('#'+field))$('#'+field).value=e[field]||'';}
+  $('#photo-empty').hidden=Boolean(e.photo);$('#photo-preview').hidden=!e.photo;$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
   if(e.photo){const identity=e.photo.localId;$('#entry-photo').removeAttribute('src');photoURL(e.photo).then(url=>{if(entry().photo?.localId===identity&&url)$('#entry-photo').src=url;}).catch(()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});}
-  savedLabel(!user?'Sign in to begin':e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'Ready for a little of today');refreshProgress();
+  savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');refreshProgress();
 }
-function render(){header();renderStrip();renderEntry();$('#journal-view').hidden=tab==='settings';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=tab!=='past';$('#year-panel').hidden=!yearView;$('#entry-panel').hidden=tab==='past'&&yearView;$('#day-strip').hidden=tab==='past'&&yearView;$('#signin-panel').hidden=Boolean(user)||tab==='settings';for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}if(yearView&&tab==='past')renderYear();}
+function render(){applyAuthGate(document,Boolean(user));if(!user)return;header();renderStrip();renderEntry();$('#journal-view').hidden=tab==='settings';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=tab!=='past';$('#year-panel').hidden=!yearView;$('#entry-panel').hidden=tab==='past'&&yearView;$('#day-strip').hidden=tab==='past'&&yearView;for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}if(yearView&&tab==='past')renderYear();}
 async function openDay(date){if(!validDay(date)||(date>today()&&!entries.has(date)))return;await localWrites.catch(()=>{});selectedDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render();}
 function renderYear(){
   $('#year-title').textContent=selectedYear;const grid=$('#year-grid');grid.replaceChildren();const dates=daysInYear(selectedYear);
@@ -112,7 +113,9 @@ async function checkBackend(){try{backend=await cloud.backendStatus();$('#connec
 async function onUser(account,message){
   for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
-  $('#signout').hidden=!user;$('#signin-settings').hidden=Boolean(user);$('#account-label').textContent=user?user.email:'Sign in to keep your journal safe.';if(message)toast(message);
+  $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
+  if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid','history-list'])$('#'+id).replaceChildren();for(const dialog of document.querySelectorAll('dialog[open]'))dialog.close('cancel');$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
+  if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
     unsubscribers=cloud.listen(user.uid,async remote=>{for(const r of remote){const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}renderEntry();renderStrip();if(yearView)renderYear();},async incoming=>{settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
@@ -127,12 +130,12 @@ const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   await change('photo',{localId,crop,pending:true,source:null,square:null},date);if(selectedDate===date){renderEntry();renderStrip();}
 },error);
 for(const field of ['good','learned']){
-  const input=$('#'+field);const save=()=>{if(input.isComposing)return;input.value=limit(input.value);$('#'+field+'-count').textContent=count(input.value)+' / '+LIMIT;change(field,input.value).catch(error);};input.addEventListener('input',e=>{input.isComposing=e.isComposing;save();});input.addEventListener('compositionend',()=>{input.isComposing=false;save();});
+  const input=$('#'+field);const save=()=>{if(input.isComposing)return;input.value=limit(input.value);change(field,input.value).catch(error);};input.addEventListener('input',e=>{input.isComposing=e.isComposing;save();});input.addEventListener('compositionend',()=>{input.isComposing=false;save();});
 }
 for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>$('#'+type+'-input').click();$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0];if(file)try{await cropper.open(file,selectedDate,entry().photo);}catch(err){error(err);}e.target.value='';};}
 $('#recrop').onclick=async()=>{try{const photo=entry().photo;let local=await store.get('photos',user.uid+':'+photo.localId);const source=local?.source||await cloud.media(photo.source);await cropper.open(source,selectedDate,photo);}catch(err){error(err);}};
 $('#remove-photo').onclick=async()=>{if(!confirm('Remove this photograph from the entry? Earlier versions will keep it.'))return;await store.put('history',{key:user.uid+':'+selectedDate+':'+Date.now(),date:selectedDate,value:snapshot(entry()),archivedAt:Date.now()});await change('photo',null);renderEntry();renderStrip();};
-for(const id of ['signin','signin-settings'])$('#'+id).onclick=()=>cloud.signIn().catch(error);
+$('#signin').onclick=()=>cloud.signIn().catch(error);
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=()=>{tab=b.dataset.tab;if(tab==='today'){selectedDate=today();yearView=false;}render();window.scrollTo({top:0,behavior:'auto'});};
 $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onclick=()=>openDay(shiftDay(selectedDate,1));
@@ -165,4 +168,4 @@ $('#import').onclick=()=>$('#import-input').click();$('#import-input').onchange=
 $('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;$('#install').hidden=false;});$('#install').onclick=async()=>{await installEvent?.prompt();installEvent=null;$('#install').hidden=true;};
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>toast('Offline installation could not be enabled.'));
-render();cloud.initialize(onUser).catch(err=>{$('#connection-status').textContent='Connect to the internet for your first sign-in.';error(err);});
+render();cloud.initialize(onUser).then(()=>{$('#signin').disabled=false;}).catch(err=>{$('#signin').disabled=false;$('#connection-status').textContent='Connect to the internet for your first sign-in.';error(err);});

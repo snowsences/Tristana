@@ -14,7 +14,6 @@ VAPID_SUBJECT = "mailto:allenkevinc@gmail.com"
 [triggers]
 crons = ["* * * * *"]
 
-# Create a KV namespace called TRISTANA_STATE, then uncomment and paste its ID.
-# [[kv_namespaces]]
-# binding = "TRISTANA_STATE"
-# id = "YOUR_KV_NAMESPACE_ID"
+[[kv_namespaces]]
+binding = "TRISTANA_STATE"
+id = "300c1eabfdad400c9295d7e845fdb703"

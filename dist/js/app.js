@@ -5,6 +5,7 @@ import * as store from './storage.js';
 import * as cloud from './cloud.js';
 import {createCropper} from './crop.js';
 import {applyAuthGate} from './auth-ui.js';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -62,13 +63,13 @@ function renderStrip(){
   const tile=strip.querySelector('[aria-pressed=true]');if(tile)strip.scrollLeft=tile.offsetLeft-strip.clientWidth/2+tile.clientWidth/2;
 }
 function refreshProgress(){
-  const e=entry();$('#history-button').hidden=!user;
+  const e=entry();
   const tile=$('#day-strip').querySelector(`[data-date="${selectedDate}"]`);if(tile){tile.setAttribute('aria-label',selectedDate+', '+status(e,selectedDate,today()));tile.querySelector('.tile-image').className='tile-image '+status(e,selectedDate,today());}
   if(yearView)renderYear();
 }
 function renderEntry(){
   const e=entry();for(const field of ['good','learned']){if(document.activeElement!==$('#'+field))$('#'+field).value=e[field]||'';}
-  $('#photo-empty').hidden=Boolean(e.photo);$('#photo-preview').hidden=!e.photo;$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
+  applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
   if(e.photo){const identity=e.photo.localId;$('#entry-photo').removeAttribute('src');photoURL(e.photo).then(url=>{if(entry().photo?.localId===identity&&url)$('#entry-photo').src=url;}).catch(()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});}
   savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');refreshProgress();
 }
@@ -99,11 +100,11 @@ async function runSync(){
         if(entry(date).photo?.localId===e.photo.localId){const updated={...entry(date),photo:e.photo};entries.set(date,updated);await persist(updated);}else continue;
       } catch(err) {photoError=err;e._dirty=e._dirty.filter(f=>f!=='photo');} }
       if(!e._dirty.length) { $('#connection-status').textContent=readableError(photoError); continue; }
-      const {data,conflicts}=await cloud.sync(uid,e);
+      const {data}=await cloud.sync(uid,e);
       if(user?.uid!==uid)return;
       const latest=entry(date);const clean={...latest,_base:{...latest._base},_dirty:[...latest._dirty],revision:data.revision};
       for(const field of e._dirty){clean._base[field]=data[field];if(same(latest[field],e[field]))clean._dirty=clean._dirty.filter(f=>f!==field);}
-      entries.set(date,clean);await persist(clean);if(conflicts.length)toast('Both versions were kept. See Earlier versions to review.');
+      entries.set(date,clean);await persist(clean);
     }
     $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');renderEntry();renderStrip();
   }catch(err){savedLabel('Saved on device · backup pending');$('#connection-status').textContent=readableError(err);if(entry().photo?.pending)$('#photo-note').textContent='Saved on device. Photo backup is waiting for the Worker setup.';}
@@ -114,7 +115,7 @@ async function onUser(account,message){
   for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
-  if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid','history-list'])$('#'+id).replaceChildren();for(const dialog of document.querySelectorAll('dialog[open]'))dialog.close('cancel');$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
+  if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
     unsubscribers=cloud.listen(user.uid,async remote=>{for(const r of remote){const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}renderEntry();renderStrip();if(yearView)renderYear();},async incoming=>{settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
@@ -126,15 +127,32 @@ function applySettings(){zone=settings.timezone||Intl.DateTimeFormat().resolvedO
 async function closeNotifications(date){if(date!==today()||!filled(entry(date)))return;try{const registration=await navigator.serviceWorker?.getRegistration();for(const n of await registration?.getNotifications()||[])if(n.data?.date===date)n.close();}catch{}}
 const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   if(!user)return;const localId=crypto.randomUUID();await store.put('photos',{key:user.uid+':'+localId,source,square});
-  if(oldPhoto)await store.put('history',{key:user.uid+':'+date+':'+Date.now(),date,value:snapshot(entry(date)),archivedAt:Date.now()});
   await change('photo',{localId,crop,pending:true,source:null,square:null},date);if(selectedDate===date){renderEntry();renderStrip();}
 },error);
 for(const field of ['good','learned']){
   const input=$('#'+field);const save=()=>{if(input.isComposing)return;input.value=limit(input.value);change(field,input.value).catch(error);};input.addEventListener('input',e=>{input.isComposing=e.isComposing;save();});input.addEventListener('compositionend',()=>{input.isComposing=false;save();});
 }
 for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>$('#'+type+'-input').click();$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0];if(file)try{await cropper.open(file,selectedDate,entry().photo);}catch(err){error(err);}e.target.value='';};}
-$('#recrop').onclick=async()=>{try{const photo=entry().photo;let local=await store.get('photos',user.uid+':'+photo.localId);const source=local?.source||await cloud.media(photo.source);await cropper.open(source,selectedDate,photo);}catch(err){error(err);}};
-$('#remove-photo').onclick=async()=>{if(!confirm('Remove this photograph from the entry? Earlier versions will keep it.'))return;await store.put('history',{key:user.uid+':'+selectedDate+':'+Date.now(),date:selectedDate,value:snapshot(entry()),archivedAt:Date.now()});await change('photo',null);renderEntry();renderStrip();};
+bindPhotoLightbox(document,{
+  isAuthenticated:()=>Boolean(user),
+  async onOpen(){
+    const date=selectedDate,photo=entry(date).photo;if(!user||!photo)return null;
+    const url=await photoURL(photo);if(!user||entry(date).photo?.localId!==photo.localId||!url)return null;
+    return {date,photo,url};
+  },
+  async onReframe({date,photo}){
+    if(!user||entry(date).photo?.localId!==photo.localId)return;
+    const local=await store.get('photos',user.uid+':'+photo.localId);
+    const source=local?.source||await cloud.media(photo.source);
+    if(user)await cropper.open(source,date,photo);
+  },
+  async onRemove({date,photo}){
+    if(!user||entry(date).photo?.localId!==photo.localId)return true;
+    if(!confirm('Remove this photograph from this day?'))return false;
+    await change('photo',null,date);if(selectedDate===date){renderEntry();renderStrip();}return true;
+  },
+  onError:error
+});
 $('#signin').onclick=()=>cloud.signIn().catch(error);
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=()=>{tab=b.dataset.tab;if(tab==='today'){selectedDate=today();yearView=false;}render();window.scrollTo({top:0,behavior:'auto'});};
@@ -156,15 +174,9 @@ $('#enable-reminders').onclick=async()=>{
   }catch(err){error(err);}
 };
 $('#disable-reminders').onclick=async()=>{try{await cloud.api('/reminders',{method:'DELETE',body:{deviceId}});const reg=await navigator.serviceWorker.ready;await(await reg.pushManager.getSubscription())?.unsubscribe();await cloud.settings(user.uid,{reminderDeviceId:''});$('#reminder-status').textContent='Reminders are off.';$('#disable-reminders').hidden=true;}catch(err){error(err);}};
-$('#history-button').onclick=async()=>{
-  try{const remote=await cloud.history(user.uid,selectedDate).catch(()=>[]);const local=(await store.all('history')).filter(x=>x.key.startsWith(user.uid+':'+selectedDate+':')).map(x=>({...x.value,archivedAt:x.archivedAt}));const list=$('#history-list');list.replaceChildren();
-    for(const value of [...remote,...local].sort((a,b)=>b.archivedAt-a.archivedAt).slice(0,30)){const article=document.createElement('article');const date=document.createElement('p');date.className='history-label';date.textContent=new Date(value.archivedAt).toLocaleString();const good=document.createElement('p');good.textContent='Good: '+(value.good||'—');const learned=document.createElement('p');learned.textContent='Learned: '+(value.learned||'—');const button=document.createElement('button');button.className='text-button';button.textContent='Restore this version';button.onclick=async()=>{for(const f of FIELDS)await change(f,value[f]??(f==='photo'?null:''));renderEntry();renderStrip();$('#history-dialog').close();};article.append(date,good,learned,button);list.append(article);}
-    if(!list.childElementCount)list.textContent='No earlier versions yet.';$('#history-dialog').showModal();
-  }catch(err){error(err);}
-};$('#close-history').onclick=()=>$('#history-dialog').close();
 const blobToData=blob=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});
 $('#export').onclick=async()=>{try{await localWrites;const exportEntries=[...entries.values()].map(e=>({date:e.date,good:e.good,learned:e.learned,photo:e.photo}));const photos=[];for(const p of (await store.all('photos')).filter(x=>x.key.startsWith(user.uid+':'))){photos.push({localId:p.key.slice(user.uid.length+1),source:p.source?await blobToData(p.source):null,square:p.square?await blobToData(p.square):null});}const json={format:'tristana-backup',version:1,exportedAt:new Date().toISOString(),entries:exportEntries,photos};const url=URL.createObjectURL(new Blob([JSON.stringify(json)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='tristana-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#backup-status').textContent='Exported '+exportEntries.length+' entries and '+photos.length+' local photographs. Photos not cached on this device remain Cloudinary references.';}catch(err){error(err);}};
-$('#import').onclick=()=>$('#import-input').click();$('#import-input').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>250*1024*1024)throw new Error('This backup is too large to import on this device.');const backup=JSON.parse(await file.text());if(backup.format!=='tristana-backup'||backup.version!==1||!Array.isArray(backup.entries)||!Array.isArray(backup.photos))throw new Error('This is not a Tristana backup.');for(const r of backup.entries)if(!validDay(r.date)||count(r.good)>LIMIT||count(r.learned)>LIMIT||typeof r.good!=='string'||typeof r.learned!=='string')throw new Error('A backup entry is invalid.');if(!confirm('Import '+backup.entries.length+' entries? Matching days will be replaced; earlier versions will be kept.'))return;for(const p of backup.photos){if(typeof p.localId!=='string'||!/^[-a-zA-Z0-9]+$/.test(p.localId))throw new Error('Invalid photo identifier.');const value={key:user.uid+':'+p.localId};for(const kind of ['source','square'])if(p[kind]){if(!/^data:image\/(jpeg|png|webp);base64,/.test(p[kind]))throw new Error('Invalid backup photograph.');value[kind]=await fetch(p[kind]).then(r=>r.blob());}await store.put('photos',value);}for(const r of backup.entries){await store.put('history',{key:user.uid+':'+r.date+':'+Date.now(),date:r.date,value:snapshot(entry(r.date)),archivedAt:Date.now()});for(const field of FIELDS)await change(field,r[field]??(field==='photo'?null:''),r.date);}render();toast('Backup imported and saved on this device.');}catch(err){error(err);}finally{e.target.value='';}};
+$('#import').onclick=()=>$('#import-input').click();$('#import-input').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>250*1024*1024)throw new Error('This backup is too large to import on this device.');const backup=JSON.parse(await file.text());if(backup.format!=='tristana-backup'||backup.version!==1||!Array.isArray(backup.entries)||!Array.isArray(backup.photos))throw new Error('This is not a Tristana backup.');for(const r of backup.entries)if(!validDay(r.date)||count(r.good)>LIMIT||count(r.learned)>LIMIT||typeof r.good!=='string'||typeof r.learned!=='string')throw new Error('A backup entry is invalid.');if(!confirm('Import '+backup.entries.length+' entries? Matching days will be replaced.'))return;for(const p of backup.photos){if(typeof p.localId!=='string'||!/^[-a-zA-Z0-9]+$/.test(p.localId))throw new Error('Invalid photo identifier.');const value={key:user.uid+':'+p.localId};for(const kind of ['source','square'])if(p[kind]){if(!/^data:image\/(jpeg|png|webp);base64,/.test(p[kind]))throw new Error('Invalid backup photograph.');value[kind]=await fetch(p[kind]).then(r=>r.blob());}await store.put('photos',value);}for(const r of backup.entries){for(const field of FIELDS)await change(field,r[field]??(field==='photo'?null:''),r.date);}render();toast('Backup imported and saved on this device.');}catch(err){error(err);}finally{e.target.value='';}};
 $('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;$('#install').hidden=false;});$('#install').onclick=async()=>{await installEvent?.prompt();installEvent=null;$('#install').hidden=true;};
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>toast('Offline installation could not be enabled.'));

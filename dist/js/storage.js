@@ -1,7 +1,7 @@
 const request = req => new Promise((resolve,reject)=>{req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error);});
 const database = new Promise((resolve,reject)=>{
   const r=indexedDB.open('tristana',1);
-  r.onupgradeneeded=()=>{for(const name of ['entries','photos','settings','history']) r.result.createObjectStore(name,{keyPath:'key'});};
+  r.onupgradeneeded=()=>{for(const name of ['entries','photos','settings']) r.result.createObjectStore(name,{keyPath:'key'});};
   r.onsuccess=()=>resolve(r.result); r.onerror=()=>reject(r.error);
 });
 export async function get(store,key) { const db=await database; return request(db.transaction(store).objectStore(store).get(key)); }

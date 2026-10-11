@@ -1,5 +1,5 @@
 import {CONFIG} from './config.js';
-import {FIELDS,reconcile} from './core.js';
+import {reconcile} from './core.js';
 let sdk,auth,db;
 export async function initialize(onUser) {
   const [appAPI,authAPI,storeAPI]=await Promise.all([
@@ -30,21 +30,15 @@ export function listen(uid,onEntries,onSettings,onError) {
 }
 export async function sync(uid,local) {
   const ref=sdk.doc(db,'users',uid,'entries',local.date);
-  const history=sdk.doc(sdk.collection(db,'users',uid,'entries',local.date,'history'));
   return sdk.runTransaction(db,async tx=>{
     const snap=await tx.get(ref); const remote=snap.data() || {date:local.date,learned:'',good:'',photo:null,revision:0};
-    const {next,conflicts}=reconcile(local,remote);
+    const {next}=reconcile(local,remote);
     const data={date:local.date,learned:next.learned||'',good:next.good||'',photo:next.photo||null,revision:(remote.revision||0)+1,updatedAt:Date.now(),updatedBy:local.updatedBy||'device'};
-    if(snap.exists()) tx.set(history,{...remote,archivedAt:Date.now(),reason:conflicts.length?'Concurrent edits preserved':'Earlier version'});
     tx.set(ref,data);
-    return {data,conflicts};
+    return {data};
   });
 }
 export async function settings(uid,patch) { await sdk.setDoc(sdk.doc(db,'users',uid),patch,{merge:true}); }
-export async function history(uid,date) {
-  const snap=await sdk.getDocs(sdk.collection(db,'users',uid,'entries',date,'history'));
-  return snap.docs.map(d=>({...d.data(),id:d.id})).sort((a,b)=>(b.archivedAt||0)-(a.archivedAt||0)).slice(0,30);
-}
 export async function api(path,{method='GET',body}={}) {
   if(!auth?.currentUser) throw new Error('Sign in to connect to your backup.');
   const token=await auth.currentUser.getIdToken();

@@ -1,0 +1,20 @@
+name = "tristana"
+main = "index.js"
+compatibility_date = "2026-10-11"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+FIREBASE_PROJECT_ID = "tristana-56147"
+OWNER_EMAIL = "allenkevinc@gmail.com"
+CLOUDINARY_CLOUD_NAME = "myranker"
+ALLOWED_ORIGIN = "https://snowsences.github.io"
+APP_URL = "https://snowsences.github.io/Tristana/"
+VAPID_SUBJECT = "mailto:allenkevinc@gmail.com"
+
+[triggers]
+crons = ["* * * * *"]
+
+# Create a KV namespace called TRISTANA_STATE, then uncomment and paste its ID.
+# [[kv_namespaces]]
+# binding = "TRISTANA_STATE"
+# id = "YOUR_KV_NAMESPACE_ID"

@@ -1,0 +1,1 @@
+{"name":"tristana-worker","private":true,"type":"module","scripts":{"dev":"wrangler dev","deploy":"wrangler deploy","vapid":"node -e \"console.log(JSON.stringify(require('web-push').generateVAPIDKeys(),null,2))\""},"dependencies":{"jose":"^6.1.0","web-push":"^3.6.7"},"devDependencies":{"wrangler":"^4.0.0"}}

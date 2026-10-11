@@ -17,7 +17,9 @@ const displayDate=(date,options)=>new Intl.DateTimeFormat('en-US',{timeZone:'UTC
 const toast=message=>{const el=$('#toast');el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,6500);};
 const error=err=>toast(readableError(err));
 function readableError(err){const code=err.code||'';if(code.includes('unauthorized-domain'))return 'Add snowsences.github.io to Firebase Authentication’s authorized domains.';if(code.includes('operation-not-allowed'))return 'Enable the Google sign-in provider in Firebase Authentication.';if(code.includes('permission-denied'))return 'Firebase access was denied. Publish the supplied Firestore rules.';if(code.includes('popup-blocked'))return 'Allow the Google sign-in popup, then try again.';if(code.includes('popup-closed'))return 'Sign-in closed. Your journal is still here.';return err.message||'Something went wrong. Please try again.';}
-function savedLabel(message){$('#save-status').textContent=message;}
+function savedLabel(message){if(message)$('#connection-status').textContent=message;}
+function resizePrompt(input){input.style.height='auto';if(input.clientWidth)input.style.height=input.scrollHeight+'px';}
+function resizePrompts(){for(const field of ['good','learned'])resizePrompt($('#'+field));}
 function snapshot(value){return structuredClone(value);}
 function persist(e){const copy=snapshot(e);copy.key=user.uid+':'+e.date;localWrites=localWrites.catch(()=>{}).then(()=>store.put('entries',copy));return localWrites;}
 async function change(field,value,date=selectedDate){
@@ -39,7 +41,6 @@ function header(){
   applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
   $('#page-title').innerHTML=tab==='past'?'Past<br>days.':tab==='settings'?'Make it yours.':'A little<br>of today.';
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
-  $('#entry-date').textContent=selectedDate===today()?'Today':displayDate(selectedDate,{weekday:'short',month:'short',day:'numeric',year:'numeric'});
   $('#next-day').disabled=selectedDate>=today();
 }
 async function photoURL(photo,kind='square'){
@@ -68,7 +69,7 @@ function refreshProgress(){
   if(yearView)renderYear();
 }
 function renderEntry(){
-  const e=entry();for(const field of ['good','learned']){if(document.activeElement!==$('#'+field))$('#'+field).value=e[field]||'';}
+  const e=entry();for(const field of ['good','learned']){if(document.activeElement!==$('#'+field))$('#'+field).value=e[field]||'';}requestAnimationFrame(resizePrompts);
   applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
   if(e.photo){const identity=e.photo.localId;$('#entry-photo').removeAttribute('src');photoURL(e.photo).then(url=>{if(entry().photo?.localId===identity&&url)$('#entry-photo').src=url;}).catch(()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});}
   savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');refreshProgress();
@@ -130,7 +131,7 @@ const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   await change('photo',{localId,crop,pending:true,source:null,square:null},date);if(selectedDate===date){renderEntry();renderStrip();}
 },error);
 for(const field of ['good','learned']){
-  const input=$('#'+field);const save=()=>{if(input.isComposing)return;input.value=limit(input.value);change(field,input.value).catch(error);};input.addEventListener('input',e=>{input.isComposing=e.isComposing;save();});input.addEventListener('compositionend',()=>{input.isComposing=false;save();});
+  const input=$('#'+field);const save=()=>{if(input.isComposing){resizePrompt(input);return;}input.value=limit(input.value);resizePrompt(input);change(field,input.value).catch(error);};input.addEventListener('input',e=>{input.isComposing=e.isComposing;save();});input.addEventListener('compositionend',()=>{input.isComposing=false;save();});
 }
 for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>$('#'+type+'-input').click();$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0];if(file)try{await cropper.open(file,selectedDate,entry().photo);}catch(err){error(err);}e.target.value='';};}
 bindPhotoLightbox(document,{
@@ -177,7 +178,7 @@ $('#disable-reminders').onclick=async()=>{try{await cloud.api('/reminders',{meth
 const blobToData=blob=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});
 $('#export').onclick=async()=>{try{await localWrites;const exportEntries=[...entries.values()].map(e=>({date:e.date,good:e.good,learned:e.learned,photo:e.photo}));const photos=[];for(const p of (await store.all('photos')).filter(x=>x.key.startsWith(user.uid+':'))){photos.push({localId:p.key.slice(user.uid.length+1),source:p.source?await blobToData(p.source):null,square:p.square?await blobToData(p.square):null});}const json={format:'tristana-backup',version:1,exportedAt:new Date().toISOString(),entries:exportEntries,photos};const url=URL.createObjectURL(new Blob([JSON.stringify(json)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='tristana-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#backup-status').textContent='Exported '+exportEntries.length+' entries and '+photos.length+' local photographs. Photos not cached on this device remain Cloudinary references.';}catch(err){error(err);}};
 $('#import').onclick=()=>$('#import-input').click();$('#import-input').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>250*1024*1024)throw new Error('This backup is too large to import on this device.');const backup=JSON.parse(await file.text());if(backup.format!=='tristana-backup'||backup.version!==1||!Array.isArray(backup.entries)||!Array.isArray(backup.photos))throw new Error('This is not a Tristana backup.');for(const r of backup.entries)if(!validDay(r.date)||count(r.good)>LIMIT||count(r.learned)>LIMIT||typeof r.good!=='string'||typeof r.learned!=='string')throw new Error('A backup entry is invalid.');if(!confirm('Import '+backup.entries.length+' entries? Matching days will be replaced.'))return;for(const p of backup.photos){if(typeof p.localId!=='string'||!/^[-a-zA-Z0-9]+$/.test(p.localId))throw new Error('Invalid photo identifier.');const value={key:user.uid+':'+p.localId};for(const kind of ['source','square'])if(p[kind]){if(!/^data:image\/(jpeg|png|webp);base64,/.test(p[kind]))throw new Error('Invalid backup photograph.');value[kind]=await fetch(p[kind]).then(r=>r.blob());}await store.put('photos',value);}for(const r of backup.entries){for(const field of FIELDS)await change(field,r[field]??(field==='photo'?null:''),r.date);}render();toast('Backup imported and saved on this device.');}catch(err){error(err);}finally{e.target.value='';}};
-$('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
+$('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('resize',resizePrompts);window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;$('#install').hidden=false;});$('#install').onclick=async()=>{await installEvent?.prompt();installEvent=null;$('#install').hidden=true;};
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>toast('Offline installation could not be enabled.'));
 render();cloud.initialize(onUser).then(()=>{$('#signin').disabled=false;}).catch(err=>{$('#signin').disabled=false;$('#connection-status').textContent='Connect to the internet for your first sign-in.';error(err);});

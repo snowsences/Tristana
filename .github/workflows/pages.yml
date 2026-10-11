@@ -1,20 +1,16 @@
-name: Publish Tristana
+name: Check Tristana
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
-  group: pages
+  group: tristana-checks-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,9 +19,5 @@ jobs:
           node-version: 24
       - run: npm ci --ignore-scripts
       - run: npm test && npm run check
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
-      - uses: actions/deploy-pages@v4
-        id: deployment
+# GitHub Pages publishes main / (root), including index.html and dist/.
+# Keep one publisher so /Tristana/dist/ remains available after every update.

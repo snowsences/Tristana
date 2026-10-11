@@ -1,4 +1,4 @@
-const VERSION='tristana-v1';
+const VERSION='tristana-v2';
 const SHELL=['./','./index.html','./style.css','./manifest.webmanifest','./theme-manifest.json','./js/app.js','./js/config.js','./js/core.js','./js/storage.js','./js/cloud.js','./js/crop.js','./js/themes.js','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',e=>e.waitUntil((async()=>{const c=await caches.open(VERSION);await c.addAll(SHELL);try{await c.addAll(['firebase-app','firebase-auth','firebase-firestore'].map(name=>'https://www.gstatic.com/firebasejs/13.0.0/'+name+'.js'));}catch{/* Local shell remains usable if SDK caching is interrupted. */}})()));
 self.addEventListener('activate',e=>e.waitUntil((async()=>{for(const k of await caches.keys())if(k.startsWith('tristana-')&&k!==VERSION)await caches.delete(k);await self.clients.claim();})()));

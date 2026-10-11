@@ -30,7 +30,7 @@ function applyTheme(){
   const {theme,scene}=selection;for(const [key,value] of Object.entries({bg:theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
   document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
   const art=$('#header-art');art.src=scene.src;art.srcset=`${scene.smallSrc} 600w, ${scene.src} 1200w`;art.sizes='(max-width:680px) 100vw, 680px';
-  $('#scene-caption').textContent=theme.name;$('#theme-button').firstChild.textContent=(override?theme.name:'Seasonal')+' ';$('#theme-select').value=override||'';
+  $('#theme-select').value=override||'';
   $('meta[name=theme-color]').content=theme.colors.background;
 }
 function header(){
@@ -139,7 +139,7 @@ $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onc
 $('#date-button').onclick=()=>{$('#selected-date').value=selectedDate;$('#selected-date').max=today();$('#date-dialog').showModal();};$('#date-dialog').addEventListener('close',()=>{if($('#date-dialog').returnValue==='choose')openDay($('#selected-date').value);});
 $('#photos-view').onclick=()=>{yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render();};$('#year-view').onclick=()=>{yearView=true;$('#photos-view').setAttribute('aria-pressed','false');$('#year-view').setAttribute('aria-pressed','true');render();};$('#prev-year').onclick=()=>{selectedYear--;renderYear();};$('#next-year').onclick=()=>{selectedYear++;renderYear();};
 for(const theme of manifest.themes){const option=document.createElement('option');option.value=theme.month;option.textContent=displayDate(`2026-${String(theme.month).padStart(2,'0')}-01`,{month:'long'})+' · '+theme.name;$('#theme-select').append(option);}
-$('#theme-select').onchange=e=>{localStorage.setItem('tristana-theme',e.target.value);applyTheme();};$('#theme-button').onclick=()=>{tab='settings';render();$('#theme-select').scrollIntoView({block:'center'});$('#theme-select').focus();};
+$('#theme-select').onchange=e=>{localStorage.setItem('tristana-theme',e.target.value);applyTheme();};
 $('#phone-toggle').onchange=async e=>{if(!user){e.target.checked=false;return toast('Sign in first.');}const patch={phoneDeviceId:e.target.checked?deviceId:'',timezone:e.target.checked?Intl.DateTimeFormat().resolvedOptions().timeZone:zone};try{await cloud.settings(user.uid,patch);settings={...settings,...patch};applySettings();}catch(err){error(err);}};
 $('#reminder-time').onchange=async e=>{if(user)try{await cloud.settings(user.uid,{reminderTime:e.target.value});if(settings.reminderDeviceId===deviceId)await cloud.api('/reminders/time',{method:'POST',body:{time:e.target.value,timezone:zone}});}catch(err){error(err);}};
 $('#enable-reminders').onclick=async()=>{

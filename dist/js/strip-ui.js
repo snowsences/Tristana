@@ -1,13 +1,13 @@
 import {shiftDay,filled,status} from './core.js';
-export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoURL,onSelect}) {
+export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoURL,getPhotoFilter=()=> 'none',onSelect}) {
   const doc=element.ownerDocument,win=doc.defaultView;let selected,first,last,scrollFrame,observer;const tiles=new Map();
   const observe=win.IntersectionObserver?new win.IntersectionObserver(changes=>{for(const item of changes)if(item.isIntersecting)loadPhoto(item.target);},{root:element,rootMargin:'0px 160px'}):null;
   function loadPhoto(button){const photo=getEntry(button.dataset.date).photo;if(!photo||button._loaded===photo.localId)return;button._loaded=photo.localId;const identity=photo.localId;
-    getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!button.isConnected||getEntry(button.dataset.date).photo?.localId!==identity)return;let img=button.querySelector('img');if(!img){img=doc.createElement('img');img.alt='';img.decoding='async';button.querySelector('.tile-image').append(img);}img.src=url;}).catch(()=>{button._loaded=null;});
+    getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!button.isConnected||getEntry(button.dataset.date).photo?.localId!==identity)return;let img=button.querySelector('img');if(!img){img=doc.createElement('img');img.alt='';img.decoding='async';button.querySelector('.tile-image').append(img);}img.style.filter=getPhotoFilter(button.dataset.date);img.src=url;}).catch(()=>{button._loaded=null;});
   }
   function update(button){const date=button.dataset.date,e=getEntry(date),state=status(e,date,getToday());
     button.setAttribute('aria-pressed',String(date===selected));button.setAttribute('aria-label',displayDate(date,{weekday:'long',month:'long',day:'numeric'})+', '+state);button.disabled=date>getToday()&&!filled(e);
-    const image=button.querySelector('.tile-image');image.className='tile-image '+state;
+    const image=button.querySelector('.tile-image');const img=image.querySelector('img');if(img)img.style.filter=getPhotoFilter(date);image.className='tile-image '+state;
     let dot=image.querySelector('.day-state');if(filled(e)&&!dot){dot=doc.createElement('i');dot.className='day-state';image.append(dot);}if(!filled(e))dot?.remove();
     if(button._identity!==e.photo?.localId){button._identity=e.photo?.localId;button._loaded=null;image.querySelector('img')?.remove();if(e.photo){if(observe)observe.observe(button);else loadPhoto(button);}}
     if(e.photo&&button._loaded!==e.photo.localId){const r=button.getBoundingClientRect(),er=element.getBoundingClientRect();if(button.isConnected&&r.right>=er.left-160&&r.left<=er.right+160)loadPhoto(button);}

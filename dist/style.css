@@ -173,5 +173,9 @@ html[data-memory-editing=true]{overflow:hidden}
 .photo-lightbox>img[data-zoomed=true]{cursor:grab;will-change:transform}
 .lightbox-close,.lightbox-actions{z-index:1}
 
-/* Keep prompt headings proportionate to the narrower phone writing area. */
-@media(max-width:759px){#entry-panel .prompt-body label{font-size:18px}}
+/* Keep the journal typography proportionate to the narrower phone writing area. */
+@media(max-width:759px){
+  .hero h1,.hero[data-page=past] h1{font-size:32px}
+  #entry-panel .prompt-body label{font-size:18px}
+  #entry-panel .prompt-body textarea{font-size:15px}
+}

@@ -150,3 +150,7 @@ body[data-theme=tide-oregon] .journal-content,body[data-theme=tide-oregon] .memo
 
 .page-decoration[data-ready=true]{opacity:1}
 @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){.page-decoration{display:none}}
+
+/* A translating rubber band on Android, without scaling content or moving fixed artwork. */
+html[data-elastic-platform=android],html[data-elastic-platform=android] body{overscroll-behavior-y:none}
+html[data-edge-bounce=true] .hero-copy,html[data-edge-bounce=true] #entry-panel,html[data-edge-bounce=true] #memories-panel,html[data-edge-bounce=true] #settings-view,html[data-edge-bounce=true] .hero[data-page=settings]>img{translate:0 var(--edge-offset,0px)}

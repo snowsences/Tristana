@@ -54,7 +54,7 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
   function readViewport(){if(!active||element.hidden)return;
     const last=element.lastElementChild;if(last&&last.getBoundingClientRect().bottom<win.innerHeight+700&&records.size<allDates().length){limit+=40;render();}
     if(!observer)for(const record of records.values())loadPhoto(record);
-    if(!programmatic){const date=visibleDate();if(date)select(date,{notify:true});}
+    if(!programmatic&&doc.documentElement.dataset.edgeBounce!=='true'){const date=visibleDate();if(date)select(date,{notify:true});}
   }
   function onScroll(){if(!active)return;win.cancelAnimationFrame(frame);frame=win.requestAnimationFrame(readViewport);
     if(programmatic){clearTimeout(settleTimer);settleTimer=setTimeout(()=>{programmatic=false;},160);}

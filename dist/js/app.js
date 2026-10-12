@@ -63,7 +63,7 @@ function applyTheme(){
   next.decode().then(apply).catch(()=>{if(serial===artGeneration){artIdentity='';error(new Error('The illustration could not load. Your entry is still available.'));}});
 }
 function header(){
-  $('#hero').dataset.page=tab;applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
+  $('#hero').dataset.page=tab;applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':tab==='past'?'Tristana':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
   $('#page-title').innerHTML=tab==='past'?'Memories.':tab==='settings'?'Make it yours.':'A little<br>of today.';
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
   $('#next-day').disabled=selectedDate>=today();

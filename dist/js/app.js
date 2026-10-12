@@ -54,6 +54,7 @@ function applyTheme(){
   const art=$('#header-art'),next=new Image();next.srcset=`${scene.smallSrc} 600w, ${scene.src} 1200w`;next.sizes='(max-width:680px) 100vw, 680px';next.src=scene.src;
   const apply=()=>{if(serial!==artGeneration)return;
     for(const [key,value] of Object.entries({bg:scene.background||theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
+    document.documentElement.style.setProperty('--prompt-art',`url("./${scene.smallSrc}")`);
     document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
     const previous=art.src&&art.animate&&!reducedMotion()?art.cloneNode(false):null;art.parentElement.querySelectorAll('.hero-previous').forEach(img=>img.remove());if(previous){previous.removeAttribute('id');previous.classList.add('hero-previous');previous.removeAttribute('fetchpriority');art.parentElement.append(previous);}
     art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());$('meta[name=theme-color]').content=scene.background||theme.colors.background;
@@ -80,19 +81,19 @@ async function photoURL(photo,kind='square'){
     return url;
   })();photoPromises.set(key,task);try{return await task;}finally{if(photoPromises.get(key)===task)photoPromises.delete(key);}
 }
-function renderStrip(options){if(tab!=='settings')dayStrip.render(selectedDate,options);}
+function renderStrip(options){if(tab==='past')dayStrip.render(selectedDate,options);}
 function refreshProgress(date=selectedDate){dayStrip.update([date]);memories.update([date]);}
 function renderEntry(){
   const e=entry();prompts.setEntry(e);applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
   $('#entry-photo').style.filter=photoFilter(selectedDate);photoRenderer.render(e.photo,selectedDate);savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');
 }
-function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=true;$('.day-section').classList.toggle('today-days',tab==='today');
-  $('#journal-view').hidden=tab==='settings';$('#journal-view').dataset.view=tab==='past'?'memories':'today';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=true;$('#year-panel').hidden=true;$('#entry-panel').hidden=tab!=='today';$('#memories-panel').hidden=tab!=='past';$('#day-strip').hidden=false;
+function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=true;$('.day-section').classList.toggle('today-days',tab==='today');$('.day-section').hidden=tab!=='past';
+  $('#journal-view').hidden=tab==='settings';$('#journal-view').dataset.view=tab==='past'?'memories':'today';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=true;$('#year-panel').hidden=true;$('#entry-panel').hidden=tab!=='today';$('#memories-panel').hidden=tab!=='past';$('#day-strip').hidden=tab!=='past';
   renderStrip({animate:dayMotion,recenter:recenterDay});if(tab==='today')renderEntry();if(tab==='past'){memories.render();memories.ensure(selectedDate);memories.select(selectedDate);}memories.setActive(tab==='past');
   for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
 }
 async function openDay(date){
-  if(!validDay(date)||(date>today()&&!entries.has(date)))return;
+  if(!validDay(date)||(date>today()&&!entries.has(date))||(tab==='today'&&date!==today()))return;
   if(tab==='past'){selectMemoryDay(date);memories.scrollTo(date);return;}
   const request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
   const changed=date!==selectedDate;selectedDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render({dayMotion:true});if(changed)reveal($('#entry-panel'),{duration:170});
@@ -153,7 +154,7 @@ async function onUser(account,message){
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
     unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab==='today')renderEntry();memories.update(changed);if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
-    try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=restored.date;yearView=false;if(tab==='past')memoryDate=selectedDate;selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
+    try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=tab==='today'?today():restored.date;yearView=false;if(tab==='past')memoryDate=selectedDate;selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
   }
   render();
 }

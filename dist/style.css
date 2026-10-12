@@ -97,3 +97,15 @@ body[data-theme=tide-oregon] .memories-content{background-image:var(--tide-motif
 @media(max-width:359px){.memories-content{padding-left:16px;padding-right:16px}.memory-card{gap:10px}.memory-card.has-photo{grid-template-columns:38px minmax(0,1fr) 56px}.memory-photo{width:56px}}
 
 .memory-good[hidden]+.memory-learned,.memory-sentences .memory-no-entry{margin-top:0}
+
+/* Today: illustrated edges and quiet frosted writing surfaces. */
+#journal-view[data-view=today] #entry-panel{position:relative;z-index:1;margin-top:-20px}
+#entry-panel .prompt-card{margin-bottom:12px;background:transparent;border-radius:0}
+#entry-panel .good-card{border-top-left-radius:52px}
+#entry-panel .learned-card{border-bottom-left-radius:52px}
+#entry-panel .card-motif{flex-basis:60px;border-radius:0;background-color:color-mix(in srgb,var(--accent) 14%,var(--bg));background-image:linear-gradient(color-mix(in srgb,var(--bg) 22%,transparent),color-mix(in srgb,var(--accent) 18%,transparent)),var(--prompt-art);background-size:cover,auto 220%;background-position:center,85% 42%;background-repeat:no-repeat}
+#entry-panel .learned-card .card-motif{background-position:center,70% 65%}
+#entry-panel .card-motif:before{border-color:color-mix(in srgb,var(--accent) 36%,transparent);z-index:1}
+#entry-panel .prompt-body{background:color-mix(in srgb,var(--bg) 68%,transparent);backdrop-filter:blur(18px) saturate(1.12);-webkit-backdrop-filter:blur(18px) saturate(1.12);box-shadow:inset 0 1px color-mix(in srgb,white 32%,transparent),inset 0 -1px color-mix(in srgb,var(--accent) 10%,transparent)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#entry-panel .prompt-body{background:color-mix(in srgb,var(--bg) 92%,var(--accent))}}
+@media(max-width:390px){#entry-panel .card-motif{flex-basis:48px}}

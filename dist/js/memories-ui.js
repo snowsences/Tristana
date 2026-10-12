@@ -24,7 +24,7 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
   }
   function make(date){const node=doc.createElement('article');node.className='memory-card';node.dataset.date=date;node.setAttribute('aria-label',displayDate(date,{weekday:'long',month:'long',day:'numeric',year:'numeric'}));
     const stamp=doc.createElement('time');stamp.className='memory-date';stamp.dateTime=date;
-    for(const [className,options] of [['memory-day',{day:'numeric'}],['memory-month',{month:'short'}],['memory-year',{year:'numeric'}]]){const label=doc.createElement('span');label.className=className;label.textContent=displayDate(date,options);stamp.append(label);}
+    for(const [className,options] of [['memory-weekday',{weekday:'short'}],['memory-day',{day:'numeric'}],['memory-month',{month:'short'}]]){const label=doc.createElement('span');label.className=className;label.textContent=displayDate(date,options).toUpperCase();stamp.append(label);}
     const sentences=doc.createElement('div');sentences.className='memory-sentences';
     const paragraph=(className,label)=>{const p=doc.createElement('p');p.className=className;const prefix=doc.createElement('span');prefix.className='sr-only';prefix.textContent=label+': ';const text=doc.createElement('span');text.className='memory-text';p.append(prefix,text);sentences.append(p);return p;};
     const good=paragraph('memory-good','Something good'),learned=paragraph('memory-learned','Something learned');const absent=doc.createElement('p');absent.className='memory-no-entry';absent.textContent='Nothing saved for this day.';sentences.append(absent);

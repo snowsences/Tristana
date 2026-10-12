@@ -159,8 +159,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/jan-good.webp",
-        "learned": "assets/prompts/jan-learned.webp"
+        "good": "assets/prompts/jan-good-v2.webp",
+        "learned": "assets/prompts/jan-learned-v2.webp"
       }
     },
     {
@@ -308,8 +308,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/feb-good.webp",
-        "learned": "assets/prompts/feb-learned.webp"
+        "good": "assets/prompts/feb-good-v2.webp",
+        "learned": "assets/prompts/feb-learned-v2.webp"
       }
     },
     {
@@ -457,8 +457,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/mar-good.webp",
-        "learned": "assets/prompts/mar-learned.webp"
+        "good": "assets/prompts/mar-good-v2.webp",
+        "learned": "assets/prompts/mar-learned-v2.webp"
       }
     },
     {
@@ -606,8 +606,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/apr-good.webp",
-        "learned": "assets/prompts/apr-learned.webp"
+        "good": "assets/prompts/apr-good-v2.webp",
+        "learned": "assets/prompts/apr-learned-v2.webp"
       }
     },
     {
@@ -755,8 +755,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/may-good.webp",
-        "learned": "assets/prompts/may-learned.webp"
+        "good": "assets/prompts/may-good-v2.webp",
+        "learned": "assets/prompts/may-learned-v2.webp"
       }
     },
     {
@@ -911,8 +911,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/jun-good.webp",
-        "learned": "assets/prompts/jun-learned.webp"
+        "good": "assets/prompts/jun-good-v2.webp",
+        "learned": "assets/prompts/jun-learned-v2.webp"
       }
     },
     {
@@ -1060,8 +1060,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/jul-good.webp",
-        "learned": "assets/prompts/jul-learned.webp"
+        "good": "assets/prompts/jul-good-v2.webp",
+        "learned": "assets/prompts/jul-learned-v2.webp"
       }
     },
     {
@@ -1209,8 +1209,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/aug-good.webp",
-        "learned": "assets/prompts/aug-learned.webp"
+        "good": "assets/prompts/aug-good-v2.webp",
+        "learned": "assets/prompts/aug-learned-v2.webp"
       }
     },
     {
@@ -1358,8 +1358,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/sep-good.webp",
-        "learned": "assets/prompts/sep-learned.webp"
+        "good": "assets/prompts/sep-good-v2.webp",
+        "learned": "assets/prompts/sep-learned-v2.webp"
       }
     },
     {
@@ -1507,8 +1507,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/oct-good.webp",
-        "learned": "assets/prompts/oct-learned.webp"
+        "good": "assets/prompts/oct-good-v2.webp",
+        "learned": "assets/prompts/oct-learned-v2.webp"
       }
     },
     {
@@ -1656,8 +1656,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/nov-good.webp",
-        "learned": "assets/prompts/nov-learned.webp"
+        "good": "assets/prompts/nov-good-v2.webp",
+        "learned": "assets/prompts/nov-learned-v2.webp"
       }
     },
     {
@@ -1805,8 +1805,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/dec-good.webp",
-        "learned": "assets/prompts/dec-learned.webp"
+        "good": "assets/prompts/dec-good-v2.webp",
+        "learned": "assets/prompts/dec-learned-v2.webp"
       }
     }
   ]

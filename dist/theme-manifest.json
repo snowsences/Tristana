@@ -1516,8 +1516,8 @@
         }
       ],
       "promptArt": {
-        "good": "assets/prompts/oct-good-v2.webp",
-        "learned": "assets/prompts/oct-learned-v2.webp"
+        "good": "assets/prompts/oct-good-v3.webp",
+        "learned": "assets/prompts/oct-learned-v3.webp"
       },
       "decorationSrc": "assets/decorations/oct-orchard-sketch.webp"
     },

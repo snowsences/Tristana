@@ -7,20 +7,20 @@ export function applyPhotoPresence(document, hasPhoto) {
 export function bindPhotoLightbox(document, {onOpen,onReframe,onRemove,onError,isAuthenticated}) {
   const dialog=document.getElementById('photo-lightbox');
   const image=document.getElementById('lightbox-photo');
-  let context=null;const preview=document.getElementById('photo-preview');
-  dialog._beforeClose=async()=>{if(!preview.hidden)await animatePhoto(image,preview.getBoundingClientRect(),containedRect(image),{closing:true});};
-  document.getElementById('photo-preview').onclick=async()=>{
-    try{const photo=await onOpen();if(!photo||!isAuthenticated())return;context=photo;image.style.filter=photo.filter||'none';image.src=photo.url;if(image.decode)await image.decode();if(!isAuthenticated())return;const from=preview.getBoundingClientRect();dialog.showModal();reveal(dialog.querySelector('.lightbox-actions'));animatePhoto(image,from,containedRect(image)).catch(onError);}catch(error){onError(error);}
-  };
+  let context=null;const preview=document.getElementById('photo-preview'),actions=dialog.querySelector('.lightbox-actions');
+  dialog._beforeClose=async()=>{const origin=context?.origin||preview;if(origin.isConnected&&!origin.hidden)await animatePhoto(image,origin.getBoundingClientRect(),containedRect(image),{closing:true});};
+  async function open(photo){if(!photo||!isAuthenticated())return;context=photo;image.style.filter=photo.filter||'none';image.src=photo.url;if(image.decode)await image.decode();if(!isAuthenticated())return;const from=(photo.origin||preview).getBoundingClientRect();actions.hidden=Boolean(photo.readOnly);dialog.dataset.readOnly=String(Boolean(photo.readOnly));dialog.showModal();reveal(actions);animatePhoto(image,from,containedRect(image)).catch(onError);}
+  preview.onclick=async()=>{try{await open(await onOpen());}catch(error){onError(error);}};
   document.getElementById('close-photo').onclick=()=>dialog.close();
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
-  dialog.addEventListener('close',()=>{context=null;image.removeAttribute('src');});
+  dialog.addEventListener('close',()=>{context=null;actions.hidden=false;delete dialog.dataset.readOnly;image.removeAttribute('src');});
   document.getElementById('recrop').onclick=async()=>{
-    const photo=context;if(!photo)return;await dialog.close();
+    const photo=context;if(!photo||photo.readOnly)return;await dialog.close();
     try{await onReframe(photo);}catch(error){onError(error);}
   };
   document.getElementById('remove-photo').onclick=async()=>{
-    const photo=context;if(!photo)return;
+    const photo=context;if(!photo||photo.readOnly)return;
     try{if(await onRemove(photo)!==false)dialog.close();}catch(error){onError(error);}
   };
+  return {open};
 }

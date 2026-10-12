@@ -1,6 +1,6 @@
 import {shiftDay,filled,status} from './core.js';
-export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoURL,getPhotoFilter=()=> 'none',onSelect}) {
-  const doc=element.ownerDocument,win=doc.defaultView;let selected,first,last,scrollFrame,observer;const tiles=new Map();
+export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoURL,getPhotoFilter=()=> 'none',onSelect,onBrowse,getIsBrowsing=()=>false}) {
+  const doc=element.ownerDocument,win=doc.defaultView;let selected,first,last,scrollFrame,observer,browseTimer,centering=false,userBrowsing=false;const tiles=new Map();
   const observe=win.IntersectionObserver?new win.IntersectionObserver(changes=>{for(const item of changes)if(item.isIntersecting)loadPhoto(item.target);},{root:element,rootMargin:'0px 160px'}):null;
   function loadPhoto(button){const photo=getEntry(button.dataset.date).photo;if(!photo||button._loaded===photo.localId)return;button._loaded=photo.localId;const identity=photo.localId;
     getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!button.isConnected||getEntry(button.dataset.date).photo?.localId!==identity)return;let img=button.querySelector('img');if(!img){img=doc.createElement('img');img.alt='';img.decoding='async';button.querySelector('.tile-image').append(img);}img.style.filter=getPhotoFilter(button.dataset.date);img.src=url;}).catch(()=>{button._loaded=null;});
@@ -17,20 +17,25 @@ export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoUR
     const label=doc.createElement('span');label.className='tile-date';label.textContent=displayDate(date,{month:'short',day:'numeric'});button.append(image,label);button.onclick=()=>onSelect(date);tiles.set(date,button);update(button);return button;
   }
   function fill(from,to,prepend=false){const fragment=doc.createDocumentFragment();for(let date=from;date<=to;date=shiftDay(date,1))fragment.append(make(date));if(prepend)element.prepend(fragment);else element.append(fragment);}
-  function center(behavior='auto'){const tile=tiles.get(selected);if(!tile)return;const left=tile.offsetLeft-element.clientWidth/2+tile.clientWidth/2;if(element.scrollTo)element.scrollTo({left,behavior});else element.scrollLeft=left;}
+  function center(behavior='auto'){centering=true;userBrowsing=false;clearTimeout(browseTimer);browseTimer=setTimeout(()=>centering=false,behavior==='smooth'?500:120);const tile=tiles.get(selected);if(!tile)return;const left=tile.offsetLeft-element.clientWidth/2+tile.clientWidth/2;if(element.scrollTo)element.scrollTo({left,behavior});else element.scrollLeft=left;}
   function extend(){if(!first||element.hidden||!element.clientWidth)return;const max=element.scrollWidth-element.clientWidth;if(max<=0)return;
     if(element.scrollLeft<160){const anchor=element.firstElementChild;const left=anchor.getBoundingClientRect().left,newFirst=shiftDay(first,-14);fill(newFirst,shiftDay(first,-1),true);first=newFirst;element.scrollLeft+=anchor.getBoundingClientRect().left-left;trim('end');}
     else if(max-element.scrollLeft<160&&last<shiftDay(getToday(),7)){const candidate=shiftDay(last,14),ceiling=shiftDay(getToday(),7),newLast=candidate<ceiling?candidate:ceiling;fill(shiftDay(last,1),newLast);last=newLast;trim('start');}
   }
   function trim(side){while(tiles.size>91){const button=side==='start'?element.firstElementChild:element.lastElementChild;const anchor=element.children[1],left=anchor?.getBoundingClientRect().left;tiles.delete(button.dataset.date);observe?.unobserve(button);button.remove();if(side==='start'&&anchor)element.scrollLeft+=anchor.getBoundingClientRect().left-left;}first=element.firstElementChild?.dataset.date;last=element.lastElementChild?.dataset.date;}
-  element.addEventListener('scroll',()=>{win.cancelAnimationFrame(scrollFrame);scrollFrame=win.requestAnimationFrame(extend);},{passive:true});
+  function browse(){if(!onBrowse||!getIsBrowsing()||centering||!userBrowsing||!element.clientWidth)return;const middle=element.scrollLeft+element.clientWidth/2;let closest,distance=Infinity;for(const button of tiles.values()){if(button.disabled)continue;const delta=Math.abs(button.offsetLeft+button.clientWidth/2-middle);if(delta<distance){closest=button;distance=delta;}}if(closest&&closest.dataset.date!==selected)onBrowse(closest.dataset.date);}
+  element.addEventListener('pointerdown',()=>{centering=false;userBrowsing=true;clearTimeout(browseTimer);},{passive:true});
+  element.addEventListener('wheel',event=>{if(Math.abs(event.deltaX)>Math.abs(event.deltaY)||event.shiftKey){centering=false;userBrowsing=true;}},{passive:true});
+  element.addEventListener('scroll',()=>{win.cancelAnimationFrame(scrollFrame);scrollFrame=win.requestAnimationFrame(extend);if(userBrowsing&&!centering){clearTimeout(browseTimer);browseTimer=setTimeout(browse,120);}},{passive:true});
+  element.addEventListener('scrollend',browse);
+
   return {
-    render(date,{recenter=false,animate=false}={}){const prior=selected;selected=date;
+    render(date,{recenter=false,animate=false,keepScroll=false}={}){const prior=selected;selected=date;
       if(!first||((prior!==date||recenter)&&(date<first||date>last))){observe?.disconnect();tiles.clear();element.replaceChildren();first=shiftDay(date,-14);last=shiftDay(date,7);fill(first,last);recenter=true;}
       for(const button of tiles.values())update(button);
-      if(recenter||prior!==date)win.requestAnimationFrame(()=>{center(animate&&!win.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'smooth':'auto');for(const button of tiles.values())update(button);});
+      if(!keepScroll&&(recenter||prior!==date))win.requestAnimationFrame(()=>{center(animate&&!win.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'smooth':'auto');for(const button of tiles.values())update(button);});
     },
     update(dates){for(const date of dates||tiles.keys()){const button=tiles.get(date);if(button)update(button);}},
-    reset(){observe?.disconnect();tiles.clear();element.replaceChildren();first=last=selected=null;},
+    reset(){clearTimeout(browseTimer);centering=false;userBrowsing=false;observe?.disconnect();tiles.clear();element.replaceChildren();first=last=selected=null;},
   };
 }

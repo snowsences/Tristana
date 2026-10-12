@@ -8,6 +8,7 @@ import {createUpdatePrompt} from './update-ui.js';
 import {photoGrade} from './photo-grades.js';
 import {thumbnailPhoto} from './image-utils.js';
 import {createPromptEditor} from './prompt-ui.js';
+import {createMemories} from './memories-ui.js';
 import {createDayStrip} from './strip-ui.js';
 import {createPhotoRenderer} from './entry-ui.js';
 import {installDialogs,reveal,confirmAction,reducedMotion} from './motion-ui.js';
@@ -17,20 +18,26 @@ const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
 let user=null,entries=new Map(),settings={},tab='today',yearView=false,selectedYear=new Date().getFullYear(),selectedDate,unsubscribers=[],syncing=false,localWrites=Promise.resolve(),photoURLs=new Map(),photoPromises=new Map(),installEvent,backend=null;
-let navigationId=0,artGeneration=0,artIdentity='',selectedMonth=1;const tabScroll={today:0,past:0,settings:0};const preloadedArt=new Set();
+let navigationId=0,artGeneration=0,artIdentity='',selectedMonth=1,memoryDate=null;const tabScroll={today:0,past:0,settings:0};const preloadedArt=new Set();
 let zone=Intl.DateTimeFormat().resolvedOptions().timeZone;selectedDate=dayInZone(zone);
 const today=()=>dayInZone(zone);
 const photoFilter=date=>photoGrade(date,Number(localStorage.getItem('tristana-theme'))||undefined);
 const entry=(date=selectedDate)=>entries.get(date)||blankEntry(date);
-const displayDate=(date,options)=>new Intl.DateTimeFormat('en-US',{timeZone:'UTC',...options}).format(new Date(date+'T12:00:00Z'));
+const dateFormatters=new Map();
+const displayDate=(date,options)=>{const key=JSON.stringify(options);if(!dateFormatters.has(key))dateFormatters.set(key,new Intl.DateTimeFormat('en-US',{timeZone:'UTC',...options}));return dateFormatters.get(key).format(new Date(date+'T12:00:00Z'));};
 const toast=message=>{const el=$('#toast');el.textContent=message;el.hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.hidden=true,6500);};
 const error=err=>toast(readableError(err));
 function readableError(err){const code=err.code||'';if(code.includes('unauthorized-domain'))return 'Add snowsences.github.io to Firebase Authentication’s authorized domains.';if(code.includes('operation-not-allowed'))return 'Enable the Google sign-in provider in Firebase Authentication.';if(code.includes('permission-denied'))return 'Firebase access was denied. Publish the supplied Firestore rules.';if(code.includes('popup-blocked'))return 'Allow the Google sign-in popup, then try again.';if(code.includes('popup-closed'))return 'Sign-in closed. Your journal is still here.';return err.message||'Something went wrong. Please try again.';}
 function savedLabel(message){if(message)$('#connection-status').textContent=message;}
 installDialogs(document);
 const prompts=createPromptEditor(document,{onChange:change,onError:error});
-const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,onSelect:openDay});
+const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,onSelect:openDay,onBrowse:date=>{if(tab==='past'){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'});
 const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});
+const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-section'),getEntries:()=>entries,getPhotoURL:photoURL,getPhotoFilter:photoFilter,
+  getAccent:date=>resolveHeader(manifest,{date,themeMonth:Number(localStorage.getItem('tristana-theme'))||undefined}).theme.colors.accent,displayDate,
+  onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto});
+function selectMemoryDay(date,{keepScroll=false}={}){if(!user||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
+async function openMemoryPhoto(date,origin){const uid=user?.uid,photo=entry(date).photo;if(!uid||!photo)return;try{const url=await photoURL(photo);if(user?.uid!==uid||tab!=='past'||entry(date).photo?.localId!==photo.localId||!url)return;await lightbox.open({date,photo,url,origin,filter:photoFilter(date),readOnly:true});}catch(err){error(err);}}
 function snapshot(value){return structuredClone(value);}
 function persist(e){const copy=snapshot(e);copy.key=user.uid+':'+e.date;localWrites=localWrites.catch(()=>{}).then(()=>store.put('entries',copy));return localWrites;}
 async function change(field,value,date=selectedDate){
@@ -74,18 +81,19 @@ async function photoURL(photo,kind='square'){
   })();photoPromises.set(key,task);try{return await task;}finally{if(photoPromises.get(key)===task)photoPromises.delete(key);}
 }
 function renderStrip(options){if(tab!=='settings')dayStrip.render(selectedDate,options);}
-function refreshProgress(date=selectedDate){dayStrip.update([date]);if(yearView&&tab==='past')renderYear();}
+function refreshProgress(date=selectedDate){dayStrip.update([date]);memories.update([date]);}
 function renderEntry(){
   const e=entry();prompts.setEntry(e);applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
   $('#entry-photo').style.filter=photoFilter(selectedDate);photoRenderer.render(e.photo,selectedDate);savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');
 }
-function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=tab==='today';$('.day-section').classList.toggle('today-days',tab==='today');
-  $('#journal-view').hidden=tab==='settings';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=tab!=='past';$('#year-panel').hidden=!yearView;$('#entry-panel').hidden=tab==='past'&&yearView;$('#day-strip').hidden=tab==='past'&&yearView;
-  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab!=='settings'&&!(tab==='past'&&yearView))renderEntry();
-  for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}if(yearView&&tab==='past')renderYear();
+function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=true;$('.day-section').classList.toggle('today-days',tab==='today');
+  $('#journal-view').hidden=tab==='settings';$('#journal-view').dataset.view=tab==='past'?'memories':'today';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=true;$('#year-panel').hidden=true;$('#entry-panel').hidden=tab!=='today';$('#memories-panel').hidden=tab!=='past';$('#day-strip').hidden=false;
+  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab==='today')renderEntry();if(tab==='past'){memories.render();memories.ensure(selectedDate);memories.select(selectedDate);}memories.setActive(tab==='past');
+  for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
 }
 async function openDay(date){
   if(!validDay(date)||(date>today()&&!entries.has(date)))return;
+  if(tab==='past'){selectMemoryDay(date);memories.scrollTo(date);return;}
   const request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
   const changed=date!==selectedDate;selectedDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render({dayMotion:true});if(changed)reveal($('#entry-panel'),{duration:170});
 }
@@ -112,7 +120,7 @@ function queueSync(){clearTimeout(syncTimer);syncTimer=setTimeout(runSync,600);}
 async function runSync(){
   if(!user||!navigator.onLine||syncing)return;syncing=true;const uid=user.uid;
   try{
-    await localWrites;
+    await localWrites;const updatedDates=[];
     for(const [date,current] of entries){if(!current._dirty.length)continue;
       const e=snapshot(current);
       let photoError;
@@ -129,23 +137,23 @@ async function runSync(){
       if(user?.uid!==uid)return;
       const latest=entry(date);const clean={...latest,_base:{...latest._base},_dirty:[...latest._dirty],revision:data.revision};
       for(const field of e._dirty){clean._base[field]=data[field];if(same(latest[field],e[field]))clean._dirty=clean._dirty.filter(f=>f!==field);}
-      entries.set(date,clean);await persist(clean);
+      entries.set(date,clean);await persist(clean);updatedDates.push(date);
     }
-    $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');renderEntry();renderStrip();
+    $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');if(tab==='today')renderEntry();dayStrip.update(updatedDates);memories.update(updatedDates);
   }catch(err){savedLabel('Saved on device · backup pending');$('#connection-status').textContent=readableError(err);if(entry().photo?.pending)$('#photo-note').textContent='Saved on device. Photo backup is waiting for the Worker setup.';}
   finally{syncing=false;if(user&&[...entries.values()].some(e=>e._dirty.length)&&navigator.onLine){clearTimeout(syncTimer);syncTimer=setTimeout(runSync,15000);}}
 }
 async function checkBackend(){try{backend=await cloud.backendStatus();$('#connection-status').textContent=backend.photos?'Firebase and photo backend connected.':'Firebase connected. Configure Cloudinary secrets in the Worker.';$('#reminder-status').textContent=backend.reminders?(settings.reminderDeviceId===deviceId?'Enabled on this phone at '+(settings.reminderTime||'21:00')+'.':'Ready to enable on this phone.'):'Reminder backend needs its VAPID and Firebase service-account secrets.';}catch(err){backend=null;$('#connection-status').textContent='Firebase connected; the Worker still needs deployment.';$('#reminder-status').textContent='Phone reminders need the Worker setup first.';}}
 async function onUser(account,message){
-  for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();navigationId++;
+  for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();memories.reset();memoryDate=null;navigationId++;
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
   if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
-    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab!=='settings')renderEntry();if(yearView&&tab==='past')renderYear();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
+    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab==='today')renderEntry();memories.update(changed);if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
-    try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=restored.date;yearView=Boolean(restored.yearView);selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
+    try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=restored.date;yearView=false;if(tab==='past')memoryDate=selectedDate;selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
   }
   render();
 }
@@ -156,7 +164,7 @@ const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   await change('photo',{localId,crop,pending:true,source:null,square:null},date);if(selectedDate===date){renderEntry();renderStrip();}
 },error,{photoFilter});
 for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>$('#'+type+'-input').click();$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0];if(file)try{await cropper.open(file,selectedDate,entry().photo);}catch(err){error(err);}e.target.value='';};}
-bindPhotoLightbox(document,{
+const lightbox=bindPhotoLightbox(document,{
   isAuthenticated:()=>Boolean(user),
   async onOpen(){
     const date=selectedDate,photo=entry(date).photo;if(!user||!photo)return null;
@@ -181,14 +189,14 @@ $('#signin').onclick=()=>cloud.signIn().catch(error);
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
   const target=b.dataset.tab,request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
-  tabScroll[tab]=window.scrollY;const changed=tab!==target;tab=target;if(tab==='today'){selectedDate=today();yearView=false;}render({recenterDay:tab==='today'});
+  tabScroll[tab]=window.scrollY;const changed=tab!==target;tab=target;if(tab==='today'){selectedDate=today();yearView=false;}if(tab==='past'){selectedDate=memoryDate=memoryDate||memories.latest()||today();yearView=false;}render({recenterDay:tab==='today'});
   window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});
 };
 $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onclick=()=>openDay(shiftDay(selectedDate,1));
 $('#date-button').onclick=()=>{$('#selected-date').value=selectedDate;$('#selected-date').max=today();$('#date-dialog').showModal();};$('#date-dialog').addEventListener('click',event=>{const dialog=$('#date-dialog');const rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close('cancel');});$('#date-dialog').addEventListener('close',()=>{if($('#date-dialog').returnValue==='choose')openDay($('#selected-date').value);});
 $('#photos-view').onclick=()=>{yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render();};$('#year-view').onclick=()=>{yearView=true;$('#photos-view').setAttribute('aria-pressed','false');$('#year-view').setAttribute('aria-pressed','true');render();};$('#prev-year').onclick=()=>{selectedYear--;renderYear();};$('#next-year').onclick=()=>{selectedYear++;renderYear();};
 for(const theme of manifest.themes){const option=document.createElement('option');option.value=theme.month;option.textContent=displayDate(`2026-${String(theme.month).padStart(2,'0')}-01`,{month:'long'})+' · '+theme.name;$('#theme-select').append(option);}
-$('#theme-select').onchange=e=>{localStorage.setItem('tristana-theme',e.target.value);applyTheme();renderEntry();dayStrip.update();};
+$('#theme-select').onchange=e=>{localStorage.setItem('tristana-theme',e.target.value);applyTheme();if(tab==='today')renderEntry();dayStrip.update();memories.update();};
 $('#phone-toggle').onchange=async e=>{if(!user){e.target.checked=false;return toast('Sign in first.');}const patch={phoneDeviceId:e.target.checked?deviceId:'',timezone:e.target.checked?Intl.DateTimeFormat().resolvedOptions().timeZone:zone};try{await cloud.settings(user.uid,patch);settings={...settings,...patch};applySettings();}catch(err){error(err);}};
 $('#reminder-time').onchange=async e=>{if(user)try{await cloud.settings(user.uid,{reminderTime:e.target.value});if(settings.reminderDeviceId===deviceId)await cloud.api('/reminders/time',{method:'POST',body:{time:e.target.value,timezone:zone}});}catch(err){error(err);}};
 $('#enable-reminders').onclick=async()=>{

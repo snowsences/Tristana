@@ -130,7 +130,7 @@ body[data-theme=orchard]{--prompt-fill:#472b0f21}
 
 .hero[data-page=settings]>img{position:absolute;inset:0 0 auto auto;width:120%;height:120%;clip-path:none}
 #journal-view[data-view=memories] .day-section{background:transparent}
-#journal-view[data-view=memories] .day-strip .tile-image{border-radius:25px 25px 0 0}
+#journal-view[data-view=memories] .day-strip .tile-image{border-radius:35px 35px 0 0}
 
 #journal-view[data-view=memories] .day-tile[aria-pressed=true] .tile-image{outline:none}
 #journal-view[data-view=memories] .day-tile[aria-pressed=true]:after{content:"";position:absolute;top:89px;left:0;width:100%;height:3px;background:var(--accent);pointer-events:none}

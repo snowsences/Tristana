@@ -4,6 +4,7 @@ import {resolveHeader} from './themes.js';
 import * as store from './storage.js';
 import * as cloud from './cloud.js';
 import {createCropper} from './crop.js';
+import {createUpdatePrompt} from './update-ui.js';
 import {photoGrade} from './photo-grades.js';
 import {thumbnailPhoto} from './image-utils.js';
 import {createPromptEditor} from './prompt-ui.js';
@@ -144,6 +145,7 @@ async function onUser(account,message){
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
     unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab!=='settings')renderEntry();if(yearView&&tab==='past')renderYear();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
+    try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=restored.date;yearView=Boolean(restored.yearView);selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
   }
   render();
 }
@@ -205,7 +207,14 @@ $('#export').onclick=async()=>{try{await localWrites;const exportEntries=[...ent
 $('#import').onclick=()=>$('#import-input').click();$('#import-input').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>250*1024*1024)throw new Error('This backup is too large to import on this device.');const backup=JSON.parse(await file.text());if(backup.format!=='tristana-backup'||backup.version!==1||!Array.isArray(backup.entries)||!Array.isArray(backup.photos))throw new Error('This is not a Tristana backup.');for(const r of backup.entries)if(!validDay(r.date)||count(r.good)>LIMIT||count(r.learned)>LIMIT||typeof r.good!=='string'||typeof r.learned!=='string')throw new Error('A backup entry is invalid.');if(!confirm('Import '+backup.entries.length+' entries? Matching days will be replaced.'))return;for(const p of backup.photos){if(typeof p.localId!=='string'||!/^[-a-zA-Z0-9]+$/.test(p.localId))throw new Error('Invalid photo identifier.');const value={key:user.uid+':'+p.localId};for(const kind of ['source','square'])if(p[kind]){if(!/^data:image\/(jpeg|png|webp);base64,/.test(p[kind]))throw new Error('Invalid backup photograph.');value[kind]=await fetch(p[kind]).then(r=>r.blob());}await store.put('photos',value);}for(const r of backup.entries){for(const field of FIELDS)await change(field,r[field]??(field==='photo'?null:''),r.date);}render();toast('Backup imported and saved on this device.');}catch(err){error(err);}finally{e.target.value='';}};
 $('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('resize',()=>prompts.resize());window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;$('#install').hidden=false;});$('#install').onclick=async()=>{await installEvent?.prompt();installEvent=null;$('#install').hidden=true;};
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>toast('Offline installation could not be enabled.'));
+if('serviceWorker'in navigator){
+  const updater=createUpdatePrompt({document,serviceWorker:navigator.serviceWorker,
+    async saveDrafts(){prompts.commit();if(user)for(const e of entries.values())if(e._dirty.length)await persist(e);await localWrites;sessionStorage.setItem('tristana-after-update',JSON.stringify({uid:user?.uid,tab,date:selectedDate,yearView,year:selectedYear,scroll:window.scrollY}));},
+    reload:()=>window.location.reload(),onError:error});
+  navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>{updater.watch(registration);updater.check();}).catch(()=>toast('Offline installation could not be enabled.'));
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')updater.check();});window.addEventListener('online',()=>updater.check());
+  setInterval(()=>{if(document.visibilityState==='visible'&&navigator.onLine)updater.check();},5*60*1000);
+}
 render();cloud.initialize(onUser).then(()=>{$('#signin').disabled=false;}).catch(err=>{$('#signin').disabled=false;$('#connection-status').textContent='Connect to the internet for your first sign-in.';error(err);});
 
 $('#close-month').onclick=()=>$('#month-dialog').close('cancel');

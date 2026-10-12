@@ -139,8 +139,7 @@ body[data-theme=orchard]{--prompt-fill:#472b0f21}
 /* Fixed, noninteractive seasonal decoration under the reading surfaces. */
 #main{position:relative;z-index:1}
 .page-decoration{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px));width:min(100%,680px);height:300px;z-index:0;pointer-events:none;opacity:0;mask-image:linear-gradient(to bottom,transparent,#000 70%);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 70%)}
-.page-decoration:before{content:"";position:absolute;inset:0;background:var(--accent);opacity:.25;mask-image:var(--decoration-src);-webkit-mask-image:var(--decoration-src);mask-size:100% auto;-webkit-mask-size:100% auto;mask-position:center bottom;-webkit-mask-position:center bottom;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat}
-body[data-theme=rainwood] .page-decoration:before{opacity:.32}
+.page-decoration:before{content:"";position:absolute;inset:0;background-image:var(--decoration-src);background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;opacity:.38}
 body[data-theme=tide-oregon] .journal-content,body[data-theme=tide-oregon] .memories-content{background-image:none}
 .app-shell{padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px) + 20px)}
 .artistic-settings input[type=range]{display:block;width:100%;accent-color:var(--accent);margin:0}

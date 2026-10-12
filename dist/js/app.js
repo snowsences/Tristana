@@ -65,7 +65,7 @@ function applyTheme(){
   const art=$('#header-art'),next=new Image();next.srcset=`${scene.smallSrc} 600w, ${scene.src} 1200w`;next.sizes='(max-width:680px) 100vw, 680px';next.src=scene.src;
   const apply=()=>{if(serial!==artGeneration)return;
     for(const [key,value] of Object.entries({bg:scene.background||theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
-    document.documentElement.style.setProperty('--decoration-src',`url("./assets/decorations/${theme.id}.svg")`);$('#page-decoration').dataset.ready='true';
+    document.documentElement.style.setProperty('--decoration-src',`url("./${theme.decorationSrc}")`);$('#page-decoration').dataset.ready='true';
     document.documentElement.style.setProperty('--prompt-good-art',`url("./${theme.promptArt.good}")`);
     document.documentElement.style.setProperty('--prompt-learned-art',`url("./${theme.promptArt.learned}")`);
     document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');

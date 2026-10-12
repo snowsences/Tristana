@@ -27,7 +27,8 @@ body[data-auth="signed-out"]{background:#fbf6ef}
 .day-section.today-days{margin-top:-14px}
 
 body[data-auth="signed-in"]{background:var(--bg)}
-.photo-empty .photo-buttons{width:calc(100% - 40px);max-width:340px;margin-top:22px;color:var(--ink)}
+.photo-empty .photo-buttons{width:calc(100% - 120px);max-width:260px;margin-top:22px;color:var(--ink)}
+.photo-empty .photo-buttons .secondary{min-width:0;padding-left:8px;padding-right:8px}
 
 /* Motion supports deliberate interactions; syncing never animates the page. */
 button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -181,6 +182,7 @@ html[data-memory-editing=true]{overflow:hidden}
 
 /* Carry the prompt-card edge treatment into the empty photograph area. */
 .photo-empty{box-shadow:0px 1px 5px 0px rgba(0,0,0,0.1),inset 0px 2px 0px 0px color-mix(in srgb,white 62%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 50%,transparent)}
+.photo-glyph{display:block;width:32px;height:32px;flex:none;margin-bottom:8px}
 
 /* Keep the journal typography proportionate to the narrower phone writing area. */
 @media(max-width:759px){

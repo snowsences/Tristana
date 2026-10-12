@@ -65,3 +65,30 @@ test('SwiftKey committing an existing word does not insert that word again',()=>
 test('ordinary input and word commits never rewrite the native textarea value',()=>{
  const f=fixture();try{const editor=createPromptEditor(f.d,{onChange:()=>{},onError:()=>{}});editor.setEntry({date:'2026-10-11',good:'',learned:''});const input=f.d.getElementById('good'),native=Object.getOwnPropertyDescriptor(f.win.HTMLTextAreaElement.prototype,'value');let writes=0;Object.defineProperty(input,'value',{get(){return native.get.call(this);},set(value){writes++;native.set.call(this,value);}});native.set.call(input,'tell');input.dispatchEvent(new f.win.InputEvent('input',{inputType:'insertText',data:'l'}));assert.equal(writes,0);input.setSelectionRange(4,4);input.dispatchEvent(new f.win.CompositionEvent('compositionstart'));input.dispatchEvent(new f.win.CompositionEvent('compositionend',{data:'tell'}));assert.equal(writes,0);assert.equal(input.value,'tell');}finally{f.win.close();}
 });
+
+test('Android touch scrolling keeps ownership after pointer cancellation and never turns a swipe into a tap',()=>{
+ const f=fixture(),selected=[],browsed=[],centers=[];
+ try{
+  const element=f.d.getElementById('day-strip');Object.defineProperties(element,{clientWidth:{value:360},scrollWidth:{get:()=>element.children.length*86},onscrollend:{value:null}});
+  Object.defineProperty(f.win.HTMLElement.prototype,'offsetLeft',{get(){return this.classList.contains('day-tile')?[...element.children].indexOf(this)*86:0;}});
+  Object.defineProperty(f.win.HTMLElement.prototype,'clientWidth',{get(){return this.classList.contains('day-tile')?72:0;}});
+  element.scrollTo=({left})=>{centers.push(left);element.scrollLeft=left;};
+  const strip=createDayStrip({element,getEntry:()=>({}),getToday:()=> '2026-10-11',displayDate:date=>date,getPhotoURL:async()=>null,onSelect:date=>selected.push(date),onBrowse:date=>browsed.push(date),getIsBrowsing:()=>true});
+  strip.render('2026-10-05');const initialCenters=centers.length,anchor=element.firstElementChild;
+  element.dispatchEvent(new f.win.MouseEvent('pointerdown',{clientX:200,clientY:10}));
+  const touch=new f.win.Event('touchstart');Object.defineProperty(touch,'touches',{value:[{clientX:200,clientY:10}]});element.dispatchEvent(touch);
+  // Native panning cancels pointer delivery while the finger is still touching.
+  f.win.dispatchEvent(new f.win.Event('pointercancel'));element.scrollLeft=40;element.dispatchEvent(new f.win.Event('scroll'));
+  element.dispatchEvent(new f.win.Event('scrollend'));strip.render('2026-10-04');
+  assert.equal(element.firstElementChild,anchor);assert.equal(element.scrollLeft,40);assert.equal(centers.length,initialCenters);assert.deepEqual(browsed,[]);
+  element.children[3].dispatchEvent(new f.win.MouseEvent('click',{detail:1,cancelable:true}));assert.deepEqual(selected,[]);
+  f.win.dispatchEvent(new f.win.Event('touchend'));
+  // A render during the remaining native coast must not write a horizontal offset.
+  strip.render('2026-10-03');assert.equal(centers.length,initialCenters);assert.equal(element.firstElementChild,anchor);
+  element.dispatchEvent(new f.win.Event('scrollend'));assert.notEqual(element.firstElementChild,anchor);assert.equal(centers.length,initialCenters);
+  // A fresh deliberate tap and keyboard activation still work.
+  element.dispatchEvent(new f.win.MouseEvent('pointerdown',{clientX:20,clientY:10}));f.win.dispatchEvent(new f.win.Event('pointerup'));
+  element.children[3].dispatchEvent(new f.win.MouseEvent('click',{detail:1}));assert.equal(selected.length,1);
+  element.children[4].click();assert.equal(selected.length,2);strip.reset();
+ }finally{f.win.close();}
+});

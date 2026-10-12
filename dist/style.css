@@ -53,7 +53,8 @@ textarea.limit-reached{box-shadow:0 1px var(--accent)}
 dialog[open]::backdrop{animation:backdrop-in 180ms ease-out}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
-.day-strip{overflow-anchor:none}
+.day-strip{position:relative;overflow-anchor:none;scroll-behavior:auto;touch-action:pan-x pan-y pinch-zoom}
+.day-tile{scroll-snap-align:none}
 
 .hero[data-page=past] h1{font-size:clamp(36px,7vw,60px);letter-spacing:-1.8px}
 

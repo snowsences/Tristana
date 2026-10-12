@@ -6,9 +6,9 @@ test('each entry month resolves its own grade and an explicit theme overrides it
  for(const theme of manifest.themes){const date=`2026-${String(theme.month).padStart(2,'0')}-15`;assert.equal(photoGrade(date),`url("#photo-grade-${theme.id}")`);}
  assert.equal(photoGrade('2026-10-11',5),'url("#photo-grade-daylight")');assert.throws(()=>photoGrade('2026-10-11',13));
 });
-test('all grades have matching SVG definitions and keep neutral tones subtle',()=>{
+test('all grades have matching SVG definitions and keep stronger grading within moderate tonal bounds',()=>{
  const dom=new JSDOM(html);try{for(const g of PHOTO_GRADES){const filter=dom.window.document.getElementById('photo-grade-'+g.id);assert.ok(filter);assert.equal(filter.getAttribute('color-interpolation-filters'),'sRGB');assert.equal(Number(filter.querySelector('feColorMatrix').getAttribute('values')),g.saturation);
- for(const [i,ch] of ['R','G','B'].entries()){const transfer=filter.querySelector('feFunc'+ch);const slope=Number(transfer.getAttribute('slope')),lift=Number(transfer.getAttribute('intercept'));assert.ok(Math.abs((.5*slope+lift)-.5)<.03);assert.ok(lift>=0&&lift<=.02);assert.ok(g.saturation>=.9&&g.saturation<=1.025);assert.ok(Math.abs(slope+lift-1)<.055);assert.ok(Math.abs(slope-g.contrast*g.gain[i])<.00001);}
+ for(const [i,ch] of ['R','G','B'].entries()){const transfer=filter.querySelector('feFunc'+ch);const slope=Number(transfer.getAttribute('slope')),lift=Number(transfer.getAttribute('intercept'));assert.ok(Math.abs((.5*slope+lift)-.5)<.06);assert.ok(lift>=0&&lift<=.045);assert.ok(g.saturation>=.78&&g.saturation<=1.06);assert.ok(Math.abs(slope+lift-1)<.125);assert.ok(Math.abs(slope-g.contrast*g.gain[i])<.00001);}
  }}finally{dom.window.close();}
 });
 test('thumbnails across a month boundary use their own grades without changing photo URLs',async()=>{

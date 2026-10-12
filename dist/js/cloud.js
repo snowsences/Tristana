@@ -24,7 +24,7 @@ export async function signIn() {
 export async function signOut() { if(auth) await sdk.signOut(auth); }
 export function listen(uid,onEntries,onSettings,onError) {
   return [
-    sdk.onSnapshot(sdk.collection(db,'users',uid,'entries'),snap=>onEntries(snap.docs.map(d=>d.data())),onError),
+    sdk.onSnapshot(sdk.collection(db,'users',uid,'entries'),snap=>onEntries(snap.docChanges().map(change=>({type:change.type,data:change.doc.data()}))),onError),
     sdk.onSnapshot(sdk.doc(db,'users',uid),snap=>onSettings(snap.data() || {}),onError)
   ];
 }

@@ -2,7 +2,7 @@
 export function applyAuthGate(document, authenticated) {
   const app = document.getElementById('app-shell');
   const splash = document.getElementById('signin-panel');
-  if(!authenticated)for(const dialog of document.querySelectorAll('dialog[open]'))dialog.close('cancel');
+  if(!authenticated)for(const dialog of document.querySelectorAll('dialog[open]'))(dialog.closeImmediately||dialog.close).call(dialog,'cancel');
   app.hidden = !authenticated;
   app.toggleAttribute('inert', !authenticated);
   splash.hidden = authenticated;

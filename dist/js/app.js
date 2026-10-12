@@ -4,12 +4,18 @@ import {resolveHeader} from './themes.js';
 import * as store from './storage.js';
 import * as cloud from './cloud.js';
 import {createCropper} from './crop.js';
+import {thumbnailPhoto} from './image-utils.js';
+import {createPromptEditor} from './prompt-ui.js';
+import {createDayStrip} from './strip-ui.js';
+import {createPhotoRenderer} from './entry-ui.js';
+import {installDialogs,reveal,confirmAction,reducedMotion} from './motion-ui.js';
 import {applyAuthGate} from './auth-ui.js';
 import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
 let user=null,entries=new Map(),settings={},tab='today',yearView=false,selectedYear=new Date().getFullYear(),selectedDate,unsubscribers=[],syncing=false,localWrites=Promise.resolve(),photoURLs=new Map(),photoPromises=new Map(),installEvent,backend=null;
+let navigationId=0,artGeneration=0,artIdentity='',selectedMonth=1;const tabScroll={today:0,past:0,settings:0};const preloadedArt=new Set();
 let zone=Intl.DateTimeFormat().resolvedOptions().timeZone;selectedDate=dayInZone(zone);
 const today=()=>dayInZone(zone);
 const entry=(date=selectedDate)=>entries.get(date)||blankEntry(date);
@@ -18,8 +24,10 @@ const toast=message=>{const el=$('#toast');el.textContent=message;el.hidden=fals
 const error=err=>toast(readableError(err));
 function readableError(err){const code=err.code||'';if(code.includes('unauthorized-domain'))return 'Add snowsences.github.io to Firebase Authentication’s authorized domains.';if(code.includes('operation-not-allowed'))return 'Enable the Google sign-in provider in Firebase Authentication.';if(code.includes('permission-denied'))return 'Firebase access was denied. Publish the supplied Firestore rules.';if(code.includes('popup-blocked'))return 'Allow the Google sign-in popup, then try again.';if(code.includes('popup-closed'))return 'Sign-in closed. Your journal is still here.';return err.message||'Something went wrong. Please try again.';}
 function savedLabel(message){if(message)$('#connection-status').textContent=message;}
-function resizePrompt(input){input.style.height='auto';if(input.clientWidth)input.style.height=input.scrollHeight+'px';}
-function resizePrompts(){for(const field of ['good','learned'])resizePrompt($('#'+field));}
+installDialogs(document);
+const prompts=createPromptEditor(document,{onChange:change,onError:error});
+const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,onSelect:openDay});
+const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});
 function snapshot(value){return structuredClone(value);}
 function persist(e){const copy=snapshot(e);copy.key=user.uid+':'+e.date;localWrites=localWrites.catch(()=>{}).then(()=>store.put('entries',copy));return localWrites;}
 async function change(field,value,date=selectedDate){
@@ -27,61 +35,74 @@ async function change(field,value,date=selectedDate){
   dayTouched=true;
   const current=entry(date);const e={...current,_base:{...current._base},_dirty:[...new Set([...current._dirty,field])],updatedAt:Date.now(),updatedBy:deviceId,[field]:value};
   entries.set(date,e);savedLabel('Saving on this device…');
-  try{await persist(e);savedLabel(navigator.onLine?'Saved on device · syncing':'Saved on device · offline');refreshProgress();closeNotifications(date);queueSync();}catch(err){savedLabel('Could not save · export a copy');error(err);}
+  try{await persist(e);savedLabel(navigator.onLine?'Saved on device · syncing':'Saved on device · offline');refreshProgress(date);closeNotifications(date);queueSync();}catch(err){savedLabel('Could not save · export a copy');error(err);}
 }
 function applyTheme(){
-  const override=localStorage.getItem('tristana-theme');const selection=resolveHeader(manifest,{date:selectedDate,themeMonth:override?Number(override):undefined});
-  const {theme,scene}=selection;for(const [key,value] of Object.entries({bg:scene.background||theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
-  document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
-  const art=$('#header-art');art.src=scene.src;art.srcset=`${scene.smallSrc} 600w, ${scene.src} 1200w`;art.sizes='(max-width:680px) 100vw, 680px';
+  const override=localStorage.getItem('tristana-theme');const {theme,scene}=resolveHeader(manifest,{date:selectedDate,themeMonth:override?Number(override):undefined});
   $('#theme-select').value=override||'';
-  $('meta[name=theme-color]').content=scene.background||theme.colors.background;
+  const identity=scene.src;if(identity===artIdentity)return;artIdentity=identity;const serial=++artGeneration;
+  const art=$('#header-art'),next=new Image();next.srcset=`${scene.smallSrc} 600w, ${scene.src} 1200w`;next.sizes='(max-width:680px) 100vw, 680px';next.src=scene.src;
+  const apply=()=>{if(serial!==artGeneration)return;
+    for(const [key,value] of Object.entries({bg:scene.background||theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
+    document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
+    const previous=art.src&&art.animate&&!reducedMotion()?art.cloneNode(false):null;art.parentElement.querySelectorAll('.hero-previous').forEach(img=>img.remove());if(previous){previous.removeAttribute('id');previous.classList.add('hero-previous');previous.removeAttribute('fetchpriority');art.parentElement.append(previous);}
+    art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());$('meta[name=theme-color]').content=scene.background||theme.colors.background;
+    for(const day of [-1,1]){const adjacent=resolveHeader(manifest,{date:shiftDay(selectedDate,day),themeMonth:override?Number(override):undefined}).scene;if(preloadedArt.has(adjacent.src))continue;preloadedArt.add(adjacent.src);const preload=new Image();preload.srcset=`${adjacent.smallSrc} 600w, ${adjacent.src} 1200w`;preload.sizes=next.sizes;preload.src=adjacent.src;}
+  };
+  next.decode().then(apply).catch(()=>{if(serial===artGeneration){artIdentity='';error(new Error('The illustration could not load. Your entry is still available.'));}});
 }
 function header(){
-  applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
+  $('#hero').dataset.page=tab;applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
   $('#page-title').innerHTML=tab==='past'?'Memories.':tab==='settings'?'Make it yours.':'A little<br>of today.';
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
   $('#next-day').disabled=selectedDate>=today();
 }
 async function photoURL(photo,kind='square'){
-  if(!photo)return null;const key=user?.uid+':'+photo.localId+':'+kind;
-  if(photoURLs.has(key))return photoURLs.get(key);
+  if(!photo||!user)return null;const uid=user.uid,key=uid+':'+photo.localId+':'+kind;
+  if(photoURLs.has(key)){const url=photoURLs.get(key);photoURLs.delete(key);photoURLs.set(key,url);return url;}
   if(photoPromises.has(key))return photoPromises.get(key);
   const task=(async()=>{
-    let local=await store.get('photos',user.uid+':'+photo.localId);let blob=local?.[kind];
-    if(!blob&&photo[kind]){blob=await cloud.media(photo[kind]);local={...local,key:user.uid+':'+photo.localId,[kind]:blob};await store.put('photos',local);}
-    if(!blob)return null;const url=URL.createObjectURL(blob);photoURLs.set(key,url);return url;
-  })();photoPromises.set(key,task);try{return await task;}finally{photoPromises.delete(key);}
+    const photoKey=uid+':'+photo.localId;let local=await store.get('photos',photoKey);let blob=local?.[kind];
+    if(!blob){const assetKind=kind==='thumbnail'?'square':kind;let sourceBlob=local?.[assetKind];if(!sourceBlob&&kind==='thumbnail'){await photoURL(photo,'square');sourceBlob=(await store.get('photos',photoKey))?.square;}if(!sourceBlob&&photo[assetKind])sourceBlob=await cloud.media(photo[assetKind]);
+      if(sourceBlob){blob=kind==='thumbnail'?await thumbnailPhoto(sourceBlob):sourceBlob;const latest=await store.get('photos',photoKey);await store.put('photos',{...latest,key:photoKey,[assetKind]:sourceBlob,[kind]:blob});}}
+    if(!blob||user?.uid!==uid)return null;const url=URL.createObjectURL(blob);photoURLs.set(key,url);
+    if(photoURLs.size>96){for(const [oldKey,oldURL] of photoURLs){if(![...document.querySelectorAll('img')].some(img=>img.src===oldURL)){URL.revokeObjectURL(oldURL);photoURLs.delete(oldKey);break;}}}
+    return url;
+  })();photoPromises.set(key,task);try{return await task;}finally{if(photoPromises.get(key)===task)photoPromises.delete(key);}
 }
-function renderStrip(){
-  const strip=$('#day-strip');const dates=Array.from({length:15},(_,i)=>shiftDay(selectedDate,i-7));strip.replaceChildren();
-  for(const date of dates){const e=entry(date);const button=document.createElement('button');button.className='day-tile';button.dataset.date=date;button.setAttribute('aria-pressed',String(date===selectedDate));button.setAttribute('aria-label',displayDate(date,{weekday:'long',month:'long',day:'numeric'})+', '+status(e,date,today()));
-    const image=document.createElement('span');image.className='tile-image '+status(e,date,today());image.textContent=displayDate(date,{day:'numeric'});
-    if(e.photo){const img=document.createElement('img');img.alt='';image.append(img);photoURL(e.photo).then(url=>{if(url&&img.isConnected)img.src=url;}).catch(()=>{});}
-    if(filled(e)){const dot=document.createElement('span');dot.className='day-state';image.append(dot);}
-    const label=document.createElement('span');label.className='tile-date';label.textContent=displayDate(date,{month:'short',day:'numeric'});button.append(image,label);button.disabled=date>today()&&!entries.has(date);button.onclick=()=>openDay(date);strip.append(button);
-  }
-  const tile=strip.querySelector('[aria-pressed=true]');if(tile)strip.scrollLeft=tile.offsetLeft-strip.clientWidth/2+tile.clientWidth/2;
-}
-function refreshProgress(){
-  const e=entry();
-  const tile=$('#day-strip').querySelector(`[data-date="${selectedDate}"]`);if(tile){tile.setAttribute('aria-label',selectedDate+', '+status(e,selectedDate,today()));tile.querySelector('.tile-image').className='tile-image '+status(e,selectedDate,today());}
-  if(yearView)renderYear();
-}
+function renderStrip(options){if(tab!=='settings')dayStrip.render(selectedDate,options);}
+function refreshProgress(date=selectedDate){dayStrip.update([date]);if(yearView&&tab==='past')renderYear();}
 function renderEntry(){
-  const e=entry();for(const field of ['good','learned']){if(document.activeElement!==$('#'+field))$('#'+field).value=e[field]||'';}requestAnimationFrame(resizePrompts);
-  applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
-  if(e.photo){const identity=e.photo.localId;$('#entry-photo').removeAttribute('src');photoURL(e.photo).then(url=>{if(entry().photo?.localId===identity&&url)$('#entry-photo').src=url;}).catch(()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});}
-  savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');refreshProgress();
+  const e=entry();prompts.setEntry(e);applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
+  photoRenderer.render(e.photo,selectedDate);savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');
 }
-function render(){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=tab==='today';$('.day-section').classList.toggle('today-days',tab==='today');renderStrip();renderEntry();$('#journal-view').hidden=tab==='settings';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=tab!=='past';$('#year-panel').hidden=!yearView;$('#entry-panel').hidden=tab==='past'&&yearView;$('#day-strip').hidden=tab==='past'&&yearView;for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}if(yearView&&tab==='past')renderYear();}
-async function openDay(date){if(!validDay(date)||(date>today()&&!entries.has(date)))return;await localWrites.catch(()=>{});selectedDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render();}
+function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=tab==='today';$('.day-section').classList.toggle('today-days',tab==='today');
+  $('#journal-view').hidden=tab==='settings';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=tab!=='past';$('#year-panel').hidden=!yearView;$('#entry-panel').hidden=tab==='past'&&yearView;$('#day-strip').hidden=tab==='past'&&yearView;
+  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab!=='settings'&&!(tab==='past'&&yearView))renderEntry();
+  for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}if(yearView&&tab==='past')renderYear();
+}
+async function openDay(date){
+  if(!validDay(date)||(date>today()&&!entries.has(date)))return;
+  const request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
+  const changed=date!==selectedDate;selectedDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render({dayMotion:true});if(changed)reveal($('#entry-panel'),{duration:170});
+}
 function renderYear(){
   $('#year-title').textContent=selectedYear;const grid=$('#year-grid');grid.replaceChildren();const dates=daysInYear(selectedYear);
-  for(let month=1;month<=12;month++){const block=document.createElement('section');block.className='month-block';const h=document.createElement('h3');h.textContent=displayDate(`${selectedYear}-${String(month).padStart(2,'0')}-01`,{month:'short'});const week=document.createElement('div');week.className='month-weekdays';for(const d of ['M','T','W','T','F','S','S']){const s=document.createElement('span');s.textContent=d;week.append(s);}const days=document.createElement('div');days.className='month-days';const monthDates=dates.filter(d=>Number(d.slice(5,7))===month);const start=(new Date(monthDates[0]+'T12:00:00Z').getUTCDay()+6)%7;for(let i=0;i<start;i++)days.append(document.createElement('span'));
-    for(const date of monthDates){const b=document.createElement('button');b.className=status(entry(date),date,today())+(date===selectedDate?' selected':'');b.textContent=Number(date.slice(-2));b.setAttribute('aria-label',date+', '+status(entry(date),date,today()));b.title=b.getAttribute('aria-label');b.disabled=date>today()&&!entries.has(date);b.onclick=()=>{openDay(date);$('#entry-panel').scrollIntoView({block:'start'});};days.append(b);}block.append(h,week,days);grid.append(block);
+  for(let month=1;month<=12;month++){
+    const monthDates=dates.filter(d=>Number(d.slice(5,7))===month),saved=monthDates.filter(d=>filled(entry(d))).length;
+    const block=document.createElement('button');block.type='button';block.className='month-block';block.setAttribute('aria-label',displayDate(monthDates[0],{month:'long',year:'numeric'})+', '+saved+' days saved. Select a day.');
+    const h=document.createElement('h3');h.textContent=displayDate(monthDates[0],{month:'short'});const week=document.createElement('div');week.className='month-weekdays';week.setAttribute('aria-hidden','true');for(const d of ['M','T','W','T','F','S','S']){const label=document.createElement('span');label.textContent=d;week.append(label);}
+    const days=document.createElement('div');days.className='month-days';days.setAttribute('aria-hidden','true');const start=(new Date(monthDates[0]+'T12:00:00Z').getUTCDay()+6)%7;for(let i=0;i<start;i++)days.append(document.createElement('span'));
+    for(const date of monthDates){const cell=document.createElement('span');cell.className='year-day '+status(entry(date),date,today())+(date===selectedDate?' selected':'');days.append(cell);}
+    block.onclick=()=>openMonth(month);block.append(h,week,days);grid.append(block);
   }
 }
+function renderMonth(){
+  const monthDate=`${selectedYear}-${String(selectedMonth).padStart(2,'0')}-01`;$('#month-title').textContent=displayDate(monthDate,{month:'long',year:'numeric'});const grid=$('#month-grid');grid.replaceChildren();
+  const dates=daysInYear(selectedYear).filter(d=>Number(d.slice(5,7))===selectedMonth);const start=(new Date(monthDate+'T12:00:00Z').getUTCDay()+6)%7;for(let i=0;i<start;i++)grid.append(document.createElement('span'));
+  for(const date of dates){const button=document.createElement('button');button.type='button';button.textContent=Number(date.slice(-2));button.className=status(entry(date),date,today());button.setAttribute('aria-label',displayDate(date,{weekday:'long',month:'long',day:'numeric'})+', '+status(entry(date),date,today()));if(date===selectedDate)button.setAttribute('aria-current','date');button.disabled=date>today()&&!entries.has(date);button.onclick=async()=>{await $('#month-dialog').close();await openDay(date);$('#entry-panel').scrollIntoView({block:'start',behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};grid.append(button);}
+}
+function openMonth(month){selectedMonth=month;renderMonth();$('#month-dialog').showModal();}
 let syncTimer;
 let dayTouched=false,firstSettings=true;
 function queueSync(){clearTimeout(syncTimer);syncTimer=setTimeout(runSync,600);}
@@ -113,13 +134,13 @@ async function runSync(){
 }
 async function checkBackend(){try{backend=await cloud.backendStatus();$('#connection-status').textContent=backend.photos?'Firebase and photo backend connected.':'Firebase connected. Configure Cloudinary secrets in the Worker.';$('#reminder-status').textContent=backend.reminders?(settings.reminderDeviceId===deviceId?'Enabled on this phone at '+(settings.reminderTime||'21:00')+'.':'Ready to enable on this phone.'):'Reminder backend needs its VAPID and Firebase service-account secrets.';}catch(err){backend=null;$('#connection-status').textContent='Firebase connected; the Worker still needs deployment.';$('#reminder-status').textContent='Phone reminders need the Worker setup first.';}}
 async function onUser(account,message){
-  for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();
+  for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();navigationId++;
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
   if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
-    unsubscribers=cloud.listen(user.uid,async remote=>{for(const r of remote){const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}renderEntry();renderStrip();if(yearView)renderYear();},async incoming=>{settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
+    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab!=='settings')renderEntry();if(yearView&&tab==='past')renderYear();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
   }
   render();
@@ -127,12 +148,9 @@ async function onUser(account,message){
 function applySettings(){zone=settings.timezone||Intl.DateTimeFormat().resolvedOptions().timeZone;$('#timezone-label').textContent='Journal timezone: '+zone.replaceAll('_',' ');$('#phone-toggle').checked=settings.phoneDeviceId===deviceId;$('#reminder-time').value=settings.reminderTime||'21:00';if(settings.phoneDeviceId===deviceId){const currentZone=Intl.DateTimeFormat().resolvedOptions().timeZone;if(currentZone!==zone){zone=currentZone;cloud.settings(user.uid,{timezone:zone}).catch(error);}}$('#disable-reminders').hidden=settings.reminderDeviceId!==deviceId;header();}
 async function closeNotifications(date){if(date!==today()||!filled(entry(date)))return;try{const registration=await navigator.serviceWorker?.getRegistration();for(const n of await registration?.getNotifications()||[])if(n.data?.date===date)n.close();}catch{}}
 const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
-  if(!user)return;const localId=crypto.randomUUID();await store.put('photos',{key:user.uid+':'+localId,source,square});
+  if(!user)return;const localId=crypto.randomUUID();const thumbnail=await thumbnailPhoto(square);await store.put('photos',{key:user.uid+':'+localId,source,square,thumbnail});
   await change('photo',{localId,crop,pending:true,source:null,square:null},date);if(selectedDate===date){renderEntry();renderStrip();}
 },error);
-for(const field of ['good','learned']){
-  const input=$('#'+field);const save=()=>{if(input.isComposing){resizePrompt(input);return;}input.value=limit(input.value);resizePrompt(input);change(field,input.value).catch(error);};input.addEventListener('input',e=>{input.isComposing=e.isComposing;save();});input.addEventListener('compositionend',()=>{input.isComposing=false;save();});
-}
 for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>$('#'+type+'-input').click();$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0];if(file)try{await cropper.open(file,selectedDate,entry().photo);}catch(err){error(err);}e.target.value='';};}
 bindPhotoLightbox(document,{
   isAuthenticated:()=>Boolean(user),
@@ -149,14 +167,19 @@ bindPhotoLightbox(document,{
   },
   async onRemove({date,photo}){
     if(!user||entry(date).photo?.localId!==photo.localId)return true;
-    if(!confirm('Remove this photograph from this day?'))return false;
+    if(!await confirmAction(document,{title:'Remove photograph?',message:'This day’s text will stay saved.',action:'Remove'}))return false;
+    if(!user||entry(date).photo?.localId!==photo.localId)return true;
     await change('photo',null,date);if(selectedDate===date){renderEntry();renderStrip();}return true;
   },
   onError:error
 });
 $('#signin').onclick=()=>cloud.signIn().catch(error);
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
-for(const b of document.querySelectorAll('[data-tab]'))b.onclick=()=>{tab=b.dataset.tab;if(tab==='today'){selectedDate=today();yearView=false;}render();window.scrollTo({top:0,behavior:'auto'});};
+for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
+  const target=b.dataset.tab,request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
+  tabScroll[tab]=window.scrollY;const changed=tab!==target;tab=target;if(tab==='today'){selectedDate=today();yearView=false;}render({recenterDay:tab==='today'});
+  window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});
+};
 $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onclick=()=>openDay(shiftDay(selectedDate,1));
 $('#date-button').onclick=()=>{$('#selected-date').value=selectedDate;$('#selected-date').max=today();$('#date-dialog').showModal();};$('#date-dialog').addEventListener('click',event=>{const dialog=$('#date-dialog');const rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close('cancel');});$('#date-dialog').addEventListener('close',()=>{if($('#date-dialog').returnValue==='choose')openDay($('#selected-date').value);});
 $('#photos-view').onclick=()=>{yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render();};$('#year-view').onclick=()=>{yearView=true;$('#photos-view').setAttribute('aria-pressed','false');$('#year-view').setAttribute('aria-pressed','true');render();};$('#prev-year').onclick=()=>{selectedYear--;renderYear();};$('#next-year').onclick=()=>{selectedYear++;renderYear();};
@@ -178,7 +201,10 @@ $('#disable-reminders').onclick=async()=>{try{await cloud.api('/reminders',{meth
 const blobToData=blob=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob);});
 $('#export').onclick=async()=>{try{await localWrites;const exportEntries=[...entries.values()].map(e=>({date:e.date,good:e.good,learned:e.learned,photo:e.photo}));const photos=[];for(const p of (await store.all('photos')).filter(x=>x.key.startsWith(user.uid+':'))){photos.push({localId:p.key.slice(user.uid.length+1),source:p.source?await blobToData(p.source):null,square:p.square?await blobToData(p.square):null});}const json={format:'tristana-backup',version:1,exportedAt:new Date().toISOString(),entries:exportEntries,photos};const url=URL.createObjectURL(new Blob([JSON.stringify(json)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='tristana-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#backup-status').textContent='Exported '+exportEntries.length+' entries and '+photos.length+' local photographs. Photos not cached on this device remain Cloudinary references.';}catch(err){error(err);}};
 $('#import').onclick=()=>$('#import-input').click();$('#import-input').onchange=async e=>{try{const file=e.target.files[0];if(!file)return;if(file.size>250*1024*1024)throw new Error('This backup is too large to import on this device.');const backup=JSON.parse(await file.text());if(backup.format!=='tristana-backup'||backup.version!==1||!Array.isArray(backup.entries)||!Array.isArray(backup.photos))throw new Error('This is not a Tristana backup.');for(const r of backup.entries)if(!validDay(r.date)||count(r.good)>LIMIT||count(r.learned)>LIMIT||typeof r.good!=='string'||typeof r.learned!=='string')throw new Error('A backup entry is invalid.');if(!confirm('Import '+backup.entries.length+' entries? Matching days will be replaced.'))return;for(const p of backup.photos){if(typeof p.localId!=='string'||!/^[-a-zA-Z0-9]+$/.test(p.localId))throw new Error('Invalid photo identifier.');const value={key:user.uid+':'+p.localId};for(const kind of ['source','square'])if(p[kind]){if(!/^data:image\/(jpeg|png|webp);base64,/.test(p[kind]))throw new Error('Invalid backup photograph.');value[kind]=await fetch(p[kind]).then(r=>r.blob());}await store.put('photos',value);}for(const r of backup.entries){for(const field of FIELDS)await change(field,r[field]??(field==='photo'?null:''),r.date);}render();toast('Backup imported and saved on this device.');}catch(err){error(err);}finally{e.target.value='';}};
-$('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('resize',resizePrompts);window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
+$('#retry-sync').onclick=()=>{checkBackend();runSync();};window.addEventListener('resize',()=>prompts.resize());window.addEventListener('online',()=>{queueSync();if(user)checkBackend();});window.addEventListener('pagehide',()=>{if(user)for(const e of entries.values())if(e._dirty.length)persist(e);});document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'){if(user){applySettings();queueSync();}header();}});
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;$('#install').hidden=false;});$('#install').onclick=async()=>{await installEvent?.prompt();installEvent=null;$('#install').hidden=true;};
 if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>toast('Offline installation could not be enabled.'));
 render();cloud.initialize(onUser).then(()=>{$('#signin').disabled=false;}).catch(err=>{$('#signin').disabled=false;$('#connection-status').textContent='Connect to the internet for your first sign-in.';error(err);});
+
+$('#close-month').onclick=()=>$('#month-dialog').close('cancel');
+for(const id of ['month-dialog','confirm-dialog'])$('#'+id).addEventListener('click',event=>{const dialog=$('#'+id),rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close('cancel');});

@@ -1,4 +1,5 @@
 import {cropBounds,cropSource} from './core.js';
+import {scaledPhoto,restoredCrop} from './image-utils.js';
 export function createCropper(onSave,onError) {
   const dialog=document.querySelector('#crop-dialog'),frame=document.querySelector('#crop-frame'),image=document.querySelector('#crop-image'),slider=document.querySelector('#crop-zoom');
   let source,date,oldPhoto,url,width,height,x=0,y=0,zoom=1;const pointers=new Map();let lastDistance;
@@ -12,7 +13,7 @@ export function createCropper(onSave,onError) {
     if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(blob);image.src=url;
     await image.decode();width=image.naturalWidth;height=image.naturalHeight;
     if(!width||!height)throw new Error('This photo format could not be opened. Try a JPEG or PNG.');
-    dialog.showModal();render();
+    dialog.showModal();if(previous?.crop){const restored=restoredCrop(previous.crop,width,height,frame.clientWidth);({x,y,zoom}=restored);slider.value=zoom;}render();
   }
   frame.addEventListener('pointerdown',e=>{frame.setPointerCapture(e.pointerId);pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});lastDistance=undefined;});
   frame.addEventListener('pointermove',e=>{
@@ -26,13 +27,14 @@ export function createCropper(onSave,onError) {
   document.querySelector('#cancel-crop').onclick=()=>dialog.close();
   new ResizeObserver(render).observe(frame);
   document.querySelector('#save-crop').onclick=async()=>{
-    const button=document.querySelector('#save-crop');button.disabled=true;
+    const button=document.querySelector('#save-crop');const label=button.textContent;button.disabled=true;button.textContent='Preparing…';
     try {
       const s=cropSource(width,height,frame.clientWidth,zoom,x,y);const canvas=document.createElement('canvas');canvas.width=1024;canvas.height=1024;
       const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,1024,1024);ctx.drawImage(image,s.sx,s.sy,s.size,s.size,0,0,1024,1024);
       const square=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.9));if(!square)throw new Error('Could not crop this photo.');
-      await onSave({source,square,date,oldPhoto,crop:{sx:s.sx,sy:s.sy,size:s.size,width,height}});dialog.close();
-    }catch(error){onError(error);}finally{button.disabled=false;}
+      const optimized=await scaledPhoto(source);
+      await onSave({source:optimized,square,date,oldPhoto,crop:{sx:s.sx,sy:s.sy,size:s.size,width,height}});await dialog.close();
+    }catch(error){onError(error);}finally{button.disabled=false;button.textContent=label;}
   };
   return {open};
 }

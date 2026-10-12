@@ -78,9 +78,14 @@ body[data-update-ready=true] .app-shell{padding-bottom:calc(var(--nav-height) + 
 @keyframes update-banner-in{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
 .update-banner:not([hidden]){animation:update-banner-in 180ms ease-out}
 
-.app-shell:has(#journal-view[data-view=memories]){overflow:clip}
-#journal-view[data-view=memories] .day-section{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;margin-top:-14px;margin-bottom:18px;background:var(--bg);border-bottom:1px solid var(--line)}
-.memories-content{padding:0 24px 34px;overflow-anchor:none}
+html:has(#journal-view[data-view=memories]),body:has(#journal-view[data-view=memories]){height:100%;overflow:hidden}
+.app-shell:has(#journal-view[data-view=memories]){height:100dvh;min-height:0;overflow:hidden;padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px))}
+.app-shell:has(#journal-view[data-view=memories]) #main{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden}
+.hero[data-page=past]{flex:0 0 auto}
+#journal-view[data-view=memories]{display:flex;flex:1 1 auto;flex-direction:column;min-height:0;overflow:hidden}
+#journal-view[data-view=memories] .day-section{position:relative;z-index:4;flex:0 0 auto;margin-top:-14px;margin-bottom:0;background:var(--bg);border-bottom:1px solid var(--line)}
+.memories-content{flex:1 1 auto;min-height:0;padding:0 24px 34px;overflow-x:hidden;overflow-y:auto;overflow-anchor:none;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+body[data-update-ready=true] .app-shell:has(#journal-view[data-view=memories]){padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px) + 88px)}
 .memory-card{--memory-accent:var(--accent);display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:start;padding:20px 0;margin-bottom:0;background:transparent;border:0;border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent);border-radius:0}
 .memory-card.has-photo{grid-template-columns:52px minmax(0,1fr) 80px}
 .memory-card[aria-current=date]{border-bottom-color:color-mix(in srgb,var(--ink) 12%,transparent)}

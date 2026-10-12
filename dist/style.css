@@ -61,3 +61,6 @@ dialog::backdrop{opacity:1;transition:opacity 140ms ease}
 dialog.is-closing::backdrop{animation:none;opacity:0}
 
 .photo-grade-definitions{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
+
+/* Stop Android’s boundary stretch from exposing space above the header. */
+html,body{overscroll-behavior-y:none}

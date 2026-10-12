@@ -100,7 +100,7 @@ body[data-theme=tide-oregon] .memories-content{background-image:var(--tide-motif
 
 /* Today: illustrated edges and quiet frosted writing surfaces. */
 #journal-view[data-view=today] #entry-panel{position:relative;z-index:1;margin-top:-40px}
-#entry-panel .prompt-card{margin-bottom:8px;background:transparent;border-radius:0;box-shadow:0px 1px 3px 0px rgba(0,0,0,0.1)}
+#entry-panel .prompt-card{margin-bottom:8px;background:transparent;border-radius:0;box-shadow:0px 1px 5px 0px rgba(0,0,0,0.05)}
 #entry-panel .good-card{border-top-right-radius:32px}
 #entry-panel .learned-card{border-bottom-left-radius:32px}
 #entry-panel .card-motif{flex-basis:60px;border-radius:0;background-color:color-mix(in srgb,var(--accent) 14%,var(--bg));background-image:linear-gradient(color-mix(in srgb,var(--bg) 22%,transparent),color-mix(in srgb,var(--accent) 18%,transparent)),var(--prompt-art);background-size:cover,auto 220%;background-position:center,85% 42%;background-repeat:no-repeat}

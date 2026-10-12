@@ -157,7 +157,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#fdf8ee"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/jan-good.webp",
+        "learned": "assets/prompts/jan-learned.webp"
+      }
     },
     {
       "month": 2,
@@ -302,7 +306,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#fef9ef"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/feb-good.webp",
+        "learned": "assets/prompts/feb-learned.webp"
+      }
     },
     {
       "month": 3,
@@ -447,7 +455,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#f2fafe"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/mar-good.webp",
+        "learned": "assets/prompts/mar-learned.webp"
+      }
     },
     {
       "month": 4,
@@ -592,7 +604,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#f7f8f3"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/apr-good.webp",
+        "learned": "assets/prompts/apr-learned.webp"
+      }
     },
     {
       "month": 5,
@@ -737,7 +753,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#fdf6ed"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/may-good.webp",
+        "learned": "assets/prompts/may-learned.webp"
+      }
     },
     {
       "month": 6,
@@ -889,7 +909,11 @@
           "motifSrc": "assets/tide-motifs/jun-07-sunday-contours.svg",
           "background": "#f1fcfd"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/jun-good.webp",
+        "learned": "assets/prompts/jun-learned.webp"
+      }
     },
     {
       "month": 7,
@@ -1034,7 +1058,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#fcf7eb"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/jul-good.webp",
+        "learned": "assets/prompts/jul-learned.webp"
+      }
     },
     {
       "month": 8,
@@ -1179,7 +1207,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#f6f9f6"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/aug-good.webp",
+        "learned": "assets/prompts/aug-learned.webp"
+      }
     },
     {
       "month": 9,
@@ -1324,7 +1356,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#fcf6ed"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/sep-good.webp",
+        "learned": "assets/prompts/sep-learned.webp"
+      }
     },
     {
       "month": 10,
@@ -1469,7 +1505,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#fdf6eb"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/oct-good.webp",
+        "learned": "assets/prompts/oct-learned.webp"
+      }
     },
     {
       "month": 11,
@@ -1614,7 +1654,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#f7f6f0"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/nov-good.webp",
+        "learned": "assets/prompts/nov-learned.webp"
+      }
     },
     {
       "month": 12,
@@ -1759,7 +1803,11 @@
           "reviewStatus": "awaiting final user review",
           "background": "#f3f9fe"
         }
-      ]
+      ],
+      "promptArt": {
+        "good": "assets/prompts/dec-good.webp",
+        "learned": "assets/prompts/dec-learned.webp"
+      }
     }
   ]
 }

@@ -61,7 +61,8 @@ function applyTheme(){
   const apply=()=>{if(serial!==artGeneration)return;
     for(const [key,value] of Object.entries({bg:scene.background||theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
     document.documentElement.style.setProperty('--decoration-src',`url("./assets/decorations/${theme.id}.svg")`);$('#page-decoration').dataset.ready='true';
-    document.documentElement.style.setProperty('--prompt-art',`url("./${scene.smallSrc}")`);
+    document.documentElement.style.setProperty('--prompt-good-art',`url("./${theme.promptArt.good}")`);
+    document.documentElement.style.setProperty('--prompt-learned-art',`url("./${theme.promptArt.learned}")`);
     document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
     const previous=art.src&&art.animate&&!reducedMotion()?art.cloneNode(false):null;art.parentElement.querySelectorAll('.hero-previous').forEach(img=>img.remove());if(previous){previous.removeAttribute('id');previous.classList.add('hero-previous');previous.removeAttribute('fetchpriority');art.parentElement.append(previous);}
     art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());$('meta[name=theme-color]').content=scene.background||theme.colors.background;

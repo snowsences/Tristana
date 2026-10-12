@@ -134,3 +134,19 @@ body[data-theme=orchard]{--prompt-fill:#472b0f21}
 
 #journal-view[data-view=memories] .day-tile[aria-pressed=true] .tile-image{outline:none}
 #journal-view[data-view=memories] .day-tile[aria-pressed=true]:after{content:"";position:absolute;top:89px;left:0;width:100%;height:3px;background:var(--accent);pointer-events:none}
+
+/* Fixed, noninteractive seasonal decoration under the reading surfaces. */
+#main{position:relative;z-index:1}
+.page-decoration{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px));width:min(100%,680px);height:300px;z-index:0;pointer-events:none;opacity:0;mask-image:linear-gradient(to bottom,transparent,#000 70%);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 70%)}
+.page-decoration:before{content:"";position:absolute;inset:0;background:var(--accent);opacity:.25;mask-image:var(--decoration-src);-webkit-mask-image:var(--decoration-src);mask-size:100% auto;-webkit-mask-size:100% auto;mask-position:center bottom;-webkit-mask-position:center bottom;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat}
+body[data-theme=rainwood] .page-decoration:before{opacity:.32}
+body[data-theme=tide-oregon] .journal-content,body[data-theme=tide-oregon] .memories-content{background-image:none}
+.app-shell{padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px) + 20px)}
+.artistic-settings input[type=range]{display:block;width:100%;accent-color:var(--accent);margin:0}
+.artistic-preview-frame{position:relative;max-width:300px;margin:20px auto 0;aspect-ratio:1;border-radius:16px 32px 16px 8px;overflow:hidden;background:var(--wash)}
+.artistic-preview-frame img{display:block;width:100%;height:100%;object-fit:cover}
+.artistic-preview-frame span{position:absolute;inset:auto 12px 12px;padding:6px 10px;font-size:12px;background:color-mix(in srgb,var(--bg) 92%,transparent);border-radius:6px;text-align:center}
+.artistic-preview-frame span:empty{display:none}
+
+.page-decoration[data-ready=true]{opacity:1}
+@supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){.page-decoration{display:none}}

@@ -1,5 +1,5 @@
 import {parseISODate} from './themes.js';
-// Theme grading with a a more pronounced seasonal color balance.
+// Theme grading with a more pronounced seasonal color balance.
 // Applied at display time: the original and square JPEGs remain ungraded.
 export const PHOTO_GRADES=[
   {id:'hearth',saturation:.94,contrast:.98,gain:[1.025,1,.970],lift:[.011,.008,.008]},

@@ -1,5 +1,5 @@
 import {filled,validDay} from './core.js';
-export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoFilter=()=> 'none',getAccent=()=> '',displayDate,onDayChange,onPhoto}) {
+export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoFilter=()=> 'none',getPhotoIdentity=photo=>photo?.localId,getAccent=()=> '',displayDate,onDayChange,onPhoto}) {
   const doc=element.ownerDocument,win=doc.defaultView,records=new Map(),requestedEmpty=new Set();
   let active=false,selected=null,limit=60,frame,settleTimer,programmatic=false,rendering=false;
   const empty=doc.createElement('p');empty.className='memories-empty';empty.textContent='Your days will appear here.';element.append(empty);
@@ -9,8 +9,8 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
   function allDates(){return [...new Set([...getEntries().values()].filter(e=>validDay(e.date)&&filled(e)).map(e=>e.date).concat([...requestedEmpty]))].sort().reverse();}
   function pinOffset(){const top=parseFloat(win.getComputedStyle(daySection).top)||0;return top+daySection.getBoundingClientRect().height+12;}
   function focusLine(){const rect=daySection.getBoundingClientRect();return Math.max(pinOffset(),rect.bottom+12);}
-  function loadPhoto(record){const photo=getEntry(record.date).photo;if(!active||!photo||record.loaded===photo.localId)return;const identity=photo.localId;record.loaded=identity;
-    getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!record.node.isConnected||record.loaded!==identity||getEntry(record.date).photo?.localId!==identity)return;
+  function loadPhoto(record){const photo=getEntry(record.date).photo,identity=getPhotoIdentity(photo);if(!active||!photo||record.loaded===identity)return;record.loaded=identity;
+    getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!record.node.isConnected||record.loaded!==identity||getPhotoIdentity(getEntry(record.date).photo)!==identity)return;
       const image=doc.createElement('img');image.alt='';image.decoding='async';image.style.filter=getPhotoFilter(record.date);image.src=url;record.image?.remove();record.image=image;record.photo.append(image);
     }).catch(()=>{if(record.loaded===identity)record.loaded=null;});
   }
@@ -18,7 +18,7 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
     record.good.querySelector('.memory-text').textContent=entry.good||'';record.learned.querySelector('.memory-text').textContent=entry.learned||'';
     record.empty.hidden=Boolean(filled(entry));record.photo.hidden=!entry.photo;record.node.classList.toggle('has-photo',Boolean(entry.photo));
     const accent=getAccent(record.date);if(accent)record.node.style.setProperty('--memory-accent',accent);
-    if(record.identity!==entry.photo?.localId){record.identity=entry.photo?.localId;record.loaded=null;record.image?.remove();record.image=null;}
+    if(record.identity!==getPhotoIdentity(entry.photo)){record.identity=getPhotoIdentity(entry.photo);record.loaded=null;record.image?.remove();record.image=null;}
     if(record.image)record.image.style.filter=getPhotoFilter(record.date);
     if(record.visible)loadPhoto(record);
   }

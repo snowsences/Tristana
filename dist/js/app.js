@@ -7,6 +7,7 @@ import {createCropper} from './crop.js';
 import {createUpdatePrompt} from './update-ui.js';
 import {photoGrade} from './photo-grades.js';
 import {thumbnailPhoto} from './image-utils.js';
+import {artisticPreference,artisticKey,createPhotoPainter,createArtisticPhotos} from './artistic-photos.js';
 import {createPromptEditor} from './prompt-ui.js';
 import {createMemories} from './memories-ui.js';
 import {createDayStrip} from './strip-ui.js';
@@ -18,6 +19,9 @@ const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
 let user=null,entries=new Map(),settings={},tab='today',yearView=false,selectedYear=new Date().getFullYear(),selectedDate,unsubscribers=[],syncing=false,localWrites=Promise.resolve(),photoURLs=new Map(),photoPromises=new Map(),installEvent,backend=null;
+let artisticPrefs=artisticPreference(),artisticPreviewGeneration=0,artisticTimer,artisticFailure=false;
+const photoPresentationKey=()=>artisticKey(artisticPrefs);
+const photoIdentity=photo=>photo?photo.localId+':'+photoPresentationKey():undefined;
 let navigationId=0,artGeneration=0,artIdentity='',selectedMonth=1,memoryDate=null;const tabScroll={today:0,past:0,settings:0};const preloadedArt=new Set();
 let zone=Intl.DateTimeFormat().resolvedOptions().timeZone;selectedDate=dayInZone(zone);
 const today=()=>dayInZone(zone);
@@ -31,9 +35,9 @@ function readableError(err){const code=err.code||'';if(code.includes('unauthoriz
 function savedLabel(message){if(message)$('#connection-status').textContent=message;}
 installDialogs(document);
 const prompts=createPromptEditor(document,{onChange:change,onError:error});
-const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,onSelect:openDay,onBrowse:date=>{if(tab==='past'){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'});
-const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});
-const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-section'),getEntries:()=>entries,getPhotoURL:photoURL,getPhotoFilter:photoFilter,
+const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,onSelect:openDay,onBrowse:date=>{if(tab==='past'){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'});
+const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';},photoPresentationKey);
+const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-section'),getEntries:()=>entries,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,
   getAccent:date=>resolveHeader(manifest,{date,themeMonth:Number(localStorage.getItem('tristana-theme'))||undefined}).theme.colors.accent,displayDate,
   onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto});
 function selectMemoryDay(date,{keepScroll=false}={}){if(!user||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
@@ -54,6 +58,7 @@ function applyTheme(){
   const art=$('#header-art'),next=new Image();next.srcset=`${scene.smallSrc} 600w, ${scene.src} 1200w`;next.sizes='(max-width:680px) 100vw, 680px';next.src=scene.src;
   const apply=()=>{if(serial!==artGeneration)return;
     for(const [key,value] of Object.entries({bg:scene.background||theme.colors.background,ink:theme.colors.ink,accent:theme.colors.accent}))document.documentElement.style.setProperty('--'+key,value);
+    document.documentElement.style.setProperty('--decoration-src',`url("./assets/decorations/${theme.id}.svg")`);$('#page-decoration').dataset.ready='true';
     document.documentElement.style.setProperty('--prompt-art',`url("./${scene.smallSrc}")`);
     document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
     const previous=art.src&&art.animate&&!reducedMotion()?art.cloneNode(false):null;art.parentElement.querySelectorAll('.hero-previous').forEach(img=>img.remove());if(previous){previous.removeAttribute('id');previous.classList.add('hero-previous');previous.removeAttribute('fetchpriority');art.parentElement.append(previous);}
@@ -68,19 +73,40 @@ function header(){
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
   $('#next-day').disabled=selectedDate>=today();
 }
-async function photoURL(photo,kind='square'){
+async function rawPhotoURL(photo,kind='square'){
   if(!photo||!user)return null;const uid=user.uid,key=uid+':'+photo.localId+':'+kind;
   if(photoURLs.has(key)){const url=photoURLs.get(key);photoURLs.delete(key);photoURLs.set(key,url);return url;}
   if(photoPromises.has(key))return photoPromises.get(key);
   const task=(async()=>{
     const photoKey=uid+':'+photo.localId;let local=await store.get('photos',photoKey);let blob=local?.[kind];
-    if(!blob){const assetKind=kind==='thumbnail'?'square':kind;let sourceBlob=local?.[assetKind];if(!sourceBlob&&kind==='thumbnail'){await photoURL(photo,'square');sourceBlob=(await store.get('photos',photoKey))?.square;}if(!sourceBlob&&photo[assetKind])sourceBlob=await cloud.media(photo[assetKind]);
+    if(!blob){const assetKind=kind==='thumbnail'?'square':kind;let sourceBlob=local?.[assetKind];if(!sourceBlob&&kind==='thumbnail'){await rawPhotoURL(photo,'square');sourceBlob=(await store.get('photos',photoKey))?.square;}if(!sourceBlob&&photo[assetKind])sourceBlob=await cloud.media(photo[assetKind]);
       if(sourceBlob){blob=kind==='thumbnail'?await thumbnailPhoto(sourceBlob):sourceBlob;const latest=await store.get('photos',photoKey);await store.put('photos',{...latest,key:photoKey,[assetKind]:sourceBlob,[kind]:blob});}}
     if(!blob||user?.uid!==uid)return null;const url=URL.createObjectURL(blob);photoURLs.set(key,url);
     if(photoURLs.size>96){for(const [oldKey,oldURL] of photoURLs){if(![...document.querySelectorAll('img')].some(img=>img.src===oldURL)){URL.revokeObjectURL(oldURL);photoURLs.delete(oldKey);break;}}}
     return url;
   })();photoPromises.set(key,task);try{return await task;}finally{if(photoPromises.get(key)===task)photoPromises.delete(key);}
 }
+const photoPainter=createPhotoPainter();
+const artisticPhotos=createArtisticPhotos({getOwner:()=>user?.uid,getPreference:()=>artisticPrefs,getRecord:key=>store.get('photos',key),saveRecord:record=>store.put('photos',record),
+  async loadSquare(photo,kind){const uid=user?.uid;if(!uid)return null;await rawPhotoURL(photo,kind);if(user?.uid!==uid)return null;return (await store.get('photos',uid+':'+photo.localId))?.[kind]||null;},
+  makeThumbnail:thumbnailPhoto,paint:(blob,strength)=>photoPainter.process(blob,strength),onError:()=>{artisticFailure=true;}});
+async function photoURL(photo,kind='square'){
+  if(!photo||!user)return null;const presentation=photoPresentationKey();if(kind==='source'||presentation==='original')return rawPhotoURL(photo,kind);
+  const uid=user.uid,key=uid+':'+photo.localId+':'+kind+':'+presentation;
+  if(photoURLs.has(key)){const url=photoURLs.get(key);photoURLs.delete(key);photoURLs.set(key,url);return url;}
+  if(photoPromises.has(key))return photoPromises.get(key);
+  const task=(async()=>{const blob=await artisticPhotos.get(photo,kind);if(!blob||user?.uid!==uid||photoPresentationKey()!==presentation)return null;
+    const url=URL.createObjectURL(blob);photoURLs.set(key,url);if(photoURLs.size>96){for(const [oldKey,oldURL] of photoURLs){if(![...document.querySelectorAll('img')].some(img=>img.src===oldURL)){URL.revokeObjectURL(oldURL);photoURLs.delete(oldKey);break;}}}return url;
+  })();photoPromises.set(key,task);try{return await task;}finally{if(photoPromises.get(key)===task)photoPromises.delete(key);}
+}
+function artisticControls(){const enabled=Boolean(user)&&artisticPrefs.enabled;$('#artistic-enabled').checked=enabled;$('#artistic-enabled').disabled=!user;$('#artistic-strength-control').hidden=!enabled;$('#artistic-strength').disabled=!enabled;$('#artistic-strength').value=artisticPrefs.strength;$('#artistic-strength-value').textContent=artisticPrefs.strength+'%';}
+async function artisticPreview(){
+  const serial=++artisticPreviewGeneration,uid=user?.uid,photoEntry=[...entries.values()].filter(e=>e.photo).sort((a,b)=>b.date.localeCompare(a.date))[0],frame=$('#artistic-preview-frame'),image=$('#artistic-preview');
+  if(!uid||tab!=='settings'||!photoEntry){frame.hidden=true;image.removeAttribute('src');return;}frame.hidden=false;artisticFailure=false;$('#artistic-preview-status').textContent=photoPresentationKey()==='original'?'':'Painting your photograph…';
+  try{const url=await photoURL(photoEntry.photo);if(serial!==artisticPreviewGeneration||user?.uid!==uid||tab!=='settings'||!url)return;image.style.filter=photoFilter(photoEntry.date);image.src=url;await image.decode?.();if(serial===artisticPreviewGeneration)$('#artistic-preview-status').textContent=artisticFailure&&photoPresentationKey()!=='original'?'Showing the original. The artistic finish could not be prepared.':'';}catch(err){if(serial===artisticPreviewGeneration){$('#artistic-preview-status').textContent='Preview needs a connection.';}}
+}
+function refreshPhotoPresentation(){dayStrip.update();memories.update();if(tab==='today')renderEntry();if(tab==='settings')artisticPreview();}
+function saveArtisticPreference(patch){if(!user)return;artisticPrefs=artisticPreference({...artisticPrefs,...patch});localStorage.setItem('tristana-artistic-'+user.uid,JSON.stringify(artisticPrefs));artisticControls();refreshPhotoPresentation();}
 function renderStrip(options){if(tab==='past')dayStrip.render(selectedDate,options);}
 function refreshProgress(date=selectedDate){dayStrip.update([date]);memories.update([date]);}
 function renderEntry(){
@@ -89,7 +115,7 @@ function renderEntry(){
 }
 function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=true;$('.day-section').classList.toggle('today-days',tab==='today');$('.day-section').hidden=tab!=='past';
   $('#journal-view').hidden=tab==='settings';$('#journal-view').dataset.view=tab==='past'?'memories':'today';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=true;$('#year-panel').hidden=true;$('#entry-panel').hidden=tab!=='today';$('#memories-panel').hidden=tab!=='past';$('#day-strip').hidden=tab!=='past';
-  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab==='today')renderEntry();if(tab==='past'){memories.render();memories.ensure(selectedDate);memories.select(selectedDate);}memories.setActive(tab==='past');
+  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab==='today')renderEntry();if(tab==='past'){memories.render();memories.ensure(selectedDate);memories.select(selectedDate);}memories.setActive(tab==='past');if(tab==='settings')artisticPreview();else artisticPreviewGeneration++;
   for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
 }
 async function openDay(date){
@@ -146,19 +172,19 @@ async function runSync(){
 }
 async function checkBackend(){try{backend=await cloud.backendStatus();$('#connection-status').textContent=backend.photos?'Firebase and photo backend connected.':'Firebase connected. Configure Cloudinary secrets in the Worker.';$('#reminder-status').textContent=backend.reminders?(settings.reminderDeviceId===deviceId?'Enabled on this phone at '+(settings.reminderTime||'21:00')+'.':'Ready to enable on this phone.'):'Reminder backend needs its VAPID and Firebase service-account secrets.';}catch(err){backend=null;$('#connection-status').textContent='Firebase connected; the Worker still needs deployment.';$('#reminder-status').textContent='Phone reminders need the Worker setup first.';}}
 async function onUser(account,message){
-  for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();memories.reset();memoryDate=null;navigationId++;
+  for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();memories.reset();memoryDate=null;navigationId++;clearTimeout(artisticTimer);artisticPreviewGeneration++;$('#artistic-preview').removeAttribute('src');$('#artistic-preview-frame').hidden=true;try{artisticPrefs=artisticPreference(account?JSON.parse(localStorage.getItem('tristana-artistic-'+account.uid)||'{}'):{});}catch{artisticPrefs=artisticPreference();}artisticControls();
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
   if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
-    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab==='today')renderEntry();memories.update(changed);if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
+    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab==='today')renderEntry();memories.update(changed);if(tab==='settings')artisticPreview();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
     try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=tab==='today'?today():restored.date;yearView=false;if(tab==='past')memoryDate=selectedDate;selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
   }
   render();
 }
-function applySettings(){zone=settings.timezone||Intl.DateTimeFormat().resolvedOptions().timeZone;$('#timezone-label').textContent='Journal timezone: '+zone.replaceAll('_',' ');$('#phone-toggle').checked=settings.phoneDeviceId===deviceId;$('#reminder-time').value=settings.reminderTime||'21:00';if(settings.phoneDeviceId===deviceId){const currentZone=Intl.DateTimeFormat().resolvedOptions().timeZone;if(currentZone!==zone){zone=currentZone;cloud.settings(user.uid,{timezone:zone}).catch(error);}}$('#disable-reminders').hidden=settings.reminderDeviceId!==deviceId;header();}
+function applySettings(){artisticControls();zone=settings.timezone||Intl.DateTimeFormat().resolvedOptions().timeZone;$('#timezone-label').textContent='Journal timezone: '+zone.replaceAll('_',' ');$('#phone-toggle').checked=settings.phoneDeviceId===deviceId;$('#reminder-time').value=settings.reminderTime||'21:00';if(settings.phoneDeviceId===deviceId){const currentZone=Intl.DateTimeFormat().resolvedOptions().timeZone;if(currentZone!==zone){zone=currentZone;cloud.settings(user.uid,{timezone:zone}).catch(error);}}$('#disable-reminders').hidden=settings.reminderDeviceId!==deviceId;header();}
 async function closeNotifications(date){if(date!==today()||!filled(entry(date)))return;try{const registration=await navigator.serviceWorker?.getRegistration();for(const n of await registration?.getNotifications()||[])if(n.data?.date===date)n.close();}catch{}}
 const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   if(!user)return;const localId=crypto.randomUUID();const thumbnail=await thumbnailPhoto(square);await store.put('photos',{key:user.uid+':'+localId,source,square,thumbnail});
@@ -197,7 +223,10 @@ $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onc
 $('#date-button').onclick=()=>{$('#selected-date').value=selectedDate;$('#selected-date').max=today();$('#date-dialog').showModal();};$('#date-dialog').addEventListener('click',event=>{const dialog=$('#date-dialog');const rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close('cancel');});$('#date-dialog').addEventListener('close',()=>{if($('#date-dialog').returnValue==='choose')openDay($('#selected-date').value);});
 $('#photos-view').onclick=()=>{yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render();};$('#year-view').onclick=()=>{yearView=true;$('#photos-view').setAttribute('aria-pressed','false');$('#year-view').setAttribute('aria-pressed','true');render();};$('#prev-year').onclick=()=>{selectedYear--;renderYear();};$('#next-year').onclick=()=>{selectedYear++;renderYear();};
 for(const theme of manifest.themes){const option=document.createElement('option');option.value=theme.month;option.textContent=displayDate(`2026-${String(theme.month).padStart(2,'0')}-01`,{month:'long'})+' · '+theme.name;$('#theme-select').append(option);}
-$('#theme-select').onchange=e=>{localStorage.setItem('tristana-theme',e.target.value);applyTheme();if(tab==='today')renderEntry();dayStrip.update();memories.update();};
+$('#theme-select').onchange=e=>{localStorage.setItem('tristana-theme',e.target.value);applyTheme();if(tab==='today')renderEntry();dayStrip.update();memories.update();if(tab==='settings')artisticPreview();};
+$('#artistic-enabled').onchange=event=>{clearTimeout(artisticTimer);saveArtisticPreference({enabled:event.target.checked});};
+$('#artistic-strength').oninput=event=>{const strength=Number(event.target.value);$('#artistic-strength-value').textContent=strength+'%';clearTimeout(artisticTimer);artisticTimer=setTimeout(()=>saveArtisticPreference({strength}),250);};
+$('#artistic-strength').onchange=event=>{clearTimeout(artisticTimer);saveArtisticPreference({strength:Number(event.target.value)});};
 $('#phone-toggle').onchange=async e=>{if(!user){e.target.checked=false;return toast('Sign in first.');}const patch={phoneDeviceId:e.target.checked?deviceId:'',timezone:e.target.checked?Intl.DateTimeFormat().resolvedOptions().timeZone:zone};try{await cloud.settings(user.uid,patch);settings={...settings,...patch};applySettings();}catch(err){error(err);}};
 $('#reminder-time').onchange=async e=>{if(user)try{await cloud.settings(user.uid,{reminderTime:e.target.value});if(settings.reminderDeviceId===deviceId)await cloud.api('/reminders/time',{method:'POST',body:{time:e.target.value,timezone:zone}});}catch(err){error(err);}};
 $('#enable-reminders').onclick=async()=>{

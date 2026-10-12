@@ -10,6 +10,7 @@ import {thumbnailPhoto} from './image-utils.js';
 import {artisticPreference,artisticKey,createPhotoPainter,createArtisticPhotos} from './artistic-photos.js';
 import {createPromptEditor} from './prompt-ui.js';
 import {createMemories} from './memories-ui.js';
+import {createEmptyDayEditor} from './empty-day-ui.js';
 import {createDayStrip} from './strip-ui.js';
 import {createPhotoRenderer} from './entry-ui.js';
 import {installDialogs,reveal,confirmAction,reducedMotion} from './motion-ui.js';
@@ -37,12 +38,16 @@ function savedLabel(message){if(message)$('#connection-status').textContent=mess
 installDialogs(document);
 const elasticScroll=installElasticScroll(document,{isAllowed:()=>Boolean(user)});
 const prompts=createPromptEditor(document,{onChange:change,onError:error});
-const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,onSelect:openDay,onBrowse:date=>{if(tab==='past'){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'});
+const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,onSelect:openDay,onBrowse:date=>{if(tab==='past'&&!memoryEditor.date){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'&&!memoryEditor.date});
 const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';},photoPresentationKey);
+const memoryEditor=createEmptyDayEditor(document,{canOpen:date=>Boolean(user)&&tab==='past'&&validDay(date)&&date<=today()&&!filled(entry(date)),renderEntry,
+  commit:()=>prompts.commit(),waitForSave:()=>localWrites,resize:()=>prompts.resize(),displayDate,onError:error,
+  onOpen:()=>{elasticScroll.cancel();memories.setActive(false);},
+  onClose:date=>{if(user){refreshProgress(date);memories.setActive(tab==='past');}else memories.setActive(false);}});
 const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-section'),getEntries:()=>entries,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,
   getAccent:date=>resolveHeader(manifest,{date,themeMonth:Number(localStorage.getItem('tristana-theme'))||undefined}).theme.colors.accent,displayDate,
-  onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto});
-function selectMemoryDay(date,{keepScroll=false}={}){if(!user||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
+  onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto,onCreate:date=>memoryEditor.open(date),canCreate:date=>date<=today()});
+function selectMemoryDay(date,{keepScroll=false}={}){if(!user||memoryEditor.date||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
 async function openMemoryPhoto(date,origin){const uid=user?.uid,photo=entry(date).photo;if(!uid||!photo)return;try{const url=await photoURL(photo);if(user?.uid!==uid||tab!=='past'||entry(date).photo?.localId!==photo.localId||!url)return;await lightbox.open({date,photo,url,origin,filter:photoFilter(date),readOnly:true});}catch(err){error(err);}}
 function snapshot(value){return structuredClone(value);}
 function persist(e){const copy=snapshot(e);copy.key=user.uid+':'+e.date;localWrites=localWrites.catch(()=>{}).then(()=>store.put('entries',copy));return localWrites;}
@@ -108,20 +113,21 @@ async function artisticPreview(){
   if(!uid||tab!=='settings'||!photoEntry){frame.hidden=true;image.removeAttribute('src');return;}frame.hidden=false;artisticFailure=false;$('#artistic-preview-status').textContent=photoPresentationKey()==='original'?'':'Painting your photograph…';
   try{const url=await photoURL(photoEntry.photo);if(serial!==artisticPreviewGeneration||user?.uid!==uid||tab!=='settings'||!url)return;image.style.filter=photoFilter(photoEntry.date);image.src=url;await image.decode?.();if(serial===artisticPreviewGeneration)$('#artistic-preview-status').textContent=artisticFailure&&photoPresentationKey()!=='original'?'Showing the original. The artistic finish could not be prepared.':'';}catch(err){if(serial===artisticPreviewGeneration){$('#artistic-preview-status').textContent='Preview needs a connection.';}}
 }
-function refreshPhotoPresentation(){dayStrip.update();memories.update();if(tab==='today')renderEntry();if(tab==='settings')artisticPreview();}
+function refreshPhotoPresentation(){dayStrip.update();memories.update();if(tab==='today'||memoryEditor.date)renderEntry();if(tab==='settings')artisticPreview();}
 function saveArtisticPreference(patch){if(!user)return;artisticPrefs=artisticPreference({...artisticPrefs,...patch});localStorage.setItem('tristana-artistic-'+user.uid,JSON.stringify(artisticPrefs));artisticControls();refreshPhotoPresentation();}
 function renderStrip(options){if(tab==='past')dayStrip.render(selectedDate,options);}
 function refreshProgress(date=selectedDate){dayStrip.update([date]);memories.update([date]);}
-function renderEntry(){
-  const e=entry();prompts.setEntry(e);applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
-  $('#entry-photo').style.filter=photoFilter(selectedDate);photoRenderer.render(e.photo,selectedDate);savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');
+function renderEntry(date=memoryEditor.date||selectedDate){
+  const e=entry(date);prompts.setEntry(e);applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
+  $('#entry-photo').style.filter=photoFilter(date);photoRenderer.render(e.photo,date);savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');
 }
 function render({dayMotion=false,recenterDay=false}={}){applyAuthGate(document,Boolean(user));if(!user)return;header();$('#date-bar').hidden=true;$('.day-section').classList.toggle('today-days',tab==='today');$('.day-section').hidden=tab!=='past';
-  $('#journal-view').hidden=tab==='settings';$('#journal-view').dataset.view=tab==='past'?'memories':'today';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=true;$('#year-panel').hidden=true;$('#entry-panel').hidden=tab!=='today';$('#memories-panel').hidden=tab!=='past';$('#day-strip').hidden=tab!=='past';
-  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab==='today')renderEntry();if(tab==='past'){memories.render();memories.ensure(selectedDate);memories.select(selectedDate);}memories.setActive(tab==='past');if(tab==='settings')artisticPreview();else artisticPreviewGeneration++;
+  $('#journal-view').hidden=tab==='settings';$('#journal-view').dataset.view=tab==='past'?'memories':'today';$('#settings-view').hidden=tab!=='settings';$('#past-tools').hidden=true;$('#year-panel').hidden=true;$('#entry-panel').hidden=tab!=='today'&&!memoryEditor.date;$('#memories-panel').hidden=tab!=='past';$('#day-strip').hidden=tab!=='past';
+  renderStrip({animate:dayMotion,recenter:recenterDay});if(tab==='today'||memoryEditor.date)renderEntry();if(tab==='past'){memories.render();memories.ensure(selectedDate);memories.select(selectedDate);}memories.setActive(tab==='past'&&!memoryEditor.date);if(tab==='settings')artisticPreview();else artisticPreviewGeneration++;
   for(const button of document.querySelectorAll('[data-tab]')){if(button.dataset.tab===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}
 }
 async function openDay(date){
+  if(memoryEditor.date)return;
   if(!validDay(date)||(date>today()&&!entries.has(date))||(tab==='today'&&date!==today()))return;
   if(tab==='past'){selectMemoryDay(date);memories.scrollTo(date);return;}
   const request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
@@ -169,7 +175,7 @@ async function runSync(){
       for(const field of e._dirty){clean._base[field]=data[field];if(same(latest[field],e[field]))clean._dirty=clean._dirty.filter(f=>f!==field);}
       entries.set(date,clean);await persist(clean);updatedDates.push(date);
     }
-    $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');if(tab==='today')renderEntry();dayStrip.update(updatedDates);memories.update(updatedDates);
+    $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');if(tab==='today'||memoryEditor.date)renderEntry();dayStrip.update(updatedDates);memories.update(updatedDates);
   }catch(err){savedLabel('Saved on device · backup pending');$('#connection-status').textContent=readableError(err);if(entry().photo?.pending)$('#photo-note').textContent='Saved on device. Photo backup is waiting for the Worker setup.';}
   finally{syncing=false;if(user&&[...entries.values()].some(e=>e._dirty.length)&&navigator.onLine){clearTimeout(syncTimer);syncTimer=setTimeout(runSync,15000);}}
 }
@@ -182,7 +188,7 @@ async function onUser(account,message){
   if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
-    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(selectedDate)&&tab==='today')renderEntry();memories.update(changed);if(tab==='settings')artisticPreview();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
+    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(memoryEditor.date||selectedDate)&&(tab==='today'||memoryEditor.date))renderEntry();memories.update(changed);if(tab==='settings')artisticPreview();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
     try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=tab==='today'?today():restored.date;yearView=false;if(tab==='past')memoryDate=selectedDate;selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
   }
@@ -192,13 +198,14 @@ function applySettings(){artisticControls();zone=settings.timezone||Intl.DateTim
 async function closeNotifications(date){if(date!==today()||!filled(entry(date)))return;try{const registration=await navigator.serviceWorker?.getRegistration();for(const n of await registration?.getNotifications()||[])if(n.data?.date===date)n.close();}catch{}}
 const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   if(!user)return;const localId=crypto.randomUUID();const thumbnail=await thumbnailPhoto(square);await store.put('photos',{key:user.uid+':'+localId,source,square,thumbnail});
-  await change('photo',{localId,crop,pending:true,source:null,square:null},date);if(selectedDate===date){renderEntry();renderStrip();}
+  await change('photo',{localId,crop,pending:true,source:null,square:null},date);if((memoryEditor.date||selectedDate)===date){renderEntry();renderStrip();}
 },error,{photoFilter});
-for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>$('#'+type+'-input').click();$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0];if(file)try{await cropper.open(file,selectedDate,entry().photo);}catch(err){error(err);}e.target.value='';};}
+let photoCapture;
+for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>{photoCapture={date:memoryEditor.date||selectedDate,uid:user?.uid};$('#'+type+'-input').click();};$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0],capture=photoCapture;photoCapture=null;if(file&&capture?.uid===user?.uid&&user)try{await cropper.open(file,capture.date,entry(capture.date).photo);}catch(err){error(err);}e.target.value='';};}
 const lightbox=bindPhotoLightbox(document,{
   isAuthenticated:()=>Boolean(user),
   async onOpen(){
-    const date=selectedDate,photo=entry(date).photo;if(!user||!photo)return null;
+    const date=memoryEditor.date||selectedDate,photo=entry(date).photo;if(!user||!photo)return null;
     const url=await photoURL(photo);if(!user||entry(date).photo?.localId!==photo.localId||!url)return null;
     return {date,photo,url,filter:photoFilter(date)};
   },
@@ -212,13 +219,14 @@ const lightbox=bindPhotoLightbox(document,{
     if(!user||entry(date).photo?.localId!==photo.localId)return true;
     if(!await confirmAction(document,{title:'Remove photograph?',message:'This day’s text will stay saved.',action:'Remove'}))return false;
     if(!user||entry(date).photo?.localId!==photo.localId)return true;
-    await change('photo',null,date);if(selectedDate===date){renderEntry();renderStrip();}return true;
+    await change('photo',null,date);if((memoryEditor.date||selectedDate)===date){renderEntry();renderStrip();}return true;
   },
   onError:error
 });
 $('#signin').onclick=()=>cloud.signIn().catch(error);
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
+  if(memoryEditor.date)await $('#empty-day-dialog').close();
   elasticScroll.cancel();const target=b.dataset.tab,request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
   tabScroll[tab]=window.scrollY;const changed=tab!==target;tab=target;if(tab==='today'){selectedDate=today();yearView=false;}if(tab==='past'){selectedDate=memoryDate=memoryDate||memories.latest()||today();yearView=false;}render({recenterDay:tab==='today'});
   window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});

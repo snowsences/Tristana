@@ -1,5 +1,5 @@
 import {filled,validDay} from './core.js';
-export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoFilter=()=> 'none',getPhotoIdentity=photo=>photo?.localId,getAccent=()=> '',displayDate,onDayChange,onPhoto}) {
+export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoFilter=()=> 'none',getPhotoIdentity=photo=>photo?.localId,getAccent=()=> '',displayDate,onDayChange,onPhoto,onCreate,canCreate=()=>true}) {
   const doc=element.ownerDocument,win=doc.defaultView,records=new Map(),requestedEmpty=new Set();
   let active=false,selected=null,limit=60,frame,settleTimer,programmatic=false,rendering=false;
   const empty=doc.createElement('p');empty.className='memories-empty';empty.textContent='Your days will appear here.';element.append(empty);
@@ -17,6 +17,9 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
   function update(record){const entry=getEntry(record.date);record.good.hidden=!entry.good?.trim();record.learned.hidden=!entry.learned?.trim();
     record.good.querySelector('.memory-text').textContent=entry.good||'';record.learned.querySelector('.memory-text').textContent=entry.learned||'';
     record.empty.hidden=Boolean(filled(entry));record.photo.hidden=!entry.photo;record.node.classList.toggle('has-photo',Boolean(entry.photo));
+    const editable=Boolean(onCreate)&&!filled(entry)&&canCreate(record.date);record.node.classList.toggle('empty-day-editable',editable);
+    for(const [name,value] of [['role','button'],['tabindex','0'],['aria-haspopup','dialog']]){if(editable)record.node.setAttribute(name,value);else record.node.removeAttribute(name);}
+    record.node.setAttribute('aria-label',displayDate(record.date,{weekday:'long',month:'long',day:'numeric',year:'numeric'})+(editable?', add an entry':''));
     const accent=getAccent(record.date);if(accent)record.node.style.setProperty('--memory-accent',accent);
     if(record.identity!==getPhotoIdentity(entry.photo)){record.identity=getPhotoIdentity(entry.photo);record.loaded=null;record.image?.remove();record.image=null;}
     if(record.image)record.image.style.filter=getPhotoFilter(record.date);
@@ -29,7 +32,9 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
     const paragraph=(className,label)=>{const p=doc.createElement('p');p.className=className;const prefix=doc.createElement('span');prefix.className='sr-only';prefix.textContent=label+': ';const text=doc.createElement('span');text.className='memory-text';p.append(prefix,text);sentences.append(p);return p;};
     const good=paragraph('memory-good','Something good'),learned=paragraph('memory-learned','Something learned');const absent=doc.createElement('p');absent.className='memory-no-entry';absent.textContent='Nothing saved for this day.';sentences.append(absent);
     const photo=doc.createElement('button');photo.type='button';photo.className='memory-photo';photo.setAttribute('aria-label','View photograph for '+displayDate(date,{month:'long',day:'numeric',year:'numeric'}));photo.onclick=()=>onPhoto(date,photo);
-    node.addEventListener('click',event=>{if(!event.target.closest('button'))select(date,{notify:true});});
+    const activate=()=>{select(date,{notify:true});if(onCreate&&!filled(getEntry(date))&&canCreate(date))onCreate(date);};
+    node.addEventListener('click',event=>{if(!event.target.closest('button'))activate();});
+    node.addEventListener('keydown',event=>{if(event.target===node&&node.classList.contains('empty-day-editable')&&['Enter',' '].includes(event.key)){event.preventDefault();activate();}});
     node.append(stamp,sentences,photo);const record={date,node,good,learned,empty:absent,photo,visible:!observer};records.set(date,record);update(record);observer?.observe(node);return record;
   }
   function select(date,{notify=false}={}){const changed=selected!==date;records.get(selected)?.node.removeAttribute('aria-current');selected=date;records.get(date)?.node.setAttribute('aria-current','date');if(changed&&notify)onDayChange(date);}

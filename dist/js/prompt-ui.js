@@ -1,9 +1,18 @@
-import {LIMIT,count,limit} from './core.js';
+import {LIMIT,count} from './core.js';
 export function limitedEdit(value,start,end,text) {
   const prefix=value.slice(0,start),suffix=value.slice(end);
   const available=Math.max(0,LIMIT-count(prefix)-count(suffix));
   const points=Array.from(text),accepted=points.slice(0,available).join('');
   return {value:prefix+accepted+suffix,caret:prefix.length+accepted.length,rejected:points.slice(available).join('')};
+}
+// Enforce the limit against the browser's actual edit, never composition event.data.
+export function limitedNativeEdit(before,after) {
+  if(count(after)<=LIMIT)return {value:after,rejected:''};
+  const old=Array.from(before||''),next=Array.from(after);let start=0,end=0;
+  while(start<old.length&&start<next.length&&old[start]===next[start])start++;
+  while(end<old.length-start&&end<next.length-start&&old[old.length-1-end]===next[next.length-1-end])end++;
+  const prefix=old.slice(0,start).join(''),suffix=old.slice(old.length-end).join('');
+  return limitedEdit(before||'',prefix.length,(before||'').length-suffix.length,next.slice(start,next.length-end).join(''));
 }
 export function createPromptEditor(document,{onChange,onError}) {
   const win=document.defaultView;const fields=['good','learned'];
@@ -29,14 +38,18 @@ export function createPromptEditor(document,{onChange,onError}) {
       animation.finished.catch(()=>{}).finally(()=>particle.remove());
     }
   }
-  function save(input) {
+  function save(input,baseline=input._beforeValue??input._savedValue??'') {
     if(input.isComposing)return resize(input);
-    const value=limit(input.value),extra=Array.from(input.value).slice(LIMIT).join('');input.value=value;resize(input);spill(input,extra);
+    const edit=limitedNativeEdit(baseline,input.value),value=edit.value;
+    // Even assigning the same value can reset Android's composing region.
+    if(input.value!==value){input.value=value;if(edit.caret!==undefined)input.setSelectionRange(edit.caret,edit.caret);}
+    delete input._beforeValue;resize(input);spill(input,edit.rejected);
     if(input.dataset.day&&input._savedValue!==value){input._savedValue=value;Promise.resolve(onChange(input.id,value,input.dataset.day)).catch(onError);}
   }
   for(const field of fields){const input=document.getElementById(field);
     input.addEventListener('beforeinput',event=>{
-      if(event.isComposing||input.isComposing||!event.inputType?.startsWith('insert')||event.data===null)return;
+      if(event.isComposing||input.isComposing)return;input._beforeValue=input.value;
+      if(event.inputType!=='insertText'||event.data===null)return;
       const edit=limitedEdit(input.value,input.selectionStart,input.selectionEnd,event.data);
       if(!edit.rejected)return;
       if(!event.cancelable)return;
@@ -44,13 +57,13 @@ export function createPromptEditor(document,{onChange,onError}) {
     });
     input.addEventListener('paste',event=>{if(input.isComposing)return;const text=event.clipboardData?.getData('text/plain');if(!text)return;const edit=limitedEdit(input.value,input.selectionStart,input.selectionEnd,text);if(edit.rejected){event.preventDefault();input.value=edit.value;input.setSelectionRange(edit.caret,edit.caret);resize(input);spill(input,edit.rejected);save(input);}});
     input.addEventListener('input',event=>{input.isComposing=event.isComposing;save(input);});
-    function finishComposition(text){const base=input._composition;if(base){const inserted=text??input.value.slice(base.start,input.value.length-(base.value.length-base.end));const edit=limitedEdit(base.value,base.start,base.end,inserted);input.value=edit.value;input.setSelectionRange(edit.caret,edit.caret);spill(input,edit.rejected);delete input._composition;}input.isComposing=false;save(input);}
+    function finishComposition(){const baseline=input._composition?.value;delete input._composition;input.isComposing=false;save(input,baseline??input._savedValue??'');}
     input.addEventListener('compositionstart',()=>{input.isComposing=true;input._composition={value:input.value,start:input.selectionStart,end:input.selectionEnd};});
-    input.addEventListener('compositionend',event=>finishComposition(event.data));
+    input.addEventListener('compositionend',()=>finishComposition());
     input.addEventListener('blur',()=>finishComposition());
   }
   return {
-    setEntry(entry){for(const field of fields){const input=document.getElementById(field),differentDay=input.dataset.day!==entry.date;if(differentDay||document.activeElement!==input){input.value=entry[field]||'';input._savedValue=input.value;}input.dataset.day=entry.date;}win.requestAnimationFrame(()=>fields.forEach(f=>resize(document.getElementById(f))));},
+    setEntry(entry){for(const field of fields){const input=document.getElementById(field),differentDay=input.dataset.day!==entry.date;if(differentDay||document.activeElement!==input){const value=entry[field]||'';if(input.value!==value)input.value=value;input._savedValue=value;}input.dataset.day=entry.date;}win.requestAnimationFrame(()=>fields.forEach(f=>resize(document.getElementById(f))));},
     commit(){for(const field of fields){const input=document.getElementById(field);if(document.activeElement===input)input.blur();save(input);}},
     resize(){fields.forEach(f=>resize(document.getElementById(f)));},
     reset(){document.querySelectorAll('.falling-character').forEach(p=>{p.getAnimations?.().forEach(a=>a.cancel());p.remove();});live.textContent='';clearTimeout(announceTimer);announceTimer=null;for(const field of fields){const input=document.getElementById(field);input.value='';input._savedValue='';delete input.dataset.day;}},

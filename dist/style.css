@@ -172,3 +172,6 @@ html[data-memory-editing=true]{overflow:hidden}
 .photo-lightbox>img{touch-action:none;user-select:none;-webkit-user-drag:none;transform-origin:center}
 .photo-lightbox>img[data-zoomed=true]{cursor:grab;will-change:transform}
 .lightbox-close,.lightbox-actions{z-index:1}
+
+/* Keep prompt headings proportionate to the narrower phone writing area. */
+@media(max-width:759px){#entry-panel .prompt-body label{font-size:18px}}

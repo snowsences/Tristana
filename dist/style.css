@@ -109,8 +109,8 @@ body[data-theme=tide-oregon] .memories-content{background-image:var(--tide-motif
 
 /* Today: illustrated edges and quiet frosted writing surfaces. */
 #journal-view[data-view=today] #entry-panel{position:relative;z-index:1;margin-top:-40px}
-#entry-panel .prompt-card{margin-bottom:8px;background:var(--prompt-fill,color-mix(in srgb,var(--ink) 13%,transparent));border-radius:0;box-shadow:0px 1px 5px 0px rgba(0,0,0,0.05),inset 0 2px color-mix(in srgb,white 32%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 30%,transparent)}
-#entry-panel .prompt-card:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;box-shadow:inset 0 2px color-mix(in srgb,white 32%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 30%,transparent)}
+#entry-panel .prompt-card{margin-bottom:8px;background:var(--prompt-fill,color-mix(in srgb,var(--ink) 13%,transparent));border-radius:0;box-shadow:0px 1px 5px 0px rgba(0,0,0,0.1),inset 0px 2px 0px 0px color-mix(in srgb,white 62%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 50%,transparent)}
+#entry-panel .prompt-card:after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;box-shadow:inset 0px 2px 0px 0px color-mix(in srgb,white 62%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 50%,transparent)}
 #entry-panel .good-card{border-top-right-radius:32px}
 #entry-panel .learned-card{border-bottom-left-radius:32px}
 #entry-panel .card-motif{flex-basis:60px;border-radius:0;background-color:color-mix(in srgb,var(--accent) 14%,var(--bg));background-image:var(--prompt-good-art);background-size:cover;background-position:center;background-repeat:no-repeat}
@@ -180,7 +180,7 @@ html[data-memory-editing=true]{overflow:hidden}
 .lightbox-close,.lightbox-actions{z-index:1}
 
 /* Carry the prompt-card edge treatment into the empty photograph area. */
-.photo-empty{box-shadow:0px 1px 5px 0px rgba(0,0,0,0.05),inset 0 2px color-mix(in srgb,white 32%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 30%,transparent)}
+.photo-empty{box-shadow:0px 1px 5px 0px rgba(0,0,0,0.1),inset 0px 2px 0px 0px color-mix(in srgb,white 62%,transparent),inset 0 -3px 0px color-mix(in srgb,var(--accent) 50%,transparent)}
 
 /* Keep the journal typography proportionate to the narrower phone writing area. */
 @media(max-width:759px){

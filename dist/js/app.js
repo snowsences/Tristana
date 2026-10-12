@@ -48,7 +48,7 @@ const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-s
   getAccent:date=>resolveHeader(manifest,{date,themeMonth:Number(localStorage.getItem('tristana-theme'))||undefined}).theme.colors.accent,displayDate,
   onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto,onCreate:date=>memoryEditor.open(date),canCreate:date=>date<=today()});
 function selectMemoryDay(date,{keepScroll=false}={}){if(!user||memoryEditor.date||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
-async function openMemoryPhoto(date,origin){const uid=user?.uid,photo=entry(date).photo;if(!uid||!photo)return;try{const url=await photoURL(photo);if(user?.uid!==uid||tab!=='past'||entry(date).photo?.localId!==photo.localId||!url)return;await lightbox.open({date,photo,url,origin,filter:photoFilter(date),readOnly:true});}catch(err){error(err);}}
+async function openMemoryPhoto(date,origin){const uid=user?.uid,photo=entry(date).photo;if(!uid||!photo)return;try{const url=await rawPhotoURL(photo,'source');if(user?.uid!==uid||tab!=='past'||entry(date).photo?.localId!==photo.localId||!url)return;await lightbox.open({date,photo,url,origin,readOnly:true});}catch(err){error(err);}}
 function snapshot(value){return structuredClone(value);}
 function persist(e){const copy=snapshot(e);copy.key=user.uid+':'+e.date;localWrites=localWrites.catch(()=>{}).then(()=>store.put('entries',copy));return localWrites;}
 async function change(field,value,date=selectedDate){
@@ -206,8 +206,8 @@ const lightbox=bindPhotoLightbox(document,{
   isAuthenticated:()=>Boolean(user),
   async onOpen(){
     const date=memoryEditor.date||selectedDate,photo=entry(date).photo;if(!user||!photo)return null;
-    const url=await photoURL(photo);if(!user||entry(date).photo?.localId!==photo.localId||!url)return null;
-    return {date,photo,url,filter:photoFilter(date)};
+    const uid=user.uid,url=await rawPhotoURL(photo,'source');if(user?.uid!==uid||entry(date).photo?.localId!==photo.localId||!url)return null;
+    return {date,photo,url};
   },
   async onReframe({date,photo}){
     if(!user||entry(date).photo?.localId!==photo.localId)return;

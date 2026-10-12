@@ -153,10 +153,6 @@ body[data-theme=tide-oregon] .journal-content,body[data-theme=tide-oregon] .memo
 .page-decoration[data-ready=true]{opacity:1}
 @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){.page-decoration{display:none}}
 
-/* A translating rubber band on Android, without scaling content or moving fixed artwork. */
-html[data-elastic-platform=android],html[data-elastic-platform=android] body{overscroll-behavior-y:none}
-html[data-edge-bounce=true] .hero-copy,html[data-edge-bounce=true] #entry-panel,html[data-edge-bounce=true] #memories-panel,html[data-edge-bounce=true] #settings-view,html[data-edge-bounce=true] .hero[data-page=settings]>img{translate:0 var(--edge-offset,0px)}
-
 /* Backfill an empty memory with the existing daily editor. */
 html[data-memory-editing=true]{overflow:hidden}
 .empty-day-editable{cursor:pointer}
@@ -169,3 +165,10 @@ html[data-memory-editing=true]{overflow:hidden}
 .empty-day-dialog #entry-panel{padding:0;margin:0}
 .empty-day-dialog .photo-note:empty{display:none}
 @media(max-width:359px){.empty-day-head{padding:16px}.empty-day-body{padding:16px}.empty-day-head h2{font-size:20px}.empty-day-dialog .photo-empty .photo-glyph{display:none}}
+
+/* App screens stay at their layout scale; only the photograph has local zoom. */
+#app-shell,#signin-panel,dialog{touch-action:pan-x pan-y}
+.photo-lightbox{overflow:hidden;overscroll-behavior:contain}
+.photo-lightbox>img{touch-action:none;user-select:none;-webkit-user-drag:none;transform-origin:center}
+.photo-lightbox>img[data-zoomed=true]{cursor:grab;will-change:transform}
+.lightbox-close,.lightbox-actions{z-index:1}

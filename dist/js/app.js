@@ -14,7 +14,6 @@ import {createEmptyDayEditor} from './empty-day-ui.js';
 import {createDayStrip} from './strip-ui.js';
 import {createPhotoRenderer} from './entry-ui.js';
 import {installDialogs,reveal,confirmAction,reducedMotion} from './motion-ui.js';
-import {installElasticScroll} from './elastic-scroll.js';
 import {applyAuthGate} from './auth-ui.js';
 import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js';
 const $=s=>document.querySelector(s);
@@ -36,13 +35,12 @@ const error=err=>toast(readableError(err));
 function readableError(err){const code=err.code||'';if(code.includes('unauthorized-domain'))return 'Add snowsences.github.io to Firebase Authentication’s authorized domains.';if(code.includes('operation-not-allowed'))return 'Enable the Google sign-in provider in Firebase Authentication.';if(code.includes('permission-denied'))return 'Firebase access was denied. Publish the supplied Firestore rules.';if(code.includes('popup-blocked'))return 'Allow the Google sign-in popup, then try again.';if(code.includes('popup-closed'))return 'Sign-in closed. Your journal is still here.';return err.message||'Something went wrong. Please try again.';}
 function savedLabel(message){if(message)$('#connection-status').textContent=message;}
 installDialogs(document);
-const elasticScroll=installElasticScroll(document,{isAllowed:()=>Boolean(user)});
 const prompts=createPromptEditor(document,{onChange:change,onError:error});
 const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,onSelect:openDay,onBrowse:date=>{if(tab==='past'&&!memoryEditor.date){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'&&!memoryEditor.date});
 const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';},photoPresentationKey);
 const memoryEditor=createEmptyDayEditor(document,{canOpen:date=>Boolean(user)&&tab==='past'&&validDay(date)&&date<=today()&&!filled(entry(date)),renderEntry,
   commit:()=>prompts.commit(),waitForSave:()=>localWrites,resize:()=>prompts.resize(),displayDate,onError:error,
-  onOpen:()=>{elasticScroll.cancel();memories.setActive(false);},
+  onOpen:()=>{memories.setActive(false);},
   onClose:date=>{if(user){refreshProgress(date);memories.setActive(tab==='past');}else memories.setActive(false);}});
 const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-section'),getEntries:()=>entries,getPhotoURL:photoURL,getPhotoFilter:photoFilter,getPhotoIdentity:photoIdentity,
   getAccent:date=>resolveHeader(manifest,{date,themeMonth:Number(localStorage.getItem('tristana-theme'))||undefined}).theme.colors.accent,displayDate,
@@ -181,7 +179,7 @@ async function runSync(){
 }
 async function checkBackend(){try{backend=await cloud.backendStatus();$('#connection-status').textContent=backend.photos?'Firebase and photo backend connected.':'Firebase connected. Configure Cloudinary secrets in the Worker.';$('#reminder-status').textContent=backend.reminders?(settings.reminderDeviceId===deviceId?'Enabled on this phone at '+(settings.reminderTime||'21:00')+'.':'Ready to enable on this phone.'):'Reminder backend needs its VAPID and Firebase service-account secrets.';}catch(err){backend=null;$('#connection-status').textContent='Firebase connected; the Worker still needs deployment.';$('#reminder-status').textContent='Phone reminders need the Worker setup first.';}}
 async function onUser(account,message){
-  elasticScroll.cancel();
+
   for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();memories.reset();memoryDate=null;navigationId++;clearTimeout(artisticTimer);artisticPreviewGeneration++;$('#artistic-preview').removeAttribute('src');$('#artistic-preview-frame').hidden=true;try{artisticPrefs=artisticPreference(account?JSON.parse(localStorage.getItem('tristana-artistic-'+account.uid)||'{}'):{});}catch{artisticPrefs=artisticPreference();}artisticControls();
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
@@ -227,7 +225,7 @@ $('#signin').onclick=()=>cloud.signIn().catch(error);
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
   if(memoryEditor.date)await $('#empty-day-dialog').close();
-  elasticScroll.cancel();const target=b.dataset.tab,request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
+  const target=b.dataset.tab,request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
   tabScroll[tab]=window.scrollY;const changed=tab!==target;tab=target;if(tab==='today'){selectedDate=today();yearView=false;}if(tab==='past'){selectedDate=memoryDate=memoryDate||memories.latest()||today();yearView=false;}render({recenterDay:tab==='today'});
   window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});
 };

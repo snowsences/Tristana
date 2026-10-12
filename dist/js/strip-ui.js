@@ -1,6 +1,6 @@
 import {shiftDay,filled,status} from './core.js';
 export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoURL,getPhotoFilter=()=> 'none',onSelect,onBrowse,getIsBrowsing=()=>false}) {
-  const doc=element.ownerDocument,win=doc.defaultView;let selected,first,last,scrollFrame,observer,browseTimer,centering=false,userBrowsing=false;const tiles=new Map();
+  const doc=element.ownerDocument,win=doc.defaultView;let selected,first,last,observer,browseTimer,centering=false,userBrowsing=false,pointerHeld=false;const tiles=new Map();
   const observe=win.IntersectionObserver?new win.IntersectionObserver(changes=>{for(const item of changes)if(item.isIntersecting)loadPhoto(item.target);},{root:element,rootMargin:'0px 160px'}):null;
   function loadPhoto(button){const photo=getEntry(button.dataset.date).photo;if(!photo||button._loaded===photo.localId)return;button._loaded=photo.localId;const identity=photo.localId;
     getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!button.isConnected||getEntry(button.dataset.date).photo?.localId!==identity)return;let img=button.querySelector('img');if(!img){img=doc.createElement('img');img.alt='';img.decoding='async';button.querySelector('.tile-image').append(img);}img.style.filter=getPhotoFilter(button.dataset.date);img.src=url;}).catch(()=>{button._loaded=null;});
@@ -24,18 +24,25 @@ export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoUR
   }
   function trim(side){while(tiles.size>91){const button=side==='start'?element.firstElementChild:element.lastElementChild;const anchor=element.children[1],left=anchor?.getBoundingClientRect().left;tiles.delete(button.dataset.date);observe?.unobserve(button);button.remove();if(side==='start'&&anchor)element.scrollLeft+=anchor.getBoundingClientRect().left-left;}first=element.firstElementChild?.dataset.date;last=element.lastElementChild?.dataset.date;}
   function browse(){if(!onBrowse||!getIsBrowsing()||centering||!userBrowsing||!element.clientWidth)return;const middle=element.scrollLeft+element.clientWidth/2;let closest,distance=Infinity;for(const button of tiles.values()){if(button.disabled)continue;const delta=Math.abs(button.offsetLeft+button.clientWidth/2-middle);if(delta<distance){closest=button;distance=delta;}}if(closest&&closest.dataset.date!==selected)onBrowse(closest.dataset.date);}
-  element.addEventListener('pointerdown',()=>{centering=false;userBrowsing=true;clearTimeout(browseTimer);},{passive:true});
+  // Let the browser finish touch momentum before changing the scroll offset or
+  // synchronizing the vertical list. Prepending during a fling cancels its glide.
+  const nativeScrollEnd='onscrollend' in element;
+  function settled(){if(pointerHeld)return;clearTimeout(browseTimer);extend();browse();}
+  function scheduleSettlement(){if(!nativeScrollEnd){clearTimeout(browseTimer);browseTimer=setTimeout(settled,220);}}
+  element.addEventListener('pointerdown',()=>{pointerHeld=true;centering=false;userBrowsing=true;clearTimeout(browseTimer);},{passive:true});
+  const release=()=>{pointerHeld=false;scheduleSettlement();};
+  win.addEventListener('pointerup',release,{passive:true});win.addEventListener('pointercancel',release,{passive:true});
   element.addEventListener('wheel',event=>{if(Math.abs(event.deltaX)>Math.abs(event.deltaY)||event.shiftKey){centering=false;userBrowsing=true;}},{passive:true});
-  element.addEventListener('scroll',()=>{win.cancelAnimationFrame(scrollFrame);scrollFrame=win.requestAnimationFrame(extend);if(userBrowsing&&!centering){clearTimeout(browseTimer);browseTimer=setTimeout(browse,120);}},{passive:true});
-  element.addEventListener('scrollend',browse);
+  element.addEventListener('scroll',scheduleSettlement,{passive:true});
+  element.addEventListener('scrollend',settled);
 
   return {
     render(date,{recenter=false,animate=false,keepScroll=false}={}){const prior=selected;selected=date;
-      if(!first||((prior!==date||recenter)&&(date<first||date>last))){observe?.disconnect();tiles.clear();element.replaceChildren();first=shiftDay(date,-14);last=shiftDay(date,7);fill(first,last);recenter=true;}
+      if(!first||((prior!==date||recenter)&&(date<first||date>last))){observe?.disconnect();tiles.clear();element.replaceChildren();first=shiftDay(date,-70);last=shiftDay(date,7);fill(first,last);recenter=true;}
       for(const button of tiles.values())update(button);
       if(!keepScroll&&(recenter||prior!==date))win.requestAnimationFrame(()=>{center(animate&&!win.matchMedia?.('(prefers-reduced-motion: reduce)').matches?'smooth':'auto');for(const button of tiles.values())update(button);});
     },
     update(dates){for(const date of dates||tiles.keys()){const button=tiles.get(date);if(button)update(button);}},
-    reset(){clearTimeout(browseTimer);centering=false;userBrowsing=false;observe?.disconnect();tiles.clear();element.replaceChildren();first=last=selected=null;},
+    reset(){clearTimeout(browseTimer);centering=false;userBrowsing=false;pointerHeld=false;observe?.disconnect();tiles.clear();element.replaceChildren();first=last=selected=null;},
   };
 }

@@ -127,3 +127,7 @@ body[data-theme=orchard]{--prompt-fill:#472b0f21}
 
 /* Artwork stays pinned while the heading and journal content scroll. */
 .hero>img{position:fixed;inset:0 max(0px,calc((100vw - 680px)/2)) auto auto;width:min(120vw,816px);height:min(80vw,544px);clip-path:inset(0 0 0 16.666667%)}
+
+.hero[data-page=settings]>img{position:absolute;inset:0 0 auto auto;width:120%;height:120%;clip-path:none}
+#journal-view[data-view=memories] .day-section{background:transparent}
+#journal-view[data-view=memories] .day-strip .tile-image{border-radius:25px 25px 0 0}

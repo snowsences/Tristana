@@ -17,3 +17,6 @@ test('any number of scenes works, including one and more drawings than days',()=
  for(const count of [1,2,10,40]){const theme={month:10,id:'test',scenes:Array.from({length:count},(_,i)=>({id:String(i)}))},m={themes:[theme]},order=monthlySceneOrder(theme,'2026-10-01');assert.equal(new Set(ids(order)).size,count);for(let day=1;day<=31;day++)assert.equal(resolveHeader(m,{date:`2026-10-${String(day).padStart(2,'0')}`}).scene.id,order[(day-1)%count].id);}
  assert.throws(()=>monthlySceneOrder({id:'empty',scenes:[]},'2026-10-01'),/no scenes/);assert.throws(()=>resolveHeader(manifest,{date:'2026-02-29'}),/Invalid/);
 });
+test('expanded November and December include every addition once before repeating',()=>{
+ for(const [month,count,length] of [[11,11,30],[12,12,31]]){const theme=manifest.themes.find(t=>t.month===month);assert.equal(theme.scenes.length,count);const selections=Array.from({length},(_,i)=>resolveHeader(manifest,{date:`2026-${month}-${String(i+1).padStart(2,'0')}`}).scene.id);assert.equal(new Set(selections.slice(0,count)).size,count);assert.deepEqual(new Set(selections.slice(0,count)),new Set(ids(theme.scenes)));for(let i=count;i<length;i++)assert.equal(selections[i],selections[i%count]);}
+});

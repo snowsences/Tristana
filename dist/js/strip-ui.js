@@ -1,4 +1,4 @@
-import {shiftDay,filled,status} from './core.js';
+import {shiftDay,filled,status} from './core.js?v=69';
 export function createDayStrip({element,getEntry,getToday,displayDate,getPhotoURL,getPhotoIdentity=photo=>photo?.localId,onSelect,onBrowse,getIsBrowsing=()=>false}) {
   const doc=element.ownerDocument,win=doc.defaultView;let selected,first,last,observer,browseTimer,centering=false,userBrowsing=false,pointerHeld=false,touchHeld=false,dragged=false,startX=0,startY=0,startScroll=0,centerFrame;const tiles=new Map();
   const observe=win.IntersectionObserver?new win.IntersectionObserver(changes=>{for(const item of changes)if(item.isIntersecting)loadPhoto(item.target);},{root:element,rootMargin:'0px 160px'}):null;

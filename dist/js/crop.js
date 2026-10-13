@@ -1,5 +1,5 @@
-import {cropBounds,cropSource} from './core.js';
-import {scaledPhoto,restoredCrop} from './image-utils.js';
+import {cropBounds,cropSource} from './core.js?v=69';
+import {scaledPhoto,restoredCrop} from './image-utils.js?v=69';
 export function createCropper(onSave,onError) {
   const dialog=document.querySelector('#crop-dialog'),frame=document.querySelector('#crop-frame'),image=document.querySelector('#crop-image'),slider=document.querySelector('#crop-zoom');
   let source,date,oldPhoto,url,width,height,x=0,y=0,zoom=1;const pointers=new Map();let lastDistance;

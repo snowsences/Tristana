@@ -1,5 +1,5 @@
-import {CONFIG} from './config.js';
-import {reconcile} from './core.js';
+import {CONFIG} from './config.js?v=69';
+import {reconcile} from './core.js?v=69';
 let sdk,auth,db;
 export async function initialize(onUser) {
   const [appAPI,authAPI,storeAPI]=await Promise.all([

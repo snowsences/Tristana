@@ -196,3 +196,17 @@ h1,.hero h1,.hero[data-page=past] h1{letter-spacing:-1.6px}
 /* Paint the system status-bar safe area when the app runs edge-to-edge. */
 body::before{content:'';position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#000;z-index:1000;pointer-events:none}
 .app-shell{padding-top:env(safe-area-inset-top,0px)}
+
+/* Keep the outer corners rounded at the viewport, including the fixed tab bar. */
+html,body{background:#000}
+.signin-panel{background:#f1eee8}
+.app-shell{border-radius:4px}
+body::after{
+  content:'';position:fixed;top:env(safe-area-inset-top,0px);bottom:0;left:50%;transform:translateX(-50%);width:min(100%,680px);z-index:1001;pointer-events:none;
+  background:
+    radial-gradient(circle at 100% 100%,transparent 3.5px,#000 4px) top left,
+    radial-gradient(circle at 0 100%,transparent 3.5px,#000 4px) top right,
+    radial-gradient(circle at 100% 0,transparent 3.5px,#000 4px) bottom left,
+    radial-gradient(circle at 0 0,transparent 3.5px,#000 4px) bottom right;
+  background-size:4px 4px;background-repeat:no-repeat;
+}

@@ -138,7 +138,7 @@ body[data-theme=orchard]{--prompt-fill:#472b0f21}
 /* Artwork stays pinned while the heading and journal content scroll. */
 .hero>img{position:fixed;inset:0 max(0px,calc((100vw - 680px)/2)) auto auto;width:min(120vw,816px);height:min(75vw,544px);clip-path:inset(0 0 0 16.666667%)}
 
-.hero[data-page=settings]>img{position:absolute;inset:0 0 auto auto;width:120%;height:120%;clip-path:none}
+.hero[data-page=settings]>img{position:absolute;inset:0 0 auto auto;width:120%;height:min(75vw,544px);clip-path:none}
 #journal-view[data-view=memories] .day-section{background:transparent}
 #journal-view[data-view=memories] .day-strip .tile-image{border-radius:14px 14px 2px 2px}
 
@@ -188,8 +188,8 @@ h1,.hero h1,.hero[data-page=past] h1{letter-spacing:-1.6px}
   #entry-panel .prompt-body textarea{font-size:15px}
 }
 
-/* Paint the system status-bar safe area when the app runs edge-to-edge. */
-body::before{content:'';position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:#000;z-index:1000;pointer-events:none}
+/* Paint both system-bar safe areas when the browser draws edge-to-edge. */
+body::before{content:'';position:fixed;inset:0;background:linear-gradient(#000,#000) top/100% env(safe-area-inset-top,0px) no-repeat,linear-gradient(#000,#000) bottom/100% env(safe-area-inset-bottom,0px) no-repeat;z-index:1000;pointer-events:none}
 .app-shell{padding-top:env(safe-area-inset-top,0px)}
 
 /* Keep the outer corners rounded at the viewport, including the fixed tab bar. */

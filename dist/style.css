@@ -67,7 +67,6 @@ dialog[open]::backdrop{animation:backdrop-in 180ms ease-out}
 dialog::backdrop{opacity:1;transition:opacity 140ms ease}
 dialog.is-closing::backdrop{animation:none;opacity:0}
 
-.photo-grade-definitions{position:absolute;width:0;height:0;overflow:hidden;pointer-events:none}
 
 /* Allow native edge elasticity while keeping pull-to-refresh disabled. */
 html,body{overscroll-behavior-y:contain}
@@ -151,11 +150,6 @@ body[data-theme=orchard]{--prompt-fill:#472b0f21}
 .page-decoration:before{content:"";position:absolute;inset:0;background-image:var(--decoration-src);background-size:100% auto;background-position:center bottom;background-repeat:no-repeat;opacity:.38}
 body[data-theme=tide-oregon] .journal-content,body[data-theme=tide-oregon] .memories-content{background-image:none}
 .app-shell{padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px) + 20px)}
-.artistic-settings input[type=range]{display:block;width:100%;accent-color:var(--accent);margin:0}
-.artistic-preview-frame{position:relative;max-width:300px;margin:20px auto 0;aspect-ratio:1;border-radius:16px 32px 16px 8px;overflow:hidden;background:var(--wash)}
-.artistic-preview-frame img{display:block;width:100%;height:100%;object-fit:cover}
-.artistic-preview-frame span{position:absolute;inset:auto 12px 12px;padding:6px 10px;font-size:12px;background:color-mix(in srgb,var(--bg) 92%,transparent);border-radius:6px;text-align:center}
-.artistic-preview-frame span:empty{display:none}
 
 .page-decoration[data-ready=true]{opacity:1}
 @supports not ((mask-image:linear-gradient(#000,#000)) or (-webkit-mask-image:linear-gradient(#000,#000))){.page-decoration{display:none}}

@@ -1,5 +1,5 @@
 import {filled,validDay} from './core.js';
-export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoFilter=()=> 'none',getPhotoIdentity=photo=>photo?.localId,getAccent=()=> '',displayDate,onDayChange,onPhoto,onCreate,canCreate=()=>true}) {
+export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoIdentity=photo=>photo?.localId,getAccent=()=> '',displayDate,onDayChange,onPhoto,onCreate,canCreate=()=>true}) {
   const doc=element.ownerDocument,win=doc.defaultView,records=new Map(),requestedEmpty=new Set();
   let active=false,selected=null,limit=60,frame,settleTimer,programmatic=false,rendering=false;
   const empty=doc.createElement('p');empty.className='memories-empty';empty.textContent='Your days will appear here.';element.append(empty);
@@ -11,7 +11,7 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
   function scrollList(top,behavior='auto'){if(typeof element.scrollTo==='function')element.scrollTo({top,behavior});else{element.scrollTop=top;element.dispatchEvent(new win.Event('scroll'));}}
   function loadPhoto(record){const photo=getEntry(record.date).photo,identity=getPhotoIdentity(photo);if(!active||!photo||record.loaded===identity)return;record.loaded=identity;
     getPhotoURL(photo,'thumbnail').then(url=>{if(!url||!record.node.isConnected||record.loaded!==identity||getPhotoIdentity(getEntry(record.date).photo)!==identity)return;
-      const image=doc.createElement('img');image.alt='';image.decoding='async';image.style.filter=getPhotoFilter(record.date);image.src=url;record.image?.remove();record.image=image;record.photo.append(image);
+      const image=doc.createElement('img');image.alt='';image.decoding='async';image.src=url;record.image?.remove();record.image=image;record.photo.append(image);
     }).catch(()=>{if(record.loaded===identity)record.loaded=null;});
   }
   function update(record){const entry=getEntry(record.date);record.good.hidden=!entry.good?.trim();record.learned.hidden=!entry.learned?.trim();
@@ -22,7 +22,6 @@ export function createMemories({element,daySection,getEntries,getPhotoURL,getPho
     record.node.setAttribute('aria-label',displayDate(record.date,{weekday:'long',month:'long',day:'numeric',year:'numeric'})+(editable?', add an entry':''));
     const accent=getAccent(record.date);if(accent)record.node.style.setProperty('--memory-accent',accent);
     if(record.identity!==getPhotoIdentity(entry.photo)){record.identity=getPhotoIdentity(entry.photo);record.loaded=null;record.image?.remove();record.image=null;}
-    if(record.image)record.image.style.filter=getPhotoFilter(record.date);
     if(record.visible)loadPhoto(record);
   }
   function make(date){const node=doc.createElement('article');node.className='memory-card';node.dataset.date=date;node.setAttribute('aria-label',displayDate(date,{weekday:'long',month:'long',day:'numeric',year:'numeric'}));

@@ -1,6 +1,6 @@
 import {cropBounds,cropSource} from './core.js';
 import {scaledPhoto,restoredCrop} from './image-utils.js';
-export function createCropper(onSave,onError,{photoFilter=()=> 'none'}={}) {
+export function createCropper(onSave,onError) {
   const dialog=document.querySelector('#crop-dialog'),frame=document.querySelector('#crop-frame'),image=document.querySelector('#crop-image'),slider=document.querySelector('#crop-zoom');
   let source,date,oldPhoto,url,width,height,x=0,y=0,zoom=1;const pointers=new Map();let lastDistance;
   const render=()=>{
@@ -10,7 +10,7 @@ export function createCropper(onSave,onError,{photoFilter=()=> 'none'}={}) {
   async function open(blob,entryDate,previous) {
     if(blob.size>20*1024*1024) throw new Error('Choose a photo smaller than 20 MB.');
     source=blob;date=entryDate;oldPhoto=previous;zoom=1;x=0;y=0;slider.value='1';width=0;
-    if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(blob);image.style.filter=photoFilter(entryDate);image.src=url;
+    if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(blob);image.src=url;
     await image.decode();width=image.naturalWidth;height=image.naturalHeight;
     if(!width||!height)throw new Error('This photo format could not be opened. Try a JPEG or PNG.');
     dialog.showModal();if(previous?.crop){const restored=restoredCrop(previous.crop,width,height,frame.clientWidth);({x,y,zoom}=restored);slider.value=zoom;}render();

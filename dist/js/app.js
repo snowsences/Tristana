@@ -1,19 +1,21 @@
-import {CONFIG} from './config.js?v=69';
-import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=69';
-import {resolveHeader} from './themes.js?v=69';
-import * as store from './storage.js?v=69';
-import * as cloud from './cloud.js?v=69';
-import {createCropper} from './crop.js?v=69';
-import {createUpdatePrompt} from './update-ui.js?v=69';
-import {thumbnailPhoto} from './image-utils.js?v=69';
-import {createPromptEditor} from './prompt-ui.js?v=69';
-import {createMemories} from './memories-ui.js?v=69';
-import {createEmptyDayEditor} from './empty-day-ui.js?v=69';
-import {createDayStrip} from './strip-ui.js?v=69';
-import {createPhotoRenderer} from './entry-ui.js?v=69';
-import {installDialogs,reveal,confirmAction,reducedMotion} from './motion-ui.js?v=69';
-import {applyAuthGate} from './auth-ui.js?v=69';
-import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=69';
+import {CONFIG} from './config.js?v=71';
+import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=71';
+import {resolveHeader} from './themes.js?v=71';
+import * as store from './storage.js?v=71';
+import * as cloud from './cloud.js?v=71';
+import {createCropper} from './crop.js?v=71';
+import {createUpdatePrompt} from './update-ui.js?v=71';
+import {thumbnailPhoto} from './image-utils.js?v=71';
+import {createPromptEditor} from './prompt-ui.js?v=71';
+import {createMemories} from './memories-ui.js?v=71';
+import {createEmptyDayEditor} from './empty-day-ui.js?v=71';
+import {createDayStrip} from './strip-ui.js?v=71';
+import {createPhotoRenderer} from './entry-ui.js?v=71';
+import {installDialogs,reveal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=71';
+import {applyAuthGate} from './auth-ui.js?v=71';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=71';
+import {createDateNavigator} from './date-nav.js?v=71';
+import {installKeyboardComfort} from './keyboard-ui.js?v=71';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -30,6 +32,7 @@ function readableError(err){const code=err.code||'';if(code.includes('unauthoriz
 function savedLabel(message){if(message)$('#connection-status').textContent=message;}
 installDialogs(document);
 const prompts=createPromptEditor(document,{onChange:change,onError:error});
+const keyboard=installKeyboardComfort(document);
 const dayStrip=createDayStrip({element:$('#day-strip'),getEntry:entry,getToday:today,displayDate,getPhotoURL:photoURL,onSelect:openDay,onBrowse:date=>{if(tab==='past'&&!memoryEditor.date){selectMemoryDay(date,{keepScroll:true});memories.scrollTo(date);}},getIsBrowsing:()=>tab==='past'&&!memoryEditor.date});
 const photoRenderer=createPhotoRenderer($('#entry-photo'),photoURL,()=>{$('#photo-note').textContent='Photo backup needs a connection. Your entry is saved.';});
 const memoryEditor=createEmptyDayEditor(document,{canOpen:date=>Boolean(user)&&tab==='past'&&validDay(date)&&date<=today()&&!filled(entry(date)),renderEntry,
@@ -40,6 +43,9 @@ const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-s
   getAccent:date=>resolveHeader(manifest,{date,themeMonth:Number(localStorage.getItem('tristana-theme'))||undefined}).theme.colors.accent,displayDate,
   onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto,onCreate:date=>memoryEditor.open(date),canCreate:date=>date<=today()});
 function selectMemoryDay(date,{keepScroll=false}={}){if(!user||memoryEditor.date||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
+const dateNavigator=createDateNavigator({document,getEntries:()=>entries,getToday:today,getSelected:()=>selectedDate,getOwner:()=>user?.uid,getPhotoURL:photoURL,displayDate,onError:error,
+  onSelect:date=>{if(!user)return;prompts.commit();tabScroll[tab]=window.scrollY;tab='past';selectedDate=memoryDate=date;dayTouched=true;render();window.scrollTo({top:0,behavior:'auto'});selectMemoryDay(date);memories.scrollTo(date);}});
+$('#open-time').onclick=()=>{if(user&&!memoryEditor.date)dateNavigator.open();};
 async function openMemoryPhoto(date,origin){const uid=user?.uid,photo=entry(date).photo;if(!uid||!photo)return;try{const url=await photoURL(photo,'source');if(user?.uid!==uid||tab!=='past'||entry(date).photo?.localId!==photo.localId||!url)return;await lightbox.open({date,photo,url,origin,readOnly:true});}catch(err){error(err);}}
 function snapshot(value){return structuredClone(value);}
 function persist(e){const copy=snapshot(e);copy.key=user.uid+':'+e.date;localWrites=localWrites.catch(()=>{}).then(()=>store.put('entries',copy));return localWrites;}
@@ -68,6 +74,7 @@ function applyTheme(){
   next.decode().then(apply).catch(()=>{if(serial===artGeneration){artIdentity='';error(new Error('The illustration could not load. Your entry is still available.'));}});
 }
 function header(){
+  $('#open-time').hidden=tab==='settings'||!user;
   $('#hero').dataset.page=tab;applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':tab==='past'?'Tristana':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
   $('#page-title').innerHTML=tab==='past'?'Memories.':tab==='settings'?'Make it yours.':'A little<br>of today.';
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
@@ -87,7 +94,7 @@ async function photoURL(photo,kind='square'){
   })();photoPromises.set(key,task);try{return await task;}finally{if(photoPromises.get(key)===task)photoPromises.delete(key);}
 }
 function renderStrip(options){if(tab==='past')dayStrip.render(selectedDate,options);}
-function refreshProgress(date=selectedDate){dayStrip.update([date]);memories.update([date]);}
+function refreshProgress(date=selectedDate){dayStrip.update([date]);memories.update([date]);dateNavigator.refresh();}
 function renderEntry(date=memoryEditor.date||selectedDate){
   const e=entry(date);prompts.setEntry(e);applyPhotoPresence(document,Boolean(e.photo));$('#photo-note').textContent=e.photo?.pending?'Photo saved on device · waiting for cloud backup':'';
   photoRenderer.render(e.photo,date);savedLabel(e._dirty.length?'Saved on device · waiting to sync':e.revision?'Saved & synced':'');
@@ -146,7 +153,7 @@ async function runSync(){
       for(const field of e._dirty){clean._base[field]=data[field];if(same(latest[field],e[field]))clean._dirty=clean._dirty.filter(f=>f!==field);}
       entries.set(date,clean);await persist(clean);updatedDates.push(date);
     }
-    $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');if(tab==='today'||memoryEditor.date)renderEntry();dayStrip.update(updatedDates);memories.update(updatedDates);
+    $('#connection-status').textContent=[...entries.values()].some(e=>e.photo?.pending)?'Text entries synced. Photo backups are waiting for the Worker.':'Firebase connected. Your entries are synced.';if(entry()._dirty.length===0)savedLabel('Saved & synced');if(tab==='today'||memoryEditor.date)renderEntry();dayStrip.update(updatedDates);memories.update(updatedDates);dateNavigator.refresh();
   }catch(err){savedLabel('Saved on device · backup pending');$('#connection-status').textContent=readableError(err);if(entry().photo?.pending)$('#photo-note').textContent='Saved on device. Photo backup is waiting for the Worker setup.';}
   finally{syncing=false;if(user&&[...entries.values()].some(e=>e._dirty.length)&&navigator.onLine){clearTimeout(syncTimer);syncTimer=setTimeout(runSync,15000);}}
 }
@@ -156,10 +163,10 @@ async function onUser(account,message){
   for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();memories.reset();memoryDate=null;navigationId++;
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
-  if(!user){tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
+  if(!user){dateNavigator.reset();tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
-  if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();await store.persistStorage();
-    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(memoryEditor.date||selectedDate)&&(tab==='today'||memoryEditor.date))renderEntry();memories.update(changed);if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
+  if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();store.persistStorage().catch(()=>{});
+    unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(memoryEditor.date||selectedDate)&&(tab==='today'||memoryEditor.date))renderEntry();memories.update(changed);dateNavigator.refresh();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
     checkBackend();queueSync();
     try{const restored=JSON.parse(sessionStorage.getItem('tristana-after-update')||'null');sessionStorage.removeItem('tristana-after-update');if(restored?.uid===user.uid&&['today','past','settings'].includes(restored.tab)&&validDay(restored.date)){tab=restored.tab;selectedDate=tab==='today'?today():restored.date;yearView=false;if(tab==='past')memoryDate=selectedDate;selectedYear=Number(restored.year)||Number(selectedDate.slice(0,4));dayTouched=true;$('#photos-view').setAttribute('aria-pressed',String(!yearView));$('#year-view').setAttribute('aria-pressed',String(yearView));requestAnimationFrame(()=>window.scrollTo({top:Math.max(0,Number(restored.scroll)||0),behavior:'auto'}));}}catch{}
   }
@@ -170,7 +177,7 @@ async function closeNotifications(date){if(date!==today()||!filled(entry(date)))
 const cropper=createCropper(async({source,square,date,oldPhoto,crop})=>{
   if(!user)return;const localId=crypto.randomUUID();const thumbnail=await thumbnailPhoto(square);await store.put('photos',{key:user.uid+':'+localId,source,square,thumbnail});
   await change('photo',{localId,crop,pending:true,source:null,square:null},date);if((memoryEditor.date||selectedDate)===date){renderEntry();renderStrip();}
-},error);
+},error,{onPlaced:async({date,from})=>{if(!user||(memoryEditor.date||selectedDate)!==date)return;await photoRenderer.ready;const preview=$('#photo-preview'),image=$('#entry-photo');if(preview.hidden||!image.src)return;preview.scrollIntoView({block:'nearest',behavior:'auto'});await animatePhoto(image,from,image.getBoundingClientRect());}});
 let photoCapture;
 for(const type of ['camera','library']){$('#'+type+'-button').onclick=()=>{photoCapture={date:memoryEditor.date||selectedDate,uid:user?.uid};$('#'+type+'-input').click();};$('#'+type+'-input').onchange=async e=>{const file=e.target.files[0],capture=photoCapture;photoCapture=null;if(file&&capture?.uid===user?.uid&&user)try{await cropper.open(file,capture.date,entry(capture.date).photo);}catch(err){error(err);}e.target.value='';};}
 const lightbox=bindPhotoLightbox(document,{
@@ -194,7 +201,8 @@ const lightbox=bindPhotoLightbox(document,{
   },
   onError:error
 });
-$('#signin').onclick=()=>cloud.signIn().catch(error);
+const signIn=()=>cloud.signIn().catch(err=>{error(err);throw err;});
+if(window.tristanaStartup)window.tristanaStartup.setSignIn(signIn);else $('#signin').onclick=()=>signIn().catch(()=>{});
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
   if(memoryEditor.date)await $('#empty-day-dialog').close();
@@ -233,7 +241,8 @@ if('serviceWorker'in navigator){
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')updater.check();});window.addEventListener('online',()=>updater.check());
   setInterval(()=>{if(document.visibilityState==='visible'&&navigator.onLine)updater.check();},5*60*1000);
 }
-render();cloud.initialize(onUser).then(()=>{$('#signin').disabled=false;}).catch(err=>{$('#signin').disabled=false;$('#connection-status').textContent='Connect to the internet for your first sign-in.';error(err);});
+render();
+export async function start(){await cloud.initialize(onUser);$('#signin').disabled=false;}
 
 $('#close-month').onclick=()=>$('#month-dialog').close('cancel');
 for(const id of ['month-dialog','confirm-dialog'])$('#'+id).addEventListener('click',event=>{const dialog=$('#'+id),rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close('cancel');});

@@ -1,4 +1,4 @@
-import {LIMIT,count} from './core.js?v=69';
+import {LIMIT,count} from './core.js?v=71';
 export function limitedEdit(value,start,end,text) {
   const prefix=value.slice(0,start),suffix=value.slice(end);
   const available=Math.max(0,LIMIT-count(prefix)-count(suffix));
@@ -18,7 +18,11 @@ export function createPromptEditor(document,{onChange,onError}) {
   const win=document.defaultView;const fields=['good','learned'];
   const live=document.createElement('span');live.className='sr-only';live.setAttribute('role','status');document.body.append(live);
   let announceTimer;
-  const resize=input=>{input.style.height='auto';if(input.clientWidth)input.style.height=input.scrollHeight+'px';};
+  const resize=input=>{if(!input.clientWidth)return;const scroller=input.closest('dialog[open]'),scroll=scroller?.scrollTop,windowScroll=win.scrollY;
+    input.style.height='auto';const height=input.scrollHeight;input.style.height=height+'px';
+    // Measurement must not collapse the field and move the surrounding scroll area.
+    if(scroller&&scroller.scrollTop!==scroll)scroller.scrollTop=scroll;if(win.scrollY!==windowScroll)win.scrollTo({top:windowScroll,behavior:'auto'});
+  };
   function spill(input,text) {
     if(!text)return;
     if(!announceTimer){live.textContent='140 characters is the limit.';announceTimer=setTimeout(()=>{live.textContent='';announceTimer=null;},2500);}

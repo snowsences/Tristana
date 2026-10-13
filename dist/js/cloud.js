@@ -1,20 +1,25 @@
-import {CONFIG} from './config.js?v=69';
-import {reconcile} from './core.js?v=69';
-let sdk,auth,db;
-export async function initialize(onUser) {
+import {CONFIG} from './config.js?v=71';
+import {reconcile} from './core.js?v=71';
+let sdk,auth,db,initializing,stopAuth;
+export function initialize(onUser) {
+  if(initializing)return initializing;
+  const task=(async()=>{
   const [appAPI,authAPI,storeAPI]=await Promise.all([
     import('https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js'),
     import('https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js'),
     import('https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js')
   ]);
   sdk={...appAPI,...authAPI,...storeAPI};
-  const app=sdk.initializeApp(CONFIG.firebase);auth=sdk.getAuth(app);
-  await sdk.setPersistence(auth,sdk.browserLocalPersistence);
+  const app=sdk.getApps().length?sdk.getApp():sdk.initializeApp(CONFIG.firebase);
+  if(!auth){try{auth=sdk.initializeAuth(app,{persistence:[sdk.indexedDBLocalPersistence,sdk.browserLocalPersistence,sdk.browserSessionPersistence],popupRedirectResolver:sdk.browserPopupRedirectResolver});}catch(error){if(error.code!=='auth/already-initialized')throw error;auth=sdk.getAuth(app);}}
   db=sdk.getFirestore(app);
-  sdk.onAuthStateChanged(auth,async user=>{
-    if(user && (user.email?.toLowerCase()!==CONFIG.ownerEmail || !user.emailVerified)) {await sdk.signOut(auth);onUser(null,'This journal is only for '+CONFIG.ownerEmail);return;}
-    onUser(user);
+  stopAuth?.();
+  await new Promise((resolve,reject)=>{let first=true;
+    stopAuth=sdk.onAuthStateChanged(auth,user=>{
+      (async()=>{if(user&&(user.email?.toLowerCase()!==CONFIG.ownerEmail||!user.emailVerified)){await sdk.signOut(auth);await onUser(null,'This journal is only for '+CONFIG.ownerEmail);}else await onUser(user);})().then(()=>{if(first){first=false;resolve();}},error=>{if(first){first=false;reject(error);}else globalThis.window?.tristanaStartup?.initializationFailed(error);});
+    },error=>{if(first){first=false;reject(error);}else globalThis.window?.tristanaStartup?.initializationFailed(error);});
   });
+  })();initializing=task;task.then(()=>{initializing=null;},()=>{initializing=null;stopAuth?.();stopAuth=null;});return task;
 }
 export async function signIn() {
   if(!auth) throw new Error('Connect to the internet to sign in.');

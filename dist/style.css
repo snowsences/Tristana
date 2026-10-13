@@ -82,7 +82,8 @@ html:has(#journal-view[data-view=memories]),body:has(#journal-view[data-view=mem
 .app-shell:has(#journal-view[data-view=memories]){height:100dvh;min-height:0;overflow:hidden;padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px))}
 .app-shell:has(#journal-view[data-view=memories]) #main{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden}
 .hero[data-page=past]{flex:0 0 auto}
-#journal-view[data-view=memories]{display:flex;flex:1 1 auto;flex-direction:column;min-height:0;overflow:hidden}
+/* Allow the day row’s eight-pixel header overlap; the detail list clips itself. */
+#journal-view[data-view=memories]{display:flex;flex:1 1 auto;flex-direction:column;min-height:0;overflow:visible}
 #journal-view[data-view=memories] .day-section{position:relative;z-index:4;flex:0 0 auto;margin-top:-14px;margin-bottom:0;background:var(--bg);border-bottom:1px solid var(--line)}
 .memories-content{flex:1 1 auto;min-height:0;padding:0 24px 34px;overflow-x:hidden;overflow-y:auto;overflow-anchor:none;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
 body[data-update-ready=true] .app-shell:has(#journal-view[data-view=memories]){padding-bottom:calc(var(--nav-height) + env(safe-area-inset-bottom,0px) + 88px)}
@@ -204,3 +205,43 @@ body::after{
     radial-gradient(circle at 0 0,transparent 3.5px,#000 4px) bottom right;
   background-size:4px 4px;background-repeat:no-repeat;
 }
+
+/* Browsing time is a quiet sheet above the current journal. */
+.header-date-target{position:absolute;inset:0;z-index:2;width:100%;height:100%;border-radius:0}
+.header-date-target:focus-visible{outline-offset:-6px}
+.signin-content{width:100%;max-width:330px;text-align:center}
+.signin-content .primary{min-height:48px}
+#startup-status{font-size:13px;line-height:1.5;opacity:.7;margin-top:16px}
+.time-dialog{max-width:620px;width:calc(100% - 24px);max-height:calc(100dvh - 32px - env(safe-area-inset-top,0px));padding:0;border:0;border-radius:16px;overflow:auto;overscroll-behavior:contain}
+.time-head{position:sticky;top:0;z-index:2;padding:20px 20px 12px;background:var(--bg);border-bottom:1px solid var(--line)}
+.time-year-controls{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:12px}
+.time-year-controls select{width:120px;font-family:var(--serif);font-size:24px;text-align:center;border:0;background:transparent;padding:4px;margin:0}
+.time-year-controls button{width:44px;height:44px;font-size:24px}
+.time-view-controls{display:flex;justify-content:center;gap:6px;margin-top:12px}
+.time-view-controls button{min-height:40px;padding:8px 20px;border-radius:24px;font-size:13px}
+.time-view-controls button[aria-pressed=true]{background:var(--wash);box-shadow:inset 0 0 0 1px var(--line)}
+.time-month-control{margin:0!important}.time-month-control select{margin-top:12px}
+.time-legend{display:flex;justify-content:center;gap:20px;font-size:11px;opacity:.7;margin-top:12px}
+.time-legend span{display:flex;align-items:center;gap:6px}.time-legend i{width:7px;height:7px;border-radius:2px;background:var(--accent)}
+.time-legend .time-missing{background:color-mix(in srgb,var(--ink) 9%,var(--bg))}
+.time-content{padding:20px}
+.time-months{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 12px}
+.time-month-card{padding:0;min-width:0;text-align:left}.time-month-name{display:block;font-family:var(--serif);font-size:17px;margin-top:8px}
+.time-mosaic{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;aspect-ratio:1;border-radius:10px;overflow:hidden}
+.time-mosaic>span{background:var(--wash);overflow:hidden}.time-mosaic img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity 150ms ease}.time-mosaic img.is-ready{opacity:1}
+.time-year{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 16px}
+.time-calendar h3{font-family:var(--serif);font-size:18px;font-weight:400;margin:0 0 10px}
+.time-weekdays,.time-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.time-weekdays{font-size:9px;opacity:.55;margin-bottom:6px}.time-day{aspect-ratio:1;border-radius:3px;padding:0;min-width:0;font-size:14px;min-height:36px}
+.time-day.partial,.time-day.done{background:var(--accent);color:var(--bg)}.time-day[aria-current=date]{outline:2px solid var(--ink);outline-offset:2px}
+.time-days-mini .time-day{font-size:0;min-height:0}.time-month .time-day{min-height:44px}
+@media(max-width:480px){.time-year{grid-template-columns:repeat(2,minmax(0,1fr))}.time-months{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}}
+
+/* The keyboard owns the bottom of the viewport while writing. */
+html[data-keyboard-open=true] .bottom-nav{visibility:hidden;pointer-events:none}
+html[data-keyboard-open=true] .app-shell:not(:has(#journal-view[data-view=memories])){padding-bottom:calc(24px + var(--keyboard-occlusion,0px))}
+html[data-keyboard-open=true] .empty-day-dialog{max-height:calc(var(--editor-viewport-height,100dvh) - 24px);margin-top:12px;margin-bottom:12px}
+.prompt-body textarea{scroll-margin-block:24px;overflow-anchor:none}
+.crop-grid{opacity:0;transition:opacity 160ms ease}
+.crop-frame[data-adjusting=true] .crop-grid{opacity:.5}
+.crop-frame>img{will-change:transform}

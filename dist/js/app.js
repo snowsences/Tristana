@@ -68,7 +68,7 @@ function applyTheme(){
     document.documentElement.style.setProperty('--prompt-learned-art',`url("./${theme.promptArt.learned}")`);
     document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
     const previous=art.src&&art.animate&&!reducedMotion()?art.cloneNode(false):null;art.parentElement.querySelectorAll('.hero-previous').forEach(img=>img.remove());if(previous){previous.removeAttribute('id');previous.classList.add('hero-previous');previous.removeAttribute('fetchpriority');art.parentElement.append(previous);}
-    art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());$('meta[name=theme-color]').content=scene.background||theme.colors.background;
+    art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());
     for(const day of [-1,1]){const adjacent=resolveHeader(manifest,{date:shiftDay(selectedDate,day),themeMonth:override?Number(override):undefined}).scene;if(preloadedArt.has(adjacent.src))continue;preloadedArt.add(adjacent.src);const preload=new Image();preload.srcset=`${adjacent.smallSrc} 600w, ${adjacent.src} 1200w`;preload.sizes=next.sizes;preload.src=adjacent.src;}
   };
   next.decode().then(apply).catch(()=>{if(serial===artGeneration){artIdentity='';error(new Error('The illustration could not load. Your entry is still available.'));}});

@@ -1,40 +1,80 @@
-// Deterministic painterly abstraction. It never reads or writes journal data.
-export const ARTISTIC_VERSION='paint-v1';
+// Local, deterministic coarse-to-fine brush rendering, inspired by Hertzmann's
+// multi-size painterly rendering. Originals and their alpha are never changed.
+export const ARTISTIC_VERSION='paint-v2-brush';
 export const artisticStrength=value=>Math.max(0,Math.min(100,Math.round((Number(value)||0)/5)*5));
 export function* paintSteps(source,width,height,strength=55) {
-  const amount=artisticStrength(strength)/100;
-  const result=new Uint8ClampedArray(source);
-  if(!amount){return result;}
-  const stride=width+1,size=stride*(height+1),red=new Float64Array(size),green=new Float64Array(size),blue=new Float64Array(size),square=new Float64Array(size);
+  const amount=artisticStrength(strength)/100,result=new Uint8ClampedArray(source);
+  if(!amount||!width||!height)return result;
+  const stride=width+1,size=stride*(height+1),channels=Array.from({length:3},()=>new Float64Array(size));
   for(let y=0;y<height;y++){
-    let r=0,g=0,b=0,l2=0;
+    const row=[0,0,0];
     for(let x=0;x<width;x++){
-      const pixel=(y*width+x)*4,l=.2126*source[pixel]+.7152*source[pixel+1]+.0722*source[pixel+2],i=(y+1)*stride+x+1;
-      r+=source[pixel];g+=source[pixel+1];b+=source[pixel+2];l2+=l*l;
-      red[i]=red[i-stride]+r;green[i]=green[i-stride]+g;blue[i]=blue[i-stride]+b;square[i]=square[i-stride]+l2;
+      const pixel=(y*width+x)*4,i=(y+1)*stride+x+1;
+      for(let c=0;c<3;c++){row[c]+=source[pixel+c];channels[c][i]=channels[c][i-stride]+row[c];}
     }
     if(y%32===31)yield;
   }
-  const radius=Math.max(2,Math.round(Math.min(width,height)/150*(.7+amount*.65)));
-  const sum=(a,x0,y0,x1,y1)=>a[(y1+1)*stride+x1+1]-a[y0*stride+x1+1]-a[(y1+1)*stride+x0]+a[y0*stride+x0];
+  const random=(x,y,salt=0)=>{
+    let seed=Math.imul(x+1,374761393)^Math.imul(y+1,668265263)^Math.imul(salt+1,1442695041);
+    seed=Math.imul(seed^(seed>>>13),1274126177);return ((seed^(seed>>>16))>>>0)/4294967295;
+  };
+  const scale=Math.max(.3,Math.min(width,height)/500),base=scale*(.65+amount*.8);
+  const painting=new Float32Array(source.length),reference=new Float32Array(source.length);
+  const luminance=(x,y)=>{const p=(Math.max(0,Math.min(height-1,y))*width+Math.max(0,Math.min(width-1,x)))*4;return reference[p]*.2126+reference[p+1]*.7152+reference[p+2]*.0722;};
+  // Build a smooth reference at each brush size. Smaller brushes are placed only
+  // where the existing painting misses meaningful color/detail in that reference.
+  for(const [layer,factor] of [10,5,2].entries()){
+    const radius=Math.max(1.1,base*factor),blur=Math.max(1,Math.round(radius*.65));
+    for(let y=0;y<height;y++){
+      for(let x=0;x<width;x++){
+        const x0=Math.max(0,x-blur),x1=Math.min(width-1,x+blur),y0=Math.max(0,y-blur),y1=Math.min(height-1,y+blur),n=(x1-x0+1)*(y1-y0+1),p=(y*width+x)*4;
+        for(let c=0;c<3;c++){const a=channels[c];reference[p+c]=(a[(y1+1)*stride+x1+1]-a[y0*stride+x1+1]-a[(y1+1)*stride+x0]+a[y0*stride+x0])/n;if(layer===0)painting[p+c]=reference[p+c];}
+      }
+      if(y%32===31)yield;
+    }
+    const spacing=Math.max(2,Math.round(radius*.95)),strokes=[];
+    for(let y=0;y<height;y+=spacing){
+      for(let x=0;x<width;x+=spacing){
+        const cx=Math.min(width-1,x+Math.floor(random(x,y,layer)*spacing)),cy=Math.min(height-1,y+Math.floor(random(y,x,layer+9)*spacing));
+        let best=-1,bx=cx,by=cy;
+        // Select a high-error point within the cell, rather than recreating a grid.
+        for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+          const sx=Math.max(0,Math.min(width-1,cx+dx*Math.floor(spacing/3))),sy=Math.max(0,Math.min(height-1,cy+dy*Math.floor(spacing/3))),p=(sy*width+sx)*4;
+          const error=(Math.abs(reference[p]-painting[p])+Math.abs(reference[p+1]-painting[p+1])+Math.abs(reference[p+2]-painting[p+2]))/3;
+          if(error>best){best=error;bx=sx;by=sy;}
+        }
+        if(layer===0||best>7+amount*12)strokes.push({x:bx,y:by,order:random(cx,cy,layer+21)});
+      }
+      if(y%(spacing*16)===0)yield;
+    }
+    strokes.sort((a,b)=>a.order-b.order);
+    for(let index=0;index<strokes.length;index++){
+      const {x,y}=strokes[index],p=(y*width+x)*4,step=Math.max(1,Math.round(radius*.5));
+      const gx=luminance(x+step,y)-luminance(x-step,y),gy=luminance(x,y+step)-luminance(x,y-step);
+      const angle=Math.hypot(gx,gy)>4?Math.atan2(gy,gx)+Math.PI/2:random(x,y,41)*Math.PI;
+      const cos=Math.cos(angle),sin=Math.sin(angle),long=radius*(1.55+random(x,y,17)*.6),short=radius*.7,extent=Math.ceil(long);
+      const tint=(random(x,y,31)-.5)*3;
+      for(let yy=Math.max(0,y-extent);yy<=Math.min(height-1,y+extent);yy++)for(let xx=Math.max(0,x-extent);xx<=Math.min(width-1,x+extent);xx++){
+        const dx=xx-x,dy=yy-y,u=(dx*cos+dy*sin)/long,v=(-dx*sin+dy*cos)/short,d=u*u+v*v;
+        if(d>=1)continue;
+        const q=(yy*width+xx)*4;
+        // Avoid drawing across strong color boundaries (faces, silhouettes, etc.).
+        const difference=(Math.abs(reference[q]-reference[p])+Math.abs(reference[q+1]-reference[p+1])+Math.abs(reference[q+2]-reference[p+2]))/3;
+        const edge=Math.max(0,1-difference/55);
+        const bristle=1-.07*Math.cos(v*24+random(x,y,71)*6.28);
+        const opacity=Math.min(1,(1-d)*5)*.88*edge*bristle;
+        for(let c=0;c<3;c++)painting[q+c]+=(reference[p+c]+tint-painting[q+c])*opacity;
+      }
+      if(index%128===127)yield;
+    }
+  }
+  // Strength primarily controls brush size; only low strengths crossfade. No photographic
+  // microtexture is reintroduced. Fine paper tooth stays below visible noise.
+  const mix=Math.min(1,amount/.35);
   for(let y=0;y<height;y++){
     for(let x=0;x<width;x++){
-      const left=Math.max(0,x-radius),right=Math.min(width-1,x+radius),top=Math.max(0,y-radius),bottom=Math.min(height-1,y+radius),pixel=(y*width+x)*4;
-      let rr=0,gg=0,bb=0,total=0;
-      // Softly weight the four local regions instead of abruptly selecting one.
-      // This avoids the block boundaries of a basic Kuwahara filter.
-      for(let quadrant=0;quadrant<4;quadrant++){
-        const x0=quadrant&1?x:left,x1=quadrant&1?right:x,y0=quadrant&2?y:top,y1=quadrant&2?bottom:y,n=(x1-x0+1)*(y1-y0+1);
-        const r=sum(red,x0,y0,x1,y1)/n,g=sum(green,x0,y0,x1,y1)/n,b=sum(blue,x0,y0,x1,y1)/n,l=.2126*r+.7152*g+.0722*b;
-        const variance=Math.max(0,sum(square,x0,y0,x1,y1)/n-l*l),weight=1/((1+variance/70)*(1+variance/70));
-        rr+=r*weight;gg+=g*weight;bb+=b*weight;total+=weight;
-      }
-      const mix=amount*.94;
-      let seed=Math.imul(x+1,374761393)^Math.imul(y+1,668265263);seed=Math.imul(seed^(seed>>>13),1274126177);seed^=seed>>>16;
-      const grain=((seed>>>0)/4294967295-.5)*2.2*amount;
-      result[pixel]=source[pixel]*(1-mix)+rr/total*mix+grain;
-      result[pixel+1]=source[pixel+1]*(1-mix)+gg/total*mix+grain;
-      result[pixel+2]=source[pixel+2]*(1-mix)+bb/total*mix+grain;
+      const p=(y*width+x)*4,tooth=(random(x,y,99)-.5)*1.2*amount;
+      for(let c=0;c<3;c++)result[p+c]=source[p+c]*(1-mix)+painting[p+c]*mix+tooth;
     }
     if(y%32===31)yield;
   }

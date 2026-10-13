@@ -1,10 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "title": "A Little of Today",
   "kind": "seasonal-header-artwork",
   "generationMethod": "built-in imagegen",
   "aspectRatio": "3:2",
-  "weekdayConvention": "Monday=0 ... Sunday=6",
   "sharedTabs": [
     "Today",
     "Past Days"
@@ -1513,6 +1512,108 @@
           "smallSha256": "e16589e2d2c70193e55c620ed2b72bec3a7306cfe488bcf9389e2c3b08fff3f5",
           "reviewStatus": "awaiting final user review",
           "background": "#fdf6eb"
+        },
+        {
+          "id": "bayon-storm-sun",
+          "title": "Bayon · storm and sunlight",
+          "description": "Bayon sandstone face towers under passing October storm clouds and warm shafts of sun, naturally green Cambodian foliage.",
+          "width": 1200,
+          "height": 800,
+          "smallWidth": 600,
+          "smallHeight": 400,
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf7eb",
+          "src": "assets/10-orchard/oct-08-bayon.webp",
+          "bytes": 215296,
+          "sha256": "8d40684020ff83a084bd3f0f35aa31093e8ca74715e381c589f06e2c22ddef4e",
+          "smallSrc": "assets/10-orchard/oct-08-bayon-small.webp",
+          "smallBytes": 66250,
+          "smallSha256": "5a8afe3971db35b84df1c7fbd6fa9e26bafff0e57a608375154f4ef5aea13645"
+        },
+        {
+          "id": "canadian-rockies-larches",
+          "title": "Canadian Rockies · golden larches",
+          "description": "Golden needle-bearing alpine larches with snow-dusted Canadian Rockies peaks and warm autumn light.",
+          "width": 1200,
+          "height": 800,
+          "smallWidth": 600,
+          "smallHeight": 400,
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf8ed",
+          "src": "assets/10-orchard/oct-09-larches.webp",
+          "bytes": 213714,
+          "sha256": "fc7340e246645cba6e7c738108704dfe3ad20dff675b7e60ae7127bca4bc3d02",
+          "smallSrc": "assets/10-orchard/oct-09-larches-small.webp",
+          "smallBytes": 64366,
+          "smallSha256": "983c7ef1bb0657ee0963a2567ca641489e31ed182e2436e98185335560e2eecb"
+        },
+        {
+          "id": "glacier-autumn-slopes",
+          "title": "Glacier · orange-red hillsides",
+          "description": "Orange-red autumn brush across Glacier National Park mountainsides, gray peaks and a cool blue lake.",
+          "width": 1200,
+          "height": 800,
+          "smallWidth": 600,
+          "smallHeight": 400,
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf5e9",
+          "src": "assets/10-orchard/oct-10-glacier.webp",
+          "bytes": 171306,
+          "sha256": "800054c9e261feb255be29c37cec6a74d34e81b93980922860a9d5dbcedb2f0c",
+          "smallSrc": "assets/10-orchard/oct-10-glacier-small.webp",
+          "smallBytes": 52500,
+          "smallSha256": "106114710a1d966664c90868cb4cf715fb2ff41338d0f21e4bbc5e310d0ecff8"
+        },
+        {
+          "id": "geese-sunset-v",
+          "title": "Migrating geese · sunset sky",
+          "description": "Looking up into a copper and violet sunset sky; similarly sized Canada geese in a left-facing V with one leader and two trailing arms, based on a real formation photograph.",
+          "width": 1200,
+          "height": 800,
+          "smallWidth": 600,
+          "smallHeight": 400,
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf6eb",
+          "src": "assets/10-orchard/oct-11-geese.webp",
+          "bytes": 122712,
+          "sha256": "44be83f4695af02c6b09bd36e70f7e7e4a8b784ad1076359bc48e436c7823336",
+          "smallSrc": "assets/10-orchard/oct-11-geese-small.webp",
+          "smallBytes": 39014,
+          "smallSha256": "ad71aeec03327f16e31fedc0c99a61cf9d596ff67acef5937026cf25617a8aec"
+        },
+        {
+          "id": "alaska-autumn-moose",
+          "title": "Alaska · moose in autumn brush",
+          "description": "A bull moose in dense golden and crimson Alaskan brush under warm low autumn sun.",
+          "width": 1200,
+          "height": 800,
+          "smallWidth": 600,
+          "smallHeight": 400,
+          "reviewStatus": "awaiting final user review",
+          "background": "#fef8ed",
+          "src": "assets/10-orchard/oct-12-moose.webp",
+          "bytes": 182588,
+          "sha256": "31b99dcb80de39499d3e249014b8ac0120123953626d46405458728f57397b3a",
+          "smallSrc": "assets/10-orchard/oct-12-moose-small.webp",
+          "smallBytes": 54972,
+          "smallSha256": "42c6bcb067a51cc1641a99cb03fade4b2b2fccc0972699eebee1dc8234a19e9b"
+        },
+        {
+          "id": "lamar-autumn-bison",
+          "title": "Lamar Valley · autumn bison",
+          "description": "American bison grazing in golden Lamar Valley grasses near a meandering river, autumn willow and distant mountain ridges.",
+          "width": 1200,
+          "height": 800,
+          "smallWidth": 600,
+          "smallHeight": 400,
+          "reviewStatus": "awaiting final user review",
+          "background": "#fdf7eb",
+          "src": "assets/10-orchard/oct-13-lamar-bison.webp",
+          "bytes": 181840,
+          "sha256": "2e60300dd1a5f8cc46eb05bb1262d1b3ce803be1a8c678d871062328cbaca704",
+          "smallSrc": "assets/10-orchard/oct-13-lamar-bison-small.webp",
+          "smallBytes": 54668,
+          "smallSha256": "b2a95d0a276c38b29886743ee5135092636fd634608f6e15bae1afdf676dd911"
         }
       ],
       "promptArt": {
@@ -1821,5 +1922,10 @@
       },
       "decorationSrc": "assets/decorations/dec-alpine-winter-sketch.webp"
     }
-  ]
+  ],
+  "sceneSelection": {
+    "mode": "monthly-shuffle-loop",
+    "seed": "Calendar year-month and theme ID",
+    "repeat": "One shuffled permutation repeats unchanged through the month."
+  }
 }

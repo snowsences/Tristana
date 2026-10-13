@@ -10,16 +10,25 @@ export function parseISODate(value) {
   if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m-1 || dt.getUTCDate() !== d) throw new RangeError('Invalid calendar date.');
   return {month:m, weekday:(dt.getUTCDay()+6)%7}; // Monday=0 ... Sunday=6
 }
-export function resolveHeader(manifest, {date=localISODate(), themeMonth, weekday}={}) {
+/** A portable seeded shuffle keeps each month's loop identical across devices. */
+export function monthlySceneOrder(theme,date) {
+  parseISODate(date);
+  if(!theme.scenes?.length)throw new Error('Theme has no scenes.');
+  const order=[...theme.scenes].sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  let seed=2166136261;
+  for(const char of `tristana-monthly-v1:${date.slice(0,7)}:${theme.id}`)seed=Math.imul(seed^char.charCodeAt(0),16777619)>>>0;
+  const random=()=>{seed=(seed+0x6D2B79F5)>>>0;let value=seed;value=Math.imul(value^(value>>>15),value|1);value^=value+Math.imul(value^(value>>>7),value|61);return ((value^(value>>>14))>>>0)/4294967296;};
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  return order;
+}
+export function resolveHeader(manifest, {date=localISODate(), themeMonth}={}) {
   const parsed=parseISODate(date);
   const month=themeMonth ?? parsed.month;
-  const day=weekday ?? parsed.weekday;
   if(!Number.isInteger(month)||month<1||month>12) throw new RangeError('Theme month must be 1 through 12.');
-  if(!Number.isInteger(day)||day<0||day>6) throw new RangeError('Weekday must be Monday=0 through Sunday=6.');
   const theme=manifest.themes.find(t=>t.month===month);
   if(!theme) throw new Error('Theme is missing from manifest.');
-  const scene=theme.scenes.find(s=>s.weekday===day);
-  if(!scene) throw new Error('Weekday is missing from theme.');
+  const order=monthlySceneOrder(theme,date);
+  const scene=order[(Number(date.slice(8,10))-1)%order.length];
   return {date,theme,scene};
 }
 /** Pass the same resolved selection to BOTH Today and Past Days. */

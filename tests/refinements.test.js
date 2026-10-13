@@ -30,7 +30,7 @@ test('pinch preserves the photo point under moving fingers, including zoom limit
 test('startup exposes loading and a working retry, retaining direct sign-in activation',async()=>{
  const f=fixture();let calls=0,signins=0;f.win.console.error=()=>{};
  f.win.mockImport=async()=>({start:async()=>{calls++;if(calls===1)throw new Error('Offline');f.win.tristanaStartup.setSignIn(()=>{signins++;return Promise.resolve();});}});
- const source=readFileSync(new URL('../dist/js/boot.js',import.meta.url),'utf8').replace("import('./app.js?v=71')",'window.mockImport()');
+ const source=readFileSync(new URL('../dist/js/boot.js',import.meta.url),'utf8').replace("import('./app.js?v=74')",'window.mockImport()');
  try{f.win.eval(source);assert.equal(f.d.getElementById('signin').disabled,true);assert.match(f.d.getElementById('startup-status').textContent,/Restoring/);await tick();assert.equal(f.d.getElementById('signin-label').textContent,'Try again');f.d.getElementById('signin').click();await tick();assert.equal(calls,2);assert.equal(f.d.getElementById('signin-label').textContent,'Log in with Google');f.d.getElementById('signin').click();assert.equal(signins,1);assert.equal(f.d.getElementById('signin-label').textContent,'Signing in…');await tick();assert.equal(f.d.getElementById('signin').disabled,false);f.win.tristanaStartup.initializationFailed(new Error('Local recovery failed'));assert.equal(f.d.getElementById('signin-label').textContent,'Try again');f.d.getElementById('signin').click();await tick();assert.equal(calls,3);assert.equal(f.d.getElementById('signin-label').textContent,'Log in with Google');
  }finally{f.win.close();}
 });

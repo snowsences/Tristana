@@ -16,3 +16,5 @@ August now includes 31 glacier-lake scenes. Its 19 additions retain the detailed
 September now includes 30 alpine-autumn scenes. Its 23 additions preserve the detailed painting style and smooth warm-ivory fades. Each full and small export has its actual blank-corner tone measured and recorded for the page background. Total audited scenes: 314.
 
 October now includes 31 distinct orchard/autumn scenes. Its 14 additions retain the detailed painting style, curved terrain-following fades, natural foliage, and warm ivory paper tones. Apple orchards contain apples only. Actual blank-corner background colors were measured on both full and small exports. All 17 previous October scenes remain unchanged. Total audited scenes: 328.
+
+November now includes 30 distinct Rainwood scenes. Its 19 additions retain the detailed natural painting style, broad curved fades, subdued wet-forest greens and blue-gray light, and pale neutral/green-ivory paper tones. Actual blank-corner background colors were measured on both full and small exports. All 11 previous November scenes remain unchanged. Total audited scenes: 347.

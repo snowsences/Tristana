@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 328,
+  "sceneCount": 347,
   "themes": [
     {
       "month": 1,
@@ -1960,6 +1960,120 @@
           "id": "redwoods-silver-fog",
           "src": "assets/11-rainwood/nov-11-redwoods-fog.webp",
           "background": "#f7f7f1",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "quinault-mossy-maple-creek",
+          "src": "assets/11-rainwood/quinault-mossy-maple-creek.webp",
+          "background": "#f7f7ef",
+          "maximumCornerDelta": 1.38
+        },
+        {
+          "id": "hoh-river-misty-gravel-bar",
+          "src": "assets/11-rainwood/hoh-river-misty-gravel-bar.webp",
+          "background": "#f7f8f2",
+          "maximumCornerDelta": 1.2
+        },
+        {
+          "id": "sol-duc-falls-november",
+          "src": "assets/11-rainwood/sol-duc-falls-november.webp",
+          "background": "#f9f8f2",
+          "maximumCornerDelta": 0.61
+        },
+        {
+          "id": "wahclella-falls-rainwood",
+          "src": "assets/11-rainwood/wahclella-falls-rainwood.webp",
+          "background": "#f8f8f1",
+          "maximumCornerDelta": 1.5
+        },
+        {
+          "id": "latourell-basalt-fall",
+          "src": "assets/11-rainwood/latourell-basalt-fall.webp",
+          "background": "#f8f8f1",
+          "maximumCornerDelta": 0.93
+        },
+        {
+          "id": "panther-creek-moss-cascades",
+          "src": "assets/11-rainwood/panther-creek-moss-cascades.webp",
+          "background": "#f8f8f0",
+          "maximumCornerDelta": 0.78
+        },
+        {
+          "id": "eagle-creek-rainy-canyon",
+          "src": "assets/11-rainwood/eagle-creek-rainy-canyon.webp",
+          "background": "#f8f8f0",
+          "maximumCornerDelta": 0.76
+        },
+        {
+          "id": "ramona-falls-forest-veil",
+          "src": "assets/11-rainwood/ramona-falls-forest-veil.webp",
+          "background": "#f8f8f2",
+          "maximumCornerDelta": 1.52
+        },
+        {
+          "id": "redwood-fern-canyon",
+          "src": "assets/11-rainwood/redwood-fern-canyon.webp",
+          "background": "#f9f8f2",
+          "maximumCornerDelta": 0.6
+        },
+        {
+          "id": "redwood-roots-forest-floor",
+          "src": "assets/11-rainwood/redwood-roots-forest-floor.webp",
+          "background": "#f8f7f0",
+          "maximumCornerDelta": 0.98
+        },
+        {
+          "id": "redwood-creek-silver-rain",
+          "src": "assets/11-rainwood/redwood-creek-silver-rain.webp",
+          "background": "#f8f8f0",
+          "maximumCornerDelta": 1.3
+        },
+        {
+          "id": "cape-perpetua-storm-forest",
+          "src": "assets/11-rainwood/cape-perpetua-storm-forest.webp",
+          "background": "#f8f8f0",
+          "maximumCornerDelta": 0.57
+        },
+        {
+          "id": "olympic-coast-driftwood",
+          "src": "assets/11-rainwood/olympic-coast-driftwood.webp",
+          "background": "#f7f7ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "lake-crescent-november-mist",
+          "src": "assets/11-rainwood/lake-crescent-november-mist.webp",
+          "background": "#f7f6f1",
+          "maximumCornerDelta": 1.53
+        },
+        {
+          "id": "trillium-lake-fresh-snow-hood",
+          "src": "assets/11-rainwood/trillium-lake-fresh-snow-hood.webp",
+          "background": "#faf9f3",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "rainier-clearing-storm-window",
+          "src": "assets/11-rainwood/rainier-clearing-storm-window.webp",
+          "background": "#f8f9f3",
+          "maximumCornerDelta": 0.13
+        },
+        {
+          "id": "columbia-gorge-mossy-oak-view",
+          "src": "assets/11-rainwood/columbia-gorge-mossy-oak-view.webp",
+          "background": "#f7f7ef",
+          "maximumCornerDelta": 1.04
+        },
+        {
+          "id": "rainwood-fern-nurse-log",
+          "src": "assets/11-rainwood/rainwood-fern-nurse-log.webp",
+          "background": "#f7f7f0",
+          "maximumCornerDelta": 0.68
+        },
+        {
+          "id": "roosevelt-elk-rainforest-clearing",
+          "src": "assets/11-rainwood/roosevelt-elk-rainforest-clearing.webp",
+          "background": "#f8f8f3",
           "maximumCornerDelta": 1.0
         }
       ]

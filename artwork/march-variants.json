@@ -1,0 +1,115 @@
+{
+  "month": "March",
+  "method": "built-in imagegen",
+  "sharedPrompt": "Use case: illustration-story, style-reference generation. One single landscape Tristana header image, 1536x1024, aspect ratio3:2. The supplied image is a STYLE AND COMPOSITION reference only. Replace its subject/geography and lighting completely with PRIMARY REQUEST, retaining finely detailed refined watercolor/gouache realism, soft paper texture, natural credible landscape forms, rich clear painted details. Scene lives on right60-70%; far left30% stays nearly blank very pale ice-blue #f3faff; a sweeping irregular curved watercolor fade inward from left and bottom15-20% softly dissolves into same pale color. Dark night imagery stays on right only. Winter Iceland with snow and ice. No text, numbers, labels, app UI, collage, border, people, vehicles, fantasy effects, fabricated structures, or green summer foliage. Each image a unique location/viewpoint/lighting arrangement, never a simple color filter. PRIMARY REQUEST: ",
+  "variants": [
+    {
+      "id": "ice-cave-violet-dawn",
+      "title": "Ice cave · violet dawn",
+      "request": "A newly composed Icelandic glacial ice chamber viewed from a low position, intricate scalloped cobalt and cyan ceiling overhead on the right; broad opening frames snow-covered volcanic ground and a distant ocean at violet predawn. Thin peach band near horizon, no sun disk yet, cold blue light reveals transparent facets and pale snow. Distinct arch shape and small frozen pool, not the reference sunrise.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "ice-cave-midday",
+      "title": "Ice cave · clear winter noon",
+      "request": "A tall narrow Icelandic blue-ice passage opens onto brilliantly snow-covered hills beneath a clear winter blue sky. Crisp low midday sunlight refracts through translucent cyan ice along the opening, white frost seams and tiny bubbles in deep blue ceiling. Fresh angled perspective looking outward around a curving icy wall; no orange sunrise, people, or artificial illumination.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "ice-cave-moonlit-shore",
+      "title": "Ice cave · moonlit shore",
+      "request": "An Icelandic ice cave with a broad irregular low arch looks out to a snowy black volcanic shoreline under natural moonlight. One modest moon outside at upper-right, silver reflections on a dark still tidal pool, deep blue/cyan ice facets and frost, sparse stars outside only. Clearly nighttime, no aurora, daylight, flames or glowing fantasy crystals. Change the cave geometry and viewpoint substantially.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "ice-cave-snowfall",
+      "title": "Ice cave · falling snow",
+      "request": "An Icelandic blue glacial chamber at a snowy overcast daytime. Through a high irregular ice opening on the right, see softly falling snow over icy boulders and distant snowy ridges. Turquoise floor ice, intensely detailed cobalt roof with clear trapped bubbles, gray diffuse light, no sun or aurora. A different intimate branching chamber and near foreground ice ledge.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "aurora-emerald-snowfields",
+      "title": "Aurora · emerald snowfields",
+      "request": "An open snowy Icelandic mountain valley on a clear winter night. A long natural green and cyan aurora arcs diagonally over the right-hand sky, tiny stars, distant snowy volcanic ridges and smooth undisturbed snowdrifts with dark lava boulders at right. Faint green reflections on ice in a narrow frozen stream. No cave, trees, structures or daylight, no fantasy neon glow in the landscape.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "aurora-violet-lagoon",
+      "title": "Aurora · violet over the lagoon",
+      "request": "A wintry Icelandic glacial lagoon at night with low blue icebergs floating in dark still open water among snowy margins. Natural curtains of violet and pink aurora sweep above the distant glacier on the right; stars and subtle soft aurora reflection in water, glacier ice a believable cold blue. Low shoreline viewpoint, distinct iceberg silhouettes. No cave, people, boats or tropical colors.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "aurora-crimson-basalt",
+      "title": "Aurora · crimson above basalt",
+      "request": "A remote Icelandic snow-covered coast at nighttime with dark jagged basalt rocks and a distant snowy headland. Natural high-altitude red and magenta aurora drapes softly across a deep indigo starry sky, a slender green band near the horizon, silver foam on a cold deep blue sea. Airy physically believable atmosphere, no cave, trees, buildings or fiery lava.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "thermal-hills-lavender-dawn",
+      "title": "Thermal hills · lavender dawn",
+      "request": "Snow-covered Icelandic geothermal hills before sunrise. Many substantial natural white steam plumes curl from vents in rusty ochre earth among thick snowfields and volcanic ridges. Lavender and indigo shadows in snow, quiet rose-peach dawn clouds at upper-right, no sun disk. New rolling valley viewpoint, very wintery, no vegetation, infrastructure or people.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "thermal-hills-golden-cloudbreak",
+      "title": "Thermal hills · winter cloudbreak",
+      "request": "A snow-covered Icelandic geothermal hillside after a passing snow squall, broad shafts of low winter gold light illuminate heavy white steam against dark slate clouds. Ochre fumarole ground, thick snowy banks, winding mineral stream through the right-hand valley, distant volcanic ridge. Strong natural contrast, snow dominant, no lava, summer plants or buildings.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "gullfoss-frosty-blue-hour",
+      "title": "Gullfoss · frosty blue hour",
+      "request": "Gullfoss in Iceland at winter blue hour just after sunset, recognizable broad two-tier waterfall turns into the narrow canyon on the right. Thick snow and ice on banks and ledges, portions of waterfall remain flowing dark teal-white, billowing cold spray. Pale violet sky fading to indigo with residual pink near horizon, no rainbow in absence of direct sunshine. Fresh wider side viewpoint.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "gullfoss-moonlight",
+      "title": "Gullfoss · silver winter night",
+      "request": "Snowy partly frozen Gullfoss under a modest clear winter moon. Natural silvery moonlight catches enormous ice-covered ledges and white water plunging into the canyon; flowing river dark blue-teal, distant snowy plateau in deep cobalt. Fine suspended mist, stars sparse, no daylight or aurora. Distinct lower diagonal overlook showing both waterfall tiers and canyon bend.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "snow-horses-rose-sunrise",
+      "title": "Icelandic horses · rose sunrise",
+      "request": "Several distant Icelandic horses with shaggy winter coats on a snow-covered hillside in low rose sunrise light. Natural small animal scale, one chestnut and two dark horses standing separately near black volcanic stones, snowy volcanic ridges far behind, pale pink and lavender clouds. New hillside arrangement and view, no fences, people, saddle, buildings or green summer grass.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "snow-horses-gentle-snowfall",
+      "title": "Icelandic horses · quiet snowfall",
+      "request": "A few distant shaggy Icelandic horses partially veiled by soft active snowfall on a rolling white winter hillside. Muted chestnut and charcoal coats, horses naturally grazing where sparse tawny grass pokes through snow. Overcast blue-gray light, low snowy mountain ridges, distinct view with horses further right and spread apart. No dramatic close-up animals, trees, buildings or people.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "seljalandsfoss-frosty-morning",
+      "title": "Seljalandsfoss · frosty morning",
+      "request": "Seljalandsfoss waterfall seen from outside in Iceland on a crisp snowy winter morning. Narrow tall white cascade descends over an overhanging dark basalt cliff, icicles and thick snow cover cliff base and foreground; low pale golden light touches spray and snow edges. Pool visibly flowing and blue-green, winter sky clear icy blue. New side view from a snowy slope, no rainbow, people, path structures or warm-season grass.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "seljalandsfoss-overcast-snow",
+      "title": "Seljalandsfoss · snowy afternoon",
+      "request": "An intimate side view of Iceland's Seljalandsfoss during overcast active winter snowfall. The slender cascade drops beside a dark curved rock recess, long natural icicles and broad thick snowfields surround open blue-gray water. Soft diffuse light, slate clouds, a few weathered basalt rocks near the snowy foreground. Strongly distinct viewpoint from crimson-sunset original, no sun or autumn foliage.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "bruarfoss-low-winter-sun",
+      "title": "Brúarfoss · low winter sunlight",
+      "request": "Brúarfoss in Iceland, naturally brilliant cyan glacial water cascading through many channels in black volcanic rock under low golden winter sunshine. Thick snow caps rocks and banks, frost crystals and a few bare low twigs at far right. A closer downstream oblique viewpoint emphasizes the central blue channel; peach and pale blue winter sky, no trees in leaf or green summer moss.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "strokkur-blue-hour",
+      "title": "Strokkur · blue-hour eruption",
+      "request": "Strokkur geyser erupting naturally above a snowy Icelandic geothermal basin at blue hour before sunrise. Large white-blue water jet and heavy steam plume on the right against deep violet-gray sky, warm peach line low at the horizon, distant snowy hills. Snowy rust-colored ground around the open steaming turquoise pool, no buildings, people or artificial lights.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    },
+    {
+      "id": "strokkur-golden-sunset",
+      "title": "Strokkur · sunset steam",
+      "request": "A different tall erupting Strokkur geyser plume backlit by rich low golden sunset light in a snowy Icelandic geothermal landscape. White steam and water become delicate gold at the edges, cold indigo shadows over thick snow, ochre wet ground beside a rippling turquoise hot pool, dark far snowy ridges and pink-orange clouds. Lower and wider viewpoint than original, no people, buildings or summer vegetation.",
+      "sourceImage": "assets/03-boreal/mar-01-monday.webp"
+    }
+  ]
+}

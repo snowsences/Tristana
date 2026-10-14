@@ -6,7 +6,7 @@ A personal daily journal: something learned, something good, and one square phot
 
 ## App source
 
-`dist/` contains the complete PWA: journal UI, 12 monthly themes with 195 header scenes, a repeatable shuffled artwork loop for each month/year, 28 distinct February images plus an exclusive leap-day image, 31 distinct March images, local autosave, photo cropping, Firebase sign-in/sync, and the phone notification client.
+`dist/` contains the complete PWA: journal UI, 12 monthly themes with 217 header scenes, a repeatable shuffled artwork loop for each month/year, 28 distinct February images plus an exclusive leap-day image, 31 distinct March images, local autosave, photo cropping, Firebase sign-in/sync, and the phone notification client.
 
 Firebase rules and the reminder/photo backend are managed in the Firebase and Cloudflare consoles. Their earlier deployment copies remain available in Git history. No journal entries or backend secrets are stored here.
 

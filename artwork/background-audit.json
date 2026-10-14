@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 314,
+  "sceneCount": 328,
   "themes": [
     {
       "month": 1,
@@ -1805,6 +1805,90 @@
           "src": "assets/10-orchard/golden-larches-snow-peaks.webp",
           "background": "#fdf6eb",
           "maximumCornerDelta": 0.0
+        },
+        {
+          "id": "hood-river-orchard-sunset",
+          "src": "assets/10-orchard/hood-river-orchard-sunset.webp",
+          "background": "#fcf6eb",
+          "maximumCornerDelta": 0.72
+        },
+        {
+          "id": "hood-river-orchard-after-rain",
+          "src": "assets/10-orchard/hood-river-orchard-after-rain.webp",
+          "background": "#fdf6ed",
+          "maximumCornerDelta": 0.82
+        },
+        {
+          "id": "pumpkin-patch-blue-hour",
+          "src": "assets/10-orchard/pumpkin-patch-blue-hour.webp",
+          "background": "#fcf6eb",
+          "maximumCornerDelta": 1.06
+        },
+        {
+          "id": "pumpkins-barn-stormlight",
+          "src": "assets/10-orchard/pumpkins-barn-stormlight.webp",
+          "background": "#fdf7ec",
+          "maximumCornerDelta": 0.75
+        },
+        {
+          "id": "vermont-maple-covered-bridge",
+          "src": "assets/10-orchard/vermont-maple-covered-bridge.webp",
+          "background": "#fdf7ea",
+          "maximumCornerDelta": 0.72
+        },
+        {
+          "id": "maple-lane-rain-evening",
+          "src": "assets/10-orchard/maple-lane-rain-evening.webp",
+          "background": "#fdf5e8",
+          "maximumCornerDelta": 0.98
+        },
+        {
+          "id": "ridgefield-swans-autumn-dawn",
+          "src": "assets/10-orchard/ridgefield-swans-autumn-dawn.webp",
+          "background": "#fdf7eb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "ridgefield-ducks-copper-reeds",
+          "src": "assets/10-orchard/ridgefield-ducks-copper-reeds.webp",
+          "background": "#fcf7ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "plitvice-autumn-cascades",
+          "src": "assets/10-orchard/plitvice-autumn-cascades.webp",
+          "background": "#fdf8ed",
+          "maximumCornerDelta": 0.75
+        },
+        {
+          "id": "silver-falls-maple-autumn",
+          "src": "assets/10-orchard/silver-falls-maple-autumn.webp",
+          "background": "#fdf7ec",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "acadia-jordan-pond-autumn",
+          "src": "assets/10-orchard/acadia-jordan-pond-autumn.webp",
+          "background": "#fef8ec",
+          "maximumCornerDelta": 0.52
+        },
+        {
+          "id": "smokies-autumn-mist-ridges",
+          "src": "assets/10-orchard/smokies-autumn-mist-ridges.webp",
+          "background": "#fdf7ec",
+          "maximumCornerDelta": 1.07
+        },
+        {
+          "id": "shenandoah-autumn-road",
+          "src": "assets/10-orchard/shenandoah-autumn-road.webp",
+          "background": "#fdf7ec",
+          "maximumCornerDelta": 1.25
+        },
+        {
+          "id": "elk-golden-autumn-meadow",
+          "src": "assets/10-orchard/elk-golden-autumn-meadow.webp",
+          "background": "#fdf7ec",
+          "maximumCornerDelta": 1.0
         }
       ]
     },

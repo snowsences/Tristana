@@ -1,7 +1,7 @@
 {
   "generationMethod": "built-in imagegen",
   "nominalThemeBackground": "#faf8ef",
-  "sharedPrompt": "Use case: illustration-story. Create ONE new Tristana July seasonal journal header, 1536x1024, landscape 3:2. The provided image is a STYLE AND FADE REFERENCE ONLY: create a completely different scene described below, do not reproduce its composition or exact mountain. Match its refined finely detailed painted illustration: crisp observed botanical textures, delicately modeled rocks, restrained watercolor washes, believable natural depth and beautiful luminous light. Clearly a sophisticated painting, not a photograph. Preserve fine rendered detail as it gradually fades; NO abstract watercolor splotches, chunky dabs, paint splatters or blurry patches replacing detail. Main scene on right two-thirds; leftmost 25\u201335% mostly blank for journal text. Opaque background matched to JULY: pale warm-neutral ivory #FAF8EF, RGB250,248,239, subtle fine paper texture. No glaring pure-white or yellow-orange paper. A broad gently irregular CURVED/DIAGONAL fade sweeps from upper-left toward bottom-right, following landforms, and softly dissolves at bottom. Top and right scene edges fully illustrated to canvas edge; no border, frame, hard rectangular cutoffs or collage. Keep dimensional detail near lower right before final fade. July alpine summer: fresh green foliage and summer wildflowers; any snow only natural remnant high-elevation snowfields or glaciers, no winter terrain or autumn leaves. No text, typography, watermark, giant foreground people or crowds. One standalone image only. Scene: ",
+  "sharedPrompt": "Use case: illustration-story. Create ONE new Tristana July seasonal journal header, 1536x1024, landscape 3:2. The provided image is a STYLE AND FADE REFERENCE ONLY: create a completely different scene described below, do not reproduce its composition or exact mountain. Match its refined finely detailed painted illustration: crisp observed botanical textures, delicately modeled rocks, restrained watercolor washes, believable natural depth and beautiful luminous light. Clearly a sophisticated painting, not a photograph. Preserve fine rendered detail as it gradually fades; NO abstract watercolor splotches, chunky dabs, paint splatters or blurry patches replacing detail. Main scene on right two-thirds; leftmost 25–35% mostly blank for journal text. Opaque background matched to JULY: pale warm-neutral ivory #FAF8EF, RGB250,248,239, subtle fine paper texture. No glaring pure-white or yellow-orange paper. A broad gently irregular CURVED/DIAGONAL fade sweeps from upper-left toward bottom-right, following landforms, and softly dissolves at bottom. Top and right scene edges fully illustrated to canvas edge; no border, frame, hard rectangular cutoffs or collage. Keep dimensional detail near lower right before final fade. July alpine summer: fresh green foliage and summer wildflowers; any snow only natural remnant high-elevation snowfields or glaciers, no winter terrain or autumn leaves. No text, typography, watermark, giant foreground people or crowds. One standalone image only. Scene: ",
   "variants": [
     {
       "id": "tipsoo-lake-summer-reflections",
@@ -18,27 +18,6 @@
       "prompt": "An intimate summer meadow in Berkeley Park on Mount Rainier's north side: a clear narrow mountain creek winds through dense lavender lupines, red-magenta paintbrush and white valerian on the right; softly layered green ridges and rugged mountain slopes beyond, patchy morning clouds with gentle warm sunbeams. Low viewpoint emphasizes exquisitely observed wet stones, flowers and rippling water; no huge lake."
     },
     {
-      "id": "spray-park-beargrass-sunbreak",
-      "title": "Spray Park Beargrass Sunbreak",
-      "src": "assets/07-alpine-summer/spray-park-beargrass-sunbreak.webp",
-      "background": "#faf7ef",
-      "prompt": "A rolling meadow in Mount Rainier's Spray Park in summer: tall creamy-white beargrass flower heads interspersed with purple lupines and fresh green sedges in the right foreground, sparse dark subalpine firs, a partially cloud-wrapped Rainier massif in upper right background. Silver sunbreak just after rain, fine droplets on flowers, layered atmospheric clouds, natural rugged landscape."
-    },
-    {
-      "id": "sunrise-ridge-and-white-river-valley",
-      "title": "Sunrise Ridge And White River Valley",
-      "src": "assets/07-alpine-summer/sunrise-ridge-and-white-river-valley.webp",
-      "background": "#fbf8ef",
-      "prompt": "Mount Rainier National Park's Sunrise area on a bright July afternoon, from a ridge looking diagonally across a deep forested White River valley toward broad volcanic Rainier in the upper right. Gnarled subalpine trees and red paintbrush dot the rocky right foreground, sparkling clean blue sky, delicate glacier striations, spacious deep view. Different elevated viewpoint from Paradise, no roads or buildings."
-    },
-    {
-      "id": "tatoosh-peaks-in-evening-light",
-      "title": "Tatoosh Peaks In Evening Light",
-      "src": "assets/07-alpine-summer/tatoosh-peaks-in-evening-light.webp",
-      "background": "#faf7ed",
-      "prompt": "Summer view of the jagged Tatoosh Range from a flower-covered meadow: multiple rugged dark peaks along the upper right horizon rather than a single round volcano, pink heather, purple penstemon, white bistort and a few lupines around finely rendered rocks in foreground. Low rose-gold evening light strikes peak faces and flower edges, cool violet-blue valleys, thin lavender clouds, serene depth."
-    },
-    {
       "id": "maple-pass-heather-and-alpine-lake",
       "title": "Maple Pass Heather And Alpine Lake",
       "src": "assets/07-alpine-summer/maple-pass-heather-and-alpine-lake.webp",
@@ -53,32 +32,11 @@
       "prompt": "Mount Baker from Artist Point in midsummer, white glaciated volcanic summit at upper right beyond dark green firs and rugged exposed rocky ridges; foreground patches of purple lupine and magenta heather amongst gray stones, modest remnant snowbanks only far away on high slopes. Pale peach early morning light on glaciers, cool blue shadows, airy alpine atmosphere, believable Washington scale."
     },
     {
-      "id": "hurricane-ridge-lupine-slopes",
-      "title": "Hurricane Ridge Lupine Slopes",
-      "src": "assets/07-alpine-summer/hurricane-ridge-lupine-slopes.webp",
-      "background": "#fcf9ee",
-      "prompt": "Olympic Mountains from Hurricane Ridge in summer: a gently curving meadow slope filled with purple lupines, cream-white bistort and small meadow daisies at right, wind-shaped subalpine firs, distant jagged Olympic ridges and a deep blue forest valley. Beautiful late afternoon sun and drifting pearly cloud, small distant snowfields, warm flowers and cool mountain depth. No buildings, roads or visible crowds."
-    },
-    {
-      "id": "goat-rocks-summer-crest",
-      "title": "Goat Rocks Summer Crest",
-      "src": "assets/07-alpine-summer/goat-rocks-summer-crest.webp",
-      "background": "#fbf8f0",
-      "prompt": "A flower-covered ridge in Washington's Goat Rocks Wilderness in summer: angular volcanic crags and a sweeping crest run diagonally through upper right, dense red paintbrush, lavender lupines and white flowers around dark boulders in right foreground; layers of blue-gray forested mountains beyond. A clearing summer shower gives luminous clouds and a delicate sun shaft, no goats in this landscape scene."
-    },
-    {
       "id": "yankee-boy-basin-columbines",
       "title": "Yankee Boy Basin Columbines",
       "src": "assets/07-alpine-summer/yankee-boy-basin-columbines.webp",
       "background": "#faf7ee",
       "prompt": "Yankee Boy Basin in Colorado's San Juan Mountains in summer: exquisitely detailed blue-and-white Colorado columbines with long thin spurs fill a small right foreground patch, a shallow stream and gray volcanic rocks lead toward rugged brown-gray basin walls and dramatic jagged peaks on upper right. Fresh bright green meadow, clear crisp blue morning sky and thin clouds, natural small remnant high snowfields, no road or vehicles."
-    },
-    {
-      "id": "american-basin-summer-stream",
-      "title": "American Basin Summer Stream",
-      "src": "assets/07-alpine-summer/american-basin-summer-stream.webp",
-      "background": "#fbf9f0",
-      "prompt": "American Basin near Handies Peak in Colorado in summer: a narrow sparkling stream winds between purple lupines, blue columbines and low alpine wildflowers on the right, a rugged amphitheater of gray-brown peaks behind lush green basin slopes. Pearly light after a gentle rain, mist only around highest distant summits, tiny ripples and wet flower detail, no tropical vegetation or giant waterfall."
     },
     {
       "id": "maroon-bells-quiet-summer-lake",
@@ -100,20 +58,6 @@
       "src": "assets/07-alpine-summer/crested-butte-meadow-after-rain.webp",
       "background": "#faf7ec",
       "prompt": "A wide summer wildflower meadow near Crested Butte in Colorado after a passing shower: purple lupines, yellow sunflowers and golden arnica, red paintbrush, and occasional blue columbines on the right; green valley slopes and a rugged mountain silhouette farther back, faint wisps of mist over meadows. Low golden light beneath a dark lavender clearing sky, wet grass and delicate flowers sparkling, no cabins or roads."
-    },
-    {
-      "id": "alpine-columbines-in-morning-dew",
-      "title": "Alpine Columbines In Morning Dew",
-      "src": "assets/07-alpine-summer/alpine-columbines-in-morning-dew.webp",
-      "background": "#fbf7ed",
-      "prompt": "An intimate botanical alpine-summer view: a few prominent naturally proportioned blue-and-white Colorado columbines with delicate long spurs, purple penstemon and white meadow daisies growing around finely textured granite on right foreground. Minute morning dew and gentle dappled sunlight, distant rugged San Juan ridges rendered softly on upper right. Keep botanical detail beautiful and precise; foreground close study with mountain depth, no giant oversized blooms or flower bouquet."
-    },
-    {
-      "id": "marmot-among-alpine-rocks",
-      "title": "Marmot Among Alpine Rocks",
-      "src": "assets/07-alpine-summer/marmot-among-alpine-rocks.webp",
-      "background": "#fcf8ed",
-      "prompt": "A realistically proportioned hoary marmot resting naturally on a sun-warmed flat gray rock in a Washington alpine meadow at medium distance on right, soft grizzled gray-brown fur and relaxed posture. Small pink heather, purple lupines and fresh grasses grow between nearby talus; jagged North Cascades peaks and a glaciated ridge far behind. Gentle clear morning light, quiet natural wildlife landscape, no cartoon face, no giant close-up animal."
     },
     {
       "id": "mountain-goat-in-summer-meadow",

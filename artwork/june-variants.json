@@ -1,7 +1,7 @@
 {
   "generationMethod": "built-in imagegen",
   "nominalThemeBackground": "#f5fafb",
-  "sharedPrompt": "Use case: illustration-story. Asset: one standalone Tristana seasonal journal header. Generate a single landscape 1536x1024 image, aspect 3:2. Match the original approved June Oregon coast illustrations: detailed realistic painted landscape, refined restrained watercolor washes with very fine natural textures and believable atmospheric depth. Keep detailed rock, foliage, water and architecture rendering through the gradual fade; do NOT turn edges into abstract watercolor splotches or coarse brush dabs. Compose the main scene on the right two-thirds; leave the leftmost 25\u201335% mostly blank for journal text. Scene gently dissolves into the CORRECT JUNE BACKGROUND, a pale COOL BLUE-WHITE HEX #F5FAFB (RGB 245,250,251). Opaque theme-matched image, NOT transparent. No warm cream or yellow tint in blank paper, even when scene has golden sunset light. A broad, softly irregular curved/diagonal fade runs from upper-left towards bottom-right, follows the landscape's forms, and fades across the bottom edge. Preserve detailed imagery near bottom-right before the final soft lower-edge fade. Top/right scene edges are sharp, fully illustrated to edges; no frame, no abrupt rectangular cutoffs, no separate border, no white rectangle. Subtle fine paper texture only. Season: June early summer on the Pacific coast, fresh coastal greenery, no snow, autumn leaves or tropical vegetation. No text, typography, watermark, panels, collage, large foreground people or dense crowds. Light and geography feel natural rather than fantasy. Scene: ",
+  "sharedPrompt": "Use case: illustration-story. Asset: one standalone Tristana seasonal journal header. Generate a single landscape 1536x1024 image, aspect 3:2. Match the original approved June Oregon coast illustrations: detailed realistic painted landscape, refined restrained watercolor washes with very fine natural textures and believable atmospheric depth. Keep detailed rock, foliage, water and architecture rendering through the gradual fade; do NOT turn edges into abstract watercolor splotches or coarse brush dabs. Compose the main scene on the right two-thirds; leave the leftmost 25–35% mostly blank for journal text. Scene gently dissolves into the CORRECT JUNE BACKGROUND, a pale COOL BLUE-WHITE HEX #F5FAFB (RGB 245,250,251). Opaque theme-matched image, NOT transparent. No warm cream or yellow tint in blank paper, even when scene has golden sunset light. A broad, softly irregular curved/diagonal fade runs from upper-left towards bottom-right, follows the landscape's forms, and fades across the bottom edge. Preserve detailed imagery near bottom-right before the final soft lower-edge fade. Top/right scene edges are sharp, fully illustrated to edges; no frame, no abrupt rectangular cutoffs, no separate border, no white rectangle. Subtle fine paper texture only. Season: June early summer on the Pacific coast, fresh coastal greenery, no snow, autumn leaves or tropical vegetation. No text, typography, watermark, panels, collage, large foreground people or dense crowds. Light and geography feel natural rather than fantasy. Scene: ",
   "variants": [
     {
       "id": "cape-kiwanda-morning-surf",
@@ -23,13 +23,6 @@
       "src": "assets/06-tide-oregon/haystack-rock-low-tide.webp",
       "background": "#f2fbfd",
       "prompt": "Cannon Beach Haystack Rock in June at a clear low tide, viewed from beach level: the distinctive large dark sea stack stands on the upper right with its smaller neighboring rocks, reflected in a shallow rippled sheet of water on wet sand; natural rounded tidepool rocks and a few modest green anemones in the right foreground, gentle breakers farther out, pale peach morning clouds with clear blue sky. Believable Oregon coastline, delicate realistic water reflections, no people."
-    },
-    {
-      "id": "seal-rock-tidepool-details",
-      "title": "Seal Rock Tidepool Details",
-      "src": "assets/06-tide-oregon/seal-rock-tidepool-details.webp",
-      "background": "#f3fbfe",
-      "prompt": "An intimate oblique low-tide view at Seal Rock on the Oregon coast in June: beautifully clear rock pools in rough wet basalt, prominent natural emerald-green anemones open underwater, a small orange ochre sea star and a purple ochre sea star attached to nearby rock, tiny barnacles, mussel shells, wisps of olive seaweed and fine rippling reflections. Soft cool overcast light reveals exquisite textures. Pacific surf is only a soft sliver in far right background; no tropical corals or colorful fish."
     },
     {
       "id": "yaquina-head-clear-afternoon",
@@ -81,13 +74,6 @@
       "prompt": "A calm rocky inlet near Cape Arago in June: a small loose group of realistically proportioned harbor seals rests naturally on low wet shoreline rocks on the right at medium distance, gray spotted coats with restrained detail, cool blue-green sea and gentle white surf behind them, coastal spruce and mossy cliff in the far right background. Beautiful soft morning light, quiet wildlife landscape; no crowded colony, no cartoon faces, no giant close-up animal, no people."
     },
     {
-      "id": "yachats-basalt-and-silver-waves",
-      "title": "Yachats Basalt And Silver Waves",
-      "src": "assets/06-tide-oregon/yachats-basalt-and-silver-waves.webp",
-      "background": "#eff8fc",
-      "prompt": "The rocky shoreline at Yachats in June during a clearing shower: dark angular basalt shelves in the right foreground, white Pacific surf pours through narrow natural channels and catches silver sunlight, turbulent turquoise-gray sea beyond and dramatic blue-gray clouds lifting into a luminous sunbreak; delicate low rainbow just in sea spray where light is physically believable. Fine wet-rock texture and detailed foam, forceful natural coast rather than tropical blue water, no people."
-    },
-    {
       "id": "neskowin-proposal-rock-sunset",
       "title": "Neskowin Proposal Rock Sunset",
       "src": "assets/06-tide-oregon/neskowin-proposal-rock-sunset.webp",
@@ -100,13 +86,6 @@
       "src": "assets/06-tide-oregon/boardman-forested-cove-after-rain.webp",
       "background": "#f2f9fb",
       "prompt": "Southern Oregon coast in Samuel H. Boardman corridor just after gentle June rain: an intimate forested cove viewed between moss-covered spruce trunks and richly detailed ferns, dark tree-topped offshore rock formations and bright turquoise surf on the right, wet branches glisten in a soft afternoon sunbreak, fine wisps of fog over the sea. Dense green temperate coastal rainforest, natural layered depth, no jungle fruit, no tropical palms, no people."
-    },
-    {
-      "id": "cape-perpetua-high-coastal-vista",
-      "title": "Cape Perpetua High Coastal Vista",
-      "src": "assets/06-tide-oregon/cape-perpetua-high-coastal-vista.webp",
-      "background": "#eff9fc",
-      "prompt": "From a high forested viewpoint at Cape Perpetua in June: the rugged Oregon coastline sweeps away in graceful layers on the right, mature green spruce forest on steep slopes, white wave lines and dark shoreline basalt far below, rolling ribbons of marine fog over the Pacific under a clear upper blue sky. Bright but gentle early-morning light, an airy expansive elevated coastal panorama, finely observed conifers in right foreground, no people or road traffic."
     },
     {
       "id": "newport-sea-lions-and-fishing-boats",

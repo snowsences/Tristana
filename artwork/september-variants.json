@@ -14,22 +14,10 @@
       "sourceName": "Mount Shuksan Reflected in Picture Lake.png"
     },
     {
-      "id": "north-cascades-golden-larch-ridge",
-      "title": "Golden Larches Above a Blue Glacial Lake",
-      "description": "Golden Larches Above a Blue Glacial Lake",
-      "sourceName": "Golden Larches Above a Blue Glacial Lake.png"
-    },
-    {
       "id": "blue-lake-liberty-bell-autumn",
       "title": "Autumn Blue Lake Beneath Liberty Bell Spires",
       "description": "Autumn Blue Lake Beneath Liberty Bell Spires",
       "sourceName": "Autumn Blue Lake Beneath Liberty Bell Spires.png"
-    },
-    {
-      "id": "cutthroat-pass-autumn",
-      "title": "Autumn at Cutthroat Pass",
-      "description": "Autumn at Cutthroat Pass",
-      "sourceName": "Autumn at Cutthroat Pass.png"
     },
     {
       "id": "rainier-autumn-glacier-glow",
@@ -54,24 +42,6 @@
       "title": "Autumn Meadows Beneath Mount Rainier",
       "description": "Autumn Meadows Beneath Mount Rainier",
       "sourceName": "Autumn Meadows Beneath Mount Rainier.png"
-    },
-    {
-      "id": "dallas-divide-golden-slopes",
-      "title": "Golden Aspens at Dallas Divide",
-      "description": "Golden Aspens at Dallas Divide",
-      "sourceName": "Golden Aspens at Dallas Divide.png"
-    },
-    {
-      "id": "million-dollar-highway-autumn-bend",
-      "title": "Autumn Bend on the Million Dollar Highway",
-      "description": "Autumn Bend on the Million Dollar Highway",
-      "sourceName": "Autumn Bend on the Million Dollar Highway.png"
-    },
-    {
-      "id": "maroon-bells-autumn-dawn",
-      "title": "Autumn dawn at Maroon Bells",
-      "description": "Autumn dawn at Maroon Bells",
-      "sourceName": "Autumn dawn at Maroon Bells.png"
     },
     {
       "id": "owl-creek-pass-autumn-towers",
@@ -110,28 +80,10 @@
       "prompt": "Use case: illustration-story. Asset type: Tristana September header landscape, landscape 1536x1024, aspect 3:2. Create ONE new richly detailed natural watercolor landscape matching the reference's precise detailed painting style and smooth curved atmospheric fade. Reference is STYLE AND FADE only. Primary request: Lake O’Hara in the Canadian Rockies in autumn, a quiet turquoise mountain lake mirrored beneath massive pale limestone cliffs, golden alpine larch trees interspersed with dark green spruce along its rocky eastern shoreline, rich gold and russet undergrowth, early morning silvery mist low over the far water, fresh snow lightly dusting the highest cliff ledges, calm clear autumn light. Accurate natural foliage, delicate precise rock strata, individual conifers and larch needles, transparent shallows and fine reflections, atmospheric depth. Scene occupies upper and right portions; empty pale warm ivory #fcf8ed left approximately 22% and bottom approximately 12%. Faithful smooth atmospheric fade from still-detailed landscape into flat warm ivory at far left and bottom. Preserve fine detail to the fade, no coarse splotches, ragged edges, splashes, paint blobs, abstract wash, frames, lettering, labels, logos, watermark, people, buildings, roads. Do not copy the reference's Colorado aspens or its mountains."
     },
     {
-      "id": "larch-valley-ten-peaks-autumn",
-      "title": "Golden Larch Valley Beneath the Ten Peaks",
-      "scene": "Larch Valley above Moraine Lake in Banff in autumn, seen from within the broad high alpine valley looking toward the jagged Ten Peaks skyline, scattered mature golden larches with fine feathery needles and dark slender trunks, russet low alpine groundcover, pale boulders and a narrow natural stream, light first snow on the high rock summits, crisp luminous morning. Larch trees must be botanically larches, not white-barked aspens. No large lake.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana September header landscape, 1536x1024 aspect 3:2. Create ONE new richly detailed natural watercolor landscape matching the reference's precise detailed painting style and smooth curved atmospheric fade. Reference is STYLE/FADE only; use requested new subject faithfully. Scene occupies upper and right portions; empty pale warm ivory #fcf8ed left approximately 22% and bottom approximately 12%. Smooth atmospheric fade from still-detailed landscape into flat warm ivory at far left and bottom. Preserve delicate precise rocks, individual plants, fine water reflections, atmospheric depth. No coarse splotches, ragged edges, splashes, paint blobs, abstract wash, frames, lettering, labels, logos, watermark. Primary request: Larch Valley above Moraine Lake in Banff in autumn, seen from within the broad high alpine valley looking toward the jagged Ten Peaks skyline, scattered mature golden larches with fine feathery needles and dark slender trunks, russet low alpine groundcover, pale boulders and a narrow natural stream, light first snow on the high rock summits, crisp luminous morning. Larch trees must be botanically larches, not white-barked aspens. No large lake."
-    },
-    {
       "id": "denali-crimson-tundra",
       "title": "Crimson Tundra Below Denali",
       "scene": "Denali in Alaska in early autumn, wide open rolling tundra ablaze with small crimson bearberry plants, copper dwarf birch and ochre grasses, a winding shallow creek reflecting pale sky in the valley, immense snow-clad Denali rising beyond low blue foothills, soft late afternoon sun and wisps of cloud around summit, huge natural scale, no trees in foreground, no people or buildings.",
       "prompt": "Use case: illustration-story. Asset type: Tristana September header landscape, 1536x1024 aspect 3:2. Create ONE new richly detailed natural watercolor landscape matching the reference's precise detailed painting style and smooth curved atmospheric fade. Reference is STYLE/FADE only; use requested new subject faithfully. Scene occupies upper and right portions; empty pale warm ivory #fcf8ed left approximately 22% and bottom approximately 12%. Smooth atmospheric fade from still-detailed landscape into flat warm ivory at far left and bottom. Preserve delicate precise rocks, individual plants, fine water reflections, atmospheric depth. No coarse splotches, ragged edges, splashes, paint blobs, abstract wash, frames, lettering, labels, logos, watermark. Primary request: Denali in Alaska in early autumn, wide open rolling tundra ablaze with small crimson bearberry plants, copper dwarf birch and ochre grasses, a winding shallow creek reflecting pale sky in the valley, immense snow-clad Denali rising beyond low blue foothills, soft late afternoon sun and wisps of cloud around summit, huge natural scale, no trees in foreground, no people or buildings."
-    },
-    {
-      "id": "glacier-autumn-waterfall",
-      "title": "Autumn Waterfall in Glacier National Park",
-      "scene": "A clear cascading waterfall in Glacier National Park in Montana in autumn, viewed from the boulder-lined creek below, white water descending over stair-stepped dark and russet rock ledges through a natural forest with yellow cottonwoods and golden deciduous shrubs interspersed with dark evergreen spruce, a glimpse of steep glaciated mountain cliffs and light fresh summit snow in upper background, cool silver morning light after rain. Rich water detail, fallen yellow leaves along wet stone shoreline, accurate temperate mountain forest.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana September header landscape, 1536x1024 aspect 3:2. Create ONE new richly detailed natural watercolor landscape matching the reference's precise detailed painting style and smooth curved atmospheric fade. Reference is STYLE/FADE only; use requested new subject faithfully. Scene occupies upper and right portions; empty pale warm ivory #fcf8ed left approximately 22% and bottom approximately 12%. Smooth atmospheric fade from still-detailed landscape into flat warm ivory at far left and bottom. Preserve delicate precise rocks, individual plants, fine water reflections, atmospheric depth. No coarse splotches, ragged edges, splashes, paint blobs, abstract wash, frames, lettering, labels, logos, watermark. Primary request: A clear cascading waterfall in Glacier National Park in Montana in autumn, viewed from the boulder-lined creek below, white water descending over stair-stepped dark and russet rock ledges through a natural forest with yellow cottonwoods and golden deciduous shrubs interspersed with dark evergreen spruce, a glimpse of steep glaciated mountain cliffs and light fresh summit snow in upper background, cool silver morning light after rain. Rich water detail, fallen yellow leaves along wet stone shoreline, accurate temperate mountain forest."
-    },
-    {
-      "id": "tombstone-autumn-tundra",
-      "title": "Autumn Tundra in Tombstone Territorial Park",
-      "scene": "Tombstone Territorial Park in Yukon in early autumn, a wide view of dramatic distant dark jagged granite spires rising beyond a broad unwooded glacial valley, rolling foreground tundra of low burgundy-red dwarf birch, orange willow and golden grasses, scattered pale boulders, a slender glacial river curving through the valley, lavender distant hills, first light snow dusting only highest spires, atmospheric overcast light breaking into a narrow golden sunbeam over the red valley. No forest or tall trees. Strongly different composition and mountain silhouette from Denali.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana September header landscape, 1536x1024 aspect 3:2. Create ONE new richly detailed natural watercolor landscape matching the reference's precise detailed painting style and smooth curved atmospheric fade. Reference is STYLE/FADE only; use requested new subject faithfully. Scene occupies upper and right portions; empty pale warm ivory #fcf8ed left approximately 22% and bottom approximately 12%. Smooth atmospheric fade from still-detailed landscape into flat warm ivory at far left and bottom. Preserve delicate precise rocks, individual plants, fine water reflections, atmospheric depth. No coarse splotches, ragged edges, splashes, paint blobs, abstract wash, frames, lettering, labels, logos, watermark. Primary request: Tombstone Territorial Park in Yukon in early autumn, a wide view of dramatic distant dark jagged granite spires rising beyond a broad unwooded glacial valley, rolling foreground tundra of low burgundy-red dwarf birch, orange willow and golden grasses, scattered pale boulders, a slender glacial river curving through the valley, lavender distant hills, first light snow dusting only highest spires, atmospheric overcast light breaking into a narrow golden sunbeam over the red valley. No forest or tall trees. Strongly different composition and mountain silhouette from Denali."
     },
     {
       "id": "lake-mcdonald-autumn-shore",

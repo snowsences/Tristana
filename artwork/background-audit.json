@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 366,
+  "sceneCount": 262,
   "themes": [
     {
       "month": 1,
@@ -55,18 +55,6 @@
           "maximumCornerDelta": 0.07
         },
         {
-          "id": "ridgefield-clear-swans",
-          "src": "assets/01-hearth/ridgefield-clear-swans.webp",
-          "background": "#fef8ee",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "million-dollar-snow",
-          "src": "assets/01-hearth/million-dollar-snow.webp",
-          "background": "#fdf9ef",
-          "maximumCornerDelta": 1.13
-        },
-        {
           "id": "cottage-pink-dawn",
           "src": "assets/01-hearth/cottage-pink-dawn.webp",
           "background": "#fcf7ec",
@@ -85,21 +73,9 @@
           "maximumCornerDelta": 2.0
         },
         {
-          "id": "cottage-snowstorm",
-          "src": "assets/01-hearth/cottage-snowstorm.webp",
-          "background": "#fdf8f0",
-          "maximumCornerDelta": 1.0
-        },
-        {
           "id": "hearth-predawn",
           "src": "assets/01-hearth/hearth-predawn.webp",
           "background": "#fcf8ef",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "stream-misty-dawn",
-          "src": "assets/01-hearth/stream-misty-dawn.webp",
-          "background": "#fdf9f0",
           "maximumCornerDelta": 1.0
         },
         {
@@ -109,21 +85,9 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "million-dollar-sunrise",
-          "src": "assets/01-hearth/million-dollar-sunrise.webp",
-          "background": "#fdfaef",
-          "maximumCornerDelta": 1.6
-        },
-        {
           "id": "ridgefield-golden-sunset",
           "src": "assets/01-hearth/ridgefield-golden-sunset.webp",
           "background": "#fdf8ed",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "hearth-storm-day",
-          "src": "assets/01-hearth/hearth-storm-day.webp",
-          "background": "#fcf7ee",
           "maximumCornerDelta": 1.0
         },
         {
@@ -139,22 +103,10 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "cottage-blue-hour",
-          "src": "assets/01-hearth/cottage-blue-hour.webp",
-          "background": "#fdf8ed",
-          "maximumCornerDelta": 1.2
-        },
-        {
           "id": "million-dollar-blue-hour",
           "src": "assets/01-hearth/million-dollar-blue-hour.webp",
           "background": "#fdf8eb",
           "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "stream-moonlight",
-          "src": "assets/01-hearth/stream-moonlight.webp",
-          "background": "#fcf7ed",
-          "maximumCornerDelta": 1.67
         },
         {
           "id": "hearth-winter-sunset",
@@ -595,18 +547,6 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "rain-fed-falls",
-          "src": "assets/04-cascade/apr-05-friday.webp",
-          "background": "#f7f8f3",
-          "maximumCornerDelta": 2.0
-        },
-        {
-          "id": "quiet-pool",
-          "src": "assets/04-cascade/apr-06-saturday.webp",
-          "background": "#f5f5f0",
-          "maximumCornerDelta": 4.4
-        },
-        {
           "id": "original-cascade",
           "src": "assets/04-cascade/apr-07-sunday.webp",
           "background": "#f7f8f3",
@@ -615,18 +555,6 @@
         {
           "id": "skogafoss-spring",
           "src": "assets/04-cascade/skogafoss-spring.webp",
-          "background": "#f4f6f0",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "multnomah-spring",
-          "src": "assets/04-cascade/multnomah-spring.webp",
-          "background": "#f6f8f4",
-          "maximumCornerDelta": 1.33
-        },
-        {
-          "id": "fern-forest-waterfall",
-          "src": "assets/04-cascade/fern-forest-waterfall.webp",
           "background": "#f4f6f0",
           "maximumCornerDelta": 1.0
         },
@@ -667,24 +595,6 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "spring-mist-at-burney-falls",
-          "src": "assets/04-cascade/spring-mist-at-burney-falls.webp",
-          "background": "#f4f6f2",
-          "maximumCornerDelta": 1.2
-        },
-        {
-          "id": "spring-mist-at-twin-falls",
-          "src": "assets/04-cascade/spring-mist-at-twin-falls.webp",
-          "background": "#f5f7f2",
-          "maximumCornerDelta": 1.67
-        },
-        {
-          "id": "moonlit-basalt-waterfall-in-spring",
-          "src": "assets/04-cascade/moonlit-basalt-waterfall-in-spring.webp",
-          "background": "#f2f4ef",
-          "maximumCornerDelta": 0.67
-        },
-        {
           "id": "rose-gold-dawn-at-south-falls",
           "src": "assets/04-cascade/rose-gold-dawn-at-south-falls.webp",
           "background": "#f5f8f3",
@@ -703,33 +613,9 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "silky-spring-waterfall-over-basalt",
-          "src": "assets/04-cascade/silky-spring-waterfall-over-basalt.webp",
-          "background": "#f3f4ef",
-          "maximumCornerDelta": 0.67
-        },
-        {
-          "id": "golden-lacefall-over-mossy-basalt",
-          "src": "assets/04-cascade/golden-lacefall-over-mossy-basalt.webp",
-          "background": "#f4f7f1",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "blue-hour-horseshoe-waterfall",
-          "src": "assets/04-cascade/blue-hour-horseshoe-waterfall.webp",
-          "background": "#f2f3ee",
-          "maximumCornerDelta": 0.27
-        },
-        {
           "id": "panther-creek-s-mossy-waterfall-amphitheater",
           "src": "assets/04-cascade/panther-creek-s-mossy-waterfall-amphitheater.webp",
           "background": "#f3f4ec",
-          "maximumCornerDelta": 0.67
-        },
-        {
-          "id": "misty-horseshoe-falls-in-april",
-          "src": "assets/04-cascade/misty-horseshoe-falls-in-april.webp",
-          "background": "#f4f5f0",
           "maximumCornerDelta": 0.67
         },
         {
@@ -757,22 +643,10 @@
       "theme": "daylight",
       "scenes": [
         {
-          "id": "morning-light",
-          "src": "assets/05-daylight/may-01-monday.webp",
-          "background": "#fdf6eb",
-          "maximumCornerDelta": 3.0
-        },
-        {
           "id": "fern-shadows",
           "src": "assets/05-daylight/may-02-tuesday.webp",
           "background": "#fefaf2",
           "maximumCornerDelta": 4.0
-        },
-        {
-          "id": "dappled-light",
-          "src": "assets/05-daylight/may-03-wednesday.webp",
-          "background": "#fdf7f0",
-          "maximumCornerDelta": 3.0
         },
         {
           "id": "sheer-curtain",
@@ -785,18 +659,6 @@
           "src": "assets/05-daylight/may-05-friday.webp",
           "background": "#fef7ee",
           "maximumCornerDelta": 7.33
-        },
-        {
-          "id": "last-light",
-          "src": "assets/05-daylight/may-06-saturday.webp",
-          "background": "#fdf6eb",
-          "maximumCornerDelta": 2.0
-        },
-        {
-          "id": "original-daylight",
-          "src": "assets/05-daylight/may-07-sunday.webp",
-          "background": "#fdf6ed",
-          "maximumCornerDelta": 1.73
         },
         {
           "id": "brooklyn-bridge-park-at-may-sunset",
@@ -829,24 +691,6 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "high-line-tenth-avenue-overlook",
-          "src": "assets/05-daylight/high-line-tenth-avenue-overlook.webp",
-          "background": "#fef7ed",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "high-line-birch-grove",
-          "src": "assets/05-daylight/high-line-birch-grove.webp",
-          "background": "#fef8ee",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "high-line-hudson-sunset",
-          "src": "assets/05-daylight/high-line-hudson-sunset.webp",
-          "background": "#fdf5eb",
-          "maximumCornerDelta": 1.2
-        },
-        {
           "id": "high-line-beneath-the-standard",
           "src": "assets/05-daylight/high-line-beneath-the-standard.webp",
           "background": "#fdf7ee",
@@ -863,12 +707,6 @@
           "src": "assets/05-daylight/dumbo-washington-street-morning.webp",
           "background": "#fef7ec",
           "maximumCornerDelta": 0.0
-        },
-        {
-          "id": "dumbo-pebble-beach-after-rain",
-          "src": "assets/05-daylight/dumbo-pebble-beach-after-rain.webp",
-          "background": "#fcf4e9",
-          "maximumCornerDelta": 1.0
         },
         {
           "id": "dumbo-carousel-at-sunrise",
@@ -889,28 +727,10 @@
           "maximumCornerDelta": 1.4
         },
         {
-          "id": "williamsburg-domino-park-afternoon",
-          "src": "assets/05-daylight/williamsburg-domino-park-afternoon.webp",
-          "background": "#fef5e9",
-          "maximumCornerDelta": 1.0
-        },
-        {
           "id": "williamsburg-bushwick-inlet-sunset",
           "src": "assets/05-daylight/williamsburg-bushwick-inlet-sunset.webp",
           "background": "#fef6eb",
           "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "williamsburg-side-street-spring",
-          "src": "assets/05-daylight/williamsburg-side-street-spring.webp",
-          "background": "#fef7eb",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "williamsburg-ferry-landing-twilight",
-          "src": "assets/05-daylight/williamsburg-ferry-landing-twilight.webp",
-          "background": "#fdf5e8",
-          "maximumCornerDelta": 1.07
         },
         {
           "id": "williamsburg-bridge-at-dawn",
@@ -925,22 +745,10 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "fort-greene-park-spring-sunlight",
-          "src": "assets/05-daylight/fort-greene-park-spring-sunlight.webp",
-          "background": "#fdf5ea",
-          "maximumCornerDelta": 1.0
-        },
-        {
           "id": "prospect-park-stone-bridge",
           "src": "assets/05-daylight/prospect-park-stone-bridge.webp",
           "background": "#fef7ef",
           "maximumCornerDelta": 1.07
-        },
-        {
-          "id": "park-slope-brownstone-evening",
-          "src": "assets/05-daylight/park-slope-brownstone-evening.webp",
-          "background": "#fef7ec",
-          "maximumCornerDelta": 0.27
         }
       ]
     },
@@ -985,12 +793,6 @@
           "maximumCornerDelta": 2.0
         },
         {
-          "id": "blue-hour",
-          "src": "assets/06-tide-oregon/jun-07-sunday.webp",
-          "background": "#f1fcfd",
-          "maximumCornerDelta": 2.87
-        },
-        {
           "id": "heceta-morning-fog",
           "src": "assets/06-tide-oregon/heceta-morning-fog.webp",
           "background": "#f1f8f8",
@@ -1007,12 +809,6 @@
           "src": "assets/06-tide-oregon/heceta-sunset.webp",
           "background": "#f1f8f8",
           "maximumCornerDelta": 0.6
-        },
-        {
-          "id": "thors-well-eruption",
-          "src": "assets/06-tide-oregon/thors-well-eruption.webp",
-          "background": "#f1f8f6",
-          "maximumCornerDelta": 0.27
         },
         {
           "id": "spouting-horn",
@@ -1048,12 +844,6 @@
           "id": "haystack-rock-low-tide",
           "src": "assets/06-tide-oregon/haystack-rock-low-tide.webp",
           "background": "#f2fbfd",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "seal-rock-tidepool-details",
-          "src": "assets/06-tide-oregon/seal-rock-tidepool-details.webp",
-          "background": "#f3fbfe",
           "maximumCornerDelta": 1.0
         },
         {
@@ -1099,12 +889,6 @@
           "maximumCornerDelta": 0.0
         },
         {
-          "id": "yachats-basalt-and-silver-waves",
-          "src": "assets/06-tide-oregon/yachats-basalt-and-silver-waves.webp",
-          "background": "#eff8fc",
-          "maximumCornerDelta": 0.57
-        },
-        {
           "id": "neskowin-proposal-rock-sunset",
           "src": "assets/06-tide-oregon/neskowin-proposal-rock-sunset.webp",
           "background": "#ecf6f9",
@@ -1115,12 +899,6 @@
           "src": "assets/06-tide-oregon/boardman-forested-cove-after-rain.webp",
           "background": "#f2f9fb",
           "maximumCornerDelta": 1.07
-        },
-        {
-          "id": "cape-perpetua-high-coastal-vista",
-          "src": "assets/06-tide-oregon/cape-perpetua-high-coastal-vista.webp",
-          "background": "#eff9fc",
-          "maximumCornerDelta": 0.87
         },
         {
           "id": "newport-sea-lions-and-fishing-boats",
@@ -1135,12 +913,6 @@
       "theme": "alpine-summer",
       "scenes": [
         {
-          "id": "lupine-morning",
-          "src": "assets/07-alpine-summer/jul-01-monday.webp",
-          "background": "#fcf9f1",
-          "maximumCornerDelta": 1.67
-        },
-        {
           "id": "paintbrush-meadow",
           "src": "assets/07-alpine-summer/jul-02-tuesday.webp",
           "background": "#fbf8f0",
@@ -1153,22 +925,10 @@
           "maximumCornerDelta": 2.0
         },
         {
-          "id": "summer-mist",
-          "src": "assets/07-alpine-summer/jul-04-thursday.webp",
-          "background": "#faf7ef",
-          "maximumCornerDelta": 2.0
-        },
-        {
           "id": "golden-meadow",
           "src": "assets/07-alpine-summer/jul-05-friday.webp",
           "background": "#faf7ef",
           "maximumCornerDelta": 3.0
-        },
-        {
-          "id": "after-rain",
-          "src": "assets/07-alpine-summer/jul-06-saturday.webp",
-          "background": "#fbf8f0",
-          "maximumCornerDelta": 2.89
         },
         {
           "id": "original-alpine-summer",
@@ -1225,24 +985,6 @@
           "maximumCornerDelta": 0.67
         },
         {
-          "id": "spray-park-beargrass-sunbreak",
-          "src": "assets/07-alpine-summer/spray-park-beargrass-sunbreak.webp",
-          "background": "#faf7ef",
-          "maximumCornerDelta": 0.13
-        },
-        {
-          "id": "sunrise-ridge-and-white-river-valley",
-          "src": "assets/07-alpine-summer/sunrise-ridge-and-white-river-valley.webp",
-          "background": "#fbf8ef",
-          "maximumCornerDelta": 1.67
-        },
-        {
-          "id": "tatoosh-peaks-in-evening-light",
-          "src": "assets/07-alpine-summer/tatoosh-peaks-in-evening-light.webp",
-          "background": "#faf7ed",
-          "maximumCornerDelta": 0.13
-        },
-        {
           "id": "maple-pass-heather-and-alpine-lake",
           "src": "assets/07-alpine-summer/maple-pass-heather-and-alpine-lake.webp",
           "background": "#fbf8f0",
@@ -1255,28 +997,10 @@
           "maximumCornerDelta": 1.33
         },
         {
-          "id": "hurricane-ridge-lupine-slopes",
-          "src": "assets/07-alpine-summer/hurricane-ridge-lupine-slopes.webp",
-          "background": "#fcf9ee",
-          "maximumCornerDelta": 0.67
-        },
-        {
-          "id": "goat-rocks-summer-crest",
-          "src": "assets/07-alpine-summer/goat-rocks-summer-crest.webp",
-          "background": "#fbf8f0",
-          "maximumCornerDelta": 0.4
-        },
-        {
           "id": "yankee-boy-basin-columbines",
           "src": "assets/07-alpine-summer/yankee-boy-basin-columbines.webp",
           "background": "#faf7ee",
           "maximumCornerDelta": 0.67
-        },
-        {
-          "id": "american-basin-summer-stream",
-          "src": "assets/07-alpine-summer/american-basin-summer-stream.webp",
-          "background": "#fbf9f0",
-          "maximumCornerDelta": 1.0
         },
         {
           "id": "maroon-bells-quiet-summer-lake",
@@ -1295,18 +1019,6 @@
           "src": "assets/07-alpine-summer/crested-butte-meadow-after-rain.webp",
           "background": "#faf7ec",
           "maximumCornerDelta": 1.44
-        },
-        {
-          "id": "alpine-columbines-in-morning-dew",
-          "src": "assets/07-alpine-summer/alpine-columbines-in-morning-dew.webp",
-          "background": "#fbf7ed",
-          "maximumCornerDelta": 0.89
-        },
-        {
-          "id": "marmot-among-alpine-rocks",
-          "src": "assets/07-alpine-summer/marmot-among-alpine-rocks.webp",
-          "background": "#fcf8ed",
-          "maximumCornerDelta": 1.0
         },
         {
           "id": "mountain-goat-in-summer-meadow",
@@ -1345,12 +1057,6 @@
           "maximumCornerDelta": 1.95
         },
         {
-          "id": "island-lake-cloud",
-          "src": "assets/08-glacier-lakes/aug-04-thursday.webp",
-          "background": "#f8faf7",
-          "maximumCornerDelta": 1.2
-        },
-        {
           "id": "emerald-lake-gold",
           "src": "assets/08-glacier-lakes/aug-05-friday.webp",
           "background": "#f6f9f6",
@@ -1369,22 +1075,10 @@
           "maximumCornerDelta": 2.4
         },
         {
-          "id": "telluride-blue-lake",
-          "src": "assets/08-glacier-lakes/telluride-blue-lake.webp",
-          "background": "#f6faf6",
-          "maximumCornerDelta": 0.73
-        },
-        {
           "id": "portage-glacier-summer",
           "src": "assets/08-glacier-lakes/portage-glacier-summer.webp",
           "background": "#f6fbf7",
           "maximumCornerDelta": 0.67
-        },
-        {
-          "id": "grinnell-lake-trail",
-          "src": "assets/08-glacier-lakes/grinnell-lake-trail.webp",
-          "background": "#f9fcf8",
-          "maximumCornerDelta": 0.4
         },
         {
           "id": "edith-cavell-angel-glacier",
@@ -1399,28 +1093,10 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "moraine-lake-summer-dawn",
-          "src": "assets/08-glacier-lakes/moraine-lake-summer-dawn.webp",
-          "background": "#f7fcf7",
-          "maximumCornerDelta": 1.25
-        },
-        {
-          "id": "lake-ohara-summer-mist",
-          "src": "assets/08-glacier-lakes/lake-ohara-summer-mist.webp",
-          "background": "#f6faf6",
-          "maximumCornerDelta": 0.48
-        },
-        {
           "id": "peyto-lake-wooded-slope",
           "src": "assets/08-glacier-lakes/peyto-lake-wooded-slope.webp",
           "background": "#f5fbf6",
           "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "bow-lake-crowfoot-glacier",
-          "src": "assets/08-glacier-lakes/bow-lake-crowfoot-glacier.webp",
-          "background": "#f5faf6",
-          "maximumCornerDelta": 0.25
         },
         {
           "id": "lake-louise-victoria-glacier",
@@ -1435,24 +1111,6 @@
           "maximumCornerDelta": 0.28
         },
         {
-          "id": "garibaldi-lake-panorama",
-          "src": "assets/08-glacier-lakes/garibaldi-lake-panorama.webp",
-          "background": "#f4faf5",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "joffre-upper-lake",
-          "src": "assets/08-glacier-lakes/joffre-upper-lake.webp",
-          "background": "#f5faf6",
-          "maximumCornerDelta": 0.7
-        },
-        {
-          "id": "berg-lake-mount-robson",
-          "src": "assets/08-glacier-lakes/berg-lake-mount-robson.webp",
-          "background": "#f4faf5",
-          "maximumCornerDelta": 0.88
-        },
-        {
           "id": "maligne-lake-spirit-island",
           "src": "assets/08-glacier-lakes/maligne-lake-spirit-island.webp",
           "background": "#f4faf5",
@@ -1463,42 +1121,6 @@
           "src": "assets/08-glacier-lakes/diablo-lake-overlook.webp",
           "background": "#f5fbf6",
           "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "ross-lake-reflections",
-          "src": "assets/08-glacier-lakes/ross-lake-reflections.webp",
-          "background": "#f5fcf7",
-          "maximumCornerDelta": 0.5
-        },
-        {
-          "id": "avalanche-lake-waterfalls",
-          "src": "assets/08-glacier-lakes/avalanche-lake-waterfalls.webp",
-          "background": "#f5faf6",
-          "maximumCornerDelta": 0.5
-        },
-        {
-          "id": "iceberg-lake-summer",
-          "src": "assets/08-glacier-lakes/iceberg-lake-summer.webp",
-          "background": "#f3f9f5",
-          "maximumCornerDelta": 1.47
-        },
-        {
-          "id": "crater-lake-cleetwood",
-          "src": "assets/08-glacier-lakes/crater-lake-cleetwood.webp",
-          "background": "#f3f9f4",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "twin-lakes-colorado",
-          "src": "assets/08-glacier-lakes/twin-lakes-colorado.webp",
-          "background": "#f5fbf5",
-          "maximumCornerDelta": 1.03
-        },
-        {
-          "id": "kenai-lake-turquoise",
-          "src": "assets/08-glacier-lakes/kenai-lake-turquoise.webp",
-          "background": "#f5fbf6",
-          "maximumCornerDelta": 0.82
         },
         {
           "id": "mendenhall-lake-glacier",
@@ -1537,12 +1159,6 @@
           "maximumCornerDelta": 2.0
         },
         {
-          "id": "aspen-sunlight",
-          "src": "assets/09-alpine-autumn/sep-04-thursday.webp",
-          "background": "#fcf9f1",
-          "maximumCornerDelta": 3.0
-        },
-        {
           "id": "clouded-ridge",
           "src": "assets/09-alpine-autumn/sep-05-friday.webp",
           "background": "#fdf8ee",
@@ -1573,22 +1189,10 @@
           "maximumCornerDelta": 0.5
         },
         {
-          "id": "north-cascades-golden-larch-ridge",
-          "src": "assets/09-alpine-autumn/north-cascades-golden-larch-ridge.webp",
-          "background": "#fdf7e9",
-          "maximumCornerDelta": 0.82
-        },
-        {
           "id": "blue-lake-liberty-bell-autumn",
           "src": "assets/09-alpine-autumn/blue-lake-liberty-bell-autumn.webp",
           "background": "#fdf9ef",
           "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "cutthroat-pass-autumn",
-          "src": "assets/09-alpine-autumn/cutthroat-pass-autumn.webp",
-          "background": "#fdf8ee",
-          "maximumCornerDelta": 1.18
         },
         {
           "id": "rainier-autumn-glacier-glow",
@@ -1612,24 +1216,6 @@
           "id": "indian-henrys-autumn-meadows",
           "src": "assets/09-alpine-autumn/indian-henrys-autumn-meadows.webp",
           "background": "#fdf9ed",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "dallas-divide-golden-slopes",
-          "src": "assets/09-alpine-autumn/dallas-divide-golden-slopes.webp",
-          "background": "#fdf9f0",
-          "maximumCornerDelta": 1.44
-        },
-        {
-          "id": "million-dollar-highway-autumn-bend",
-          "src": "assets/09-alpine-autumn/million-dollar-highway-autumn-bend.webp",
-          "background": "#fdf8ee",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "maroon-bells-autumn-dawn",
-          "src": "assets/09-alpine-autumn/maroon-bells-autumn-dawn.webp",
-          "background": "#fdf9f0",
           "maximumCornerDelta": 1.0
         },
         {
@@ -1669,28 +1255,10 @@
           "maximumCornerDelta": 1.43
         },
         {
-          "id": "larch-valley-ten-peaks-autumn",
-          "src": "assets/09-alpine-autumn/larch-valley-ten-peaks-autumn.webp",
-          "background": "#fbf7ed",
-          "maximumCornerDelta": 0.56
-        },
-        {
           "id": "denali-crimson-tundra",
           "src": "assets/09-alpine-autumn/denali-crimson-tundra.webp",
           "background": "#fcf8ef",
           "maximumCornerDelta": 0.73
-        },
-        {
-          "id": "glacier-autumn-waterfall",
-          "src": "assets/09-alpine-autumn/glacier-autumn-waterfall.webp",
-          "background": "#fbf6ec",
-          "maximumCornerDelta": 1.21
-        },
-        {
-          "id": "tombstone-autumn-tundra",
-          "src": "assets/09-alpine-autumn/tombstone-autumn-tundra.webp",
-          "background": "#fdf9f0",
-          "maximumCornerDelta": 1.44
         },
         {
           "id": "lake-mcdonald-autumn-shore",
@@ -1709,12 +1277,6 @@
           "src": "assets/10-orchard/oct-01-monday.webp",
           "background": "#fdf6eb",
           "maximumCornerDelta": 0.73
-        },
-        {
-          "id": "pumpkin-patch",
-          "src": "assets/10-orchard/oct-02-tuesday.webp",
-          "background": "#fdf8ee",
-          "maximumCornerDelta": 1.78
         },
         {
           "id": "red-maple-lane",
@@ -1741,34 +1303,10 @@
           "maximumCornerDelta": 2.0
         },
         {
-          "id": "ridgefield-flight",
-          "src": "assets/10-orchard/oct-07-sunday.webp",
-          "background": "#fdf6eb",
-          "maximumCornerDelta": 2.0
-        },
-        {
           "id": "bayon-storm-sun",
           "src": "assets/10-orchard/oct-08-bayon.webp",
           "background": "#fdf7eb",
           "maximumCornerDelta": 3.0
-        },
-        {
-          "id": "canadian-rockies-larches",
-          "src": "assets/10-orchard/oct-09-larches.webp",
-          "background": "#fdf8ed",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "glacier-autumn-slopes",
-          "src": "assets/10-orchard/oct-10-glacier.webp",
-          "background": "#fdf5e9",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "geese-sunset-v",
-          "src": "assets/10-orchard/oct-11-geese.webp",
-          "background": "#fdf6eb",
-          "maximumCornerDelta": 1.0
         },
         {
           "id": "alaska-autumn-moose",
@@ -1807,36 +1345,6 @@
           "maximumCornerDelta": 0.0
         },
         {
-          "id": "hood-river-orchard-sunset",
-          "src": "assets/10-orchard/hood-river-orchard-sunset.webp",
-          "background": "#fcf6eb",
-          "maximumCornerDelta": 0.72
-        },
-        {
-          "id": "hood-river-orchard-after-rain",
-          "src": "assets/10-orchard/hood-river-orchard-after-rain.webp",
-          "background": "#fdf6ed",
-          "maximumCornerDelta": 0.82
-        },
-        {
-          "id": "pumpkin-patch-blue-hour",
-          "src": "assets/10-orchard/pumpkin-patch-blue-hour.webp",
-          "background": "#fcf6eb",
-          "maximumCornerDelta": 1.06
-        },
-        {
-          "id": "pumpkins-barn-stormlight",
-          "src": "assets/10-orchard/pumpkins-barn-stormlight.webp",
-          "background": "#fdf7ec",
-          "maximumCornerDelta": 0.75
-        },
-        {
-          "id": "vermont-maple-covered-bridge",
-          "src": "assets/10-orchard/vermont-maple-covered-bridge.webp",
-          "background": "#fdf7ea",
-          "maximumCornerDelta": 0.72
-        },
-        {
           "id": "maple-lane-rain-evening",
           "src": "assets/10-orchard/maple-lane-rain-evening.webp",
           "background": "#fdf5e8",
@@ -1849,22 +1357,10 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "ridgefield-ducks-copper-reeds",
-          "src": "assets/10-orchard/ridgefield-ducks-copper-reeds.webp",
-          "background": "#fcf7ee",
-          "maximumCornerDelta": 1.0
-        },
-        {
           "id": "plitvice-autumn-cascades",
           "src": "assets/10-orchard/plitvice-autumn-cascades.webp",
           "background": "#fdf8ed",
           "maximumCornerDelta": 0.75
-        },
-        {
-          "id": "silver-falls-maple-autumn",
-          "src": "assets/10-orchard/silver-falls-maple-autumn.webp",
-          "background": "#fdf7ec",
-          "maximumCornerDelta": 1.0
         },
         {
           "id": "acadia-jordan-pond-autumn",
@@ -1927,12 +1423,6 @@
           "maximumCornerDelta": 0.0
         },
         {
-          "id": "canopy-light",
-          "src": "assets/11-rainwood/nov-06-saturday.webp",
-          "background": "#f8f7f3",
-          "maximumCornerDelta": 0.73
-        },
-        {
           "id": "mount-hood-morning",
           "src": "assets/11-rainwood/nov-07-sunday.webp",
           "background": "#f7f6f0",
@@ -1969,58 +1459,16 @@
           "maximumCornerDelta": 1.38
         },
         {
-          "id": "hoh-river-misty-gravel-bar",
-          "src": "assets/11-rainwood/hoh-river-misty-gravel-bar.webp",
-          "background": "#f7f8f2",
-          "maximumCornerDelta": 1.2
-        },
-        {
-          "id": "sol-duc-falls-november",
-          "src": "assets/11-rainwood/sol-duc-falls-november.webp",
-          "background": "#f9f8f2",
-          "maximumCornerDelta": 0.61
-        },
-        {
           "id": "wahclella-falls-rainwood",
           "src": "assets/11-rainwood/wahclella-falls-rainwood.webp",
           "background": "#f8f8f1",
           "maximumCornerDelta": 1.5
         },
         {
-          "id": "latourell-basalt-fall",
-          "src": "assets/11-rainwood/latourell-basalt-fall.webp",
-          "background": "#f8f8f1",
-          "maximumCornerDelta": 0.93
-        },
-        {
           "id": "panther-creek-moss-cascades",
           "src": "assets/11-rainwood/panther-creek-moss-cascades.webp",
           "background": "#f8f8f0",
           "maximumCornerDelta": 0.78
-        },
-        {
-          "id": "eagle-creek-rainy-canyon",
-          "src": "assets/11-rainwood/eagle-creek-rainy-canyon.webp",
-          "background": "#f8f8f0",
-          "maximumCornerDelta": 0.76
-        },
-        {
-          "id": "ramona-falls-forest-veil",
-          "src": "assets/11-rainwood/ramona-falls-forest-veil.webp",
-          "background": "#f8f8f2",
-          "maximumCornerDelta": 1.52
-        },
-        {
-          "id": "redwood-fern-canyon",
-          "src": "assets/11-rainwood/redwood-fern-canyon.webp",
-          "background": "#f9f8f2",
-          "maximumCornerDelta": 0.6
-        },
-        {
-          "id": "redwood-roots-forest-floor",
-          "src": "assets/11-rainwood/redwood-roots-forest-floor.webp",
-          "background": "#f8f7f0",
-          "maximumCornerDelta": 0.98
         },
         {
           "id": "redwood-creek-silver-rain",
@@ -2035,40 +1483,10 @@
           "maximumCornerDelta": 0.57
         },
         {
-          "id": "olympic-coast-driftwood",
-          "src": "assets/11-rainwood/olympic-coast-driftwood.webp",
-          "background": "#f7f7ee",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "lake-crescent-november-mist",
-          "src": "assets/11-rainwood/lake-crescent-november-mist.webp",
-          "background": "#f7f6f1",
-          "maximumCornerDelta": 1.53
-        },
-        {
           "id": "trillium-lake-fresh-snow-hood",
           "src": "assets/11-rainwood/trillium-lake-fresh-snow-hood.webp",
           "background": "#faf9f3",
           "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "rainier-clearing-storm-window",
-          "src": "assets/11-rainwood/rainier-clearing-storm-window.webp",
-          "background": "#f8f9f3",
-          "maximumCornerDelta": 0.13
-        },
-        {
-          "id": "columbia-gorge-mossy-oak-view",
-          "src": "assets/11-rainwood/columbia-gorge-mossy-oak-view.webp",
-          "background": "#f7f7ef",
-          "maximumCornerDelta": 1.04
-        },
-        {
-          "id": "rainwood-fern-nurse-log",
-          "src": "assets/11-rainwood/rainwood-fern-nurse-log.webp",
-          "background": "#f7f7f0",
-          "maximumCornerDelta": 0.68
         },
         {
           "id": "roosevelt-elk-rainforest-clearing",
@@ -2087,24 +1505,6 @@
           "src": "assets/12-alpine-winter/dec-01-monday.webp",
           "background": "#f3f9fe",
           "maximumCornerDelta": 2.6
-        },
-        {
-          "id": "frosted-cedar",
-          "src": "assets/12-alpine-winter/dec-02-tuesday.webp",
-          "background": "#f2f8fd",
-          "maximumCornerDelta": 2.0
-        },
-        {
-          "id": "snowfall-ridges",
-          "src": "assets/12-alpine-winter/dec-03-wednesday.webp",
-          "background": "#f2f8fd",
-          "maximumCornerDelta": 0.13
-        },
-        {
-          "id": "clear-winter-day",
-          "src": "assets/12-alpine-winter/dec-04-thursday.webp",
-          "background": "#f5f8fe",
-          "maximumCornerDelta": 2.0
         },
         {
           "id": "lavender-dusk",
@@ -2135,12 +1535,6 @@
           "src": "assets/12-alpine-winter/dec-09-yellowstone-vents.webp",
           "background": "#f2f7fc",
           "maximumCornerDelta": 1.13
-        },
-        {
-          "id": "dream-lake-frozen",
-          "src": "assets/12-alpine-winter/dec-10-dream-lake.webp",
-          "background": "#f4f9fe",
-          "maximumCornerDelta": 2.0
         },
         {
           "id": "rainier-sunrise-drifts",
@@ -2221,12 +1615,6 @@
           "maximumCornerDelta": 1.0
         },
         {
-          "id": "moraine-lake-winter-last-light",
-          "src": "assets/12-alpine-winter/moraine-lake-winter-last-light.webp",
-          "background": "#f2f8fe",
-          "maximumCornerDelta": 1.0
-        },
-        {
           "id": "athabasca-falls-winter-gorge",
           "src": "assets/12-alpine-winter/athabasca-falls-winter-gorge.webp",
           "background": "#f4f9fe",
@@ -2242,18 +1630,6 @@
           "id": "grand-prismatic-winter-steam",
           "src": "assets/12-alpine-winter/grand-prismatic-winter-steam.webp",
           "background": "#f1f8fe",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "tetons-moonlit-snowfield",
-          "src": "assets/12-alpine-winter/tetons-moonlit-snowfield.webp",
-          "background": "#f3fafe",
-          "maximumCornerDelta": 1.0
-        },
-        {
-          "id": "rainier-snow-laden-firs",
-          "src": "assets/12-alpine-winter/rainier-snow-laden-firs.webp",
-          "background": "#f2f8fe",
           "maximumCornerDelta": 1.0
         },
         {

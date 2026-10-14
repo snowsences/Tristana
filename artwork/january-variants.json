@@ -22,22 +22,10 @@
       "sourceImage": "assets/01-hearth/ridgefield-clear-swans.webp"
     },
     {
-      "id": "cottage-snowstorm",
-      "title": "Snowy cottage · evening snowfall",
-      "request": "The same lovely snowy woodland cottage during thick active snowfall at early evening: overcast slate-gray and violet atmosphere, snowflakes against evergreen trees, deep fresh snow, no moon or stars. Amber light from within its windows is the main warm source and illuminates a little snow immediately outside. Fine chimney smoke blends into falling snow.",
-      "sourceImage": "assets/01-hearth/jan-02-tuesday.webp"
-    },
-    {
       "id": "hearth-predawn",
       "title": "Hearth · blue predawn",
       "request": "The plaster arched hearth, ceramic vase of dried winter seed stems, stacked logs and narrow window before dawn. Outside is a snowy evergreen forest in subdued cobalt and violet, the first pale rose strip on the horizon, no moon. Low glowing embers and a small fire warm the room; indoor shadows long and quiet. Retain the cozy interior subject and winter outside, pale left and lower margins.",
       "sourceImage": "assets/01-hearth/jan-07-sunday.webp"
-    },
-    {
-      "id": "stream-misty-dawn",
-      "title": "Snowy stream · misty dawn",
-      "request": "The unfrozen winding stream through a heavily snow-covered fir forest at blue predawn. Fine mist hovers above flowing dark water, the faintest pale peach dawn begins beyond distant trees. Mostly cool blue and lilac snow, calm dark teal water, no orange sunlight yet. Rich winter texture, rounded untouched snowbanks.",
-      "sourceImage": "assets/01-hearth/jan-05-friday.webp"
     },
     {
       "id": "forest-moonlight",
@@ -46,22 +34,10 @@
       "sourceImage": "assets/01-hearth/jan-04-thursday.webp"
     },
     {
-      "id": "million-dollar-sunrise",
-      "title": "Million Dollar Highway · sunrise",
-      "request": "The winding Million Dollar Highway in Colorado's snow-covered San Juan Mountains at first sunrise. Packed snow covers the road surface. High rugged mountains catch brilliant warm pink alpenglow while the curved road and conifer slopes remain icy blue in shadow. Pale peach clouds and a sliver of morning gold; sweeping winter mountain landscape, no vehicles or people.",
-      "sourceImage": "assets/01-hearth/million-dollar-snow.webp"
-    },
-    {
       "id": "ridgefield-golden-sunset",
       "title": "Ridgefield swans · golden sunset",
       "request": "Snow-covered Ridgefield wetland auto-tour route at sunset. Winter swans glide on unfrozen water reflecting gold and copper from low sunset clouds, snowy reeds and bare cottonwoods have amber edges and soft violet shadows. A different arrangement of swimming swans, wide curving road and wetland. Still visibly deep winter, no green meadow or warm-season flowers.",
       "sourceImage": "assets/01-hearth/ridgefield-clear-swans.webp"
-    },
-    {
-      "id": "hearth-storm-day",
-      "title": "Hearth · stormy winter daylight",
-      "request": "The same plaster arched hearth interior on a snowy storm day: muted cool daylight through the narrow window, dense falling snow and snowy evergreen outside, no sun circle painted on the wall. A modest bright fire, soft amber reflection on plaster, translucent silver-blue ambient shadows. Keep dried seed stems, stacked logs, restrained pottery. Quiet and cozy.",
-      "sourceImage": "assets/01-hearth/jan-03-wednesday.webp"
     },
     {
       "id": "forest-pink-sunrise",
@@ -76,22 +52,10 @@
       "sourceImage": "assets/01-hearth/jan-05-friday.webp"
     },
     {
-      "id": "cottage-blue-hour",
-      "title": "Snowy cottage · blue hour",
-      "request": "Snow-covered modest cottage at blue hour shortly after sunset. Steel blue and muted purple sky with a fading pale apricot band far away; no moon yet. Interior windows shine warm amber; conifers and heavy roof snow take blue-violet shadows. Reframe the same cottage a little farther back behind snow-laden branches for a distinct arrangement.",
-      "sourceImage": "assets/01-hearth/jan-01-monday.webp"
-    },
-    {
       "id": "million-dollar-blue-hour",
       "title": "Million Dollar Highway · blue hour",
       "request": "Snow-covered San Juan Mountains and winding Million Dollar Highway in predawn blue hour. Packed white snow on road, deep cobalt and violet mountain shadows, distant snow peaks under thin lilac clouds and a faint pink horizon. No direct sunlight, no vehicles. The snowy road has a distinctly different sweeping curve yet stays believable to this steep mountain route.",
       "sourceImage": "assets/01-hearth/million-dollar-snow.webp"
-    },
-    {
-      "id": "stream-moonlight",
-      "title": "Snowy stream · moonlight",
-      "request": "A heavily snow-covered forest stream at night with cold clear moonlight. Dark flowing water catches a narrow silver-blue reflection; snowy rocks and fir branches glow softly. Modest moon high among sparse stars in the painted upper-right sky; deep navy forest, no gold sunset. Retain smooth creamy left and bottom fades, not black full-frame.",
-      "sourceImage": "assets/01-hearth/jan-06-saturday.webp"
     },
     {
       "id": "hearth-winter-sunset",

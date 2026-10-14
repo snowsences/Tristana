@@ -3,28 +3,10 @@
   "style": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. ",
   "scenes": [
     {
-      "id": "moraine-lake-summer-dawn",
-      "title": "Moraine Lake at Summer Dawn",
-      "description": "Moraine Lake at Summer Dawn",
-      "sourceName": "Moraine Lake at Summer Dawn.png"
-    },
-    {
-      "id": "lake-ohara-summer-mist",
-      "title": "Summer Mist over Lake O’Hara",
-      "description": "Summer Mist over Lake O’Hara",
-      "sourceName": "Summer mist over Lake O'Hara.png"
-    },
-    {
       "id": "peyto-lake-wooded-slope",
       "title": "Peyto Lake from a Wooded Slope",
       "description": "Peyto Lake from a Wooded Slope",
       "sourceName": "Peyto Lake from a wooded slope.png"
-    },
-    {
-      "id": "bow-lake-crowfoot-glacier",
-      "title": "Bow Lake and Crowfoot Glacier",
-      "description": "Bow Lake and Crowfoot Glacier",
-      "sourceName": "Bow Lake and Crowfoot Glacier.png"
     },
     {
       "id": "lake-louise-victoria-glacier",
@@ -41,27 +23,6 @@
       "sourceName": "exec-597832a9-0c98-4a82-b18d-76c099d9745f.png"
     },
     {
-      "id": "garibaldi-lake-panorama",
-      "title": "Garibaldi Lake Panorama",
-      "description": "A high viewpoint above Garibaldi Lake in British Columbia in summer, sprawling vivid turquoise lake and curving evergreen shoreline, snow-covered glaciated mountains beyond, natural midday light, lake dominant.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: A high viewpoint above Garibaldi Lake in British Columbia in summer, sprawling vivid turquoise lake and curving evergreen shoreline, snow-covered glaciated mountains beyond, natural midday light, lake dominant.",
-      "sourceName": "exec-b0beb22a-0c78-4d59-9ecb-d68b5692f927.png"
-    },
-    {
-      "id": "joffre-upper-lake",
-      "title": "Upper Joffre Lake and Matier Glacier",
-      "description": "Upper Joffre Lake in summer, intensely blue green lake below enormous hanging Matier Glacier, glacier dominates upper-right ridge, quiet shore-level view with detailed glacial boulders and small evergreen trees, cool clear morning.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Upper Joffre Lake in summer, intensely blue green lake below enormous hanging Matier Glacier, glacier dominates upper-right ridge, quiet shore-level view with detailed glacial boulders and small evergreen trees, cool clear morning.",
-      "sourceName": "exec-9b104218-d5fd-46fc-9529-1d74758bcd22.png"
-    },
-    {
-      "id": "berg-lake-mount-robson",
-      "title": "Berg Lake beneath Mount Robson",
-      "description": "Berg Lake beneath Mount Robson in midsummer, brilliant pale turquoise glacial lake with a few small naturally broken ice pieces near glacier terminus, immense snowy mountain on right, reflected white ice and blue sky, shoreline wildflowers subtle.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Berg Lake beneath Mount Robson in midsummer, brilliant pale turquoise glacial lake with a few small naturally broken ice pieces near glacier terminus, immense snowy mountain on right, reflected white ice and blue sky, shoreline wildflowers subtle.",
-      "sourceName": "exec-687e46b5-ed2a-4141-a877-2c0276bfcdf3.png"
-    },
-    {
       "id": "maligne-lake-spirit-island",
       "title": "Maligne Lake and Spirit Island",
       "description": "Maligne Lake in Jasper on a serene summer afternoon, prominent turquoise blue water, the small wooded peninsula of Spirit Island on right, layered limestone mountain ranges with remnant summer snow in distance. No boats or people.",
@@ -74,48 +35,6 @@
       "description": "Diablo Lake in Washington's North Cascades at a high overlook in summer, broad intense turquoise reservoir winding between dark evergreen slopes, distant rugged snowy mountains, warm sun breaking through clouds. Exclude visible dam, roads, vehicles.",
       "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Diablo Lake in Washington's North Cascades at a high overlook in summer, broad intense turquoise reservoir winding between dark evergreen slopes, distant rugged snowy mountains, warm sun breaking through clouds. Exclude visible dam, roads, vehicles.",
       "sourceName": "exec-f0f25d09-ad4d-4282-ac94-0f8f0c80e4f4.png"
-    },
-    {
-      "id": "ross-lake-reflections",
-      "title": "Ross Lake in Evening Light",
-      "description": "Ross Lake in North Cascades in midsummer with deep blue-green clear water, shore-level view along a rocky forested shore and distant jagged mountains, evening gold reflected as fine streaks on lightly rippled lake, no boats or buildings.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Ross Lake in North Cascades in midsummer with deep blue-green clear water, shore-level view along a rocky forested shore and distant jagged mountains, evening gold reflected as fine streaks on lightly rippled lake, no boats or buildings.",
-      "sourceName": "exec-e7880277-5f7b-4dc6-9dca-c2454b664444.png"
-    },
-    {
-      "id": "avalanche-lake-waterfalls",
-      "title": "Avalanche Lake and Summer Waterfalls",
-      "description": "Avalanche Lake in Glacier National Park in summer, broad clear turquoise green lake below a dramatic semicircular steep mountain cirque, several slender white waterfalls streaming down cliffs from melting snowfields, polished foreground pebbles visible through water, soft bright overcast.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Avalanche Lake in Glacier National Park in summer, broad clear turquoise green lake below a dramatic semicircular steep mountain cirque, several slender white waterfalls streaming down cliffs from melting snowfields, polished foreground pebbles visible through water, soft bright overcast.",
-      "sourceName": "exec-7123de88-f0c6-4cd3-861f-901c8dc7d5a8.png"
-    },
-    {
-      "id": "iceberg-lake-summer",
-      "title": "Iceberg Lake in Summer",
-      "description": "Iceberg Lake in Glacier National Park in midsummer, a turquoise alpine basin with a few small white ice floes still floating, monumental gray cliffs and pockets of remnant snow, broad lake prominent, vivid but natural daylight, no people.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Iceberg Lake in Glacier National Park in midsummer, a turquoise alpine basin with a few small white ice floes still floating, monumental gray cliffs and pockets of remnant snow, broad lake prominent, vivid but natural daylight, no people.",
-      "sourceName": "exec-09e35e5d-df01-42b3-b246-c08358854706.png"
-    },
-    {
-      "id": "crater-lake-cleetwood",
-      "title": "Crater Lake from Cleetwood Shore",
-      "description": "Crater Lake Oregon on a clear summer morning from near Cleetwood rocky shore, crystalline deep cobalt blue water visibly transparent near rocks, distant Wizard Island to the right with evergreen slopes, crater rim beyond. No boats, dock or people.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Crater Lake Oregon on a clear summer morning from near Cleetwood rocky shore, crystalline deep cobalt blue water visibly transparent near rocks, distant Wizard Island to the right with evergreen slopes, crater rim beyond. No boats, dock or people.",
-      "sourceName": "exec-c80ffd32-5b12-468e-a800-5a49539c54af.png"
-    },
-    {
-      "id": "twin-lakes-colorado",
-      "title": "Twin Lakes beneath the Sawatch",
-      "description": "Twin Lakes in Colorado in summer, lake fills most middle and lower-right foreground, smooth rich blue water with reflections of towering Sawatch peaks including Mount Elbert, green shoreline and small yellow flowers, peach sunrise sky, no buildings.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Twin Lakes in Colorado in summer, lake fills most middle and lower-right foreground, smooth rich blue water with reflections of towering Sawatch peaks including Mount Elbert, green shoreline and small yellow flowers, peach sunrise sky, no buildings.",
-      "sourceName": "exec-0407601d-fa22-483f-a2a0-470b07ea609e.png"
-    },
-    {
-      "id": "kenai-lake-turquoise",
-      "title": "Kenai Lake and Summer Mountains",
-      "description": "Kenai Lake in Alaska in summer, long sweep of electric yet natural turquoise glacial water winding between densely wooded mountain slopes, snowfields distant, rocky shoreline in right foreground, sunlit cool blue sky.",
-      "prompt": "Use case: illustration-story. Asset type: Tristana August header landscape, 1536x1024. Create ONE new richly detailed natural watercolor landscape in the EXACT visual style and composition language of the reference, but with the requested new location and viewpoint. Preserve delicate precise rock strata, individual evergreen trees, transparent water, fine reflections and atmospheric depth. Scene occupies upper and right portions; pale empty left approximately 22% and bottom approximately 12% for interface breathing room. Faithful smooth atmospheric fade from still-detailed landscape into flat pale green-white #f6faf7 at far left and bottom. No warm cream/yellow paper, no coarse watercolor splotches, ragged edge, splashes, paint blobs, abstract wash, frames, lettering, labels, logos or watermark. Continuous landscape vignette, detailed natural scene, lake prominent and beautiful, soft subtle watercolor paper grain only inside artwork. Summer season. Reference image is STYLE/FADE reference only, do not copy its mountains or lake when new location requested. \nPrimary request: Kenai Lake in Alaska in summer, long sweep of electric yet natural turquoise glacial water winding between densely wooded mountain slopes, snowfields distant, rocky shoreline in right foreground, sunlit cool blue sky.",
-      "sourceName": "exec-d34c038c-e817-4db0-a410-5e68556650c6.png"
     },
     {
       "id": "mendenhall-lake-glacier",
@@ -133,4 +52,3 @@
     }
   ]
 }
-

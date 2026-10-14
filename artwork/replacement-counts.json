@@ -1,0 +1,68 @@
+{
+  "updated": "2026-10-14",
+  "status": "Awaiting new artwork",
+  "policy": "Track counts only. Replacement subjects are independent of the removed artwork; Paris, Venice, and other locations will be chosen later. No replacements have been assigned or generated for these removals.",
+  "totalReplacementsNeeded": 104,
+  "months": [
+    {
+      "month": 1,
+      "name": "January",
+      "replacementsNeeded": 8
+    },
+    {
+      "month": 2,
+      "name": "February",
+      "replacementsNeeded": 0
+    },
+    {
+      "month": 3,
+      "name": "March",
+      "replacementsNeeded": 0
+    },
+    {
+      "month": 4,
+      "name": "April",
+      "replacementsNeeded": 11
+    },
+    {
+      "month": 5,
+      "name": "May",
+      "replacementsNeeded": 13
+    },
+    {
+      "month": 6,
+      "name": "June",
+      "replacementsNeeded": 5
+    },
+    {
+      "month": 7,
+      "name": "July",
+      "replacementsNeeded": 11
+    },
+    {
+      "month": 8,
+      "name": "August",
+      "replacementsNeeded": 15
+    },
+    {
+      "month": 9,
+      "name": "September",
+      "replacementsNeeded": 9
+    },
+    {
+      "month": 10,
+      "name": "October",
+      "replacementsNeeded": 12
+    },
+    {
+      "month": 11,
+      "name": "November",
+      "replacementsNeeded": 13
+    },
+    {
+      "month": 12,
+      "name": "December",
+      "replacementsNeeded": 7
+    }
+  ]
+}

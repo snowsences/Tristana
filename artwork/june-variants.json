@@ -1,0 +1,119 @@
+{
+  "generationMethod": "built-in imagegen",
+  "nominalThemeBackground": "#f5fafb",
+  "sharedPrompt": "Use case: illustration-story. Asset: one standalone Tristana seasonal journal header. Generate a single landscape 1536x1024 image, aspect 3:2. Match the original approved June Oregon coast illustrations: detailed realistic painted landscape, refined restrained watercolor washes with very fine natural textures and believable atmospheric depth. Keep detailed rock, foliage, water and architecture rendering through the gradual fade; do NOT turn edges into abstract watercolor splotches or coarse brush dabs. Compose the main scene on the right two-thirds; leave the leftmost 25\u201335% mostly blank for journal text. Scene gently dissolves into the CORRECT JUNE BACKGROUND, a pale COOL BLUE-WHITE HEX #F5FAFB (RGB 245,250,251). Opaque theme-matched image, NOT transparent. No warm cream or yellow tint in blank paper, even when scene has golden sunset light. A broad, softly irregular curved/diagonal fade runs from upper-left towards bottom-right, follows the landscape's forms, and fades across the bottom edge. Preserve detailed imagery near bottom-right before the final soft lower-edge fade. Top/right scene edges are sharp, fully illustrated to edges; no frame, no abrupt rectangular cutoffs, no separate border, no white rectangle. Subtle fine paper texture only. Season: June early summer on the Pacific coast, fresh coastal greenery, no snow, autumn leaves or tropical vegetation. No text, typography, watermark, panels, collage, large foreground people or dense crowds. Light and geography feel natural rather than fantasy. Scene: ",
+  "variants": [
+    {
+      "id": "cape-kiwanda-morning-surf",
+      "title": "Cape Kiwanda Morning Surf",
+      "src": "assets/06-tide-oregon/cape-kiwanda-morning-surf.webp",
+      "background": "#f0f8fb",
+      "prompt": "Cape Kiwanda on Oregon's coast in June, viewed from a nearby beach at low tide on a clear morning: warm sculpted ochre sandstone headland occupies the right side, foamy Pacific waves sweep around its base, soft golden morning light makes delicate striations in sandstone; dark distant offshore monolith and pale blue sea, wet sand reflections in foreground. Keep the real coast's natural scale and rugged shape, no invented arch or buildings."
+    },
+    {
+      "id": "ecola-spruce-viewpoint",
+      "title": "Ecola Spruce Viewpoint",
+      "src": "assets/06-tide-oregon/ecola-spruce-viewpoint.webp",
+      "background": "#f1f9fc",
+      "prompt": "A quiet Ecola State Park coastal viewpoint in June: tall Sitka spruce trunks, mossy branches and fern fronds frame a layered view of the Pacific and distant Cannon Beach sea stacks on the right; thin silver marine fog softens headlands, luminous diffused morning light, fresh deep green forest canopy and a natural earth path. Strong depth from finely rendered foreground bark to hazy coast, no people or signs."
+    },
+    {
+      "id": "haystack-rock-low-tide",
+      "title": "Haystack Rock Low Tide",
+      "src": "assets/06-tide-oregon/haystack-rock-low-tide.webp",
+      "background": "#f2fbfd",
+      "prompt": "Cannon Beach Haystack Rock in June at a clear low tide, viewed from beach level: the distinctive large dark sea stack stands on the upper right with its smaller neighboring rocks, reflected in a shallow rippled sheet of water on wet sand; natural rounded tidepool rocks and a few modest green anemones in the right foreground, gentle breakers farther out, pale peach morning clouds with clear blue sky. Believable Oregon coastline, delicate realistic water reflections, no people."
+    },
+    {
+      "id": "seal-rock-tidepool-details",
+      "title": "Seal Rock Tidepool Details",
+      "src": "assets/06-tide-oregon/seal-rock-tidepool-details.webp",
+      "background": "#f3fbfe",
+      "prompt": "An intimate oblique low-tide view at Seal Rock on the Oregon coast in June: beautifully clear rock pools in rough wet basalt, prominent natural emerald-green anemones open underwater, a small orange ochre sea star and a purple ochre sea star attached to nearby rock, tiny barnacles, mussel shells, wisps of olive seaweed and fine rippling reflections. Soft cool overcast light reveals exquisite textures. Pacific surf is only a soft sliver in far right background; no tropical corals or colorful fish."
+    },
+    {
+      "id": "yaquina-head-clear-afternoon",
+      "title": "Yaquina Head Clear Afternoon",
+      "src": "assets/06-tide-oregon/yaquina-head-clear-afternoon.webp",
+      "background": "#f1f8fb",
+      "prompt": "Yaquina Head on the Oregon coast on a clear June afternoon: the tall slender white historic lighthouse sits on a green headland in the upper right at believable middle distance, dark basalt cliffs and a cove with smooth black cobbles below, turquoise-gray Pacific breakers, a few small seabirds in the air. Crisp sea breeze, fresh grassy headland and blue-white clouds. Accurately simple lighthouse silhouette, fine geology and surf detail, no visitors or text."
+    },
+    {
+      "id": "cape-meares-marine-fog",
+      "title": "Cape Meares Marine Fog",
+      "src": "assets/06-tide-oregon/cape-meares-marine-fog.webp",
+      "background": "#f2fafd",
+      "prompt": "Cape Meares in June at the edge of a rolling marine-fog bank: a modest short white historic lighthouse is tucked beside dark coastal spruce in the upper right, steep green forested headland descends to rugged Pacific rocks and muted blue-gray water; shafts of late afternoon sunlight barely break through pale fog and illuminate one cliff edge. Quiet, believable lighthouse scale, layered airy fog, finely painted forest details, no fantasy architecture or readable signs."
+    },
+    {
+      "id": "hug-point-coastal-waterfall",
+      "title": "Hug Point Coastal Waterfall",
+      "src": "assets/06-tide-oregon/hug-point-coastal-waterfall.webp",
+      "background": "#eff8fb",
+      "prompt": "Hug Point on the Oregon coast in June: a small slender freshwater waterfall trickles over a low layered sandstone cliff at the right onto a quiet wet beach, green ferns and coastal vegetation above, a shallow reflective stream curves naturally across smooth dark sand toward Pacific surf beyond. Soft morning marine mist, pale cool sky, muted golden sandstone and detailed silky water. Keep the waterfall modest and believable, not a giant inland cascade; no people."
+    },
+    {
+      "id": "boardman-natural-bridges-sunbreak",
+      "title": "Boardman Natural Bridges Sunbreak",
+      "src": "assets/06-tide-oregon/boardman-natural-bridges-sunbreak.webp",
+      "background": "#eff8fc",
+      "prompt": "Samuel H. Boardman coast in southern Oregon in June, viewed from a forested bluff: a rugged natural rock bridge and steep tree-crowned coastal formations occupy the right side, deep teal Pacific water and white foamy channels below, mature wind-shaped conifers with fresh green foliage, fern fronds in foreground. A clear afternoon sunbreak after light rain illuminates the rock and tops of trees; distant cool mist. Natural geology, no fantasy multiple arches or human bridges."
+    },
+    {
+      "id": "bandon-face-rock-twilight",
+      "title": "Bandon Face Rock Twilight",
+      "src": "assets/06-tide-oregon/bandon-face-rock-twilight.webp",
+      "background": "#f0fafd",
+      "prompt": "Bandon's Face Rock shoreline in June at lingering blue hour: recognizable rugged sea-stack silhouettes rise on the right, the reclining face-like profile subtle and natural, shallow receding water and wet dark sand reflect bands of pink-lavender cloud after sunset. A low foamy wave catches faint silver-blue light, quiet atmospheric Pacific coast, no stars over a bright daytime sky and no people. The left/bottom paper fade stays pale cool blue-white despite the dusk scene."
+    },
+    {
+      "id": "oceanside-three-arch-rocks",
+      "title": "Oceanside Three Arch Rocks",
+      "src": "assets/06-tide-oregon/oceanside-three-arch-rocks.webp",
+      "background": "#eaf5fa",
+      "prompt": "Oceanside on the Oregon coast in June under soft coastal mist: three distinct rocky offshore formations stand at natural middle distance to the upper right, Pacific waves curl around them, low marine fog drifts across the water, muted green forested bluff and a little beach grass on the extreme right foreground. Pale blue and pearly gray light, subtle blush on the distant horizon, restrained luminous mood; no invented enormous arch carved through every rock."
+    },
+    {
+      "id": "cape-arago-harbor-seals",
+      "title": "Cape Arago Harbor Seals",
+      "src": "assets/06-tide-oregon/cape-arago-harbor-seals.webp",
+      "background": "#f3fafc",
+      "prompt": "A calm rocky inlet near Cape Arago in June: a small loose group of realistically proportioned harbor seals rests naturally on low wet shoreline rocks on the right at medium distance, gray spotted coats with restrained detail, cool blue-green sea and gentle white surf behind them, coastal spruce and mossy cliff in the far right background. Beautiful soft morning light, quiet wildlife landscape; no crowded colony, no cartoon faces, no giant close-up animal, no people."
+    },
+    {
+      "id": "yachats-basalt-and-silver-waves",
+      "title": "Yachats Basalt And Silver Waves",
+      "src": "assets/06-tide-oregon/yachats-basalt-and-silver-waves.webp",
+      "background": "#eff8fc",
+      "prompt": "The rocky shoreline at Yachats in June during a clearing shower: dark angular basalt shelves in the right foreground, white Pacific surf pours through narrow natural channels and catches silver sunlight, turbulent turquoise-gray sea beyond and dramatic blue-gray clouds lifting into a luminous sunbreak; delicate low rainbow just in sea spray where light is physically believable. Fine wet-rock texture and detailed foam, forceful natural coast rather than tropical blue water, no people."
+    },
+    {
+      "id": "neskowin-proposal-rock-sunset",
+      "title": "Neskowin Proposal Rock Sunset",
+      "src": "assets/06-tide-oregon/neskowin-proposal-rock-sunset.webp",
+      "background": "#ecf6f9",
+      "prompt": "Neskowin in June at low evening light: forest-topped Proposal Rock stands on the right at natural shoreline scale, a shallow winding creek crosses broad wet sand toward the Pacific, reflections of fresh green trees and peach-rose sky form graceful patterns in the foreground, gentle surf beyond. Intimate peaceful beach perspective and warm sunset scene colors while the blank left/bottom fade remains June's cool blue-white. No people or buildings."
+    },
+    {
+      "id": "boardman-forested-cove-after-rain",
+      "title": "Boardman Forested Cove After Rain",
+      "src": "assets/06-tide-oregon/boardman-forested-cove-after-rain.webp",
+      "background": "#f2f9fb",
+      "prompt": "Southern Oregon coast in Samuel H. Boardman corridor just after gentle June rain: an intimate forested cove viewed between moss-covered spruce trunks and richly detailed ferns, dark tree-topped offshore rock formations and bright turquoise surf on the right, wet branches glisten in a soft afternoon sunbreak, fine wisps of fog over the sea. Dense green temperate coastal rainforest, natural layered depth, no jungle fruit, no tropical palms, no people."
+    },
+    {
+      "id": "cape-perpetua-high-coastal-vista",
+      "title": "Cape Perpetua High Coastal Vista",
+      "src": "assets/06-tide-oregon/cape-perpetua-high-coastal-vista.webp",
+      "background": "#eff9fc",
+      "prompt": "From a high forested viewpoint at Cape Perpetua in June: the rugged Oregon coastline sweeps away in graceful layers on the right, mature green spruce forest on steep slopes, white wave lines and dark shoreline basalt far below, rolling ribbons of marine fog over the Pacific under a clear upper blue sky. Bright but gentle early-morning light, an airy expansive elevated coastal panorama, finely observed conifers in right foreground, no people or road traffic."
+    },
+    {
+      "id": "newport-sea-lions-and-fishing-boats",
+      "title": "Newport Sea Lions And Fishing Boats",
+      "src": "assets/06-tide-oregon/newport-sea-lions-and-fishing-boats.webp",
+      "background": "#f1f8fb",
+      "prompt": "Newport's working harbor on Oregon's coast in June, seen at dock level: a group of realistically proportioned California sea lions with brown and golden coats lounges naturally on wooden floating docks in the right foreground amongst moored fishing boats. Finely rendered weathered planks, ropes, fenders, colorful fishing hulls and tall rigging reflected in calm blue-green Yaquina Bay, soft golden morning light and a little marine haze, a hint of waterfront buildings at natural middle distance. Lively coastal harbor, realistic animal anatomy and scale, no cartoon faces, no oversized animals, no readable lettering, no crowds."
+    }
+  ]
+}

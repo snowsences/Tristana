@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 238,
+  "sceneCount": 254,
   "themes": [
     {
       "month": 1,
@@ -1031,6 +1031,102 @@
           "src": "assets/06-tide-oregon/oregon-wave-rainbow.webp",
           "background": "#f1fafc",
           "maximumCornerDelta": 2.0
+        },
+        {
+          "id": "cape-kiwanda-morning-surf",
+          "src": "assets/06-tide-oregon/cape-kiwanda-morning-surf.webp",
+          "background": "#f0f8fb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "ecola-spruce-viewpoint",
+          "src": "assets/06-tide-oregon/ecola-spruce-viewpoint.webp",
+          "background": "#f1f9fc",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "haystack-rock-low-tide",
+          "src": "assets/06-tide-oregon/haystack-rock-low-tide.webp",
+          "background": "#f2fbfd",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "seal-rock-tidepool-details",
+          "src": "assets/06-tide-oregon/seal-rock-tidepool-details.webp",
+          "background": "#f3fbfe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "yaquina-head-clear-afternoon",
+          "src": "assets/06-tide-oregon/yaquina-head-clear-afternoon.webp",
+          "background": "#f1f8fb",
+          "maximumCornerDelta": 2.0
+        },
+        {
+          "id": "cape-meares-marine-fog",
+          "src": "assets/06-tide-oregon/cape-meares-marine-fog.webp",
+          "background": "#f2fafd",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "hug-point-coastal-waterfall",
+          "src": "assets/06-tide-oregon/hug-point-coastal-waterfall.webp",
+          "background": "#eff8fb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "boardman-natural-bridges-sunbreak",
+          "src": "assets/06-tide-oregon/boardman-natural-bridges-sunbreak.webp",
+          "background": "#eff8fc",
+          "maximumCornerDelta": 0.37
+        },
+        {
+          "id": "bandon-face-rock-twilight",
+          "src": "assets/06-tide-oregon/bandon-face-rock-twilight.webp",
+          "background": "#f0fafd",
+          "maximumCornerDelta": 1.07
+        },
+        {
+          "id": "oceanside-three-arch-rocks",
+          "src": "assets/06-tide-oregon/oceanside-three-arch-rocks.webp",
+          "background": "#eaf5fa",
+          "maximumCornerDelta": 0.78
+        },
+        {
+          "id": "cape-arago-harbor-seals",
+          "src": "assets/06-tide-oregon/cape-arago-harbor-seals.webp",
+          "background": "#f3fafc",
+          "maximumCornerDelta": 0.0
+        },
+        {
+          "id": "yachats-basalt-and-silver-waves",
+          "src": "assets/06-tide-oregon/yachats-basalt-and-silver-waves.webp",
+          "background": "#eff8fc",
+          "maximumCornerDelta": 0.57
+        },
+        {
+          "id": "neskowin-proposal-rock-sunset",
+          "src": "assets/06-tide-oregon/neskowin-proposal-rock-sunset.webp",
+          "background": "#ecf6f9",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "boardman-forested-cove-after-rain",
+          "src": "assets/06-tide-oregon/boardman-forested-cove-after-rain.webp",
+          "background": "#f2f9fb",
+          "maximumCornerDelta": 1.07
+        },
+        {
+          "id": "cape-perpetua-high-coastal-vista",
+          "src": "assets/06-tide-oregon/cape-perpetua-high-coastal-vista.webp",
+          "background": "#eff9fc",
+          "maximumCornerDelta": 0.87
+        },
+        {
+          "id": "newport-sea-lions-and-fishing-boats",
+          "src": "assets/06-tide-oregon/newport-sea-lions-and-fishing-boats.webp",
+          "background": "#f1f8fb",
+          "maximumCornerDelta": 1.0
         }
       ]
     },

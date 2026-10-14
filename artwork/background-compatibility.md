@@ -11,3 +11,6 @@ For future artwork, keep the original detailed rendering and curved, gradual fad
 
 August now includes 31 glacier-lake scenes. Its 19 additions retain the detailed rendering and pale green-white fades, with actual blank-corner color sampled per scene. Full and small exports were checked against the sampled page color. Total audited scenes: 291.
 
+
+
+September now includes 30 alpine-autumn scenes. Its 23 additions preserve the detailed painting style and smooth warm-ivory fades. Each full and small export has its actual blank-corner tone measured and recorded for the page background. Total audited scenes: 314.

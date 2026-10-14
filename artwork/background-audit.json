@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 291,
+  "sceneCount": 314,
   "themes": [
     {
       "month": 1,
@@ -1559,6 +1559,144 @@
           "src": "assets/09-alpine-autumn/sep-07-sunday.webp",
           "background": "#fcf6ed",
           "maximumCornerDelta": 4.33
+        },
+        {
+          "id": "shuksan-crimson-slopes",
+          "src": "assets/09-alpine-autumn/shuksan-crimson-slopes.webp",
+          "background": "#fdf9ed",
+          "maximumCornerDelta": 1.22
+        },
+        {
+          "id": "picture-lake-golden-larches",
+          "src": "assets/09-alpine-autumn/picture-lake-golden-larches.webp",
+          "background": "#fdf8ed",
+          "maximumCornerDelta": 0.5
+        },
+        {
+          "id": "north-cascades-golden-larch-ridge",
+          "src": "assets/09-alpine-autumn/north-cascades-golden-larch-ridge.webp",
+          "background": "#fdf7e9",
+          "maximumCornerDelta": 0.82
+        },
+        {
+          "id": "blue-lake-liberty-bell-autumn",
+          "src": "assets/09-alpine-autumn/blue-lake-liberty-bell-autumn.webp",
+          "background": "#fdf9ef",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "cutthroat-pass-autumn",
+          "src": "assets/09-alpine-autumn/cutthroat-pass-autumn.webp",
+          "background": "#fdf8ee",
+          "maximumCornerDelta": 1.18
+        },
+        {
+          "id": "rainier-autumn-glacier-glow",
+          "src": "assets/09-alpine-autumn/rainier-autumn-glacier-glow.webp",
+          "background": "#fdf7eb",
+          "maximumCornerDelta": 0.53
+        },
+        {
+          "id": "rainier-autumn-lake-reflections",
+          "src": "assets/09-alpine-autumn/rainier-autumn-lake-reflections.webp",
+          "background": "#fdf8ec",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "tipsoo-lake-autumn-frost",
+          "src": "assets/09-alpine-autumn/tipsoo-lake-autumn-frost.webp",
+          "background": "#fcf7eb",
+          "maximumCornerDelta": 0.68
+        },
+        {
+          "id": "indian-henrys-autumn-meadows",
+          "src": "assets/09-alpine-autumn/indian-henrys-autumn-meadows.webp",
+          "background": "#fdf9ed",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "dallas-divide-golden-slopes",
+          "src": "assets/09-alpine-autumn/dallas-divide-golden-slopes.webp",
+          "background": "#fdf9f0",
+          "maximumCornerDelta": 1.44
+        },
+        {
+          "id": "million-dollar-highway-autumn-bend",
+          "src": "assets/09-alpine-autumn/million-dollar-highway-autumn-bend.webp",
+          "background": "#fdf8ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "maroon-bells-autumn-dawn",
+          "src": "assets/09-alpine-autumn/maroon-bells-autumn-dawn.webp",
+          "background": "#fdf9f0",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "owl-creek-pass-autumn-towers",
+          "src": "assets/09-alpine-autumn/owl-creek-pass-autumn-towers.webp",
+          "background": "#fcf7eb",
+          "maximumCornerDelta": 0.96
+        },
+        {
+          "id": "kebler-pass-golden-light",
+          "src": "assets/09-alpine-autumn/kebler-pass-golden-light.webp",
+          "background": "#fcf9ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "moraine-lake-autumn-larches",
+          "src": "assets/09-alpine-autumn/moraine-lake-autumn-larches.webp",
+          "background": "#fdfaef",
+          "maximumCornerDelta": 1.22
+        },
+        {
+          "id": "san-juans-aspen-stream",
+          "src": "assets/09-alpine-autumn/san-juans-aspen-stream.webp",
+          "background": "#fdf9ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "sneffels-first-snow-aspens",
+          "src": "assets/09-alpine-autumn/sneffels-first-snow-aspens.webp",
+          "background": "#fcf7ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "lake-ohara-autumn-mist",
+          "src": "assets/09-alpine-autumn/lake-ohara-autumn-mist.webp",
+          "background": "#fcf8f0",
+          "maximumCornerDelta": 1.43
+        },
+        {
+          "id": "larch-valley-ten-peaks-autumn",
+          "src": "assets/09-alpine-autumn/larch-valley-ten-peaks-autumn.webp",
+          "background": "#fbf7ed",
+          "maximumCornerDelta": 0.56
+        },
+        {
+          "id": "denali-crimson-tundra",
+          "src": "assets/09-alpine-autumn/denali-crimson-tundra.webp",
+          "background": "#fcf8ef",
+          "maximumCornerDelta": 0.73
+        },
+        {
+          "id": "glacier-autumn-waterfall",
+          "src": "assets/09-alpine-autumn/glacier-autumn-waterfall.webp",
+          "background": "#fbf6ec",
+          "maximumCornerDelta": 1.21
+        },
+        {
+          "id": "tombstone-autumn-tundra",
+          "src": "assets/09-alpine-autumn/tombstone-autumn-tundra.webp",
+          "background": "#fdf9f0",
+          "maximumCornerDelta": 1.44
+        },
+        {
+          "id": "lake-mcdonald-autumn-shore",
+          "src": "assets/09-alpine-autumn/lake-mcdonald-autumn-shore.webp",
+          "background": "#fcf7ee",
+          "maximumCornerDelta": 1.25
         }
       ]
     },
@@ -1822,4 +1960,3 @@
     }
   ]
 }
-

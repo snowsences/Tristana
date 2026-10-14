@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 347,
+  "sceneCount": 366,
   "themes": [
     {
       "month": 1,
@@ -2152,6 +2152,120 @@
           "id": "winter-lit-stream",
           "src": "assets/12-alpine-winter/dec-12-forest-stream.webp",
           "background": "#f2f7fc",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "shore-acres-winter-storm",
+          "src": "assets/12-alpine-winter/shore-acres-winter-storm.webp",
+          "background": "#f4f9fe",
+          "maximumCornerDelta": 0.5
+        },
+        {
+          "id": "crater-lake-snowy-rim",
+          "src": "assets/12-alpine-winter/crater-lake-snowy-rim.webp",
+          "background": "#f3fafe",
+          "maximumCornerDelta": 1.22
+        },
+        {
+          "id": "baker-blue-hour-snow-forest",
+          "src": "assets/12-alpine-winter/baker-blue-hour-snow-forest.webp",
+          "background": "#f2f8fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "liberty-bell-winter-spires",
+          "src": "assets/12-alpine-winter/liberty-bell-winter-spires.webp",
+          "background": "#f3f8fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "st-helens-winter-crater",
+          "src": "assets/12-alpine-winter/st-helens-winter-crater.webp",
+          "background": "#f3f9fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "sneffels-pink-winter-ridge",
+          "src": "assets/12-alpine-winter/sneffels-pink-winter-ridge.webp",
+          "background": "#f3fafe",
+          "maximumCornerDelta": 1.25
+        },
+        {
+          "id": "maroon-bells-frozen-lake",
+          "src": "assets/12-alpine-winter/maroon-bells-frozen-lake.webp",
+          "background": "#f2f8fd",
+          "maximumCornerDelta": 0.7
+        },
+        {
+          "id": "telluride-frozen-bridal-veil",
+          "src": "assets/12-alpine-winter/telluride-frozen-bridal-veil.webp",
+          "background": "#f4fafe",
+          "maximumCornerDelta": 1.39
+        },
+        {
+          "id": "san-juan-snowy-aspen-grove",
+          "src": "assets/12-alpine-winter/san-juan-snowy-aspen-grove.webp",
+          "background": "#f3f9fe",
+          "maximumCornerDelta": 0.44
+        },
+        {
+          "id": "bow-lake-winter-glacier",
+          "src": "assets/12-alpine-winter/bow-lake-winter-glacier.webp",
+          "background": "#f3f9fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "peyto-lake-snowy-lookout",
+          "src": "assets/12-alpine-winter/peyto-lake-snowy-lookout.webp",
+          "background": "#f1f8fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "moraine-lake-winter-last-light",
+          "src": "assets/12-alpine-winter/moraine-lake-winter-last-light.webp",
+          "background": "#f2f8fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "athabasca-falls-winter-gorge",
+          "src": "assets/12-alpine-winter/athabasca-falls-winter-gorge.webp",
+          "background": "#f4f9fe",
+          "maximumCornerDelta": 0.5
+        },
+        {
+          "id": "yellowstone-frosted-bison",
+          "src": "assets/12-alpine-winter/yellowstone-frosted-bison.webp",
+          "background": "#f3f9fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "grand-prismatic-winter-steam",
+          "src": "assets/12-alpine-winter/grand-prismatic-winter-steam.webp",
+          "background": "#f1f8fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "tetons-moonlit-snowfield",
+          "src": "assets/12-alpine-winter/tetons-moonlit-snowfield.webp",
+          "background": "#f3fafe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "rainier-snow-laden-firs",
+          "src": "assets/12-alpine-winter/rainier-snow-laden-firs.webp",
+          "background": "#f2f8fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "sahalie-falls-winter-spray",
+          "src": "assets/12-alpine-winter/sahalie-falls-winter-spray.webp",
+          "background": "#f3f9fe",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "tahoe-snowy-boulder-shore",
+          "src": "assets/12-alpine-winter/tahoe-snowy-boulder-shore.webp",
+          "background": "#f2f8fe",
           "maximumCornerDelta": 1.0
         }
       ]

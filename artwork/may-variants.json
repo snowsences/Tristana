@@ -1,0 +1,154 @@
+{
+  "generationMethod": "built-in imagegen",
+  "nominalThemeBackground": "#fff8ee",
+  "sharedPrompt": "Use case: illustration-story. Asset: one standalone Tristana seasonal journal header. Create a landscape 1536x1024 image, aspect 3:2. Match the original approved Tristana headers and approved High Line/Brooklyn pictures: finely detailed realistic painted illustration with restrained watercolor washes, believable light, deep dimensional perspective and crisp observed textures in architecture and foliage. Maintain that fine detailed rendering as it becomes faint through the fade; do not replace details with abstract paint splotches or chunky brush dabs. Compose the main scene across the right two-thirds. Leftmost 25\u201330% mostly blank for text. The original detailed scene gently fades into the CORRECT MAY BACKGROUND: pale warm ivory HEX #FFF8EE, RGB 255,248,238. This is an opaque, theme-matched image, NOT transparent. A broad soft irregular curved/diagonal fade runs from upper-left towards bottom-right and follows the scene's forms; it fades softly across the bottom. The far left and blank bottom reach the same pale May background with restrained fine grain; no white rectangle, no hard cutoff, no separate border. Top/right scene edges are sharp and fully illustrated to the edges; preserve scene detail near bottom-right before the final soft lower-edge fade. Absolutely no added text, typography, watermark, collage, frames, panels, abstract watercolor splashes, large foreground people or dense crowds. Season is May: spring greenery and believable spring flowers, no autumn foliage or snow. Single image only. Scene: ",
+  "variants": [
+    {
+      "id": "high-line-chelsea-morning",
+      "title": "High Line Chelsea Morning",
+      "src": "assets/05-daylight/high-line-chelsea-morning.webp",
+      "background": "#fef7ed",
+      "prompt": "On the High Line in Chelsea on a clear May morning: elevated concrete path curves gently past preserved rust-colored railway tracks set into lush spring planting; adjacent red-brick warehouse facades with old black fire escapes and a few contemporary buildings, fresh tree leaves, delicate white flowers and lilac-purple perennials. Low oblique morning light makes long natural shadows; an intimate city garden perspective rather than a skyline panorama."
+    },
+    {
+      "id": "high-line-after-spring-rain",
+      "title": "High Line After Spring Rain",
+      "src": "assets/05-daylight/high-line-after-spring-rain.webp",
+      "background": "#fef6eb",
+      "prompt": "The High Line after a May shower at late afternoon: low viewpoint beside two old steel rails threading between fresh grasses, a dark wooden bench on the right, glistening concrete paving with a few small puddles, dense spring planting, brick Chelsea buildings beyond. A peach sunbreak under blue-gray clouds, reflections and wet leaves rendered with fine natural detail. Quiet, no close-up people."
+    },
+    {
+      "id": "high-line-tenth-avenue-overlook",
+      "title": "High Line Tenth Avenue Overlook",
+      "src": "assets/05-daylight/high-line-tenth-avenue-overlook.webp",
+      "background": "#fef7ed",
+      "prompt": "The High Line's Tenth Avenue Square overlook in May: broad warm wooden amphitheater steps descend on the right toward a large street-facing glass opening, showing the long perspective of Tenth Avenue, yellow taxis tiny and distant, layered brick architecture, young spring trees around the elevated park. Bright pale late-morning sunlight and elegant architectural lines, distinctly an urban overlook, not another planted footpath."
+    },
+    {
+      "id": "high-line-birch-grove",
+      "title": "High Line Birch Grove",
+      "src": "assets/05-daylight/high-line-birch-grove.webp",
+      "background": "#fef8ee",
+      "prompt": "Within a leafy birch grove along the High Line in May: slender white-barked birch trunks, pale fresh green canopy, fern-like ground planting and spring flowers, a narrow elevated boardwalk bending into deep right background; partial glimpses of Chelsea brick buildings through foliage. Beautiful dappled afternoon sunlight, intimate calm sheltered composition, precisely detailed bark and leaves."
+    },
+    {
+      "id": "high-line-hudson-sunset",
+      "title": "High Line Hudson Sunset",
+      "src": "assets/05-daylight/high-line-hudson-sunset.webp",
+      "background": "#fdf5eb",
+      "prompt": "From the High Line's northern Rail Yards curve in May: elevated walkway and black railings sweep through the lower right toward the Hudson River, soft green spring planting and preserved rail lines; distant river piers and New Jersey shore visible across blue-gold water, warm red-orange sunset sky and subtle modern west-side buildings on the far right. Wide westward view, beautiful spacious sky and river, believable city scale."
+    },
+    {
+      "id": "high-line-beneath-the-standard",
+      "title": "High Line Beneath The Standard",
+      "src": "assets/05-daylight/high-line-beneath-the-standard.webp",
+      "background": "#fdf7ee",
+      "prompt": "High Line in the Meatpacking District just after sunset in May: elevated garden walkway passes beneath the lifted hotel structure of The Standard, its distinct concrete legs and rectilinear facade in the upper right, warm little walkway lamps beginning to glow among soft leafy planting; surrounding historic low brick buildings, violet-blue evening atmosphere with lingering pink sky. Detailed architectural painting, quiet, no readable signage."
+    },
+    {
+      "id": "high-line-gansevoort-spring",
+      "title": "High Line Gansevoort Spring",
+      "src": "assets/05-daylight/high-line-gansevoort-spring.webp",
+      "background": "#fef7ec",
+      "prompt": "The southern Gansevoort end of the High Line in May: angular museum architecture in the background at right and an elevated path leading past generous spring foliage, white-blossoming trees and weathered industrial steel, a visible outdoor stair descending toward the historic Meatpacking District's low brick streets. Fresh crisp morning light and pale blue sky, city layers and planted park, distinct from the meadow scene."
+    },
+    {
+      "id": "dumbo-washington-street-morning",
+      "title": "DUMBO Washington Street Morning",
+      "src": "assets/05-daylight/dumbo-washington-street-morning.webp",
+      "background": "#fef7ec",
+      "prompt": "The iconic Washington Street view in DUMBO, Brooklyn, on a fresh May morning: handsome old red-brick warehouse buildings on both sides of the narrow cobblestone street frame the blue steel Manhattan Bridge tower in the center-right distance; the Empire State Building subtly visible through the arch at believable faraway scale. Fresh green street trees soften the masonry; gentle clear sunlight and long street perspective. No large close vehicles or readable signs."
+    },
+    {
+      "id": "dumbo-pebble-beach-after-rain",
+      "title": "DUMBO Pebble Beach After Rain",
+      "src": "assets/05-daylight/dumbo-pebble-beach-after-rain.webp",
+      "background": "#fcf4e9",
+      "prompt": "At DUMBO's Pebble Beach after a May rain shower: smooth wet pebbles and shallow little wavelets in the right foreground, the East River opens toward lower Manhattan, the Manhattan Bridge crosses diagonally through the upper right with accurate blue steel structure, soft gray-lavender sky lifting into a luminous sunbreak. Natural river reflections, fresh green shoreline trees; peaceful intimate waterside view, finely painted details."
+    },
+    {
+      "id": "dumbo-carousel-at-sunrise",
+      "title": "DUMBO Carousel At Sunrise",
+      "src": "assets/05-daylight/dumbo-carousel-at-sunrise.webp",
+      "background": "#fef6eb",
+      "prompt": "From Empire Fulton Ferry park in DUMBO at a pink May sunrise: Jane's Carousel seen from outside as a small elegant glass pavilion with faintly visible painted carousel horses, its glass reflecting rose-gold light; fresh spring trees and a stone riverside path at right, Brooklyn Bridge stone tower and suspension cables rising behind it, lower Manhattan across the East River. Quiet before opening, charming and architectural; no text."
+    },
+    {
+      "id": "dumbo-manhattan-bridge-archway",
+      "title": "DUMBO Manhattan Bridge Archway",
+      "src": "assets/05-daylight/dumbo-manhattan-bridge-archway.webp",
+      "background": "#fef7ec",
+      "prompt": "Inside DUMBO's monumental Manhattan Bridge stone archway in soft May daylight: a high masonry arch and textured stone piers frame a view of a small brick courtyard and leafy trees beyond; warm oblique light across old stone, subtle red-brick industrial facades, old paving in the foreground. Calm historic architectural scene, intricate mortar and stone textures, no shop signs or crowd, no subway train."
+    },
+    {
+      "id": "dumbo-warehouse-blue-hour",
+      "title": "DUMBO Warehouse Blue Hour",
+      "src": "assets/05-daylight/dumbo-warehouse-blue-hour.webp",
+      "background": "#fef6ec",
+      "prompt": "A quiet DUMBO cobblestone street at blue hour in May: elegant red-brick warehouse facades with tall divided windows, subtle warm interior lights, black metal fire escapes and gently lit sidewalk; a partial blue steel bridge span visible high in the far right distance between buildings. Fresh green leaves, faint damp reflections on cobbles, rich indigo twilight with peach on horizon. Preserve fine architecture and quiet mood, no lettering."
+    },
+    {
+      "id": "williamsburg-domino-park-afternoon",
+      "title": "Williamsburg Domino Park Afternoon",
+      "src": "assets/05-daylight/williamsburg-domino-park-afternoon.webp",
+      "background": "#fef5e9",
+      "prompt": "Domino Park in Williamsburg on a clear May afternoon: distinctive preserved turquoise industrial gantry cranes and refinery machinery beside the East River, warm timber waterfront decking and carefully planted green spring gardens in the right foreground; old red-brick Domino refinery building with its modern glass addition at right, Manhattan skyline across water. Refined realistic geometry, relaxed sunny riverfront atmosphere, no legible signs."
+    },
+    {
+      "id": "williamsburg-bushwick-inlet-sunset",
+      "title": "Williamsburg Bushwick Inlet Sunset",
+      "src": "assets/05-daylight/williamsburg-bushwick-inlet-sunset.webp",
+      "background": "#fef6eb",
+      "prompt": "From the grassy waterfront of Bushwick Inlet Park in Williamsburg in May: fresh spring grass and low wildflower planting on the right foreground slope, a simple waterside path and dark railing, expansive East River reflecting a coral-lavender sunset, Manhattan's midtown skyline beyond. Natural skyline scale and soft atmospheric distance, lovely quiet contemplative urban landscape, different shoreline angle from Brooklyn Bridge Park."
+    },
+    {
+      "id": "williamsburg-side-street-spring",
+      "title": "Williamsburg Side Street Spring",
+      "src": "assets/05-daylight/williamsburg-side-street-spring.webp",
+      "background": "#fef7eb",
+      "prompt": "A quiet Williamsburg residential side street in May: varied low red-brick row houses, aged painted masonry, dark metal stoops and fire escapes, a corner with a small green-leafed tree and flowering planters; a few subtle distant modern buildings behind the historic neighborhood. Gentle overcast morning light, warm brick and cool green leaves, intimate human-scale streetscape without store signs or close-up people."
+    },
+    {
+      "id": "williamsburg-ferry-landing-twilight",
+      "title": "Williamsburg Ferry Landing Twilight",
+      "src": "assets/05-daylight/williamsburg-ferry-landing-twilight.webp",
+      "background": "#fdf5e8",
+      "prompt": "North Williamsburg East River ferry landing just after sunset in May: a modest pier with black railings and a small white ferry in the middle distance, leafy waterfront park and wooden promenade in the right foreground; Manhattan's illuminated skyline reflected softly on dark blue river water, a lavender-pink band on the horizon. Quiet accurate-scale cityscape, no huge fantasy buildings, no readable text."
+    },
+    {
+      "id": "williamsburg-bridge-at-dawn",
+      "title": "Williamsburg Bridge At Dawn",
+      "src": "assets/05-daylight/williamsburg-bridge-at-dawn.webp",
+      "background": "#fdf5ea",
+      "prompt": "Williamsburg Bridge in May at pale golden dawn, viewed from the Brooklyn waterfront near its approach: distinct steel suspension tower, red-painted structural and pedestrian details, diagonally receding bridge deck across the East River; leafy spring branches frame the upper right, low old brick buildings at the right edge. Fine believable cables and steelwork, rose light on metal and calm silvery river, no traffic close-ups."
+    },
+    {
+      "id": "brooklyn-heights-promenade-mist",
+      "title": "Brooklyn Heights Promenade Mist",
+      "src": "assets/05-daylight/brooklyn-heights-promenade-mist.webp",
+      "background": "#fef6ea",
+      "prompt": "Brooklyn Heights Promenade on a softly misty May morning: elegant dark iron railing and park benches curve away along the upper-right walkway; leafy mature trees and small white spring blossoms, lower Manhattan softened across the East River, glimmering diffuse light in a silvery sky. Quiet beautifully observed scene, old stone paving and bark textures; panorama at a distinctly higher viewpoint than Brooklyn Bridge Park."
+    },
+    {
+      "id": "fort-greene-park-spring-sunlight",
+      "title": "Fort Greene Park Spring Sunlight",
+      "src": "assets/05-daylight/fort-greene-park-spring-sunlight.webp",
+      "background": "#fdf5ea",
+      "prompt": "Fort Greene Park, Brooklyn, on a fresh May afternoon: a sweeping gently sloped park path lined by mature trees in bright spring foliage, sun-dappled grass and subtle flowering shrubs, distant historic Brooklyn brownstones peeking beyond the park on the far right. Lovely layered canopy and peaceful neighborhood character, natural tree scale, finely rendered foliage, no prominent people."
+    },
+    {
+      "id": "prospect-park-stone-bridge",
+      "title": "Prospect Park Stone Bridge",
+      "src": "assets/05-daylight/prospect-park-stone-bridge.webp",
+      "background": "#fef7ef",
+      "prompt": "Prospect Park in Brooklyn in May: graceful small weathered stone arch bridge spanning a quiet stream on the upper right, dense fresh woodland foliage and fern banks, subtle spring blossoms, gentle water reflections and mottled afternoon light filtering through trees. Believable intimate Brooklyn park scene, nature mixed with historic masonry; no waterfalls, no fantasy castle, no people."
+    },
+    {
+      "id": "park-slope-brownstone-evening",
+      "title": "Park Slope Brownstone Evening",
+      "src": "assets/05-daylight/park-slope-brownstone-evening.webp",
+      "background": "#fef7ec",
+      "prompt": "Park Slope, Brooklyn, in May at the last light of evening: a corner perspective of handsome brownstone townhouses with broad stone stoops, ornate dark ironwork and flowering window boxes, deep green street-tree canopy above, a soft rose sky between rooflines and a few warm interior lights. Different layout from the earlier sunny brownstone image: corner intersection viewed diagonally across the quiet street, amber and violet dusk, detailed masonry and branches."
+    }
+  ]
+}

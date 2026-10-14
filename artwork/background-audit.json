@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 217,
+  "sceneCount": 238,
   "themes": [
     {
       "month": 1,
@@ -815,6 +815,132 @@
           "src": "assets/05-daylight/spring-meadow-along-the-high-line.webp",
           "background": "#fdf9ef",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "high-line-chelsea-morning",
+          "src": "assets/05-daylight/high-line-chelsea-morning.webp",
+          "background": "#fef7ed",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "high-line-after-spring-rain",
+          "src": "assets/05-daylight/high-line-after-spring-rain.webp",
+          "background": "#fef6eb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "high-line-tenth-avenue-overlook",
+          "src": "assets/05-daylight/high-line-tenth-avenue-overlook.webp",
+          "background": "#fef7ed",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "high-line-birch-grove",
+          "src": "assets/05-daylight/high-line-birch-grove.webp",
+          "background": "#fef8ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "high-line-hudson-sunset",
+          "src": "assets/05-daylight/high-line-hudson-sunset.webp",
+          "background": "#fdf5eb",
+          "maximumCornerDelta": 1.2
+        },
+        {
+          "id": "high-line-beneath-the-standard",
+          "src": "assets/05-daylight/high-line-beneath-the-standard.webp",
+          "background": "#fdf7ee",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "high-line-gansevoort-spring",
+          "src": "assets/05-daylight/high-line-gansevoort-spring.webp",
+          "background": "#fef7ec",
+          "maximumCornerDelta": 0.13
+        },
+        {
+          "id": "dumbo-washington-street-morning",
+          "src": "assets/05-daylight/dumbo-washington-street-morning.webp",
+          "background": "#fef7ec",
+          "maximumCornerDelta": 0.0
+        },
+        {
+          "id": "dumbo-pebble-beach-after-rain",
+          "src": "assets/05-daylight/dumbo-pebble-beach-after-rain.webp",
+          "background": "#fcf4e9",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "dumbo-carousel-at-sunrise",
+          "src": "assets/05-daylight/dumbo-carousel-at-sunrise.webp",
+          "background": "#fef6eb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "dumbo-manhattan-bridge-archway",
+          "src": "assets/05-daylight/dumbo-manhattan-bridge-archway.webp",
+          "background": "#fef7ec",
+          "maximumCornerDelta": 0.0
+        },
+        {
+          "id": "dumbo-warehouse-blue-hour",
+          "src": "assets/05-daylight/dumbo-warehouse-blue-hour.webp",
+          "background": "#fef6ec",
+          "maximumCornerDelta": 1.4
+        },
+        {
+          "id": "williamsburg-domino-park-afternoon",
+          "src": "assets/05-daylight/williamsburg-domino-park-afternoon.webp",
+          "background": "#fef5e9",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "williamsburg-bushwick-inlet-sunset",
+          "src": "assets/05-daylight/williamsburg-bushwick-inlet-sunset.webp",
+          "background": "#fef6eb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "williamsburg-side-street-spring",
+          "src": "assets/05-daylight/williamsburg-side-street-spring.webp",
+          "background": "#fef7eb",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "williamsburg-ferry-landing-twilight",
+          "src": "assets/05-daylight/williamsburg-ferry-landing-twilight.webp",
+          "background": "#fdf5e8",
+          "maximumCornerDelta": 1.07
+        },
+        {
+          "id": "williamsburg-bridge-at-dawn",
+          "src": "assets/05-daylight/williamsburg-bridge-at-dawn.webp",
+          "background": "#fdf5ea",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "brooklyn-heights-promenade-mist",
+          "src": "assets/05-daylight/brooklyn-heights-promenade-mist.webp",
+          "background": "#fef6ea",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "fort-greene-park-spring-sunlight",
+          "src": "assets/05-daylight/fort-greene-park-spring-sunlight.webp",
+          "background": "#fdf5ea",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "prospect-park-stone-bridge",
+          "src": "assets/05-daylight/prospect-park-stone-bridge.webp",
+          "background": "#fef7ef",
+          "maximumCornerDelta": 1.07
+        },
+        {
+          "id": "park-slope-brownstone-evening",
+          "src": "assets/05-daylight/park-slope-brownstone-evening.webp",
+          "background": "#fef7ec",
+          "maximumCornerDelta": 0.27
         }
       ]
     },

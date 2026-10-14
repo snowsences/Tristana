@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 254,
+  "sceneCount": 272,
   "themes": [
     {
       "month": 1,
@@ -1211,6 +1211,114 @@
           "src": "assets/07-alpine-summer/crystal-mill-summer.webp",
           "background": "#fdf9f0",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "tipsoo-lake-summer-reflections",
+          "src": "assets/07-alpine-summer/tipsoo-lake-summer-reflections.webp",
+          "background": "#fbf8ef",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "berkeley-park-meadow-creek",
+          "src": "assets/07-alpine-summer/berkeley-park-meadow-creek.webp",
+          "background": "#fbf8ee",
+          "maximumCornerDelta": 0.67
+        },
+        {
+          "id": "spray-park-beargrass-sunbreak",
+          "src": "assets/07-alpine-summer/spray-park-beargrass-sunbreak.webp",
+          "background": "#faf7ef",
+          "maximumCornerDelta": 0.13
+        },
+        {
+          "id": "sunrise-ridge-and-white-river-valley",
+          "src": "assets/07-alpine-summer/sunrise-ridge-and-white-river-valley.webp",
+          "background": "#fbf8ef",
+          "maximumCornerDelta": 1.67
+        },
+        {
+          "id": "tatoosh-peaks-in-evening-light",
+          "src": "assets/07-alpine-summer/tatoosh-peaks-in-evening-light.webp",
+          "background": "#faf7ed",
+          "maximumCornerDelta": 0.13
+        },
+        {
+          "id": "maple-pass-heather-and-alpine-lake",
+          "src": "assets/07-alpine-summer/maple-pass-heather-and-alpine-lake.webp",
+          "background": "#fbf8f0",
+          "maximumCornerDelta": 0.33
+        },
+        {
+          "id": "mount-baker-from-artist-point",
+          "src": "assets/07-alpine-summer/mount-baker-from-artist-point.webp",
+          "background": "#fbf8ef",
+          "maximumCornerDelta": 1.33
+        },
+        {
+          "id": "hurricane-ridge-lupine-slopes",
+          "src": "assets/07-alpine-summer/hurricane-ridge-lupine-slopes.webp",
+          "background": "#fcf9ee",
+          "maximumCornerDelta": 0.67
+        },
+        {
+          "id": "goat-rocks-summer-crest",
+          "src": "assets/07-alpine-summer/goat-rocks-summer-crest.webp",
+          "background": "#fbf8f0",
+          "maximumCornerDelta": 0.4
+        },
+        {
+          "id": "yankee-boy-basin-columbines",
+          "src": "assets/07-alpine-summer/yankee-boy-basin-columbines.webp",
+          "background": "#faf7ee",
+          "maximumCornerDelta": 0.67
+        },
+        {
+          "id": "american-basin-summer-stream",
+          "src": "assets/07-alpine-summer/american-basin-summer-stream.webp",
+          "background": "#fbf9f0",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "maroon-bells-quiet-summer-lake",
+          "src": "assets/07-alpine-summer/maroon-bells-quiet-summer-lake.webp",
+          "background": "#fbf8ef",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "kebler-aspens-and-sunlit-ferns",
+          "src": "assets/07-alpine-summer/kebler-aspens-and-sunlit-ferns.webp",
+          "background": "#fbf8ee",
+          "maximumCornerDelta": 0.0
+        },
+        {
+          "id": "crested-butte-meadow-after-rain",
+          "src": "assets/07-alpine-summer/crested-butte-meadow-after-rain.webp",
+          "background": "#faf7ec",
+          "maximumCornerDelta": 1.44
+        },
+        {
+          "id": "alpine-columbines-in-morning-dew",
+          "src": "assets/07-alpine-summer/alpine-columbines-in-morning-dew.webp",
+          "background": "#fbf7ed",
+          "maximumCornerDelta": 0.89
+        },
+        {
+          "id": "marmot-among-alpine-rocks",
+          "src": "assets/07-alpine-summer/marmot-among-alpine-rocks.webp",
+          "background": "#fcf8ed",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "mountain-goat-in-summer-meadow",
+          "src": "assets/07-alpine-summer/mountain-goat-in-summer-meadow.webp",
+          "background": "#fcf9f0",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "mount-adams-fireweed-and-fir-forest",
+          "src": "assets/07-alpine-summer/mount-adams-fireweed-and-fir-forest.webp",
+          "background": "#fcf9f1",
+          "maximumCornerDelta": 1.33
         }
       ]
     },

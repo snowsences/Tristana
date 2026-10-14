@@ -1,0 +1,104 @@
+{
+  "month": "February",
+  "method": "built-in imagegen",
+  "variants": [
+    {
+      "id": "napali-predawn",
+      "title": "Nā Pali · violet predawn",
+      "request": "The lush tropical Nā Pali coastline before sunrise. Deep violet and indigo cloud layers over emerald cliffs, a thin coral-pink horizon, ocean in cool dark teal with pale foam. No direct sunshine yet, subtle mist between the deeply fluted green cliffs. Retain warm tropical vegetation and dramatic island geography, no snow or autumn colors.",
+      "sourceImage": "assets/02-hawaii/feb-01-monday.webp"
+    },
+    {
+      "id": "jungle-morning-sunbeams",
+      "title": "Hawaiian jungle · morning sunbeams",
+      "request": "A lush Hawaiian rainforest hollow at early morning after rain. Low sunshine forms distinct golden shafts through fine mist and layers of huge monstera leaves, climbing variegated pothos, banana leaves, ferns and bright red ginger flowers. Wet foliage catches individual glowing droplets. Shift the arrangement of large leaves and the misty opening so it is a distinct composition, deep green and warm gold.",
+      "sourceImage": "assets/02-hawaii/hawaiian-jungle-rain.webp"
+    },
+    {
+      "id": "napali-rainbow-clearing",
+      "title": "Nā Pali · rainbow after rain",
+      "request": "The lush Nā Pali cliffs in warm afternoon sunshine just after a February tropical shower. Soft rain clouds retreat over the sea, one beautiful natural rainbow arcs in the upper-right sky against pale gray clouds. Sunlit green ridges and sea mist, luminous turquoise water and white surf. A fresh slightly wider overlook framing, no people, boats or buildings.",
+      "sourceImage": "assets/02-hawaii/feb-04-thursday.webp"
+    },
+    {
+      "id": "reef-low-sun",
+      "title": "Hawaiian reef · low sun shafts",
+      "request": "A different shallow Hawaiian reef under low early morning sun. Diagonal clear sun shafts penetrate turquoise water to patches of creamy rippled sand between rounded golden corals and dark lava rock. Small vivid yellow tangs and striped reef fish swim in different directions, believable natural scale. Warm flecks of dawn gold at the surface, cool deep teal shadows, a distinct low angle across the reef.",
+      "sourceImage": "assets/02-hawaii/feb-03-wednesday.webp"
+    },
+    {
+      "id": "waimea-dawn-mist",
+      "title": "Waimea Canyon · misty dawn",
+      "request": "Kauai's colorful Waimea Canyon in quiet early dawn. Layered red and ochre ridges softened by thin lavender mist in the gullies; the first rose light touches only the highest edges while tropical green valley slopes remain cool blue-green shadow. Pale peach, lavender and pink sky with low soft clouds, no hard midday light and no snow.",
+      "sourceImage": "assets/02-hawaii/waimea-canyon.webp"
+    },
+    {
+      "id": "napali-moonlight",
+      "title": "Nā Pali · moonlit ocean",
+      "request": "The dramatic green Nā Pali cliffs on a clear tropical moonlit night. Dark emerald and indigo ridges, silver-blue moonlight on cliff edges, a narrow silver reflection on deep blue ocean and luminous white wave foam. A modest natural full moon and sparse stars in the painted upper-right sky, no sunset glow or daylight. Far-left and bottom still dissolve into pale warm cream for the app.",
+      "sourceImage": "assets/02-hawaii/feb-07-sunday.webp"
+    },
+    {
+      "id": "jungle-blue-hour",
+      "title": "Hawaiian jungle · blue hour",
+      "request": "A dense tropical Hawaiian jungle at blue hour just after sunset. Wet huge monstera leaves, variegated pothos vines, ferns and heliconia flowers in cool teal and indigo shadow with a narrow peach-lit opening in the far canopy. Little residual warm light on a few large upper leaves, rich detailed foliage, tropical fruit remains believable. No magical glowing objects or insects; quiet natural twilight.",
+      "sourceImage": "assets/02-hawaii/hawaiian-jungle-sun.webp"
+    },
+    {
+      "id": "maui-black-sand-dawn",
+      "title": "Maui black sand · pink dawn",
+      "request": "Northeastern Maui black-sand cove at sunrise. Soft pink and peach clouds, early rosy light along wave crests and wet black volcanic sand, cool teal sea in shadow, dark lava rocks framed by warm green tropical coastal trees. A different viewpoint lower along the curved beach, distant lush cliffs veiled in fine mist. No footprints, people, boats or buildings.",
+      "sourceImage": "assets/02-hawaii/maui-black-sand.webp"
+    },
+    {
+      "id": "turtle-reef-twilight",
+      "title": "Hawaiian turtle · reef twilight",
+      "request": "A Hawaiian green sea turtle gliding gently above a coral reef in the last soft light of tropical sunset. The turtle is shown from a different slightly lower angle, warm amber-pink reflections on the rippled surface overhead fading into luminous blue-green water. Muted golden coral, lava rocks and a few small yellow reef fish, dim but visible natural underwater detail, no stars or moon underwater, no glowing fantasy reef.",
+      "sourceImage": "assets/02-hawaii/hawaiian-reef-turtle.webp"
+    },
+    {
+      "id": "waimea-cloudbreak",
+      "title": "Waimea Canyon · storm cloudbreak",
+      "request": "Waimea Canyon during a clearing tropical rainstorm. Tall slate-gray clouds, a dramatic opening sends broad golden sunbeams onto only some brilliant red-orange canyon walls and green ridges; other ravines remain deep blue-green shadow. Fine mist rises from the wet lush valleys. View from a slightly different overlook with foreground tropical ferns, no snow and no fall-colored trees.",
+      "sourceImage": "assets/02-hawaii/waimea-canyon.webp"
+    },
+    {
+      "id": "monstera-evening-gold",
+      "title": "Monstera · evening gold",
+      "request": "A close botanical study of huge fenestrated monstera leaves and climbing pothos in low late afternoon Hawaiian sunlight. Light is rich amber-gold, with strongly elongated, crisp leaf shadows on a pale plaster wall and detailed droplets on the glossy leaves. Add a new leaf arrangement, small orange-red heliconia at far right and a small glimpse of lush tropical background, no cold season or dead leaves.",
+      "sourceImage": "assets/02-hawaii/feb-02-tuesday.webp"
+    },
+    {
+      "id": "napali-tropical-storm",
+      "title": "Nā Pali · tropical rain",
+      "request": "Nā Pali coastline during a warm tropical February squall. Dark blue-gray clouds and visible rain curtains partly veil distant deeply fluted emerald cliffs, strong foamy waves against black rocks, wet foreground leaves. One soft cool opening in the cloud ceiling adds depth but no rainbow or orange sunset. The setting remains richly green tropical Hawaii, never snowy.",
+      "sourceImage": "assets/02-hawaii/feb-04-thursday.webp"
+    },
+    {
+      "id": "kauai-track-sunset",
+      "title": "Kauai jungle track · sunset",
+      "request": "An overgrown red-clay off-road track through interior Kauai at late sunset. Peach and apricot light catches wet pothos and monstera leaves, ginger flowers, ferns and a few banana leaves, puddles reflect the rosy sky. Tall lush green ridges in the distance with thin violet mist. A slightly lower viewpoint along the winding muddy track, no vehicles or people.",
+      "sourceImage": "assets/02-hawaii/kauai-overgrown-track.webp"
+    },
+    {
+      "id": "maui-black-sand-moonlight",
+      "title": "Maui black sand · moonlight",
+      "request": "A quiet northeastern Maui black-sand beach on a clear moonlit tropical night. Silver-white curling wave foam, deep cobalt water, glossy dark volcanic sand with a slender reflected moon track, black lava rocks and green tropical tree silhouettes. A modest moon above layered coastal ridges and a few stars at upper right; no bioluminescence or glowing fantasy effects. Preserve the pale ivory left and bottom fade despite the night setting.",
+      "sourceImage": "assets/02-hawaii/maui-black-sand.webp"
+    },
+    {
+      "id": "reef-lava-arch",
+      "title": "Hawaiian reef · sunlit lava arch",
+      "request": "A new Hawaiian underwater reef location with a small believable natural lava-rock arch on the right, golden rounded corals along its base and patches of rippled pale sand. Clear turquoise sunbeams enter from the surface; small yellow tangs, striped butterflyfish and one tasteful Hawaiian triggerfish swim around the arch. Not a cave full of darkness: bright, airy detailed underwater watercolor with natural fish anatomy and sizes.",
+      "sourceImage": "assets/02-hawaii/feb-06-saturday.webp"
+    },
+    {
+      "id": "hawaii-leap-day-dolphins",
+      "title": "February 29 · dolphins leap beneath a rainbow",
+      "request": "Create the extra-special February 29 scene, a joyful natural Hawaiian 'leap day'. This image uses the reference only for watercolor style and Nā Pali geography; replace the main composition with a small group of three natural spinner dolphins joyfully leaping from brilliant turquoise ocean in front of distant lush green Nā Pali cliffs. One dolphin is airborne in a graceful twisting leap, one lower arc nearby and one just breaking the surface; anatomically credible sleek gray dolphins, no anthropomorphic smiles or clothing. Sparkling white splashes, soft golden sunlight after a tropical shower, one vivid beautiful rainbow in the upper-right sky, peach-white clouds and emerald cliffs. Dolphins clearly visible in the right-hand painted area at a lively but believable scale. Make this noticeably more playful and celebratory than the regular monthly images while retaining the refined natural watercolor style and pale creamy left/bottom fades. No text, numbers, people, boats or decorations.",
+      "reservedForDate": "02-29",
+      "sourceImage": "assets/02-hawaii/feb-01-monday.webp"
+    }
+  ],
+  "reservedImagePolicy": "02-29 only; exclude reserved image from monthly shuffle and previews"
+}

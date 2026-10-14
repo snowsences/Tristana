@@ -1,4 +1,4 @@
-import {daysInYear,filled,status,validDay} from './core.js?v=74';
+import {daysInYear,filled,status,validDay} from './core.js?v=78';
 
 export function createDateNavigator({document,getEntries,getToday,getSelected,getOwner,getPhotoURL,displayDate,onSelect,onError}) {
   const dialog=document.getElementById('time-dialog'),content=document.getElementById('time-content');

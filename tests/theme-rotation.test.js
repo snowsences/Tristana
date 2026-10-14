@@ -2,6 +2,20 @@ import test from 'node:test';import assert from 'node:assert/strict';import {rea
 import {resolveHeader,monthlySceneOrder} from '../dist/js/themes.js';
 const manifest=JSON.parse(readFileSync(new URL('../dist/theme-manifest.json',import.meta.url)));
 const ids=order=>order.map(scene=>scene.id);
+test('February has 28 unique regular images; leap-day artwork appears only on February 29',()=>{
+ const theme=manifest.themes.find(t=>t.month===2),reserved=theme.scenes.filter(scene=>scene.reservedForDate);
+ assert.equal(theme.scenes.length,29);assert.equal(reserved.length,1);assert.equal(reserved[0].reservedForDate,'02-29');
+ for(const year of [2026,2028,2000]){
+  const month=`${year}-02`,order=monthlySceneOrder(theme,`${month}-01`);
+  assert.equal(order.length,28);assert.equal(new Set(ids(order)).size,28);assert.ok(!ids(order).includes(reserved[0].id));
+  const regular=Array.from({length:28},(_,i)=>resolveHeader(manifest,{date:`${month}-${String(i+1).padStart(2,'0')}`}).scene.id);
+  assert.deepEqual(regular,ids(order));
+  for(const otherMonth of ['01','03','12'])for(let day=1;day<=31;day++)assert.notEqual(resolveHeader(manifest,{date:`${year}-${otherMonth}-${String(day).padStart(2,'0')}`,themeMonth:2}).scene.id,reserved[0].id);
+ }
+ for(const year of [2000,2028,2032])assert.equal(resolveHeader(manifest,{date:`${year}-02-29`}).scene.id,reserved[0].id);
+ for(const year of [2026,2100])assert.throws(()=>resolveHeader(manifest,{date:`${year}-02-29`}),/Invalid/);
+ assert.notEqual(resolveHeader(manifest,{date:'2028-02-29',themeMonth:3}).scene.id,reserved[0].id);
+});
 test('October loops one shuffled permutation of all 17 scenes, without early repeats',()=>{
  const october=manifest.themes.find(t=>t.month===10);assert.equal(october.scenes.length,17);const order=monthlySceneOrder(october,'2026-10-01');assert.equal(new Set(ids(order)).size,17);assert.deepEqual(new Set(ids(order)),new Set(ids(october.scenes)));
  for(let day=1;day<=31;day++){const date=`2026-10-${String(day).padStart(2,'0')}`;assert.equal(resolveHeader(manifest,{date}).scene.id,order[(day-1)%17].id);}
@@ -18,5 +32,5 @@ test('any number of scenes works, including one and more drawings than days',()=
  assert.throws(()=>monthlySceneOrder({id:'empty',scenes:[]},'2026-10-01'),/no scenes/);assert.throws(()=>resolveHeader(manifest,{date:'2026-02-29'}),/Invalid/);
 });
 test('expanded monthly rotations include every addition once before repeating',()=>{
- for(const [month,count,length] of [[1,31,31],[2,13,28],[3,13,31],[4,11,30],[6,14,30],[7,13,31],[8,12,31],[10,17,31],[11,11,30],[12,12,31]]){const theme=manifest.themes.find(t=>t.month===month);assert.equal(theme.scenes.length,count);const selections=Array.from({length},(_,i)=>resolveHeader(manifest,{date:`2026-${String(month).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`}).scene.id);assert.equal(new Set(selections.slice(0,count)).size,count);assert.deepEqual(new Set(selections.slice(0,count)),new Set(ids(theme.scenes)));for(let i=count;i<length;i++)assert.equal(selections[i],selections[i%count]);}
+ for(const [month,count,length] of [[1,31,31],[2,29,28],[3,13,31],[4,11,30],[6,14,30],[7,13,31],[8,12,31],[10,17,31],[11,11,30],[12,12,31]]){const theme=manifest.themes.find(t=>t.month===month);assert.equal(theme.scenes.length,count);const selections=Array.from({length},(_,i)=>resolveHeader(manifest,{date:`2026-${String(month).padStart(2,'0')}-${String(i+1).padStart(2,'0')}`}).scene.id);assert.equal(new Set(selections.slice(0,count)).size,Math.min(count,length));assert.deepEqual(new Set(selections.slice(0,count)),new Set(ids(theme.scenes.filter(scene=>!scene.reservedForDate))));for(let i=count;i<length;i++)assert.equal(selections[i],selections[i%count]);}
 });

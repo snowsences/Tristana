@@ -14,7 +14,8 @@ export function parseISODate(value) {
 export function monthlySceneOrder(theme,date) {
   parseISODate(date);
   if(!theme.scenes?.length)throw new Error('Theme has no scenes.');
-  const order=[...theme.scenes].sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  const order=theme.scenes.filter(scene=>!scene.reservedForDate).sort((a,b)=>a.id<b.id?-1:a.id>b.id?1:0);
+  if(!order.length)throw new Error('Theme has no regular scenes.');
   let seed=2166136261;
   for(const char of `tristana-monthly-v1:${date.slice(0,7)}:${theme.id}`)seed=Math.imul(seed^char.charCodeAt(0),16777619)>>>0;
   const random=()=>{seed=(seed+0x6D2B79F5)>>>0;let value=seed;value=Math.imul(value^(value>>>15),value|1);value^=value+Math.imul(value^(value>>>7),value|61);return ((value^(value>>>14))>>>0)/4294967296;};
@@ -28,7 +29,8 @@ export function resolveHeader(manifest, {date=localISODate(), themeMonth}={}) {
   const theme=manifest.themes.find(t=>t.month===month);
   if(!theme) throw new Error('Theme is missing from manifest.');
   const order=monthlySceneOrder(theme,date);
-  const scene=order[(Number(date.slice(8,10))-1)%order.length];
+  const scene=theme.scenes.find(scene=>scene.reservedForDate===date.slice(5))
+    ?? order[(Number(date.slice(8,10))-1)%order.length];
   return {date,theme,scene};
 }
 /** Pass the same resolved selection to BOTH Today and Past Days. */

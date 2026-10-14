@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 272,
+  "sceneCount": 291,
   "themes": [
     {
       "month": 1,
@@ -1397,6 +1397,120 @@
           "src": "assets/08-glacier-lakes/plitvice-waterfalls.webp",
           "background": "#fbfdfb",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "moraine-lake-summer-dawn",
+          "src": "assets/08-glacier-lakes/moraine-lake-summer-dawn.webp",
+          "background": "#f7fcf7",
+          "maximumCornerDelta": 1.25
+        },
+        {
+          "id": "lake-ohara-summer-mist",
+          "src": "assets/08-glacier-lakes/lake-ohara-summer-mist.webp",
+          "background": "#f6faf6",
+          "maximumCornerDelta": 0.48
+        },
+        {
+          "id": "peyto-lake-wooded-slope",
+          "src": "assets/08-glacier-lakes/peyto-lake-wooded-slope.webp",
+          "background": "#f5fbf6",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "bow-lake-crowfoot-glacier",
+          "src": "assets/08-glacier-lakes/bow-lake-crowfoot-glacier.webp",
+          "background": "#f5faf6",
+          "maximumCornerDelta": 0.25
+        },
+        {
+          "id": "lake-louise-victoria-glacier",
+          "src": "assets/08-glacier-lakes/lake-louise-victoria-glacier.webp",
+          "background": "#f2f9f4",
+          "maximumCornerDelta": 0.8
+        },
+        {
+          "id": "emerald-lake-reflections",
+          "src": "assets/08-glacier-lakes/emerald-lake-reflections.webp",
+          "background": "#f6fbf7",
+          "maximumCornerDelta": 0.28
+        },
+        {
+          "id": "garibaldi-lake-panorama",
+          "src": "assets/08-glacier-lakes/garibaldi-lake-panorama.webp",
+          "background": "#f4faf5",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "joffre-upper-lake",
+          "src": "assets/08-glacier-lakes/joffre-upper-lake.webp",
+          "background": "#f5faf6",
+          "maximumCornerDelta": 0.7
+        },
+        {
+          "id": "berg-lake-mount-robson",
+          "src": "assets/08-glacier-lakes/berg-lake-mount-robson.webp",
+          "background": "#f4faf5",
+          "maximumCornerDelta": 0.88
+        },
+        {
+          "id": "maligne-lake-spirit-island",
+          "src": "assets/08-glacier-lakes/maligne-lake-spirit-island.webp",
+          "background": "#f4faf5",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "diablo-lake-overlook",
+          "src": "assets/08-glacier-lakes/diablo-lake-overlook.webp",
+          "background": "#f5fbf6",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "ross-lake-reflections",
+          "src": "assets/08-glacier-lakes/ross-lake-reflections.webp",
+          "background": "#f5fcf7",
+          "maximumCornerDelta": 0.5
+        },
+        {
+          "id": "avalanche-lake-waterfalls",
+          "src": "assets/08-glacier-lakes/avalanche-lake-waterfalls.webp",
+          "background": "#f5faf6",
+          "maximumCornerDelta": 0.5
+        },
+        {
+          "id": "iceberg-lake-summer",
+          "src": "assets/08-glacier-lakes/iceberg-lake-summer.webp",
+          "background": "#f3f9f5",
+          "maximumCornerDelta": 1.47
+        },
+        {
+          "id": "crater-lake-cleetwood",
+          "src": "assets/08-glacier-lakes/crater-lake-cleetwood.webp",
+          "background": "#f3f9f4",
+          "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "twin-lakes-colorado",
+          "src": "assets/08-glacier-lakes/twin-lakes-colorado.webp",
+          "background": "#f5fbf5",
+          "maximumCornerDelta": 1.03
+        },
+        {
+          "id": "kenai-lake-turquoise",
+          "src": "assets/08-glacier-lakes/kenai-lake-turquoise.webp",
+          "background": "#f5fbf6",
+          "maximumCornerDelta": 0.82
+        },
+        {
+          "id": "mendenhall-lake-glacier",
+          "src": "assets/08-glacier-lakes/mendenhall-lake-glacier.webp",
+          "background": "#f5fbf6",
+          "maximumCornerDelta": 0.75
+        },
+        {
+          "id": "lake-pukaki-aoraki",
+          "src": "assets/08-glacier-lakes/lake-pukaki-aoraki.webp",
+          "background": "#f4faf5",
+          "maximumCornerDelta": 1.0
         }
       ]
     },
@@ -1708,3 +1822,4 @@
     }
   ]
 }
+

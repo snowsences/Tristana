@@ -1,0 +1,134 @@
+{
+  "month": "January",
+  "method": "built-in imagegen",
+  "sharedPrompt": "Use case: lighting-weather. Asset type: January seasonal header illustration for Tristana, one single landscape image, 1536 by 1024, 3:2 aspect ratio. Input image is the edit target and style reference. Create a distinctly different winter variation described below while preserving the refined detailed watercolor/gouache illustration style, natural believable forms, paper texture, cream fade and overall app composition. Scene lives on the right 60-70 percent; far left 30 percent remains nearly blank pale warm ivory #fef9ef, with a curved irregular watercolor fade sweeping inward from left and the bottom 15-20 percent softly dissolving to the SAME ivory. Do not add dark full-frame background even for night. Keep winter season, heavy snow, no people, text, labels, borders, collage, buildings other than described, cars, seasonal decorations, or summer plants. This is an actual image asset, not an app screenshot. Lighting variation should be substantial and beautiful, not a simple color filter. PRIMARY REQUEST: ",
+  "variants": [
+    {
+      "id": "cottage-pink-dawn",
+      "title": "Snowy cottage · pink dawn",
+      "request": "The snow-covered timber-and-stone cottage and surrounding conifer forest just before sunrise: faint coral-pink clouds above, cool lavender-blue snow, only first soft rosy light on highest snowy branches. Warm window glow still visible, fine chimney smoke. The sun is not yet above the horizon.",
+      "sourceImage": "assets/01-hearth/jan-01-monday.webp"
+    },
+    {
+      "id": "forest-silver-fog",
+      "title": "Snowy forest · silver fog",
+      "request": "A forest of tall snow-laden firs and cedars in thick silver winter morning fog. Layered trunks recede into mist; diffused pearly light, no visible sun. Heavy rounded untouched snowdrifts. Make the atmospheric lighting substantially different from the original golden sun.",
+      "sourceImage": "assets/01-hearth/jan-04-thursday.webp"
+    },
+    {
+      "id": "ridgefield-mist-dawn",
+      "title": "Ridgefield swans · misty dawn",
+      "request": "Ridgefield wetland and snowy auto-tour road at earliest dawn: a thin pink strip on the horizon, lavender predawn sky, dark open unfrozen wetland with low delicate mist and graceful winter swans swimming quietly. Snowy bare trees and reeds, cool lavender snow. Preserve believable open water; no frozen pond.",
+      "sourceImage": "assets/01-hearth/ridgefield-clear-swans.webp"
+    },
+    {
+      "id": "cottage-snowstorm",
+      "title": "Snowy cottage · evening snowfall",
+      "request": "The same lovely snowy woodland cottage during thick active snowfall at early evening: overcast slate-gray and violet atmosphere, snowflakes against evergreen trees, deep fresh snow, no moon or stars. Amber light from within its windows is the main warm source and illuminates a little snow immediately outside. Fine chimney smoke blends into falling snow.",
+      "sourceImage": "assets/01-hearth/jan-02-tuesday.webp"
+    },
+    {
+      "id": "hearth-predawn",
+      "title": "Hearth · blue predawn",
+      "request": "The plaster arched hearth, ceramic vase of dried winter seed stems, stacked logs and narrow window before dawn. Outside is a snowy evergreen forest in subdued cobalt and violet, the first pale rose strip on the horizon, no moon. Low glowing embers and a small fire warm the room; indoor shadows long and quiet. Retain the cozy interior subject and winter outside, pale left and lower margins.",
+      "sourceImage": "assets/01-hearth/jan-07-sunday.webp"
+    },
+    {
+      "id": "stream-misty-dawn",
+      "title": "Snowy stream · misty dawn",
+      "request": "The unfrozen winding stream through a heavily snow-covered fir forest at blue predawn. Fine mist hovers above flowing dark water, the faintest pale peach dawn begins beyond distant trees. Mostly cool blue and lilac snow, calm dark teal water, no orange sunlight yet. Rich winter texture, rounded untouched snowbanks.",
+      "sourceImage": "assets/01-hearth/jan-05-friday.webp"
+    },
+    {
+      "id": "forest-moonlight",
+      "title": "Snowy forest · moonlight",
+      "request": "Snow-covered winter conifer forest on a clear moonlit night. A modest full moon high at upper right casts cold silvery highlights and long blue shadows on smooth snowdrifts; snowy firs fade into deep navy distance. Sparse realistic stars, no daylight or sunset glow. Keep the image's far left and bottom pale warm ivory for the app despite the dark painted scene on the right.",
+      "sourceImage": "assets/01-hearth/jan-04-thursday.webp"
+    },
+    {
+      "id": "million-dollar-sunrise",
+      "title": "Million Dollar Highway · sunrise",
+      "request": "The winding Million Dollar Highway in Colorado's snow-covered San Juan Mountains at first sunrise. Packed snow covers the road surface. High rugged mountains catch brilliant warm pink alpenglow while the curved road and conifer slopes remain icy blue in shadow. Pale peach clouds and a sliver of morning gold; sweeping winter mountain landscape, no vehicles or people.",
+      "sourceImage": "assets/01-hearth/million-dollar-snow.webp"
+    },
+    {
+      "id": "ridgefield-golden-sunset",
+      "title": "Ridgefield swans · golden sunset",
+      "request": "Snow-covered Ridgefield wetland auto-tour route at sunset. Winter swans glide on unfrozen water reflecting gold and copper from low sunset clouds, snowy reeds and bare cottonwoods have amber edges and soft violet shadows. A different arrangement of swimming swans, wide curving road and wetland. Still visibly deep winter, no green meadow or warm-season flowers.",
+      "sourceImage": "assets/01-hearth/ridgefield-clear-swans.webp"
+    },
+    {
+      "id": "hearth-storm-day",
+      "title": "Hearth · stormy winter daylight",
+      "request": "The same plaster arched hearth interior on a snowy storm day: muted cool daylight through the narrow window, dense falling snow and snowy evergreen outside, no sun circle painted on the wall. A modest bright fire, soft amber reflection on plaster, translucent silver-blue ambient shadows. Keep dried seed stems, stacked logs, restrained pottery. Quiet and cozy.",
+      "sourceImage": "assets/01-hearth/jan-03-wednesday.webp"
+    },
+    {
+      "id": "forest-pink-sunrise",
+      "title": "Snowy Rainier forest · alpenglow",
+      "request": "A variation in a deeply snow-covered Mount Rainier conifer forest just after sunrise, with a distant recognizable snowy volcanic summit visible between tall firs in the upper-right distance. Pink alpenglow on the peak and tree tips; blue-violet shadows in untouched snowdrifts. Peach and pale yellow winter sky, no bare summer ground.",
+      "sourceImage": "assets/01-hearth/jan-04-thursday.webp"
+    },
+    {
+      "id": "stream-winter-sunbeams",
+      "title": "Snowy stream · winter sunbeams",
+      "request": "A winter stream in a snow-laden old-growth cedar and fir forest, low late-morning sunshine breaking through mist into visible diagonal shafts across the right-hand scene. Dark clear flowing water reflecting small golden patches, thick smooth snow on rocks and banks, sparkling frost on evergreen needles. New arrangement of tall trunks and cascading stream, unmistakably January winter.",
+      "sourceImage": "assets/01-hearth/jan-05-friday.webp"
+    },
+    {
+      "id": "cottage-blue-hour",
+      "title": "Snowy cottage · blue hour",
+      "request": "Snow-covered modest cottage at blue hour shortly after sunset. Steel blue and muted purple sky with a fading pale apricot band far away; no moon yet. Interior windows shine warm amber; conifers and heavy roof snow take blue-violet shadows. Reframe the same cottage a little farther back behind snow-laden branches for a distinct arrangement.",
+      "sourceImage": "assets/01-hearth/jan-01-monday.webp"
+    },
+    {
+      "id": "million-dollar-blue-hour",
+      "title": "Million Dollar Highway · blue hour",
+      "request": "Snow-covered San Juan Mountains and winding Million Dollar Highway in predawn blue hour. Packed white snow on road, deep cobalt and violet mountain shadows, distant snow peaks under thin lilac clouds and a faint pink horizon. No direct sunlight, no vehicles. The snowy road has a distinctly different sweeping curve yet stays believable to this steep mountain route.",
+      "sourceImage": "assets/01-hearth/million-dollar-snow.webp"
+    },
+    {
+      "id": "stream-moonlight",
+      "title": "Snowy stream · moonlight",
+      "request": "A heavily snow-covered forest stream at night with cold clear moonlight. Dark flowing water catches a narrow silver-blue reflection; snowy rocks and fir branches glow softly. Modest moon high among sparse stars in the painted upper-right sky; deep navy forest, no gold sunset. Retain smooth creamy left and bottom fades, not black full-frame.",
+      "sourceImage": "assets/01-hearth/jan-06-saturday.webp"
+    },
+    {
+      "id": "hearth-winter-sunset",
+      "title": "Hearth · winter sunset",
+      "request": "The cozy plaster arched hearth at winter sunset. Outside the narrow window snowy evergreens stand against a rosy orange and lilac sky. Low real sunset light through the window makes a small warm band across the hearth ledge and delicate long shadows of dried seed stems. Small glowing fire and soft room light, no moon, no painted decorative sun circle.",
+      "sourceImage": "assets/01-hearth/jan-03-wednesday.webp"
+    },
+    {
+      "id": "ridgefield-frost-sunbeams",
+      "title": "Ridgefield swans · frosty sunbeams",
+      "request": "A very frosty January morning at the snowy Ridgefield wetland auto-tour route. Thin winter fog parts under strong low sunlight, several distinct shafts light snow-covered bare branches and frozen reed tips. Swans on open unfrozen blue water at middle distance; low white mist over part of the wetland. A new slightly lower view along the snow-covered road, no leafed trees or spring greenery.",
+      "sourceImage": "assets/01-hearth/ridgefield-clear-swans.webp"
+    },
+    {
+      "id": "forest-active-snow",
+      "title": "Snowy forest · falling snow",
+      "request": "A dense snow-covered conifer forest during active snowfall at midday. Soft overcast gray-blue light, visible fine flakes against deep fir branches, no visible sun or sunbeams. Closely spaced trees under heavy soft white snow, smoothly drifted forest floor; a sheltered intimate woodland composition differing from the open original. Preserve creamy app-safe left and bottom.",
+      "sourceImage": "assets/01-hearth/jan-04-thursday.webp"
+    },
+    {
+      "id": "san-juan-winter-storm",
+      "title": "San Juan road · clearing storm",
+      "request": "A packed-snow mountain road in Colorado's San Juan range as a winter storm clears. Rugged snow-covered mountains partially veiled by fast low storm clouds, one dramatic opening of pale yellow sunlight illuminates a far snowy ridge, foreground road and snowy pines remain cool shadow. Dense snow over all exposed ground. No vehicles, no bare asphalt.",
+      "sourceImage": "assets/01-hearth/million-dollar-snow.webp"
+    },
+    {
+      "id": "cottage-sunset-clearing",
+      "title": "Winter cabin · sunset clearing",
+      "request": "A different modest timber-and-stone winter cottage in a snow-covered Cascades forest clearing. Late orange and rose sunset light brushes a deep rounded snow roof and fir branches; windows glow softly, fine smoke rises from a simple stone chimney. Pale mauve and peach clouds, cold blue snow shadows. Believable small cabin, no decorations, no people, no tracks.",
+      "sourceImage": "assets/01-hearth/jan-01-monday.webp"
+    },
+    {
+      "id": "cascade-pass-winter",
+      "title": "Cascade mountain pass · winter sun",
+      "request": "A winding packed-snow mountain road through a Washington Cascade mountain pass, new location variation on the snowy mountain highway idea. Dense snow-laden tall firs, broad rugged snowy peaks in upper-right distance, bright clear winter midday sky and white high clouds. Deep untouched snowy banks, crisp cool sunlight and blue shadows, no cars, no bare pavement, no summer vegetation.",
+      "sourceImage": "assets/01-hearth/million-dollar-snow.webp"
+    }
+  ],
+  "remainingMonths": "Complete and present each month in order. February must have 29 images; reserve a special fun Hawaiian image exclusively for February 29."
+}

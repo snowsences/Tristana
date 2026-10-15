@@ -256,10 +256,9 @@ html[data-keyboard-open=true] .empty-day-dialog{max-height:calc(var(--editor-vie
   mask-composite:intersect;
 }
 
-/* The archive gently enlarges the same artwork, then returns on other tabs. */
+/* Settings gently enlarges the same artwork, then returns on journal tabs. */
 .hero>img{transition:width 420ms cubic-bezier(.37,0,.63,1),height 420ms cubic-bezier(.37,0,.63,1),clip-path 420ms cubic-bezier(.37,0,.63,1)}
-.hero[data-page=past]>img{width:min(150vw,1020px);height:min(100vw,680px);clip-path:inset(0 0 0 33.333333%)}
-.hero[data-page=settings]>img{width:min(120vw,816px);clip-path:inset(0 0 0 16.666667%)}
+.hero[data-page=settings]>img{width:min(150vw,1020px);height:min(100vw,680px);clip-path:inset(0 0 0 33.333333%)}
 
 /* Keep browser-owned surfaces dark while the journal keeps its monthly paper. */
 html{background:#000;color-scheme:dark}

@@ -1,26 +1,26 @@
-import {CONFIG} from './config.js?v=95';
-import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=95';
-import {resolveHeader} from './themes.js?v=95';
-import * as store from './storage.js?v=95';
-import * as cloud from './cloud.js?v=95';
-import {createCropper} from './crop.js?v=95';
-import {createUpdatePrompt} from './update-ui.js?v=95';
-import {thumbnailPhoto} from './image-utils.js?v=95';
-import {createPromptEditor} from './prompt-ui.js?v=95';
-import {createMemories} from './memories-ui.js?v=95';
-import {createEmptyDayEditor} from './empty-day-ui.js?v=95';
-import {createDayStrip} from './strip-ui.js?v=95';
-import {createPhotoRenderer} from './entry-ui.js?v=95';
-import {installDialogs,reveal,conceal,cancelConceal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=95';
-import {applyAuthGate} from './auth-ui.js?v=95';
-import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=95';
-import {createDateNavigator} from './date-nav.js?v=95';
-import {installKeyboardComfort} from './keyboard-ui.js?v=95';
+import {CONFIG} from './config.js?v=99';
+import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=99';
+import {resolveHeader} from './themes.js?v=99';
+import * as store from './storage.js?v=99';
+import * as cloud from './cloud.js?v=99';
+import {createCropper} from './crop.js?v=99';
+import {createUpdatePrompt} from './update-ui.js?v=99';
+import {thumbnailPhoto} from './image-utils.js?v=99';
+import {createPromptEditor} from './prompt-ui.js?v=99';
+import {createMemories} from './memories-ui.js?v=99';
+import {createEmptyDayEditor} from './empty-day-ui.js?v=99';
+import {createDayStrip} from './strip-ui.js?v=99';
+import {createPhotoRenderer} from './entry-ui.js?v=99';
+import {installDialogs,reveal,conceal,cancelConceal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=99';
+import {applyAuthGate} from './auth-ui.js?v=99';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=99';
+import {createDateNavigator} from './date-nav.js?v=99';
+import {installKeyboardComfort} from './keyboard-ui.js?v=99';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
 let user=null,entries=new Map(),settings={},tab='today',yearView=false,selectedYear=new Date().getFullYear(),selectedDate,unsubscribers=[],syncing=false,localWrites=Promise.resolve(),photoURLs=new Map(),photoPromises=new Map(),installEvent,backend=null;
-let navigationId=0,artGeneration=0,artIdentity='',selectedMonth=1,memoryDate=null;const tabScroll={today:0,past:0,settings:0};const preloadedArt=new Set();
+let navigationId=0,artGeneration=0,artIdentity='',selectedMonth=1,memoryDate=null,pendingTabTarget=null;const tabScroll={today:0,past:0,settings:0};const preloadedArt=new Set();
 let zone=Intl.DateTimeFormat().resolvedOptions().timeZone;selectedDate=dayInZone(zone);
 const today=()=>dayInZone(zone);
 const entry=(date=selectedDate)=>entries.get(date)||blankEntry(date);
@@ -44,7 +44,7 @@ const memories=createMemories({element:$('#memories-panel'),daySection:$('.day-s
   onDayChange:date=>{if(tab==='past')selectMemoryDay(date);},onPhoto:openMemoryPhoto,onCreate:date=>memoryEditor.open(date),canCreate:date=>date<=today()});
 function selectMemoryDay(date,{keepScroll=false}={}){if(!user||memoryEditor.date||tab!=='past'||!validDay(date))return;selectedDate=memoryDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));header();memories.select(date);renderStrip({keepScroll});}
 const dateNavigator=createDateNavigator({document,getEntries:()=>entries,getToday:today,getSelected:()=>selectedDate,getOwner:()=>user?.uid,getPhotoURL:photoURL,displayDate,onError:error,
-  onSelect:date=>{if(!user)return;prompts.commit();tabScroll[tab]=window.scrollY;tab='past';selectedDate=memoryDate=date;dayTouched=true;render();window.scrollTo({top:0,behavior:'auto'});selectMemoryDay(date);memories.scrollTo(date);}});
+  onSelect:date=>{if(!user)return;++navigationId;pendingTabTarget=null;cancelConceal($('#journal-view'));cancelConceal($('#settings-view'));prompts.commit();tabScroll[tab]=window.scrollY;tab='past';selectedDate=memoryDate=date;dayTouched=true;render();window.scrollTo({top:0,behavior:'auto'});selectMemoryDay(date);memories.scrollTo(date);}});
 $('#open-time').onclick=()=>{if(user&&!memoryEditor.date)dateNavigator.open();};
 async function openMemoryPhoto(date,origin){const uid=user?.uid,photo=entry(date).photo;if(!uid||!photo)return;try{const url=await photoURL(photo,'source');if(user?.uid!==uid||tab!=='past'||entry(date).photo?.localId!==photo.localId||!url)return;await lightbox.open({date,photo,url,origin,readOnly:true});}catch(err){error(err);}}
 function snapshot(value){return structuredClone(value);}
@@ -73,8 +73,10 @@ function applyTheme(){
   };
   next.decode().then(apply).catch(()=>{if(serial===artGeneration){artIdentity='';error(new Error('The illustration could not load. Your entry is still available.'));}});
 }
+function previewHeaderTab(target){$('#hero').dataset.artExpanded=String(target==='settings');}
 function header(){
   $('#open-time').hidden=tab==='settings'||!user;
+  previewHeaderTab(pendingTabTarget??tab);
   $('#hero').dataset.page=tab;applyTheme();$('.hero-copy').hidden=tab==='settings';$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':tab==='past'?'Tristana':displayDate(selectedDate,{weekday:'long'});
   $('#page-title').textContent=tab==='past'?displayDate(selectedDate,{month:'short'}):tab==='settings'?'':ordinalDay(selectedDate);
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
@@ -108,7 +110,7 @@ async function openDay(date){
   if(memoryEditor.date)return;
   if(!validDay(date)||(date>today()&&!entries.has(date))||(tab==='today'&&date!==today()))return;
   if(tab==='past'){selectMemoryDay(date);memories.scrollTo(date);return;}
-  const request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
+  const request=++navigationId;pendingTabTarget=null;previewHeaderTab(tab);cancelConceal($('#journal-view'));cancelConceal($('#settings-view'));prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
   const changed=date!==selectedDate;selectedDate=date;dayTouched=true;selectedYear=Number(date.slice(0,4));yearView=false;$('#photos-view').setAttribute('aria-pressed','true');$('#year-view').setAttribute('aria-pressed','false');render({dayMotion:true});if(changed)reveal($('#entry-panel'),{duration:170});
 }
 function renderYear(){
@@ -163,7 +165,7 @@ async function onUser(account,message){
   for(const stop of unsubscribers)stop();unsubscribers=[];user=account;entries=new Map();settings={};dayTouched=false;firstSettings=true;for(const url of photoURLs.values())URL.revokeObjectURL(url);photoURLs.clear();photoPromises.clear();dayStrip.reset();photoRenderer.reset();prompts.reset();memories.reset();memoryDate=null;navigationId++;
   for(const id of ['good','learned','camera-button','library-button','export','import','enable-reminders'])$('#'+id).disabled=!user;
   $('#signout').hidden=!user;$('#account-label').textContent=user?user.email:'';
-  if(!user){dateNavigator.reset();tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
+  if(!user){pendingTabTarget=null;previewHeaderTab('today');dateNavigator.reset();tab='today';yearView=false;applyAuthGate(document,false);for(const field of ['good','learned'])$('#'+field).value='';$('#entry-photo').removeAttribute('src');for(const id of ['day-strip','year-grid'])$('#'+id).replaceChildren();$('#toast').hidden=true;clearTimeout(toast.timer);window.scrollTo({top:0,behavior:'auto'});}
   if(message)toast(message);
   if(user){const cached=await store.entriesFor(user.uid);entries=new Map(cached.map(e=>[e.date,e]));settings=(await store.get('settings',user.uid))?.value||{};applySettings();selectedDate=today();store.persistStorage().catch(()=>{});
     unsubscribers=cloud.listen(user.uid,async changes=>{const uid=account.uid,changed=[];for(const {type,data:r} of changes){if(user?.uid!==uid)return;if(type==='removed'&&!entry(r.date)._dirty.length){entries.delete(r.date);await store.remove('entries',uid+':'+r.date);}else{const merged=mergeEntry(entry(r.date),r);entries.set(r.date,merged);await persist(merged);}changed.push(r.date);}if(user?.uid!==uid)return;dayStrip.update(changed);if(changed.includes(memoryEditor.date||selectedDate)&&(tab==='today'||memoryEditor.date))renderEntry();memories.update(changed);dateNavigator.refresh();if($('#month-dialog').open)renderMonth();},async incoming=>{if(user?.uid!==account.uid)return;settings={...settings,...incoming};await store.put('settings',{key:user.uid,value:settings});applySettings();if(firstSettings&&!dayTouched&&tab==='today'){selectedDate=today();render();}firstSettings=false;},err=>{$('#connection-status').textContent=readableError(err);savedLabel('Saved on device · cloud unavailable');});
@@ -206,6 +208,7 @@ if(window.tristanaStartup)window.tristanaStartup.setSignIn(signIn);else $('#sign
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
   const target=b.dataset.tab,request=++navigationId;
+  pendingTabTarget=target;previewHeaderTab(target);
   cancelConceal($('#journal-view'));cancelConceal($('#settings-view'));
   if(memoryEditor.date)await $('#empty-day-dialog').close();
   if(request!==navigationId||!user)return;
@@ -223,6 +226,7 @@ for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
     window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});
   }finally{
     restoreOutgoing?.();
+    if(request===navigationId)pendingTabTarget=null;
   }
 };
 $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onclick=()=>openDay(shiftDay(selectedDate,1));

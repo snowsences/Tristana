@@ -1,4 +1,4 @@
-import {reveal} from './motion-ui.js?v=95';
+import {reveal} from './motion-ui.js?v=99';
 export function createPhotoRenderer(image,load,onError,getPresentationKey=()=> '') {
   let identity=null,generation=0,ready=Promise.resolve();
   return {

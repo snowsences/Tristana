@@ -246,14 +246,10 @@ html[data-keyboard-open=true] .empty-day-dialog{max-height:calc(var(--editor-vie
 .crop-frame[data-adjusting=true] .crop-grid{opacity:.5}
 .crop-frame>img{will-change:transform}
 
-/* Approved replacement paintings meet the exact monthly paper color.
-   Two alpha masks intersect; the source illustration remains untouched.
-   The clear left margin extends past the fixed header's existing crop. */
+/* Show the approved paintings with their original painted fades only. */
 .hero>img[data-edge-blend="month-paper"],.journal-header__art[data-edge-blend="month-paper"]{
-  -webkit-mask-image:linear-gradient(to right,transparent 20%,rgba(0,0,0,.104) 23.6%,rgba(0,0,0,.352) 27.2%,rgba(0,0,0,.648) 30.8%,rgba(0,0,0,.896) 34.4%,#000 38%),linear-gradient(to top,transparent 2.5%,rgba(0,0,0,.104) 5.4%,rgba(0,0,0,.352) 8.3%,rgba(0,0,0,.648) 11.2%,rgba(0,0,0,.896) 14.1%,#000 17%);
-  mask-image:linear-gradient(to right,transparent 20%,rgba(0,0,0,.104) 23.6%,rgba(0,0,0,.352) 27.2%,rgba(0,0,0,.648) 30.8%,rgba(0,0,0,.896) 34.4%,#000 38%),linear-gradient(to top,transparent 2.5%,rgba(0,0,0,.104) 5.4%,rgba(0,0,0,.352) 8.3%,rgba(0,0,0,.648) 11.2%,rgba(0,0,0,.896) 14.1%,#000 17%);
-  -webkit-mask-composite:source-in;
-  mask-composite:intersect;
+  -webkit-mask-image:none;
+  mask-image:none;
 }
 
 /* Settings gently enlarges the same artwork, then returns on journal tabs. */

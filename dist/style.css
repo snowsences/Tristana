@@ -265,3 +265,6 @@ html{background:#000;color-scheme:dark}
 body,body[data-auth="signed-out"]{background:#000}
 .app-shell,.signin-panel,dialog{color-scheme:light}
 #settings-view{padding-top:80px}
+
+/* Today cards overlap the hero by 40px; keep the copy another 24px above them. */
+.hero[data-page=today] .hero-copy{top:auto;bottom:64px}

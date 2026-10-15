@@ -1,21 +1,21 @@
-import {CONFIG} from './config.js?v=91';
-import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=91';
-import {resolveHeader} from './themes.js?v=91';
-import * as store from './storage.js?v=91';
-import * as cloud from './cloud.js?v=91';
-import {createCropper} from './crop.js?v=91';
-import {createUpdatePrompt} from './update-ui.js?v=91';
-import {thumbnailPhoto} from './image-utils.js?v=91';
-import {createPromptEditor} from './prompt-ui.js?v=91';
-import {createMemories} from './memories-ui.js?v=91';
-import {createEmptyDayEditor} from './empty-day-ui.js?v=91';
-import {createDayStrip} from './strip-ui.js?v=91';
-import {createPhotoRenderer} from './entry-ui.js?v=91';
-import {installDialogs,reveal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=91';
-import {applyAuthGate} from './auth-ui.js?v=91';
-import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=91';
-import {createDateNavigator} from './date-nav.js?v=91';
-import {installKeyboardComfort} from './keyboard-ui.js?v=91';
+import {CONFIG} from './config.js?v=92';
+import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=92';
+import {resolveHeader} from './themes.js?v=92';
+import * as store from './storage.js?v=92';
+import * as cloud from './cloud.js?v=92';
+import {createCropper} from './crop.js?v=92';
+import {createUpdatePrompt} from './update-ui.js?v=92';
+import {thumbnailPhoto} from './image-utils.js?v=92';
+import {createPromptEditor} from './prompt-ui.js?v=92';
+import {createMemories} from './memories-ui.js?v=92';
+import {createEmptyDayEditor} from './empty-day-ui.js?v=92';
+import {createDayStrip} from './strip-ui.js?v=92';
+import {createPhotoRenderer} from './entry-ui.js?v=92';
+import {installDialogs,reveal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=92';
+import {applyAuthGate} from './auth-ui.js?v=92';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=92';
+import {createDateNavigator} from './date-nav.js?v=92';
+import {installKeyboardComfort} from './keyboard-ui.js?v=92';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -75,8 +75,8 @@ function applyTheme(){
 }
 function header(){
   $('#open-time').hidden=tab==='settings'||!user;
-  $('#hero').dataset.page=tab;applyTheme();$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':tab==='past'?'Tristana':displayDate(selectedDate,{weekday:'long',month:'long',day:'numeric'});
-  $('#page-title').innerHTML=tab==='past'?'Memories.':tab==='settings'?'Make it yours.':'A little<br>of today.';
+  $('#hero').dataset.page=tab;applyTheme();$('.hero-copy').hidden=tab==='settings';$('#eyebrow').hidden=tab==='settings';$('#header-line').hidden=tab==='settings';$('#eyebrow').textContent=tab==='settings'?'':tab==='past'?'Tristana':displayDate(selectedDate,{weekday:'long'});
+  $('#page-title').textContent=tab==='past'?displayDate(selectedDate,{month:'short'}):tab==='settings'?'':ordinalDay(selectedDate);
   $('#date-label').textContent=displayDate(selectedDate,{month:'long',year:'numeric'});
   $('#next-day').disabled=selectedDate>=today();
 }

@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';
-import {dayInZone,daysInYear,shiftDay,filled,status,blankEntry,reconcile,mergeEntry,cropSource,count,limit,validDay} from '../dist/js/core.js';
+import {dayInZone,daysInYear,shiftDay,ordinalDay,filled,status,blankEntry,reconcile,mergeEntry,cropSource,count,limit,validDay} from '../dist/js/core.js';
 import {resolveHeader} from '../dist/js/themes.js';
 import {readFileSync} from 'node:fs';
 const manifest=JSON.parse(readFileSync(new URL('../dist/theme-manifest.json',import.meta.url)));
@@ -10,3 +10,9 @@ test('cross-device merge preserves local changes and remote changes to other fie
 test('same-field identical edits need no conflict; a photo deletion is preserved',()=>{const local={...blankEntry('2026-10-11'),good:'same',_dirty:['good','photo'],_base:{good:'',learned:'',photo:{publicId:'old'}}};const r=reconcile(local,{good:'same',learned:'other',photo:{publicId:'old'}});assert.deepEqual(r.conflicts,[]);assert.equal(r.next.photo,null);});
 test('crop never samples outside landscape or portrait photos at extreme drags',()=>{for(const [width,height]of [[4000,3000],[2000,6000]])for(const zoom of [1,2,4])for(const x of [-10000,0,10000])for(const y of [-10000,10000]){const s=cropSource(width,height,320,zoom,x,y);assert.ok(s.sx>=-1e-8&&s.sy>=-1e-8);assert.ok(s.sx+s.size<=width+1e-8&&s.sy+s.size<=height+1e-8);}});
 test('all 12 themes share deterministic date artwork between Today and Memories',()=>{assert.equal(manifest.themes.length,12);for(let m=1;m<=12;m++)for(let i=1;i<=28;i++){const date=`2026-${String(m).padStart(2,'0')}-${String(i).padStart(2,'0')}`;const a=resolveHeader(manifest,{date});const b=resolveHeader(manifest,{date});assert.equal(a.scene.id,b.scene.id);assert.ok(a.theme.scenes.includes(a.scene));}assert.equal(resolveHeader(manifest,{date:'2026-12-01',themeMonth:5}).theme.month,5);});
+
+test('day headings use correct ordinal suffixes for every date in a month',()=>{
+ const expected=['1st','2nd','3rd','4th','5th','6th','7th','8th','9th','10th','11th','12th','13th','14th','15th','16th','17th','18th','19th','20th','21st','22nd','23rd','24th','25th','26th','27th','28th','29th','30th','31st'];
+ for(let day=1;day<=31;day++)assert.equal(ordinalDay(`2026-10-${String(day).padStart(2,'0')}`),expected[day-1]);
+ assert.equal(ordinalDay('2028-02-29'),'29th');assert.throws(()=>ordinalDay('2026-02-29'),/Invalid date/);
+});

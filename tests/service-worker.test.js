@@ -10,10 +10,10 @@ function fixture(){
 test('install fetches a fresh shell even while the previous release is HTTP cached',async()=>{
  const f=fixture();let installed;f.listeners.install({waitUntil:value=>{installed=value;}});await installed;
  assert.ok(f.batches[0].length>20);for(const request of f.batches[0]){assert.ok(request instanceof Request);assert.equal(request.cache,'reload');}
- assert.ok(f.batches[0].some(request=>request.url.endsWith('/style.css?v=99')));
+ assert.ok(f.batches[0].some(request=>/\/style\.css\?v=\d+$/.test(request.url)));
 });
 test('shell requests revalidate HTTP cache while cached paintings stay available',async()=>{
- const f=fixture();await f.fetch('./index.html');await f.fetch('./style.css?v=99');
+ const f=fixture();await f.fetch('./index.html');await f.fetch('./style.css?v=101');
  assert.equal(f.requests.length,2);for(const {options} of f.requests)assert.equal(options.cache,'no-cache');
  const painting={ok:true};f.setCached(painting);assert.equal(await f.fetch('./assets/painting.webp'),painting);assert.equal(f.requests.length,2);
 });

@@ -253,16 +253,17 @@ html[data-keyboard-open=true] .empty-day-dialog{max-height:calc(var(--editor-vie
 }
 
 /* Settings gently enlarges the same artwork, then returns on journal tabs. */
-.hero>img,.hero[data-page=settings]>img{width:min(120vw,816px);height:min(75vw,544px);clip-path:inset(0 0 0 16.666667%);transition:width 280ms cubic-bezier(.22,1.2,.36,1) 0ms,height 280ms cubic-bezier(.22,1.2,.36,1) 0ms,clip-path 280ms cubic-bezier(.22,1.2,.36,1) 0ms}
-.hero[data-art-expanded=true]>img{width:min(150vw,1020px);height:min(100vw,680px);clip-path:inset(0 0 0 33.333333%)}
+.hero>img,.hero[data-page=settings]>img{width:min(112.5vw,816px);height:auto;aspect-ratio:3/2;clip-path:inset(0 0 0 max(0px,calc(100% - min(100vw,680px))));transition:width 280ms cubic-bezier(.22,1.2,.36,1) 0ms}
+.hero[data-art-expanded=true]>img{width:min(150vw,1020px)}
 
 /* Keep browser-owned surfaces dark while the journal keeps its monthly paper. */
 html{background:#000;color-scheme:dark}
 body,body[data-auth="signed-out"]{background:#000}
 .app-shell,.signin-panel,dialog{color-scheme:light}
 #settings-view{position:relative;z-index:1;padding-top:80px}
-.hero[data-page=settings]{z-index:0}
+.hero[data-page=settings]{z-index:0;overflow:visible}
 .hero[data-page=settings]>img{pointer-events:none}
+#settings-view>.settings-block:first-child{border-top:0}
 
 /* Today cards overlap the hero by 40px; keep the copy another 24px above them. */
 .hero[data-page=today] .hero-copy{top:auto;bottom:64px}

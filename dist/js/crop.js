@@ -1,5 +1,5 @@
-import {cropBounds,cropSource} from './core.js?v=99';
-import {scaledPhoto,restoredCrop} from './image-utils.js?v=99';
+import {cropBounds,cropSource} from './core.js?v=101';
+import {scaledPhoto,restoredCrop} from './image-utils.js?v=101';
 
 export function pinchCropPose(pose,oldCenter,newCenter,distanceRatio){
   const zoom=Math.min(4,Math.max(1,pose.zoom*distanceRatio)),ratio=zoom/pose.zoom;

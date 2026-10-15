@@ -260,3 +260,8 @@ html[data-keyboard-open=true] .empty-day-dialog{max-height:calc(var(--editor-vie
 .hero>img{transition:width 420ms cubic-bezier(.37,0,.63,1),height 420ms cubic-bezier(.37,0,.63,1),clip-path 420ms cubic-bezier(.37,0,.63,1)}
 .hero[data-page=past]>img{width:min(150vw,1020px);height:min(100vw,680px);clip-path:inset(0 0 0 33.333333%)}
 .hero[data-page=settings]>img{width:min(120vw,816px);clip-path:inset(0 0 0 16.666667%)}
+
+/* Keep browser-owned surfaces dark while the journal keeps its monthly paper. */
+html{background:#000;color-scheme:dark}
+body,body[data-auth="signed-out"]{background:#000}
+.app-shell,.signin-panel,dialog{color-scheme:light}

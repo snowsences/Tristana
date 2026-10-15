@@ -264,3 +264,4 @@ html[data-keyboard-open=true] .empty-day-dialog{max-height:calc(var(--editor-vie
 html{background:#000;color-scheme:dark}
 body,body[data-auth="signed-out"]{background:#000}
 .app-shell,.signin-panel,dialog{color-scheme:light}
+#settings-view{padding-top:80px}

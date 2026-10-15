@@ -1,21 +1,21 @@
-import {CONFIG} from './config.js?v=93';
-import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=93';
-import {resolveHeader} from './themes.js?v=93';
-import * as store from './storage.js?v=93';
-import * as cloud from './cloud.js?v=93';
-import {createCropper} from './crop.js?v=93';
-import {createUpdatePrompt} from './update-ui.js?v=93';
-import {thumbnailPhoto} from './image-utils.js?v=93';
-import {createPromptEditor} from './prompt-ui.js?v=93';
-import {createMemories} from './memories-ui.js?v=93';
-import {createEmptyDayEditor} from './empty-day-ui.js?v=93';
-import {createDayStrip} from './strip-ui.js?v=93';
-import {createPhotoRenderer} from './entry-ui.js?v=93';
-import {installDialogs,reveal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=93';
-import {applyAuthGate} from './auth-ui.js?v=93';
-import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=93';
-import {createDateNavigator} from './date-nav.js?v=93';
-import {installKeyboardComfort} from './keyboard-ui.js?v=93';
+import {CONFIG} from './config.js?v=95';
+import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=95';
+import {resolveHeader} from './themes.js?v=95';
+import * as store from './storage.js?v=95';
+import * as cloud from './cloud.js?v=95';
+import {createCropper} from './crop.js?v=95';
+import {createUpdatePrompt} from './update-ui.js?v=95';
+import {thumbnailPhoto} from './image-utils.js?v=95';
+import {createPromptEditor} from './prompt-ui.js?v=95';
+import {createMemories} from './memories-ui.js?v=95';
+import {createEmptyDayEditor} from './empty-day-ui.js?v=95';
+import {createDayStrip} from './strip-ui.js?v=95';
+import {createPhotoRenderer} from './entry-ui.js?v=95';
+import {installDialogs,reveal,conceal,cancelConceal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=95';
+import {applyAuthGate} from './auth-ui.js?v=95';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=95';
+import {createDateNavigator} from './date-nav.js?v=95';
+import {installKeyboardComfort} from './keyboard-ui.js?v=95';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -205,10 +205,25 @@ const signIn=()=>cloud.signIn().catch(err=>{error(err);throw err;});
 if(window.tristanaStartup)window.tristanaStartup.setSignIn(signIn);else $('#signin').onclick=()=>signIn().catch(()=>{});
 $('#signout').onclick=async()=>{await localWrites;await cloud.signOut();};
 for(const b of document.querySelectorAll('[data-tab]'))b.onclick=async()=>{
+  const target=b.dataset.tab,request=++navigationId;
+  cancelConceal($('#journal-view'));cancelConceal($('#settings-view'));
   if(memoryEditor.date)await $('#empty-day-dialog').close();
-  const target=b.dataset.tab,request=++navigationId;prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
-  tabScroll[tab]=window.scrollY;const changed=tab!==target;tab=target;if(tab==='today'){selectedDate=today();yearView=false;}if(tab==='past'){selectedDate=memoryDate=memoryDate||memories.latest()||today();yearView=false;}render({recenterDay:tab==='today'});
-  window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});
+  if(request!==navigationId||!user)return;
+  prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
+  const changed=tab!==target;
+  tabScroll[tab]=window.scrollY;
+  let restoreOutgoing;
+  try{
+    if(changed){
+      restoreOutgoing=await conceal(tab==='settings'?$('#settings-view'):$('#journal-view'));
+      if(request!==navigationId||!user)return;
+      prompts.commit();await localWrites.catch(()=>{});if(request!==navigationId||!user)return;
+    }
+    tab=target;if(tab==='today'){selectedDate=today();yearView=false;}if(tab==='past'){selectedDate=memoryDate=memoryDate||memories.latest()||today();yearView=false;}render({recenterDay:tab==='today'});
+    window.scrollTo({top:target==='today'?0:tabScroll[target],behavior:'auto'});if(changed)reveal(tab==='settings'?$('#settings-view'):$('#journal-view'),{duration:200,offset:6});
+  }finally{
+    restoreOutgoing?.();
+  }
 };
 $('#prev-day').onclick=()=>openDay(shiftDay(selectedDate,-1));$('#next-day').onclick=()=>openDay(shiftDay(selectedDate,1));
 $('#date-button').onclick=()=>{$('#selected-date').value=selectedDate;$('#selected-date').max=today();$('#date-dialog').showModal();};$('#date-dialog').addEventListener('click',event=>{const dialog=$('#date-dialog');const rect=dialog.getBoundingClientRect();if(event.target===dialog&&(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom))dialog.close('cancel');});$('#date-dialog').addEventListener('close',()=>{if($('#date-dialog').returnValue==='choose')openDay($('#selected-date').value);});

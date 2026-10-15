@@ -4,6 +4,28 @@ export function reveal(element,{duration=180,offset=0}={}) {
   element.getAnimations?.().forEach(a=>a.cancel());
   element.animate([{opacity:.25,transform:`translateY(${offset}px)`},{opacity:1,transform:'translateY(0)'}],{duration,easing:'cubic-bezier(.2,.7,.2,1)'});
 }
+const departures=new WeakMap();
+export function cancelConceal(element){
+  const state=element&&departures.get(element);if(!state)return;
+  departures.delete(element);state.animation.cancel();element.inert=state.inert;
+}
+export async function conceal(element,{duration=140,offset=6}={}) {
+  if(!element)return;
+  const previous=departures.get(element);
+  previous?.animation.cancel();
+  if(element.hidden||reducedMotion()||!element.animate){
+    if(previous){element.inert=previous.inert;departures.delete(element);}
+    return;
+  }
+  element.getAnimations?.().forEach(animation=>animation.cancel());
+  const animation=element.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:`translateY(${offset}px)`}],{duration,easing:'cubic-bezier(.8,0,.8,.3)',fill:'forwards'});
+  const state={animation,inert:previous?previous.inert:element.inert};
+  departures.set(element,state);element.inert=true;
+  const restore=()=>{
+    if(departures.get(element)===state){animation.cancel();element.inert=state.inert;departures.delete(element);}
+  };
+  try{await animation.finished;return restore;}catch{restore();}
+}
 export function containedRect(image){const r=image.getBoundingClientRect(),ratio=(image.naturalWidth||1)/(image.naturalHeight||1);let width=r.width,height=width/ratio;if(height>r.height){height=r.height;width=height*ratio;}return {left:r.left+(r.width-width)/2,top:r.top+(r.height-height)/2,width,height};}
 export async function animatePhoto(image,from,to,{closing=false}={}){
   if(!image?.animate||reducedMotion()||!from?.width||!to?.width)return;

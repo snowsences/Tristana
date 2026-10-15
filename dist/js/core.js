@@ -17,6 +17,12 @@ export function shiftDay(day, amount) {
   const d = new Date(day+'T12:00:00Z'); d.setUTCDate(d.getUTCDate()+amount);
   return d.toISOString().slice(0,10);
 }
+export function ordinalDay(day) {
+  if (!validDay(day)) throw new Error('Invalid date');
+  const number=Number(day.slice(-2));
+  const suffix=number>=11&&number<=13?'th':({1:'st',2:'nd',3:'rd'}[number%10]||'th');
+  return `${number}${suffix}`;
+}
 export function daysInYear(year) {
   const out = []; let day = `${year}-01-01`;
   while (day.startsWith(`${year}-`)) { out.push(day); day = shiftDay(day,1); }

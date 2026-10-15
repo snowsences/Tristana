@@ -7,7 +7,7 @@
   async function load(){
     const serial=++attempt;phase='loading';button.disabled=true;button.setAttribute('aria-busy','true');label.textContent='Opening journal…';message('Restoring your session…');
     clearTimeout(timer);timer=setTimeout(()=>{if(serial===attempt&&phase==='loading')fail(new Error('Startup timed out'));},15000);
-    try{app=app||await import('./app.js?v=79');await app.start();if(serial!==attempt)return;clearTimeout(timer);phase='ready';button.disabled=false;button.removeAttribute('aria-busy');label.textContent='Log in with Google';message('');}
+    try{app=app||await import('./app.js?v=91');await app.start();if(serial!==attempt)return;clearTimeout(timer);phase='ready';button.disabled=false;button.removeAttribute('aria-busy');label.textContent='Log in with Google';message('');}
     catch(error){if(serial===attempt)fail(error);}
   }
   window.tristanaStartup={setSignIn(handler){this.signIn=handler;},initializationFailed:fail,showError(error){message(error.message||'Sign-in could not finish. Please try again.');button.disabled=false;button.removeAttribute('aria-busy');label.textContent='Log in with Google';}};

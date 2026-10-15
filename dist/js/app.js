@@ -1,21 +1,21 @@
-import {CONFIG} from './config.js?v=79';
-import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=79';
-import {resolveHeader} from './themes.js?v=79';
-import * as store from './storage.js?v=79';
-import * as cloud from './cloud.js?v=79';
-import {createCropper} from './crop.js?v=79';
-import {createUpdatePrompt} from './update-ui.js?v=79';
-import {thumbnailPhoto} from './image-utils.js?v=79';
-import {createPromptEditor} from './prompt-ui.js?v=79';
-import {createMemories} from './memories-ui.js?v=79';
-import {createEmptyDayEditor} from './empty-day-ui.js?v=79';
-import {createDayStrip} from './strip-ui.js?v=79';
-import {createPhotoRenderer} from './entry-ui.js?v=79';
-import {installDialogs,reveal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=79';
-import {applyAuthGate} from './auth-ui.js?v=79';
-import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=79';
-import {createDateNavigator} from './date-nav.js?v=79';
-import {installKeyboardComfort} from './keyboard-ui.js?v=79';
+import {CONFIG} from './config.js?v=91';
+import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=91';
+import {resolveHeader} from './themes.js?v=91';
+import * as store from './storage.js?v=91';
+import * as cloud from './cloud.js?v=91';
+import {createCropper} from './crop.js?v=91';
+import {createUpdatePrompt} from './update-ui.js?v=91';
+import {thumbnailPhoto} from './image-utils.js?v=91';
+import {createPromptEditor} from './prompt-ui.js?v=91';
+import {createMemories} from './memories-ui.js?v=91';
+import {createEmptyDayEditor} from './empty-day-ui.js?v=91';
+import {createDayStrip} from './strip-ui.js?v=91';
+import {createPhotoRenderer} from './entry-ui.js?v=91';
+import {installDialogs,reveal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=91';
+import {applyAuthGate} from './auth-ui.js?v=91';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=91';
+import {createDateNavigator} from './date-nav.js?v=91';
+import {installKeyboardComfort} from './keyboard-ui.js?v=91';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -68,7 +68,7 @@ function applyTheme(){
     document.documentElement.style.setProperty('--prompt-learned-art',`url("./${theme.promptArt.learned}")`);
     document.body.dataset.theme=theme.id;document.documentElement.style.setProperty('--tide-motif',scene.motifSrc?`url("./${scene.motifSrc}")`:'none');
     const previous=art.src&&art.animate&&!reducedMotion()?art.cloneNode(false):null;art.parentElement.querySelectorAll('.hero-previous').forEach(img=>img.remove());if(previous){previous.removeAttribute('id');previous.classList.add('hero-previous');previous.removeAttribute('fetchpriority');art.parentElement.append(previous);}
-    art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());
+    art.dataset.edgeBlend=scene.edgeBlend||'';art.srcset=next.srcset;art.sizes=next.sizes;art.src=scene.src;reveal(art,{duration:180});if(previous)previous.animate([{opacity:1},{opacity:0}],{duration:180,easing:'ease-out'}).finished.catch(()=>{}).finally(()=>previous.remove());
     for(const day of [-1,1]){const adjacent=resolveHeader(manifest,{date:shiftDay(selectedDate,day),themeMonth:override?Number(override):undefined}).scene;if(preloadedArt.has(adjacent.src))continue;preloadedArt.add(adjacent.src);const preload=new Image();preload.srcset=`${adjacent.smallSrc} 600w, ${adjacent.src} 1200w`;preload.sizes=next.sizes;preload.src=adjacent.src;}
   };
   next.decode().then(apply).catch(()=>{if(serial===artGeneration){artIdentity='';error(new Error('The illustration could not load. Your entry is still available.'));}});

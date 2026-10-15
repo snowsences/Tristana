@@ -42,6 +42,7 @@ export function applyHeader(element, selection, {baseURL='./'}={}) {
   element.style.setProperty('--journal-accent',theme.colors.accent);
   let image=element.querySelector('.journal-header__art');
   if(!image){image=document.createElement('img');image.className='journal-header__art';element.prepend(image);}
+  image.dataset.edgeBlend=scene.edgeBlend||'';
   image.src=new URL(scene.src,base).href;
   image.srcset=`${new URL(scene.smallSrc,base).href} 600w, ${new URL(scene.src,base).href} 1200w`;
   image.sizes='(max-width: 600px) 100vw, 680px';

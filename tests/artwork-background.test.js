@@ -18,6 +18,7 @@ test('every scene displays against its own measured paper tone, with its theme i
       assert.equal(header.style.getPropertyValue('--journal-bg'),scene.background,scene.src);
       assert.equal(header.style.getPropertyValue('--journal-ink'),theme.colors.ink);
       assert.equal(header.style.getPropertyValue('--journal-accent'),theme.colors.accent);
+      assert.equal(header.querySelector('img').dataset.edgeBlend,scene.edgeBlend||'');
       assert.equal(header.querySelector('img').getAttribute('src'),new URL(scene.src,document.baseURI).href);
     }
     const march=manifest.themes.find(theme=>theme.month===3);

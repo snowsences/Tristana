@@ -1,4 +1,4 @@
-import {LIMIT,count} from './core.js?v=79';
+import {LIMIT,count} from './core.js?v=91';
 export function limitedEdit(value,start,end,text) {
   const prefix=value.slice(0,start),suffix=value.slice(end);
   const available=Math.max(0,LIMIT-count(prefix)-count(suffix));

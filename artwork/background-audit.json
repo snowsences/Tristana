@@ -1,6 +1,6 @@
 {
   "method": "Read-only RGB comparison of blank corner to configured page background, both responsive exports. Differences under eight RGB levels allow the existing paper texture and WebP compression.",
-  "sceneCount": 262,
+  "sceneCount": 366,
   "themes": [
     {
       "month": 1,
@@ -143,6 +143,70 @@
           "src": "assets/01-hearth/cascade-pass-winter.webp",
           "background": "#fdf9ee",
           "maximumCornerDelta": 1.67
+        },
+        {
+          "id": "replacement-r001-cannaregio-winter-lanterns",
+          "src": "assets/01-hearth/replacement-r001-cannaregio-winter-lanterns.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r002-dorsoduro-winter-sunbreak",
+          "src": "assets/01-hearth/replacement-r002-dorsoduro-winter-sunbreak.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r003-castello-after-rain",
+          "src": "assets/01-hearth/replacement-r003-castello-after-rain.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 8,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r004-rio-di-san-barnaba-blue-hour",
+          "src": "assets/01-hearth/replacement-r004-rio-di-san-barnaba-blue-hour.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r005-rain-along-ile-saint-louis",
+          "src": "assets/01-hearth/replacement-r005-rain-along-ile-saint-louis.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 8,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r006-marais-winter-sunlight",
+          "src": "assets/01-hearth/replacement-r006-marais-winter-sunlight.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r007-bayon-dry-season-dawn",
+          "src": "assets/01-hearth/replacement-r007-bayon-dry-season-dawn.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r008-mont-saint-michel-winter-sunbreak",
+          "src": "assets/01-hearth/replacement-r008-mont-saint-michel-winter-sunbreak.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -635,6 +699,94 @@
           "src": "assets/04-cascade/svartifoss.webp",
           "background": "#f2f5f1",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "replacement-r009-cannaregio-spring-bridge",
+          "src": "assets/04-cascade/replacement-r009-cannaregio-spring-bridge.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r010-dorsoduro-blossoms-at-dawn",
+          "src": "assets/04-cascade/replacement-r010-dorsoduro-blossoms-at-dawn.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r011-san-polo-evening-reflections",
+          "src": "assets/04-cascade/replacement-r011-san-polo-evening-reflections.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r012-burano-spring-color",
+          "src": "assets/04-cascade/replacement-r012-burano-spring-color.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r013-castello-sunlit-passage",
+          "src": "assets/04-cascade/replacement-r013-castello-sunlit-passage.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r014-buttes-chaumont-spring-wildflowers",
+          "src": "assets/04-cascade/replacement-r014-buttes-chaumont-spring-wildflowers.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r015-notre-dame-after-spring-rain",
+          "src": "assets/04-cascade/replacement-r015-notre-dame-after-spring-rain.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r016-banteay-srei-rose-gold-morning",
+          "src": "assets/04-cascade/replacement-r016-banteay-srei-rose-gold-morning.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r017-ta-prohm-root-laced-doorway",
+          "src": "assets/04-cascade/replacement-r017-ta-prohm-root-laced-doorway.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 8,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r018-bayon-faces-before-sunset",
+          "src": "assets/04-cascade/replacement-r018-bayon-faces-before-sunset.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r019-mont-saint-michel-spring-meadows",
+          "src": "assets/04-cascade/replacement-r019-mont-saint-michel-spring-meadows.webp",
+          "background": "#f6f8f3",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -749,6 +901,110 @@
           "src": "assets/05-daylight/prospect-park-stone-bridge.webp",
           "background": "#fef7ef",
           "maximumCornerDelta": 1.07
+        },
+        {
+          "id": "replacement-r020-dorsoduro-flowering-canal",
+          "src": "assets/05-daylight/replacement-r020-dorsoduro-flowering-canal.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r021-cannaregio-moonlit-windows",
+          "src": "assets/05-daylight/replacement-r021-cannaregio-moonlit-windows.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r022-castello-courtyard-light",
+          "src": "assets/05-daylight/replacement-r022-castello-courtyard-light.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r023-burano-blue-hour-canal",
+          "src": "assets/05-daylight/replacement-r023-burano-blue-hour-canal.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 8,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r024-santa-croce-rain-clearing",
+          "src": "assets/05-daylight/replacement-r024-santa-croce-rain-clearing.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r025-giudecca-sunset-lane",
+          "src": "assets/05-daylight/replacement-r025-giudecca-sunset-lane.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r026-luxembourg-garden-wildflowers",
+          "src": "assets/05-daylight/replacement-r026-luxembourg-garden-wildflowers.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r027-canal-saint-martin-in-rain",
+          "src": "assets/05-daylight/replacement-r027-canal-saint-martin-in-rain.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r028-pont-alexandre-iii-morning",
+          "src": "assets/05-daylight/replacement-r028-pont-alexandre-iii-morning.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r029-montmartre-wisteria-lane",
+          "src": "assets/05-daylight/replacement-r029-montmartre-wisteria-lane.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r030-ta-prohm-green-canopy-sunbreak",
+          "src": "assets/05-daylight/replacement-r030-ta-prohm-green-canopy-sunbreak.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r031-banteay-srei-after-a-shower",
+          "src": "assets/05-daylight/replacement-r031-banteay-srei-after-a-shower.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r032-bayon-peach-cloud-dawn",
+          "src": "assets/05-daylight/replacement-r032-bayon-peach-cloud-dawn.webp",
+          "background": "#fff8ee",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -905,6 +1161,46 @@
           "src": "assets/06-tide-oregon/newport-sea-lions-and-fishing-boats.webp",
           "background": "#f1f8fb",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "replacement-r033-cannaregio-summer-night-bridge",
+          "src": "assets/06-tide-oregon/replacement-r033-cannaregio-summer-night-bridge.webp",
+          "background": "#f5fafb",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r034-san-polo-golden-morning",
+          "src": "assets/06-tide-oregon/replacement-r034-san-polo-golden-morning.webp",
+          "background": "#f5fafb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r035-dorsoduro-summer-calle",
+          "src": "assets/06-tide-oregon/replacement-r035-dorsoduro-summer-calle.webp",
+          "background": "#f5fafb",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r036-parc-montsouris-summer-meadow",
+          "src": "assets/06-tide-oregon/replacement-r036-parc-montsouris-summer-meadow.webp",
+          "background": "#f5fafb",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r037-ta-prohm-monsoon-clearing",
+          "src": "assets/06-tide-oregon/replacement-r037-ta-prohm-monsoon-clearing.webp",
+          "background": "#f5fafb",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -1031,6 +1327,94 @@
           "src": "assets/07-alpine-summer/mount-adams-fireweed-and-fir-forest.webp",
           "background": "#fcf9f1",
           "maximumCornerDelta": 1.33
+        },
+        {
+          "id": "replacement-r038-burano-summer-sunset",
+          "src": "assets/07-alpine-summer/replacement-r038-burano-summer-sunset.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r039-castello-lantern-passage",
+          "src": "assets/07-alpine-summer/replacement-r039-castello-lantern-passage.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r040-rio-dei-mendicanti-daylight",
+          "src": "assets/07-alpine-summer/replacement-r040-rio-dei-mendicanti-daylight.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r041-dorsoduro-dawn-footbridge",
+          "src": "assets/07-alpine-summer/replacement-r041-dorsoduro-dawn-footbridge.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r042-cannaregio-summer-flowers",
+          "src": "assets/07-alpine-summer/replacement-r042-cannaregio-summer-flowers.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r043-seine-summer-evening",
+          "src": "assets/07-alpine-summer/replacement-r043-seine-summer-evening.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r044-promenade-plantee-wildflowers",
+          "src": "assets/07-alpine-summer/replacement-r044-promenade-plantee-wildflowers.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r045-banteay-srei-sunlit-pediment",
+          "src": "assets/07-alpine-summer/replacement-r045-banteay-srei-sunlit-pediment.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r046-bayon-reflected-after-rain",
+          "src": "assets/07-alpine-summer/replacement-r046-bayon-reflected-after-rain.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r047-ta-prohm-emerald-morning",
+          "src": "assets/07-alpine-summer/replacement-r047-ta-prohm-emerald-morning.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r048-mont-saint-michel-summer-gold",
+          "src": "assets/07-alpine-summer/replacement-r048-mont-saint-michel-summer-gold.webp",
+          "background": "#faf8ef",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -1133,6 +1517,126 @@
           "src": "assets/08-glacier-lakes/lake-pukaki-aoraki.webp",
           "background": "#f4faf5",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "replacement-r049-burano-summer-blue-shadows",
+          "src": "assets/08-glacier-lakes/replacement-r049-burano-summer-blue-shadows.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r050-san-polo-midnight-reflections",
+          "src": "assets/08-glacier-lakes/replacement-r050-san-polo-midnight-reflections.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r051-dorsoduro-pink-sunrise",
+          "src": "assets/08-glacier-lakes/replacement-r051-dorsoduro-pink-sunrise.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r052-castello-green-courtyard",
+          "src": "assets/08-glacier-lakes/replacement-r052-castello-green-courtyard.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r053-cannaregio-evening-canal-bend",
+          "src": "assets/08-glacier-lakes/replacement-r053-cannaregio-evening-canal-bend.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r054-giudecca-summer-night",
+          "src": "assets/08-glacier-lakes/replacement-r054-giudecca-summer-night.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r055-santa-croce-storm-sunbreak",
+          "src": "assets/08-glacier-lakes/replacement-r055-santa-croce-storm-sunbreak.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r056-buttes-chaumont-golden-grass",
+          "src": "assets/08-glacier-lakes/replacement-r056-buttes-chaumont-golden-grass.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r057-rue-cremieux-summer-colors",
+          "src": "assets/08-glacier-lakes/replacement-r057-rue-cremieux-summer-colors.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r058-rainy-saint-germain-evening",
+          "src": "assets/08-glacier-lakes/replacement-r058-rainy-saint-germain-evening.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r059-eiffel-tower-from-meadow-flowers",
+          "src": "assets/08-glacier-lakes/replacement-r059-eiffel-tower-from-meadow-flowers.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r060-ta-prohm-rain-silver-roots",
+          "src": "assets/08-glacier-lakes/replacement-r060-ta-prohm-rain-silver-roots.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r061-banteay-srei-luminous-clouds",
+          "src": "assets/08-glacier-lakes/replacement-r061-banteay-srei-luminous-clouds.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r062-bayon-monsoon-sunrise",
+          "src": "assets/08-glacier-lakes/replacement-r062-bayon-monsoon-sunrise.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r063-ta-prohm-sunlit-gallery",
+          "src": "assets/08-glacier-lakes/replacement-r063-ta-prohm-sunlit-gallery.webp",
+          "background": "#f6faf7",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -1265,6 +1769,78 @@
           "src": "assets/09-alpine-autumn/lake-mcdonald-autumn-shore.webp",
           "background": "#fcf7ee",
           "maximumCornerDelta": 1.25
+        },
+        {
+          "id": "replacement-r064-cannaregio-september-dawn",
+          "src": "assets/09-alpine-autumn/replacement-r064-cannaregio-september-dawn.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 9,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r065-burano-autumn-evening",
+          "src": "assets/09-alpine-autumn/replacement-r065-burano-autumn-evening.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r066-dorsoduro-rain-lit-steps",
+          "src": "assets/09-alpine-autumn/replacement-r066-dorsoduro-rain-lit-steps.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 9,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r067-castello-blue-hour-alley",
+          "src": "assets/09-alpine-autumn/replacement-r067-castello-blue-hour-alley.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r068-san-polo-sunlit-bridge",
+          "src": "assets/09-alpine-autumn/replacement-r068-san-polo-sunlit-bridge.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r069-luxembourg-early-autumn-light",
+          "src": "assets/09-alpine-autumn/replacement-r069-luxembourg-early-autumn-light.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r070-seine-rain-and-gold",
+          "src": "assets/09-alpine-autumn/replacement-r070-seine-rain-and-gold.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r071-banteay-srei-wet-season-gold",
+          "src": "assets/09-alpine-autumn/replacement-r071-banteay-srei-wet-season-gold.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r072-bayon-misty-green-morning",
+          "src": "assets/09-alpine-autumn/replacement-r072-bayon-misty-green-morning.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -1385,6 +1961,102 @@
           "src": "assets/10-orchard/elk-golden-autumn-meadow.webp",
           "background": "#fdf7ec",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "replacement-r073-cannaregio-october-night",
+          "src": "assets/10-orchard/replacement-r073-cannaregio-october-night.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r074-dorsoduro-autumn-sunbreak",
+          "src": "assets/10-orchard/replacement-r074-dorsoduro-autumn-sunbreak.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r075-burano-autumn-cloudlight",
+          "src": "assets/10-orchard/replacement-r075-burano-autumn-cloudlight.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r076-castello-warm-archway",
+          "src": "assets/10-orchard/replacement-r076-castello-warm-archway.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r077-santa-croce-rainy-blue-hour",
+          "src": "assets/10-orchard/replacement-r077-santa-croce-rainy-blue-hour.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r078-place-des-vosges-autumn-rain",
+          "src": "assets/10-orchard/replacement-r078-place-des-vosges-autumn-rain.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r079-tuileries-autumn-spotlight",
+          "src": "assets/10-orchard/replacement-r079-tuileries-autumn-spotlight.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 3,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r080-montmartre-autumn-steps",
+          "src": "assets/10-orchard/replacement-r080-montmartre-autumn-steps.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r081-ta-prohm-clearing-monsoon-light",
+          "src": "assets/10-orchard/replacement-r081-ta-prohm-clearing-monsoon-light.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r082-bayon-copper-evening-faces",
+          "src": "assets/10-orchard/replacement-r082-bayon-copper-evening-faces.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r083-banteay-srei-reflecting-pool",
+          "src": "assets/10-orchard/replacement-r083-banteay-srei-reflecting-pool.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r084-mont-saint-michel-autumn-tides",
+          "src": "assets/10-orchard/replacement-r084-mont-saint-michel-autumn-tides.webp",
+          "background": "#fff7eb",
+          "maximumCornerDelta": 2,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -1493,6 +2165,110 @@
           "src": "assets/11-rainwood/roosevelt-elk-rainforest-clearing.webp",
           "background": "#f8f8f3",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "replacement-r085-cannaregio-clear-november-sunset",
+          "src": "assets/11-rainwood/replacement-r085-cannaregio-clear-november-sunset.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r086-san-polo-rainy-lanterns",
+          "src": "assets/11-rainwood/replacement-r086-san-polo-rainy-lanterns.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r087-dorsoduro-november-morning",
+          "src": "assets/11-rainwood/replacement-r087-dorsoduro-november-morning.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r088-castello-autumn-courtyard",
+          "src": "assets/11-rainwood/replacement-r088-castello-autumn-courtyard.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r089-burano-november-blue-hour",
+          "src": "assets/11-rainwood/replacement-r089-burano-november-blue-hour.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 9,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r090-santa-croce-moonlit-bridge",
+          "src": "assets/11-rainwood/replacement-r090-santa-croce-moonlit-bridge.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r091-marais-november-rain",
+          "src": "assets/11-rainwood/replacement-r091-marais-november-rain.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r092-notre-dame-november-sunbreak",
+          "src": "assets/11-rainwood/replacement-r092-notre-dame-november-sunbreak.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r093-canal-saint-martin-autumn-morning",
+          "src": "assets/11-rainwood/replacement-r093-canal-saint-martin-autumn-morning.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r094-pont-neuf-twilight-reflections",
+          "src": "assets/11-rainwood/replacement-r094-pont-neuf-twilight-reflections.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 11,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r095-bayon-dry-season-sunbreak",
+          "src": "assets/11-rainwood/replacement-r095-bayon-dry-season-sunbreak.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r096-banteay-srei-sunrise-reliefs",
+          "src": "assets/11-rainwood/replacement-r096-banteay-srei-sunrise-reliefs.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r097-ta-prohm-amber-forest-light",
+          "src": "assets/11-rainwood/replacement-r097-ta-prohm-amber-forest-light.webp",
+          "background": "#f7f8f1",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     },
@@ -1643,8 +2419,65 @@
           "src": "assets/12-alpine-winter/tahoe-snowy-boulder-shore.webp",
           "background": "#f2f8fe",
           "maximumCornerDelta": 1.0
+        },
+        {
+          "id": "replacement-r098-cannaregio-december-amber-night",
+          "src": "assets/12-alpine-winter/replacement-r098-cannaregio-december-amber-night.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 7,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r099-dorsoduro-december-frost-light",
+          "src": "assets/12-alpine-winter/replacement-r099-dorsoduro-december-frost-light.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r100-castello-winter-sunset-calle",
+          "src": "assets/12-alpine-winter/replacement-r100-castello-winter-sunset-calle.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 6,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r101-burano-winter-cloudbreak",
+          "src": "assets/12-alpine-winter/replacement-r101-burano-winter-cloudbreak.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 5,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r102-paris-winter-seine-twilight",
+          "src": "assets/12-alpine-winter/replacement-r102-paris-winter-seine-twilight.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 10,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r103-ta-prohm-cool-season-dawn",
+          "src": "assets/12-alpine-winter/replacement-r103-ta-prohm-cool-season-dawn.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 4,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
+        },
+        {
+          "id": "replacement-r104-banteay-srei-golden-dry-season-evening",
+          "src": "assets/12-alpine-winter/replacement-r104-banteay-srei-golden-dry-season-evening.webp",
+          "background": "#f5f8fc",
+          "maximumCornerDelta": 8,
+          "edgeBlend": "month-paper",
+          "renderedMargins": "transparent artwork over exact scene background"
         }
       ]
     }
-  ]
+  ],
+  "replacementBlend": "New approved replacement artwork uses intersecting CSS alpha fades at its left and bottom edges over the exact monthly background; RGB texture differences in the source do not change the app background."
 }

@@ -1,5 +1,5 @@
-import {animatePhoto,containedRect,reveal} from './motion-ui.js?v=79';
-import {createPhotoZoom} from './photo-zoom.js?v=79';
+import {animatePhoto,containedRect,reveal} from './motion-ui.js?v=91';
+import {createPhotoZoom} from './photo-zoom.js?v=91';
 export function applyPhotoPresence(document, hasPhoto) {
   document.getElementById('photo-empty').hidden = hasPhoto;
   document.getElementById('photo-preview').hidden = !hasPhoto;

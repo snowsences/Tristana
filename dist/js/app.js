@@ -1,21 +1,21 @@
-import {CONFIG} from './config.js?v=101';
-import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=101';
-import {resolveHeader} from './themes.js?v=101';
-import * as store from './storage.js?v=101';
-import * as cloud from './cloud.js?v=101';
-import {createCropper} from './crop.js?v=101';
-import {createUpdatePrompt} from './update-ui.js?v=101';
-import {thumbnailPhoto} from './image-utils.js?v=101';
-import {createPromptEditor} from './prompt-ui.js?v=101';
-import {createMemories} from './memories-ui.js?v=101';
-import {createEmptyDayEditor} from './empty-day-ui.js?v=101';
-import {createDayStrip} from './strip-ui.js?v=101';
-import {createPhotoRenderer} from './entry-ui.js?v=101';
-import {installDialogs,reveal,conceal,cancelConceal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=101';
-import {applyAuthGate} from './auth-ui.js?v=101';
-import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=101';
-import {createDateNavigator} from './date-nav.js?v=101';
-import {installKeyboardComfort} from './keyboard-ui.js?v=101';
+import {CONFIG} from './config.js?v=102';
+import {FIELDS,LIMIT,count,limit,dayInZone,shiftDay,ordinalDay,daysInYear,validDay,filled,status,blankEntry,mergeEntry,same} from './core.js?v=102';
+import {resolveHeader} from './themes.js?v=102';
+import * as store from './storage.js?v=102';
+import * as cloud from './cloud.js?v=102';
+import {createCropper} from './crop.js?v=102';
+import {createUpdatePrompt} from './update-ui.js?v=102';
+import {thumbnailPhoto} from './image-utils.js?v=102';
+import {createPromptEditor} from './prompt-ui.js?v=102';
+import {createMemories} from './memories-ui.js?v=102';
+import {createEmptyDayEditor} from './empty-day-ui.js?v=102';
+import {createDayStrip} from './strip-ui.js?v=102';
+import {createPhotoRenderer} from './entry-ui.js?v=102';
+import {installDialogs,reveal,conceal,cancelConceal,confirmAction,reducedMotion,animatePhoto} from './motion-ui.js?v=102';
+import {applyAuthGate} from './auth-ui.js?v=102';
+import {applyPhotoPresence,bindPhotoLightbox} from './photo-ui.js?v=102';
+import {createDateNavigator} from './date-nav.js?v=102';
+import {installKeyboardComfort} from './keyboard-ui.js?v=102';
 const $=s=>document.querySelector(s);
 const manifest=await fetch('./theme-manifest.json').then(r=>r.json());
 const deviceId=localStorage.getItem('tristana-device')||crypto.randomUUID();localStorage.setItem('tristana-device',deviceId);
@@ -256,8 +256,8 @@ if('serviceWorker'in navigator){
   const updater=createUpdatePrompt({document,serviceWorker:navigator.serviceWorker,
     async saveDrafts(){prompts.commit();if(user)for(const e of entries.values())if(e._dirty.length)await persist(e);await localWrites;sessionStorage.setItem('tristana-after-update',JSON.stringify({uid:user?.uid,tab,date:selectedDate,yearView,year:selectedYear,scroll:window.scrollY}));},
     reload:()=>window.location.reload(),onError:error});
+  updater.check(); // The version check must also work if service-worker registration stalls.
   navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>{updater.watch(registration);updater.check();}).catch(()=>toast('Offline installation could not be enabled.'));
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')updater.check();});window.addEventListener('online',()=>updater.check());
   setInterval(()=>{if(document.visibilityState==='visible'&&navigator.onLine)updater.check();},5*60*1000);
 }
 render();

@@ -191,6 +191,9 @@ h1,.hero h1,.hero[data-page=past] h1{letter-spacing:-1.6px}
 /* Paint both system-bar safe areas when the browser draws edge-to-edge. */
 body::before{content:'';position:fixed;inset:0;background:linear-gradient(#000,#000) top/100% env(safe-area-inset-top,0px) no-repeat,linear-gradient(#000,#000) bottom/100% env(safe-area-inset-bottom,0px) no-repeat;z-index:1000;pointer-events:none}
 .app-shell{padding-top:env(safe-area-inset-top,0px)}
+/* Existing Home Screen installs may retain translucent status-bar metadata. */
+.hero>img{top:env(safe-area-inset-top,0px)}
+.hero[data-page=settings]>img{top:0}
 
 /* Keep the outer corners rounded at the viewport, including the fixed tab bar. */
 html,body{background:#000}

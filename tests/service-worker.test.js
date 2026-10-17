@@ -17,3 +17,6 @@ test('shell requests revalidate HTTP cache while cached paintings stay available
  assert.equal(f.requests.length,2);for(const {options} of f.requests)assert.equal(options.cache,'no-cache');
  const painting={ok:true};f.setCached(painting);assert.equal(await f.fetch('./assets/painting.webp'),painting);assert.equal(f.requests.length,2);
 });
+test('release discovery bypasses service-worker caches entirely',()=>{
+ const f=fixture();let intercepted=false;f.listeners.fetch({request:new Request('https://example.com/Tristana/dist/version.json'),respondWith(){intercepted=true;}});assert.equal(intercepted,false);
+});

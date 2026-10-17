@@ -157,8 +157,8 @@ body[data-theme=tide-oregon] .journal-content,body[data-theme=tide-oregon] .memo
 
 /* Backfill an empty memory with the existing daily editor. */
 html[data-memory-editing=true]{overflow:hidden}
-.empty-day-editable{cursor:pointer}
-.empty-day-editable:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.memory-editable{cursor:pointer}
+.memory-editable:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
 .empty-day-dialog{width:calc(100% - 24px);max-width:600px;max-height:calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));padding:0;border:0;border-radius:16px;overflow:auto;overscroll-behavior:contain}
 .empty-day-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;position:sticky;top:0;z-index:2;background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .empty-day-head h2{font-size:22px;line-height:1.25}

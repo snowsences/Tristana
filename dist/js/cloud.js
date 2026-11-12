@@ -1,5 +1,5 @@
-import {CONFIG} from './config.js?v=103';
-import {reconcile} from './core.js?v=103';
+import {CONFIG} from './config.js?v=104';
+import {reconcile} from './core.js?v=104';
 let sdk,auth,db,initializing,stopAuth;
 export function initialize(onUser) {
   if(initializing)return initializing;

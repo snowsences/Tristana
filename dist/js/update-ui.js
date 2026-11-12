@@ -1,4 +1,4 @@
-export const APP_VERSION='103';
+export const APP_VERSION='104';
 
 export function createUpdatePrompt({document,serviceWorker,saveDrafts,reload,onError,fetchVersion}) {
   const banner=document.getElementById('update-banner'),button=document.getElementById('apply-update');

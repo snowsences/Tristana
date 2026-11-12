@@ -17,14 +17,14 @@ export function createDateNavigator({document,getEntries,getToday,getSelected,ge
   }
   function weekdays(){const row=document.createElement('div');row.className='time-weekdays';row.setAttribute('aria-hidden','true');for(const day of ['M','T','W','T','F','S','S']){const span=document.createElement('span');span.textContent=day;row.append(span);}return row;}
   async function choose(date){if(!validDay(date)||date>getToday()||!getOwner())return;await dialog.close('choose');onSelect(date);}
-  function calendar(month,{mini=false}={}){
+  function calendar(month,{mini=false,serial,owner}={}){
     const first=`${year}-${String(month).padStart(2,'0')}-01`,dates=daysInYear(year).filter(d=>Number(d.slice(5,7))===month);
     const block=document.createElement('section');block.className='time-calendar';
     const heading=document.createElement('h3');heading.textContent=stamp(first,{month:mini?'short':'long'});block.append(heading,weekdays());
     const grid=document.createElement('div');grid.className='time-days'+(mini?' time-days-mini':'');
     const offset=(new Date(first+'T12:00:00Z').getUTCDay()+6)%7;
     for(let i=0;i<offset;i++)grid.append(document.createElement('span'));
-    for(const date of dates){const button=document.createElement('button');button.type='button';button.dataset.date=date;button.className='time-day '+status(entry(date),date,getToday());button.textContent=Number(date.slice(-2));button.disabled=date>getToday();
+    for(const date of dates){const button=document.createElement('button');button.type='button';button.dataset.date=date;button.className='time-day '+status(entry(date),date,getToday());button.disabled=date>getToday();const photo=entry(date).photo;if(photo){button.classList.add('has-photo');const image=document.createElement('img');image.className='time-day-photo';image.alt='';image.decoding='async';button.append(image);loadMosaic(image,photo,serial,owner);}const label=document.createElement('span');label.className='time-day-label';label.textContent=Number(date.slice(-2));button.append(label);
       button.setAttribute('aria-label',stamp(date,{weekday:'long',month:'long',day:'numeric',year:'numeric'})+', '+(filled(entry(date))?'saved':'empty'));
       if(date===getSelected())button.setAttribute('aria-current','date');button.onclick=()=>choose(date);grid.append(button);}
     block.append(grid);return block;
@@ -39,9 +39,9 @@ export function createDateNavigator({document,getEntries,getToday,getSelected,ge
     document.getElementById('time-prev-year').disabled=year<=1900;
     document.getElementById('time-next-year').disabled=year>=Number(getToday().slice(0,4));
     content.className='time-content time-'+mode;
-    if(mode==='month'){content.append(calendar(Number(monthSelect.value)));dialog.scrollTop=scroll;return;}
+    if(mode==='month'){content.append(calendar(Number(monthSelect.value),{serial,owner}));dialog.scrollTop=scroll;return;}
     for(let month=1;month<=12;month++){
-      if(mode==='year'){content.append(calendar(month,{mini:true}));continue;}
+      if(mode==='year'){content.append(calendar(month,{mini:true,serial,owner}));continue;}
       const first=`${year}-${String(month).padStart(2,'0')}-01`,prefix=first.slice(0,7);
       const button=document.createElement('button');button.type='button';button.className='time-month-card';button.disabled=first>getToday();
       const title=document.createElement('span');title.className='time-month-name';title.textContent=stamp(first,{month:'long'});

@@ -1,4 +1,4 @@
-import {filled,validDay} from './core.js?v=103';
+import {filled,validDay} from './core.js?v=104';
 export function createMemories({element,daySection,getEntries,getPhotoURL,getPhotoIdentity=photo=>photo?.localId,getAccent=()=> '',displayDate,onDayChange,onPhoto,onEdit,canEdit=()=>true}) {
   const doc=element.ownerDocument,win=doc.defaultView,records=new Map(),requestedEmpty=new Set();
   let active=false,selected=null,limit=60,frame,settleTimer,programmatic=false,rendering=false;

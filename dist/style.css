@@ -270,3 +270,13 @@ body,body[data-auth="signed-out"]{background:#000}
 
 /* Today cards overlap the hero by 40px; keep the copy another 24px above them. */
 .hero[data-page=today] .hero-copy{top:auto;bottom:64px}
+
+/* Daily photographs become the cell artwork in the Your Days month and year calendars. */
+.time-day{position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;background:color-mix(in srgb,var(--ink) 7%,var(--bg))}
+.time-day.partial,.time-day.done{background:var(--accent);color:var(--bg)}
+.time-day-photo{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 150ms ease}
+.time-day-photo.is-ready{opacity:1}
+.time-day.has-photo{background:transparent;color:#fff;text-shadow:0 1px 3px #000,0 0 5px #000}
+.time-day.has-photo:before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(transparent 25%,#0005)}
+.time-day-label{position:relative;z-index:2}
+.time-days-mini .time-day.has-photo{font-size:0}
